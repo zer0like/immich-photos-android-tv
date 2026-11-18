@@ -65,6 +65,7 @@ object Immich {
         sleutel = p.getString(if (k != null) "sleutel_$k" else "sleutel", "") ?: ""
         server = p.getString(if (k != null) "server_$k" else "server", "") ?: ""
         ik = null
+        realtimeTranscodingCached = null
         Instellingen.laad(c, k)
         stand++
     }
@@ -87,7 +88,18 @@ object Immich {
     fun thumb(id: String) = "$api/assets/$id/thumbnail?size=thumbnail"
     fun preview(id: String) = "$api/assets/$id/thumbnail?size=preview"
     fun video(id: String) = "$api/assets/$id/video/playback"
+    fun videoHls(id: String) = "$api/assets/$id/video/stream/main.m3u8"
     fun gezicht(id: String) = "$api/people/$id/thumbnail"
+
+    @Volatile private var realtimeTranscodingCached: Boolean? = null
+
+    /** Controleert of real-time HLS-transcoding op de Immich-server actief is. */
+    suspend fun realtimeTranscoding(): Boolean {
+        realtimeTranscodingCached?.let { return it }
+        return runCatching { JSONObject(get("/server/features")).optBoolean("realtimeTranscoding", false) }
+            .getOrDefault(false)
+            .also { realtimeTranscodingCached = it }
+    }
 
     private suspend fun haal(req: Request): String = withContext(Dispatchers.IO) {
         http.newCall(req).execute().use { r ->

@@ -1,6 +1,7 @@
 package com.immichclient.tv
 
 import android.content.Context
+import android.media.MediaFormat
 import android.os.Handler
 import android.util.Log
 import android.view.KeyEvent
@@ -93,7 +94,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.Format
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -369,25 +372,47 @@ private fun Beeld(a: Asset, staat: KijkerStaat, actief: Boolean, zicht: () -> Fl
 private fun Video(a: Asset, staat: KijkerStaat) {
     val ctx = LocalContext.current
     val speler = remember {
-        // Kleine buffers: standaard reserveert ExoPlayer tot ~140 MB (50 s) aan video; op een box met 2 GB is dat
-        // genoeg om de app vooraan te laten opruimen. Een server in het eigen netwerk heeft aan 4-15 s genoeg.
+        // Ruimere buffer voor 4K/hoge-bitrate video's en HLS-segmenten; voorkomt stotteren op snelle TV-boxen.
         val buffers = DefaultLoadControl.Builder()
-            .setBufferDurationsMs(4_000, 15_000, 1_000, 2_000)
-            .setTargetBufferBytes(16 * 1024 * 1024)
+            .setBufferDurationsMs(15_000, 60_000, 2_000, 3_000)
+            .setTargetBufferBytes(96 * 1024 * 1024)
             .setPrioritizeTimeOverSizeThresholds(false)
-            .setBackBuffer(0, false)
+            .setBackBuffer(5_000, true)
             .build()
-        val renderers = if (!videoZonderPlaceholder) DefaultRenderersFactory(ctx) else object : DefaultRenderersFactory(ctx) {
+        val renderers = object : DefaultRenderersFactory(ctx) {
             override fun buildVideoRenderers(
                 context: Context, extensionRendererMode: Int, mediaCodecSelector: MediaCodecSelector, enableDecoderFallback: Boolean,
                 eventHandler: Handler, eventListener: VideoRendererEventListener, allowedVideoJoiningTimeMs: Long, out: ArrayList<Renderer>,
             ) {
                 out.add(object : MediaCodecVideoRenderer(context, codecAdapterFactory, mediaCodecSelector, allowedVideoJoiningTimeMs,
-                    enableDecoderFallback, eventHandler, eventListener, 50) {
-                    override fun codecNeedsSetOutputSurfaceWorkaround(name: String) = true
+                    true, eventHandler, eventListener, 50) {
+                    override fun codecNeedsSetOutputSurfaceWorkaround(name: String) =
+                        videoZonderPlaceholder || super.codecNeedsSetOutputSurfaceWorkaround(name)
+
+                    override fun getMediaFormat(
+                        format: Format,
+                        codecMimeType: String,
+                        codecMaxValues: CodecMaxValues,
+                        codecOperatingRate: Float,
+                        deviceNeedsNoPostProcessWorkaround: Boolean,
+                        tunnelingAudioSessionId: Int,
+                    ): MediaFormat {
+                        val mf = super.getMediaFormat(
+                            format, codecMimeType, codecMaxValues, codecOperatingRate,
+                            deviceNeedsNoPostProcessWorkaround, tunnelingAudioSessionId,
+                        )
+                        // Amlogic-decoders weigeren soms VFR-fps net boven 60 (bijv. 60.000004)
+                        for (key in arrayOf(MediaFormat.KEY_FRAME_RATE, MediaFormat.KEY_OPERATING_RATE)) {
+                            if (mf.containsKey(key)) {
+                                val fps = runCatching { mf.getFloat(key) }.getOrNull()
+                                if (fps != null && fps > 60f && fps < 61f) mf.setFloat(key, 60f)
+                            }
+                        }
+                        return mf
+                    }
                 })
             }
-        }
+        }.setEnableDecoderFallback(true)
         ExoPlayer.Builder(ctx, renderers).setLoadControl(buffers)
             .setMediaSourceFactory(DefaultMediaSourceFactory(OkHttpDataSource.Factory(Immich.http))).build()
     }
@@ -397,10 +422,10 @@ private fun Video(a: Asset, staat: KijkerStaat) {
     // Een TextureView tekent via de GPU met de transformatie van de decoder, die klopt overal. Ongedraaide video's
     // houden de SurfaceView (zuiniger, en HDR werkt alleen daar).
     var verhouding by remember { mutableFloatStateOf(0f) }
-    var gedraaid by remember { mutableStateOf(false) }
+    val isPortrait = remember(a.id) { a.ratio < 1f }
     DisposableEffect(a.id) {
         staat.videoFout = false
-        verhouding = 0f; gedraaid = false
+        verhouding = 0f
         speler.setMediaItem(MediaItem.fromUri(Immich.video(a.id)))
         speler.prepare()
         speler.playWhenReady = true
@@ -408,11 +433,6 @@ private fun Video(a: Asset, staat: KijkerStaat) {
             override fun onIsPlayingChanged(isPlaying: Boolean) { staat.speeltVideo = isPlaying }
             override fun onVideoSizeChanged(v: VideoSize) {
                 if (v.width > 0 && v.height > 0) verhouding = v.width * v.pixelWidthHeightRatio / v.height
-            }
-            override fun onTracksChanged(tracks: Tracks) {
-                val f = tracks.groups.firstOrNull { it.type == C.TRACK_TYPE_VIDEO }?.getTrackFormat(0) ?: return
-                gedraaid = f.rotationDegrees == 90 || f.rotationDegrees == 270
-                if (gedraaid) Log.i("Fotos", "video ${a.id}: gedraaid ${f.rotationDegrees}°, TextureView")
             }
             override fun onPlaybackStateChanged(s: Int) {
                 // diashow: na de video door naar de volgende
@@ -432,24 +452,21 @@ private fun Video(a: Asset, staat: KijkerStaat) {
         }
     }
     Box(Modifier.fillMaxSize()) {
-        // Het oppervlak moet er METEEN zijn: op apparaten zonder placeholder-surface (Media3: o.a. veel Fire TV's) start de
-        // decoder pas met een echt oppervlak, dus wachten op de videomaat bleef daar eeuwig wachten (2.7: geen enkele video
-        // speelde). Tot de maat bekend is de verhouding uit Immich (staande video = staand), daarna die van de video zelf.
+        // Het oppervlak moet er METEEN zijn en nooit halverwege wisselen tussen SurfaceView en TextureView
+        // (wisselen tijdens decodering geeft op Amlogic gekleurde strepen).
         val r = if (verhouding > 0f) verhouding else a.ratio
-        key(gedraaid) {
-            AndroidView(
-                factory = { c ->
-                    if (gedraaid) TextureView(c).also { speler.setVideoTextureView(it) }
-                    else SurfaceView(c).also { speler.setVideoSurfaceView(it) }
-                },
-                onRelease = { v ->
-                    if (v is TextureView) speler.clearVideoTextureView(v)
-                    else if (v is SurfaceView) speler.clearVideoSurfaceView(v)
-                },
-                // past binnen het scherm, staand of liggend (aspectRatio probeert eerst de hoogte, anders de breedte)
-                modifier = Modifier.align(Alignment.Center).aspectRatio(r.coerceIn(0.2f, 5f), matchHeightConstraintsFirst = true),
-            )
-        }
+        AndroidView(
+            factory = { c ->
+                if (isPortrait) TextureView(c).also { speler.setVideoTextureView(it) }
+                else SurfaceView(c).also { speler.setVideoSurfaceView(it) }
+            },
+            onRelease = { v ->
+                if (v is TextureView) speler.clearVideoTextureView(v)
+                else if (v is SurfaceView) speler.clearVideoSurfaceView(v)
+            },
+            // past binnen het scherm, staand of liggend (aspectRatio probeert eerst de hoogte, anders de breedte)
+            modifier = Modifier.align(Alignment.Center).aspectRatio(r.coerceIn(0.2f, 5f), matchHeightConstraintsFirst = true),
+        )
         if (staat.videoFout) Column(Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(Icons.Filled.VideocamOff, null, Modifier.size(44.dp), tint = Kleur.zacht)
             Text(stringResource(R.string.video_fout), style = MaterialTheme.typography.bodyLarge, color = Kleur.zacht, modifier = Modifier.padding(top = 8.dp))
