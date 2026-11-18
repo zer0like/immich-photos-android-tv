@@ -138,6 +138,19 @@ class KijkerStaat(val bron: BeeldBron, start: Int, val titel: String?, diashow: 
     var speler: ExoPlayer? = null
     /** volgende foto van de diashow, alvast gekozen (en vooraf geladen) zodra de huidige in beeld staat */
     var diaVolgende = -1
+    /** schermmaten voor het bepalen of twee staande foto's naast elkaar passen */
+    var breedtePx = 1920
+    var hoogtePx = 1080
+    var tussenPx = 36
+
+    /** Tweede staande foto als die naast [i] op het scherm past; anders null. */
+    fun paarVoor(i: Int): Asset? {
+        val a = bron.op(i) ?: return null
+        val b = bron.op(i + 1) ?: return null
+        if (a.video || b.video || a.ratio >= 1f || b.ratio >= 1f) return null
+        val totaal = hoogtePx * a.ratio + tussenPx + hoogtePx * b.ratio
+        return if (totaal <= breedtePx) b else null
+    }
 
     /** willekeurige diashow zonder herhaling (zie [Schudder]) */
     private val schudder = Schudder()
@@ -147,7 +160,8 @@ class KijkerStaat(val bron: BeeldBron, start: Int, val titel: String?, diashow: 
         val n = bron.aantal
         if (Instellingen.diaWillekeurig)
             return schudder.volgende(n, index) { Instellingen.diaVideos || bron.op(it)?.video != true }
-        var i = index + 1
+        val stap = if (paarVoor(index) != null) 2 else 1
+        var i = index + stap
         while (i < n && !Instellingen.diaVideos && bron.op(i)?.video == true) i++
         return if (i < n) i else -1
     }
@@ -179,8 +193,13 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
     }
 
     fun ga(d: Int) {
-        val n = (staat.index + d)
-        if (n < 0 || n >= staat.bron.aantal) return
+        val stap = when {
+            d == 1 && staat.paarVoor(staat.index) != null -> 2
+            d == -1 && staat.index >= 2 && staat.paarVoor(staat.index - 2) != null -> -2
+            else -> d
+        }
+        val n = (staat.index + stap).coerceIn(0, (staat.bron.aantal - 1).coerceAtLeast(0))
+        if (n == staat.index) return
         // video meteen stoppen (buffers vrij) in plaats van pas na de overgang: minder piek naast de nieuwe preview
         if (huidig?.video == true) { staat.speler?.stop(); staat.speeltVideo = false }
         staat.richting = d
@@ -196,9 +215,9 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
         if (staat.diashow && Instellingen.diaWillekeurig) return@LaunchedEffect
         val loader = SingletonImageLoader.get(ctx)
         fun laad(d: Int) { staat.bron.op(staat.index + d)?.takeIf { !it.video }?.let { loader.enqueue(previewVerzoek(ctx, it.id)) } }
-        laad(1)
-        delay(300); laad(-1)
-        delay(700); laad(2)
+        laad(1); laad(2)
+        delay(300); laad(-1); laad(-2)
+        delay(700); laad(3)
     }
     // diashow: volgende alvast kiezen en vooraf laden (ook bij willekeurig of overgeslagen video's), dan verder
     LaunchedEffect(staat.diashow, staat.index, staat.speeltVideo) {
@@ -248,6 +267,10 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
         val dicht = LocalDensity.current
         val breedtePx = with(dicht) { maxWidth.roundToPx() }
         val hoogtePx = with(dicht) { maxHeight.roundToPx() }
+        val tussenPx = with(dicht) { 24.dp.roundToPx() }
+        staat.breedtePx = breedtePx
+        staat.hoogtePx = hoogtePx
+        staat.tussenPx = tussenPx
 
         // Bewust geen fadeIn/fadeOut hier: die zetten een schermvullende offscreen-laag (8 MB) per pagina op en HWUI houdt
         // die lagen in zijn cache. De crossfade zit in Beeld (ModulateAlpha = alpha per tekenopdracht, zonder laag);
@@ -265,10 +288,11 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
             label = "foto",
         ) { i ->
             val a = staat.bron.op(i)
+            val b = staat.paarVoor(i)
             val zicht by transition.animateFloat(transitionSpec = { tween(if (staat.richting == 0) 900 else 200) }, label = "zicht") {
                 if (it == EnterExitState.Visible) 1f else 0f
             }
-            if (a != null) Beeld(a, staat, actief = i == staat.index, zicht = { zicht })
+            if (a != null) Beeld(a, b, staat, actief = i == staat.index, zicht = { zicht })
             else Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text(stringResource(R.string.laden), style = MaterialTheme.typography.bodyLarge, color = Kleur.zacht) }
         }
 
@@ -341,7 +365,7 @@ private fun DiaRing(staat: KijkerStaat) {
 }
 
 @Composable
-private fun Beeld(a: Asset, staat: KijkerStaat, actief: Boolean, zicht: () -> Float) {
+private fun Beeld(a: Asset, b: Asset?, staat: KijkerStaat, actief: Boolean, zicht: () -> Float) {
     Box(Modifier.fillMaxSize().graphicsLayer { alpha = zicht(); compositingStrategy = CompositingStrategy.ModulateAlpha }, contentAlignment = Alignment.Center) {
         // diashow: heel langzaam inzoomen (Ken Burns, instelbaar), anders stil
         // Alleen op de diashow-schakelaar: de vertrekkende pagina houdt zijn zoom (anders springt hij terug tijdens de
@@ -351,19 +375,41 @@ private fun Beeld(a: Asset, staat: KijkerStaat, actief: Boolean, zicht: () -> Fl
             if (staat.diashow && Instellingen.kenBurns) { if (actief) zoom.animateTo(1.06f, tween((Instellingen.diaMs + 1500).toInt(), easing = LinearEasing)) }
             else if (zoom.value != 1f) zoom.animateTo(1f, tween(500, easing = FastOutSlowInEasing))
         }
-        val mod = Modifier.fillMaxSize().graphicsLayer { scaleX = zoom.value; scaleY = zoom.value }
         // 1) thumbhash 2) thumbnail (al in de cache van het raster) 3) preview: er staat dus altijd meteen iets
         val hash = remember(a.thumbhash) { a.thumbhash?.let { ThumbHash.bitmap(it) } }
         if (hash != null && Instellingen.wazig) {
             // achtergrond i.p.v. zwarte balken: de thumbhash (32 px) schermvullend opgerekt = gratis 'blur', verdonkerd
             Image(hash, null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop, alpha = 0.7f)
             Box(Modifier.fillMaxSize().background(Color(0x8C000000)))
-            val vorm = Modifier.aspectRatio(a.ratio.coerceIn(0.3f, 4f), matchHeightConstraintsFirst = true)
-            Image(hash, null, vorm, contentScale = ContentScale.FillBounds)
+            if (b == null) {
+                val vorm = Modifier.aspectRatio(a.ratio.coerceIn(0.3f, 4f), matchHeightConstraintsFirst = true)
+                Image(hash, null, vorm, contentScale = ContentScale.FillBounds)
+            }
         }
-        AsyncImage(beeld(Immich.thumb(a.id)), null, mod, contentScale = ContentScale.Fit)
-        if (!a.video) AsyncImage(preview(a.id), null, mod, contentScale = ContentScale.Fit)
-        if (a.video && actief) Video(a, staat)
+        if (b != null) {
+            Row(
+                Modifier.fillMaxSize().graphicsLayer { scaleX = zoom.value; scaleY = zoom.value },
+                horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                for (item in listOf(a, b)) {
+                    Box(
+                        Modifier.fillMaxHeight().aspectRatio(item.ratio.coerceIn(0.2f, 1f), matchHeightConstraintsFirst = true),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        val h = remember(item.thumbhash) { item.thumbhash?.let { ThumbHash.bitmap(it) } }
+                        if (h != null) Image(h, null, Modifier.fillMaxSize(), contentScale = ContentScale.FillBounds)
+                        AsyncImage(beeld(Immich.thumb(item.id)), null, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
+                        AsyncImage(preview(item.id), null, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
+                    }
+                }
+            }
+        } else {
+            val mod = Modifier.fillMaxSize().graphicsLayer { scaleX = zoom.value; scaleY = zoom.value }
+            AsyncImage(beeld(Immich.thumb(a.id)), null, mod, contentScale = ContentScale.Fit)
+            if (!a.video) AsyncImage(preview(a.id), null, mod, contentScale = ContentScale.Fit)
+            if (a.video && actief) Video(a, staat)
+        }
     }
 }
 
