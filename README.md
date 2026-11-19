@@ -24,6 +24,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **New localizations & 5×2 language picker:** added Chinese (Simplified), Hindi, Russian (with a Cyrillic/Latin `ABC`/`АБВ` toggle on the TV keyboard), Japanese, and Korean; both the first-run `5×2` language grid and the Settings language selector are ordered by total worldwide speakers.
 - **Refreshed 4K launcher icons & banners:** vector `<adaptive-icon>` (`mipmap-anydpi-v26`) for crisp 4K icons, and `6×`-supersampled straight `0°` card banners across all Android TV density buckets (`mdpi` through `xxxhdpi` `640×360`) for all 10 supported languages.
 - **Full disable for date, time & place overlay:** added a **Show date and place** toggle (under **Viewing photos**, placed at the top of Settings above **Screensaver**) so you can completely turn off the bottom date/time/location bar while viewing photos instead of only setting a hide delay.
+- **Full English codebase refactoring:** translated the Gradle module (`:fotos` → `:app`), all Kotlin filenames, symbols, resource keys, scripts, and comments from Dutch to standard English (keeping the Dutch UI localization intact) so contributors don't need a Dutch dictionary to work on the code.
 
 ![Timeline](docs/screenshots/timeline.png)
 
@@ -251,6 +252,10 @@ or set the environment variables `IMMICHCLIENT_KEYSTORE`, `IMMICHCLIENT_KEYSTORE
 - User-facing strings live in `res/values*/strings.xml`. To add a language, add a `values-xx/strings.xml`, add the code to `resourceConfigurations` in `app/build.gradle.kts` and to the list in `Language.kt`, and generate localized banners with `app/banners.py`.
 - The app is tuned for 2 GB TV boxes: a fixed, small image cache, previews decoded at screen size, small video buffers and a lazily loaded timeline. Keep memory usage in mind when adding features.
 - `app/countries_bin.py` builds `assets/countries.bin` (country outlines for the map in the viewer) from Natural Earth data.
+
+## TODO
+
+- [x] ~~Refactor codebase identifiers and comments from Dutch (`Kijker`, `Tijdlijn`, `Instellingen`, `Schudder`, `Willekeurig`, etc.) to standard English so contributors don't need a Dutch dictionary to read the code.~~
 
 ## Credits and licences
 
