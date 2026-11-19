@@ -25,13 +25,13 @@ import java.util.Locale
  */
 object Taal {
     /** Ondersteunde talen (ISO 639-1), in de volgorde van het keuzescherm. */
-    val TALEN = listOf("en", "nl", "de", "fr", "es")
+    val TALEN = listOf("en", "nl", "de", "fr", "es", "ru")
     private const val PREFS = "instellingen"
     private const val SLEUTEL = "taal"
 
     /** Naam van de taal in die taal zelf (voor het keuzescherm en de instelling). */
     fun naam(code: String) = when (code) {
-        "nl" -> "Nederlands"; "de" -> "Deutsch"; "fr" -> "Français"; "es" -> "Español"; else -> "English"
+        "nl" -> "Nederlands"; "de" -> "Deutsch"; "fr" -> "Français"; "es" -> "Español"; "ru" -> "Русский"; else -> "English"
     }
 
     @Volatile var code: String = "en"

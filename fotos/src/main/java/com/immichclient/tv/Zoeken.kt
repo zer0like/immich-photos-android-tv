@@ -320,6 +320,7 @@ private fun Suggesties(staat: ZoekStaat, nav: Nav, zoek: (String) -> Unit) {
 @Composable
 fun TekstInvoer(titel: String, begin: String, live: ((String) -> Unit)? = null, actie: String = stringResource(R.string.actie_zoeken), sluit: () -> Unit, klaar: (String) -> Unit) {
     var tekst by remember { mutableStateOf(begin) }
+    var latijn by remember { mutableStateOf(Taal.code != "ru") }
     val eerste = remember { FocusRequester() }
     fun zet(t: String) { tekst = t; live?.invoke(t) }
     BackHandler { sluit() }
@@ -351,20 +352,23 @@ fun TekstInvoer(titel: String, begin: String, live: ((String) -> Unit)? = null, 
                 Box(Modifier.width(2.dp).height(26.dp).background(Kleur.primair))
             }
             Spacer(Modifier.height(6.dp))
-            "abcdefghijklmnopqrstuvwxyz1234567890".chunked(10).forEachIndexed { ri, rij ->
+            val tekens = if (latijn) "abcdefghijklmnopqrstuvwxyz1234567890" else "абвгдеёжзийклмнопрстуфхцчшщъыьэюя1234567890"
+            val kolommen = if (latijn) 10 else 11
+            tekens.chunked(kolommen).forEachIndexed { ri, rij ->
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     rij.forEachIndexed { ci, c ->
                         Toets(c.toString(), Modifier.weight(1f).then(if (ri == 0 && ci == 0) Modifier.focusRequester(eerste) else Modifier)) { zet(tekst + c) }
                     }
-                    // laatste rij aanvullen tot 10, zodat alles netjes onder elkaar staat
-                    repeat(10 - rij.length) { Spacer(Modifier.weight(1f)) }
+                    // laatste rij aanvullen tot [kolommen], zodat alles netjes onder elkaar staat
+                    repeat(kolommen - rij.length) { Spacer(Modifier.weight(1f)) }
                 }
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Toets(stringResource(R.string.toets_spatie), Modifier.weight(3f)) { zet("$tekst ") }
+                Toets(stringResource(R.string.toets_spatie), Modifier.weight(if (Taal.code == "ru") 2.5f else 3f)) { zet("$tekst ") }
                 Toets("⌫", Modifier.weight(1f)) { zet(tekst.dropLast(1)) }
-                Toets(stringResource(R.string.toets_wissen), Modifier.weight(2f)) { zet("") }
-                Toets(actie, Modifier.weight(4f), hoofd = true) { klaar(tekst) }
+                Toets(stringResource(R.string.toets_wissen), Modifier.weight(if (Taal.code == "ru") 1.8f else 2f)) { zet("") }
+                if (Taal.code == "ru") Toets(if (latijn) "АБВ" else "ABC", Modifier.weight(1.2f)) { latijn = !latijn }
+                Toets(actie, Modifier.weight(if (Taal.code == "ru") 3.5f else 4f), hoofd = true) { klaar(tekst) }
             }
         }
     }

@@ -56,18 +56,18 @@ fun TaalScherm(finish: () -> Unit, klaar: () -> Unit) {
     // teksten in de taal van de gefocuste tegel (de app zelf staat nog in de voorlopige taal)
     val res = remember(focusTaal) { Taal.resources(focusTaal) }
 
-    Column(Modifier.fillMaxSize().background(Kleur.achtergrond).padding(horizontal = 64.dp, vertical = 48.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+    Column(Modifier.fillMaxSize().background(Kleur.achtergrond).padding(horizontal = 40.dp, vertical = 48.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Box(Modifier.background(Kleur.vlak, CircleShape).padding(14.dp)) { Icon(Icons.Filled.Language, null, Modifier.size(30.dp), tint = Kleur.primair) }
         Spacer(Modifier.height(18.dp))
         Text(res.getString(R.string.taal_titel), style = MaterialTheme.typography.displaySmall, textAlign = TextAlign.Center, maxLines = 1)
         Text(res.getString(R.string.taal_sub), style = MaterialTheme.typography.bodyLarge, color = Kleur.zacht, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 6.dp))
         Spacer(Modifier.height(36.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             for (code in Taal.TALEN) {
                 val gekozen = code == standaard
                 Surface(
                     onClick = { Taal.kies(ctx, code); klaar() },
-                    modifier = Modifier.width(150.dp).height(110.dp).then(if (gekozen) Modifier.focusRequester(eerste) else Modifier)
+                    modifier = Modifier.width(132.dp).height(106.dp).then(if (gekozen) Modifier.focusRequester(eerste) else Modifier)
                         .onFocusChanged { if (it.isFocused) focusTaal = code },
                     shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(16.dp)),
                     scale = ClickableSurfaceDefaults.scale(focusedScale = 1.08f),
@@ -81,7 +81,7 @@ fun TaalScherm(finish: () -> Unit, klaar: () -> Unit) {
                     val kleur = if (focusTaal == code) Kleur.opPrimair else Kleur.tekst
                     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                         Text(code.uppercase(), style = MaterialTheme.typography.labelMedium.copy(fontSize = 13.sp, letterSpacing = 2.sp), color = kleur.copy(alpha = 0.7f))
-                        Text(Taal.naam(code), style = MaterialTheme.typography.titleLarge.copy(fontSize = 22.sp), maxLines = 1, color = kleur)
+                        Text(Taal.naam(code), style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp), maxLines = 1, color = kleur)
                     }
                 }
             }

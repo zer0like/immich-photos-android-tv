@@ -20,7 +20,7 @@ android {
         // Elke ABI kost ~8 MB in de APK.
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
         // alleen de talen van de app meenemen (anders ~80 vertalingen van de bibliotheken in de APK)
-        resourceConfigurations += listOf("en", "nl", "de", "fr", "es")
+        resourceConfigurations += listOf("en", "nl", "de", "fr", "es", "ru")
     }
 
     // Vaste release-sleutel, zodat een nieuwe versie over een oude heen geïnstalleerd kan worden.
