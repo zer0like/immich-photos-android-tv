@@ -24,8 +24,8 @@ import java.util.Locale
  * [naam] (in de eigen taal); verder niets.
  */
 object Taal {
-    /** Ondersteunde talen (ISO 639-1), in de volgorde van het keuzescherm. */
-    val TALEN = listOf("en", "nl", "de", "fr", "es", "ru", "zh", "ja", "ko", "hi")
+    /** Ondersteunde talen (ISO 639-1), gesorteerd op het aantal sprekers wereldwijd (voor keuzescherm én instellingen). */
+    val TALEN = listOf("en", "zh", "hi", "es", "fr", "ru", "de", "ja", "ko", "nl")
     private const val PREFS = "instellingen"
     private const val SLEUTEL = "taal"
 

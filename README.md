@@ -4,7 +4,7 @@
 [![Latest release](https://img.shields.io/github/v/release/zer0like/immich-photos-android-tv?color=accbfa)](https://github.com/zer0like/immich-photos-android-tv/releases/latest)
 [![License: MIT](https://img.shields.io/github/license/zer0like/immich-photos-android-tv)](LICENSE)
 
-Forked from [neforce/android-tv-immich-client](https://github.com/neforce/android-tv-immich-client) with Amlogic playback fixes, D-Pad scroll stability improvements, Russian localization, Shuffle mode, and ambient background music.
+Forked from [neforce/android-tv-immich-client](https://github.com/neforce/android-tv-immich-client) with Amlogic playback fixes, D-Pad scroll stability improvements, 5 new localizations, Shuffle mode, ambient background music, and refreshed launcher icons.
 
 A fast, remote-friendly client for [Immich](https://immich.app) for Android TV boxes (Dune HD, Homatics, NVIDIA Shield, Chromecast with Google TV, and other Android TV 8+ devices). Browse your whole photo library on the big screen, relive memories, search with Immich's smart search and explore your photos on a world map, all with the remote control.
 
@@ -17,7 +17,8 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Side-by-side portrait photos:** automatically pairs two consecutive portrait photos on widescreen TVs when both fit cleanly side by side.
 - **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** (`Вперемешку`) infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
 - **Background music (`Music` settings):** ad-free [SomaFM](https://somafm.com) ambient radio (`Off` / `Slideshow only` / `Always`), single-player architecture to prevent overlap, auto-pause when minimized, and smooth 2.5 s audio ducking during video playback.
-- **Russian UI & Cyrillic keyboard:** full Russian translation (`Русский`) with Russian plurals, date formatting, and a Cyrillic/Latin (`ABC`/`АБВ`) toggle on the built-in TV keyboard.
+- **New localizations & 5×2 language picker:** added Chinese (Simplified), Hindi, Russian (with a Cyrillic/Latin `ABC`/`АБВ` toggle on the TV keyboard), Japanese, and Korean; both the first-run `5×2` language grid and the Settings language selector are ordered by total worldwide speakers.
+- **Refreshed launcher icons & banners:** smooth 6× supersampled adaptive-ready launcher icons (`xhdpi` / `xxhdpi` / `xxxhdpi`) and localized Russian launcher banners.
 - **Date & place bar toggle:** added a **Show date and place** toggle above the bottom bar duration setting.
 
 ![Timeline](docs/screenshots/timeline.png)
@@ -38,7 +39,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Scroll bar** with the position in your whole library (month, photo number, years). Move onto it with ▶ to jump through months and years quickly.
 - **Diagnostics** under Settings → About: the reason the app last stopped, kept on the device only.
 - **Settings**: slideshow, viewer, timeline, map, accent colour, app name and icon, greeting, start screen and more. See [Settings](#settings).
-- **Languages**: English, Dutch, German, French, Spanish, Russian, Chinese (Simplified), Japanese, Korean and Hindi, with a language picker on first start.
+- **Languages**: 10 languages ordered by worldwide speaker count (English, Chinese Simplified, Hindi, Spanish, French, Russian, German, Japanese, Korean, and Dutch), with a `5×2` language picker on first start and the same order in Settings.
 - **Easy pairing**: scan a QR code with your phone and log in. No typing of long API keys with the remote.
 
 | | |
