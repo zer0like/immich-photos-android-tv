@@ -14,15 +14,16 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 
 ## Fork highlights
 
-- **Amlogic & Android 10+ video playback:** uses `SurfaceView` on API 29+ for hardware HWC rotation and 10-bit/4K playback, increases ExoPlayer buffering, clamps `>60 fps` metadata quirks on Amlogic decoders, and disables mid-stream AFR stalls.
+- **Direct video playback without server transcoding (Amlogic & Android 10+):** uses `SurfaceView` on API 29+ for hardware HWC rotation and direct 10-bit HDR / 4K playback, increases ExoPlayer buffering, clamps `>60 fps` metadata quirks on Amlogic decoders (so 60+ fps / slow-mo phone clips play natively), disables mid-stream AFR stalls, and eliminates CPU/GPU transcoding load on your Immich server.
 - **Interactive D-Pad video seek HUD:** press `▼` during video playback to open a transport progress bar where `◀` / `▶` scrubs smoothly with debounced timeline preview, duration-aware steps (`5 s` / `10 s` / `15 s`, doubling on hold), `OK` pauses/resumes, and `⏩` / `⏪` jumps `±10 s` anytime.
 - **Smooth D-Pad fast scrolling:** throttles D-Pad key-repeat events to avoid ANR, removes per-tile animation coroutines, prefetches upcoming grid rows, and skips destructive cache clears on `TRIM_MEMORY_RUNNING_LOW`.
 - **Side-by-side portrait photos:** automatically pairs two consecutive portrait photos on widescreen TVs when both fit cleanly side by side.
+- **Justified Folders grid matching Photos:** replaced the fixed square grid in **Folders** with the same aspect-ratio-preserving, day-grouped tile layout (`Photo size` setting, quick-jump scroll bar, and row prefetching) used in **Photos** — no square cropping and consistent TV navigation.
 - **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
 - **Background music (`Music` settings):** ad-free [SomaFM](https://somafm.com) ambient radio (`Off` / `Slideshow only` / `Always`), single-player architecture to prevent overlap, auto-pause when minimized, and smooth 2.5 s audio ducking during video playback.
 - **New localizations & 5×2 language picker:** added Chinese (Simplified), Hindi, Russian (with a Cyrillic/Latin `ABC`/`АБВ` toggle on the TV keyboard), Japanese, and Korean; both the first-run `5×2` language grid and the Settings language selector are ordered by total worldwide speakers.
 - **Refreshed 4K launcher icons & banners:** vector `<adaptive-icon>` (`mipmap-anydpi-v26`) for crisp 4K icons, and `6×`-supersampled straight `0°` card banners across all Android TV density buckets (`mdpi` through `xxxhdpi` `640×360`) for all 10 supported languages.
-- **Date & place bar toggle:** added a **Show date and place** toggle above the bottom bar duration setting.
+- **Full disable for date, time & place overlay:** added a **Show date and place** toggle (under **Viewing photos**, placed at the top of Settings above **Screensaver**) so you can completely turn off the bottom date/time/location bar while viewing photos instead of only setting a hide delay.
 
 ![Timeline](docs/screenshots/timeline.png)
 
