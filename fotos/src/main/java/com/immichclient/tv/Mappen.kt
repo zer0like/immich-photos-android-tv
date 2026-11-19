@@ -9,8 +9,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,10 +20,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridState
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Folder
@@ -136,10 +135,9 @@ class MappenBoom(scope: CoroutineScope) {
 class MapStaat(val boom: MappenBoom, val knoop: MapKnoop?, scope: CoroutineScope) {
     var fotos by mutableStateOf<List<Asset>?>(null)
     var fout by mutableStateOf<String?>(null)
-    val grid = LazyGridState()
-    /** index (mappen eerst, dan foto's) die focus moet krijgen zodra hij in beeld is; -1 = geen */
-    var focusDoel by mutableIntStateOf(0)
-    var laatsteFocus = 0
+    val raster = RasterStaat()
+    var mapFocusDoel by mutableIntStateOf(-1)
+    var laatsteMapPad by mutableStateOf<String?>(null)
     private var geladen: MapKnoop? = null
 
     init { scope.launch { laad() } }
@@ -183,80 +181,130 @@ fun MappenScherm(scherm: Scherm.Mappen, nav: Nav) {
     val titel = if (k === boom.start) stringResource(R.string.sectie_mappen) else k.naam
     fun bekijk(i: Int, dia: Boolean) {
         if (fotos.isEmpty()) return
-        nav.bekijk(LijstBron(fotos), i.coerceIn(0, fotos.lastIndex), titel, dia, null) { staat.focusDoel = staat.laatsteFocus }
+        nav.bekijk(LijstBron(fotos), i.coerceIn(0, fotos.lastIndex), titel, dia, staat.raster)
     }
 
-    Box(Modifier.fillMaxSize()) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(KOLOMMEN),
-        state = staat.grid,
-        contentPadding = PaddingValues(start = 24.dp, end = 40.dp, top = 20.dp, bottom = 80.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        modifier = Modifier.fillMaxSize().onPreviewKeyEvent { e ->
-            if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
-            when (e.key.nativeKeyCode) {
-                // ⏯ = diashow van deze map, vanaf de gekozen foto (of de eerste)
-                KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, KeyEvent.KEYCODE_MEDIA_PLAY -> { bekijk(staat.laatsteFocus - mappen.size, true); fotos.isNotEmpty() }
-                else -> false
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val breedte = breedteVoor(maxWidth.value)
+        val rijHoogte = Instellingen.rijMaat.hoogte
+        val rijen = remember(fotos, breedte, rijHoogte) { rijenVoor(fotos, breedte, perDag = true, hoogte = rijHoogte) }
+        val eersteFoto = remember(rijen) { eersteFotoPerRij(rijen) }
+        val mapRijen = remember(mappen) { mappen.chunked(KOLOMMEN) }
+        val bovenAantal = 1 + mapRijen.size
+
+        Box(
+            Modifier.fillMaxSize().onPreviewKeyEvent { e ->
+                if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
+                when (e.key.nativeKeyCode) {
+                    // ⏯ = diashow van deze map, vanaf de gekozen foto (of de eerste)
+                    KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, KeyEvent.KEYCODE_MEDIA_PLAY -> {
+                        val a = staat.raster.laatsteFocus ?: fotos.firstOrNull()
+                        val i = a?.let { fotos.indexOf(it) }?.takeIf { it >= 0 } ?: 0
+                        bekijk(i, true)
+                        fotos.isNotEmpty()
+                    }
+                    else -> false
+                }
+            },
+        ) {
+            FotoRaster(
+                rijen = rijen,
+                staat = staat.raster,
+                onKlik = { a -> val i = fotos.indexOf(a); if (i >= 0) bekijk(i, false) },
+                bovenAantal = bovenAantal,
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                item(key = "kop") {
+                    val delen = listOfNotNull(
+                        mappen.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.mappen_aantal, it, it) },
+                        fotos.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.items, it, it) },
+                    )
+                    val pad = boom.start?.let { k.relatief(it) }.orEmpty()
+                    SchermKop(titel, listOfNotNull(pad.takeIf { it.isNotEmpty() && it != titel }, delen.joinToString("  ·  ").ifEmpty { null }).joinToString("   —   ").ifEmpty { null }) {
+                        if (mappen.size > 1) Keuze(
+                            selected = false, onClick = { boom.omgekeerd = !boom.omgekeerd; staat.mapFocusDoel = 0 },
+                            tekst = if (boom.omgekeerd) "Z–A" else "A–Z",
+                        )
+                        if (fotos.isNotEmpty()) Keuze(
+                            selected = false, onClick = { bekijk(0, true) },
+                            leadingIcon = { Icon(Icons.Filled.PlayArrow, null, Modifier.width(18.dp)) },
+                            tekst = stringResource(R.string.diashow),
+                        )
+                    }
+                }
+                items(mapRijen.size, key = { "mr:" + mapRijen[it].first().pad }) { ri ->
+                    val rijMappen = mapRijen[ri]
+                    Row(
+                        Modifier.fillMaxWidth().padding(bottom = 6.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        for ((ci, m) in rijMappen.withIndex()) {
+                            val idx = ri * KOLOMMEN + ci
+                            MapVak(
+                                m,
+                                modifier = Modifier.weight(1f),
+                                focusDoel = staat.mapFocusDoel == idx,
+                                onFocusDoelKlaar = { staat.mapFocusDoel = -1 },
+                                onFocus = { staat.laatsteMapPad = m.pad },
+                            ) {
+                                staat.laatsteMapPad = m.pad
+                                nav.open(Scherm.Mappen(staat.boom, m, nav.scope))
+                            }
+                        }
+                        repeat(KOLOMMEN - rijMappen.size) { Spacer(Modifier.weight(1f)) }
+                    }
+                }
+                if (staat.fotos == null && k.heeftFotos) item(key = "laden") {
+                    Text(stringResource(R.string.laden), style = MaterialTheme.typography.bodyLarge, color = Kleur.zacht, modifier = Modifier.padding(top = 24.dp))
+                }
+                if (staat.fotos != null && mappen.isEmpty() && fotos.isEmpty()) item(key = "leeg") {
+                    Melding(stringResource(if (staat.fout != null) R.string.mappen_niet_geladen else R.string.map_leeg), staat.fout, Icons.Filled.Folder)
+                }
             }
-        },
-    ) {
-        item(span = { GridItemSpan(maxLineSpan) }, key = "kop") {
-            val delen = listOfNotNull(
-                mappen.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.mappen_aantal, it, it) },
-                fotos.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.items, it, it) },
+            if (rijen.isNotEmpty() || mappen.isNotEmpty()) ScrolBalk(
+                fractie = { fractieVan(staat.raster.lijst, 1) },
+                beweging = { staat.raster.lijst.firstVisibleItemIndex * 7919 + staat.raster.lijst.firstVisibleItemScrollOffset / 200 },
+                scrolbaar = { staat.raster.lijst.canScrollForward || staat.raster.lijst.canScrollBackward },
+                label = {
+                    val i = staat.raster.lijst.firstVisibleItemIndex
+                    when {
+                        i <= mapRijen.size -> mapRijen.getOrNull((i - 1).coerceAtLeast(0))?.firstOrNull()?.naam
+                        else -> (rijen.getOrNull((i - bovenAantal).coerceIn(0, (rijen.size - 1).coerceAtLeast(0))) as? RijFotos)
+                            ?.regel?.stukken?.firstOrNull()?.kop
+                    }
+                },
+                sub = {
+                    if (fotos.isNotEmpty() && staat.raster.lijst.firstVisibleItemIndex >= bovenAantal) {
+                        val rIdx = (staat.raster.lijst.firstVisibleItemIndex - bovenAantal).coerceIn(0, (rijen.size - 1).coerceAtLeast(0))
+                        val nr = (eersteFoto.getOrElse(rIdx) { 0 } + 1).coerceIn(1, fotos.size)
+                        "${Taal.getal(nr)} / ${Taal.getal(fotos.size)}"
+                    } else if (mappen.isNotEmpty()) {
+                        val rIdx = (staat.raster.lijst.firstVisibleItemIndex - 1).coerceIn(0, (mapRijen.size - 1).coerceAtLeast(0))
+                        val nr = (rIdx * KOLOMMEN + 1).coerceIn(1, mappen.size)
+                        "${Taal.getal(nr)} / ${Taal.getal(mappen.size)}"
+                    } else null
+                },
+                modifier = Modifier.align(Alignment.CenterEnd),
             )
-            val pad = boom.start?.let { k.relatief(it) }.orEmpty()
-            SchermKop(titel, listOfNotNull(pad.takeIf { it.isNotEmpty() && it != titel }, delen.joinToString("  ·  ").ifEmpty { null }).joinToString("   —   ").ifEmpty { null }) {
-                if (mappen.size > 1) Keuze(
-                    selected = false, onClick = { boom.omgekeerd = !boom.omgekeerd; staat.focusDoel = 0 },
-                    tekst = if (boom.omgekeerd) "Z–A" else "A–Z",
-                )
-                if (fotos.isNotEmpty()) Keuze(
-                    selected = false, onClick = { bekijk(0, true) },
-                    leadingIcon = { Icon(Icons.Filled.PlayArrow, null, Modifier.width(18.dp)) },
-                    tekst = stringResource(R.string.diashow),
-                )
-            }
-        }
-        items(mappen.size, key = { "m:" + mappen[it].pad }) { i ->
-            val m = mappen[i]
-            MapVak(m, focusDoel = staat.focusDoel == i, onFocusDoelKlaar = { staat.focusDoel = -1 }, onFocus = { staat.laatsteFocus = i }) {
-                nav.open(Scherm.Mappen(staat.boom, m, nav.scope))
-            }
-        }
-        items(fotos.size, key = { "f:" + fotos[it].id }) { i ->
-            val idx = mappen.size + i
-            IdVak(
-                fotos[i].id, focusDoel = staat.focusDoel == idx, onFocusDoelKlaar = { staat.focusDoel = -1 },
-                onFocus = { staat.laatsteFocus = idx },
-            ) { bekijk(i, false) }
-        }
-        if (staat.fotos == null && k.heeftFotos) item(span = { GridItemSpan(maxLineSpan) }) {
-            Text(stringResource(R.string.laden), style = MaterialTheme.typography.bodyLarge, color = Kleur.zacht, modifier = Modifier.padding(top = 24.dp))
-        }
-        if (staat.fotos != null && mappen.isEmpty() && fotos.isEmpty()) item(span = { GridItemSpan(maxLineSpan) }) {
-            Melding(stringResource(if (staat.fout != null) R.string.mappen_niet_geladen else R.string.map_leeg), staat.fout, Icons.Filled.Folder)
         }
     }
-    val n = mappen.size + fotos.size
-    if (n > 0) ScrolBalk(
-        fractie = { fractieVan(staat.grid, 1) },
-        beweging = { staat.grid.firstVisibleItemIndex * 7919 + staat.grid.firstVisibleItemScrollOffset / 200 },
-        scrolbaar = { staat.grid.canScrollForward || staat.grid.canScrollBackward },
-        label = { mappen.getOrNull((staat.grid.firstVisibleItemIndex - 1).coerceAtLeast(0))?.naam },
-        sub = { "${Taal.getal((staat.grid.firstVisibleItemIndex - 1).coerceIn(0, n - 1) + 1)} / ${Taal.getal(n)}" },
-        modifier = Modifier.align(Alignment.CenterEnd),
-    )
+    // terug op dit scherm (of de eerste keer): focus op laatst gekozen submap of foto
+    LaunchedEffect(k, mappen.size, fotos.size) {
+        delay(30)
+        if (staat.raster.terugNaar != null || staat.raster.focusDoel != null) return@LaunchedEffect
+        val mapIdx = staat.laatsteMapPad?.let { pad -> mappen.indexOfFirst { it.pad == pad } }?.takeIf { it >= 0 }
+        when {
+            mapIdx != null -> { staat.mapFocusDoel = mapIdx; staat.laatsteMapPad = null }
+            staat.raster.laatsteFocus != null -> staat.raster.focusDoel = staat.raster.laatsteFocus!!.id
+            mappen.isNotEmpty() -> staat.mapFocusDoel = 0
+            fotos.isNotEmpty() -> staat.raster.focusDoel = fotos.first().id
+        }
     }
-    // terug op dit scherm (of de eerste keer): focus op het laatst gekozen vak
-    LaunchedEffect(Unit) { delay(30); if (staat.focusDoel < 0) staat.focusDoel = staat.laatsteFocus }
 }
 
 /** Map: groot mapicoon met de naam eronder (focus: iets groter, witte rand, gloed in de accentkleur). */
 @Composable
-private fun MapVak(m: MapKnoop, focusDoel: Boolean, onFocusDoelKlaar: () -> Unit, onFocus: () -> Unit, onKlik: () -> Unit) {
+private fun MapVak(m: MapKnoop, modifier: Modifier = Modifier, focusDoel: Boolean, onFocusDoelKlaar: () -> Unit, onFocus: () -> Unit, onKlik: () -> Unit) {
     val fr = remember { FocusRequester() }
     if (focusDoel) LaunchedEffect(m.pad) {
         repeat(5) { if (runCatching { fr.requestFocus() }.isSuccess) { onFocusDoelKlaar(); return@LaunchedEffect }; delay(16) }
@@ -266,7 +314,7 @@ private fun MapVak(m: MapKnoop, focusDoel: Boolean, onFocusDoelKlaar: () -> Unit
     val schaal by animateFloatAsState(if (focus) 1.06f else 1f, tween(140), label = "schaal")
     val vorm = RoundedCornerShape(10.dp)
     Column(
-        Modifier.aspectRatio(1f)
+        modifier.aspectRatio(1f)
             .graphicsLayer {
                 scaleX = schaal; scaleY = schaal; shape = vorm; clip = true
                 shadowElevation = if (focus) 16.dp.toPx() else 0f
