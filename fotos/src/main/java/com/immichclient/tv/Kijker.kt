@@ -2,6 +2,7 @@ package com.immichclient.tv
 
 import android.content.Context
 import android.media.MediaFormat
+import android.os.Build
 import android.os.Handler
 import android.util.Log
 import android.view.KeyEvent
@@ -23,11 +24,14 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,14 +44,18 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.FastForward
+import androidx.compose.material.icons.filled.FastRewind
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Pause
@@ -71,6 +79,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
@@ -135,6 +144,11 @@ class KijkerStaat(val bron: BeeldBron, start: Int, val titel: String?, diashow: 
     var actief by mutableLongStateOf(System.currentTimeMillis())
     var speeltVideo by mutableStateOf(false)
     var videoFout by mutableStateOf(false)
+    var videoHud by mutableStateOf(false)
+    var videoGepauzeerd by mutableStateOf(false)
+    var seekPreviewMs by mutableLongStateOf(-1L)
+    var seekDeltaSec by mutableIntStateOf(0)
+    var seekRonde by mutableIntStateOf(0)
     var speler: ExoPlayer? = null
     /** volgende foto van de diashow, alvast gekozen (en vooraf geladen) zodra de huidige in beeld staat */
     var diaVolgende = -1
@@ -171,6 +185,7 @@ class KijkerStaat(val bron: BeeldBron, start: Int, val titel: String?, diashow: 
         val d = diaVolgende.takeIf { it >= 0 && it != index && it < bron.aantal } ?: diaDoel()
         diaVolgende = -1
         if (d < 0) { diashow = false; return }
+        videoHud = false; videoGepauzeerd = false; seekPreviewMs = -1L; seekDeltaSec = 0; seekRonde = 0
         richting = if (Instellingen.diaSchuiven) 1 else 0
         index = d
         if (Instellingen.diaWillekeurig) schudder.markeer(d)
@@ -182,7 +197,13 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
     val ctx = LocalContext.current
     val fr = remember { FocusRequester() }
     val huidig = staat.bron.op(staat.index)
-    BackHandler { if (staat.info) staat.info = false else sluit(staat.bron.op(staat.index)) }
+    BackHandler {
+        when {
+            staat.info -> staat.info = false
+            staat.videoHud -> staat.videoHud = false
+            else -> sluit(staat.bron.op(staat.index))
+        }
+    }
     LaunchedEffect(Unit) { fr.requestFocus() }
     // Tijdens een diashow het scherm aan houden: anders start de systeem-screensaver (op o.a. de Google TV
     // Streamer niet uit te zetten) midden in de diashow. Gepauzeerd of gestopt geldt weer de gewone timeout.
@@ -202,9 +223,55 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
         if (n == staat.index) return
         // video meteen stoppen (buffers vrij) in plaats van pas na de overgang: minder piek naast de nieuwe preview
         if (huidig?.video == true) { staat.speler?.stop(); staat.speeltVideo = false }
+        staat.videoHud = false
+        staat.videoGepauzeerd = false
+        staat.seekPreviewMs = -1L
+        staat.seekDeltaSec = 0
+        staat.seekRonde = 0
         staat.richting = d
         staat.index = n
         staat.actief = System.currentTimeMillis()
+    }
+
+    fun spoelStapMs(durMs: Long, herhaling: Int): Long {
+        val basis = when {
+            durMs in 1..59_999 -> 5_000L
+            durMs >= 300_000 -> 15_000L
+            else -> 10_000L
+        }
+        return if (herhaling >= 4) basis * 2 else basis
+    }
+
+    fun spoel(stapMs: Long) {
+        val sp = staat.speler ?: return
+        val dur = sp.duration.takeIf { it > 0 } ?: Long.MAX_VALUE
+        val basis = if (staat.seekPreviewMs >= 0L) staat.seekPreviewMs else sp.currentPosition
+        val doel = (basis + stapMs).coerceIn(0L, dur)
+        staat.seekPreviewMs = doel
+        staat.seekDeltaSec = (if (staat.seekRonde > 0) staat.seekDeltaSec else 0) + (stapMs / 1000L).toInt()
+        staat.seekRonde++
+        staat.videoHud = true
+        staat.actief = System.currentTimeMillis()
+    }
+
+    // Debounced seek zodat ingedrukt houden vloeiend over de tijdlijn glijdt zonder de decoder te overspoelen
+    LaunchedEffect(staat.seekRonde) {
+        if (staat.seekRonde == 0) return@LaunchedEffect
+        delay(160)
+        val doel = staat.seekPreviewMs
+        if (doel >= 0L) staat.speler?.seekTo(doel)
+        staat.seekPreviewMs = -1L
+        delay(900)
+        staat.seekDeltaSec = 0
+        staat.seekRonde = 0
+    }
+
+    // Video-seekbalk verbergen na 4 s inactiviteit (blijft zichtbaar zolang video gepauzeerd is)
+    LaunchedEffect(staat.videoHud, staat.actief, staat.videoGepauzeerd, staat.index) {
+        if (staat.videoHud && !staat.videoGepauzeerd) {
+            delay(4_000)
+            staat.videoHud = false
+        }
     }
 
     // Buren vooraf laden, zuinig: eerst de volgende, dan de vorige, en pas als je blijft nog eentje verder.
@@ -243,23 +310,58 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
             if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
             val k = e.key.nativeKeyCode
             when (k) {
-                KeyEvent.KEYCODE_DPAD_LEFT -> { staat.diashow = false; ga(-1); true }
-                KeyEvent.KEYCODE_DPAD_RIGHT -> { staat.diashow = false; ga(1); true }
-                KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_INFO -> {
-                    staat.info = !staat.info; staat.actief = System.currentTimeMillis(); true
+                KeyEvent.KEYCODE_DPAD_LEFT -> {
+                    if (huidig?.video == true && staat.videoHud && !staat.info && !staat.diashow) {
+                        val sp = staat.speler
+                        spoel(-spoelStapMs(sp?.duration ?: 0L, e.nativeKeyEvent.repeatCount))
+                    } else {
+                        staat.diashow = false; ga(-1)
+                    }
+                    true
+                }
+                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    if (huidig?.video == true && staat.videoHud && !staat.info && !staat.diashow) {
+                        val sp = staat.speler
+                        spoel(spoelStapMs(sp?.duration ?: 0L, e.nativeKeyEvent.repeatCount))
+                    } else {
+                        staat.diashow = false; ga(1)
+                    }
+                    true
+                }
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    if (huidig?.video == true && !staat.info && !staat.diashow) {
+                        staat.videoHud = !staat.videoHud
+                        staat.actief = System.currentTimeMillis()
+                    } else {
+                        staat.info = !staat.info; staat.actief = System.currentTimeMillis()
+                    }
+                    true
+                }
+                KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_INFO -> {
+                    if (k == KeyEvent.KEYCODE_DPAD_UP && huidig?.video == true && staat.videoHud && !staat.info) {
+                        staat.videoHud = false
+                    } else {
+                        staat.info = !staat.info
+                        if (staat.info) staat.videoHud = false
+                    }
+                    staat.actief = System.currentTimeMillis(); true
                 }
                 KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE,
                 KeyEvent.KEYCODE_MEDIA_PLAY, KeyEvent.KEYCODE_MEDIA_PAUSE -> {
                     val sp = staat.speler
                     // infopaneel open bij een foto met plek: OK springt naar de wereldkaart
                     if (staat.info && opKaart != null && huidig != null && huidig.lat != null) opKaart(huidig)
-                    else if (huidig?.video == true && sp != null && !staat.diashow) sp.playWhenReady = !sp.playWhenReady
-                    else staat.diashow = !staat.diashow
+                    else if (huidig?.video == true && sp != null && !staat.diashow) {
+                        val nieuw = !sp.playWhenReady
+                        sp.playWhenReady = nieuw
+                        staat.videoGepauzeerd = !nieuw
+                        staat.videoHud = true
+                    } else staat.diashow = !staat.diashow
                     staat.actief = System.currentTimeMillis(); true
                 }
                 // ⏩ / ⏪: in een video 10 s, anders 10 foto's
-                KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> { staat.speler?.takeIf { huidig?.video == true }?.let { it.seekTo(it.currentPosition + 10_000) } ?: ga(10); true }
-                KeyEvent.KEYCODE_MEDIA_REWIND -> { staat.speler?.takeIf { huidig?.video == true }?.let { it.seekTo((it.currentPosition - 10_000).coerceAtLeast(0)) } ?: ga(-10); true }
+                KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> { if (huidig?.video == true && staat.speler != null) spoel(10_000L) else ga(10); true }
+                KeyEvent.KEYCODE_MEDIA_REWIND -> { if (huidig?.video == true && staat.speler != null) spoel(-10_000L) else ga(-10); true }
                 else -> false
             }
         },
@@ -310,10 +412,18 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
         var balk by remember { mutableStateOf(true) }
         LaunchedEffect(staat.actief, staat.index) { balk = true; val ms = Instellingen.balkMs; if (ms > 0) { delay(ms.toLong()); balk = false } }
         AnimatedVisibility(
-            ((balk && !schoon) || staat.info) && huidig != null && !staat.speeltVideo, Modifier.align(Alignment.BottomStart),
+            ((balk && !schoon) || staat.info) && huidig != null && !staat.speeltVideo && !staat.videoHud, Modifier.align(Alignment.BottomStart),
             enter = fadeIn(), exit = fadeOut(),
         ) {
             if (huidig != null) OnderBalk(huidig, staat, metKaart = huidig.lat != null && !huidig.video && kaartMaat > 0f)
+        }
+        AnimatedVisibility(
+            huidig?.video == true && staat.videoHud && !staat.info && !staat.diashow,
+            Modifier.align(Alignment.BottomCenter),
+            enter = fadeIn(tween(180)) + slideInVertically(tween(180)) { it / 3 },
+            exit = fadeOut(tween(220)) + slideOutVertically(tween(220)) { it / 3 },
+        ) {
+            VideoTransportHud(staat)
         }
         AnimatedVisibility(
             staat.info && huidig != null, Modifier.align(Alignment.CenterEnd),
@@ -406,7 +516,7 @@ private fun Beeld(a: Asset, b: Asset?, staat: KijkerStaat, actief: Boolean, zich
             }
         } else {
             val mod = Modifier.fillMaxSize().graphicsLayer { scaleX = zoom.value; scaleY = zoom.value }
-            AsyncImage(beeld(Immich.thumb(a.id)), null, mod, contentScale = ContentScale.Fit)
+            if (!a.video || !staat.speeltVideo) AsyncImage(beeld(Immich.thumb(a.id)), null, mod, contentScale = ContentScale.Fit)
             if (!a.video) AsyncImage(preview(a.id), null, mod, contentScale = ContentScale.Fit)
             if (a.video && actief) Video(a, staat)
         }
@@ -447,11 +557,11 @@ private fun Video(a: Asset, staat: KijkerStaat) {
                             format, codecMimeType, codecMaxValues, codecOperatingRate,
                             deviceNeedsNoPostProcessWorkaround, tunnelingAudioSessionId,
                         )
-                        // Amlogic-decoders weigeren soms VFR-fps net boven 60 (bijv. 60.000004)
+                        // Amlogic-decoders weigeren soms fps > 60 (bijv. 60.000004 of 240fps slow-mo)
                         for (key in arrayOf(MediaFormat.KEY_FRAME_RATE, MediaFormat.KEY_OPERATING_RATE)) {
                             if (mf.containsKey(key)) {
                                 val fps = runCatching { mf.getFloat(key) }.getOrNull()
-                                if (fps != null && fps > 60f && fps < 61f) mf.setFloat(key, 60f)
+                                if (fps != null && fps > 60f) mf.setFloat(key, 60f)
                             }
                         }
                         return mf
@@ -459,16 +569,16 @@ private fun Video(a: Asset, staat: KijkerStaat) {
                 })
             }
         }.setEnableDecoderFallback(true)
-        ExoPlayer.Builder(ctx, renderers).setLoadControl(buffers)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(OkHttpDataSource.Factory(Immich.http))).build()
+        ExoPlayer.Builder(ctx, renderers)
+            .setLoadControl(buffers)
+            .setVideoChangeFrameRateStrategy(C.VIDEO_CHANGE_FRAME_RATE_STRATEGY_OFF)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(OkHttpDataSource.Factory(Immich.http)))
+            .build()
     }
-    // Eigen weergave i.p.v. PlayerView: verhouding uit onVideoSizeChanged (bij 90°/270° al omgewisseld) en voor
-    // gedraaide video's (staande telefoonvideo's, vaak MOV) een TextureView. Met een SurfaceView laat Android de
-    // draaiing aan de hardware-overlay over en die negeert hem op sommige tv-boxen: de video staat dan op zijn kant.
-    // Een TextureView tekent via de GPU met de transformatie van de decoder, die klopt overal. Ongedraaide video's
-    // houden de SurfaceView (zuiniger, en HDR werkt alleen daar).
+    // Op Android 10+ (API 29+) ondersteunt SurfaceView rotatie in de hardware-overlay (HWC), én biedt hij directe
+    // 10-bit HDR (yuv420p10le HLG) en 4K zonder GPU-kopie via TextureView (die op Amlogic terugvalt naar ~10 fps).
     var verhouding by remember { mutableFloatStateOf(0f) }
-    val isPortrait = remember(a.id) { a.ratio < 1f }
+    val gebruikTexture = remember(a.id) { Build.VERSION.SDK_INT < 29 && a.ratio < 1f }
     DisposableEffect(a.id) {
         staat.videoFout = false
         verhouding = 0f
@@ -498,12 +608,10 @@ private fun Video(a: Asset, staat: KijkerStaat) {
         }
     }
     Box(Modifier.fillMaxSize()) {
-        // Het oppervlak moet er METEEN zijn en nooit halverwege wisselen tussen SurfaceView en TextureView
-        // (wisselen tijdens decodering geeft op Amlogic gekleurde strepen).
         val r = if (verhouding > 0f) verhouding else a.ratio
         AndroidView(
             factory = { c ->
-                if (isPortrait) TextureView(c).also { speler.setVideoTextureView(it) }
+                if (gebruikTexture) TextureView(c).also { speler.setVideoTextureView(it) }
                 else SurfaceView(c).also { speler.setVideoSurfaceView(it) }
             },
             onRelease = { v ->
@@ -517,12 +625,120 @@ private fun Video(a: Asset, staat: KijkerStaat) {
             Icon(Icons.Filled.VideocamOff, null, Modifier.size(44.dp), tint = Kleur.zacht)
             Text(stringResource(R.string.video_fout), style = MaterialTheme.typography.bodyLarge, color = Kleur.zacht, modifier = Modifier.padding(top = 8.dp))
         }
-        // dun voortgangsbalkje onderin
-        val deel by produceState(0f, speler) {
-            while (true) { val d = speler.duration; value = if (d > 0) speler.currentPosition.toFloat() / d else 0f; delay(250) }
+        if (!staat.videoHud) VideoVoortgang(speler, Modifier.align(Alignment.BottomStart))
+    }
+}
+
+@Composable
+private fun VideoVoortgang(speler: ExoPlayer, modifier: Modifier = Modifier) {
+    val deel by produceState(0f, speler) {
+        while (true) { val d = speler.duration; value = if (d > 0) (speler.currentPosition.toFloat() / d).coerceIn(0f, 1f) else 0f; delay(250) }
+    }
+    Box(modifier.fillMaxWidth().height(3.dp).background(Color(0x28FFFFFF))) {
+        Box(Modifier.fillMaxHeight().fillMaxWidth(deel).background(Kleur.primair))
+    }
+}
+
+private fun formatTijdMs(ms: Long): String {
+    val tot = (ms.coerceAtLeast(0L) / 1000L)
+    val u = tot / 3600L
+    val m = (tot % 3600L) / 60L
+    val s = tot % 60L
+    return if (u > 0) "%d:%02d:%02d".format(u, m, s) else "%d:%02d".format(m, s)
+}
+
+@Composable
+private fun VideoTransportHud(staat: KijkerStaat) {
+    val sp = staat.speler
+    val pos by produceState(Triple(0L, 0L, 0L), sp, staat.seekPreviewMs, staat.videoHud) {
+        while (true) {
+            val dur = sp?.duration?.takeIf { it > 0 } ?: 0L
+            val cur = if (staat.seekPreviewMs >= 0L) staat.seekPreviewMs else (sp?.currentPosition ?: 0L)
+            val buf = sp?.bufferedPosition ?: 0L
+            value = Triple(cur.coerceIn(0L, dur.coerceAtLeast(1L)), dur, buf.coerceIn(0L, dur.coerceAtLeast(1L)))
+            delay(150)
         }
-        Box(Modifier.align(Alignment.BottomStart).fillMaxWidth().height(4.dp).background(Color(0x33FFFFFF))) {
-            Box(Modifier.fillMaxHeight().fillMaxWidth(deel).background(Kleur.primair))
+    }
+    val curMs = pos.first
+    val durMs = pos.second
+    val bufMs = pos.third
+    val deel = if (durMs > 0L) (curMs.toFloat() / durMs).coerceIn(0f, 1f) else 0f
+    val bufDeel = if (durMs > 0L) (bufMs.toFloat() / durMs).coerceIn(0f, 1f) else 0f
+
+    Box(
+        Modifier.fillMaxWidth().background(Brush.verticalGradient(listOf(Color.Transparent, Color(0xCC000000), Color(0xEB000000))))
+            .padding(horizontal = 44.dp, vertical = 28.dp),
+    ) {
+        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    Modifier.background(Color(0x9918181C), RoundedCornerShape(14.dp))
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Icon(
+                        if (staat.videoGepauzeerd) Icons.Filled.Pause else Icons.Filled.PlayArrow,
+                        null, Modifier.size(18.dp), tint = Kleur.primair,
+                    )
+                    if (staat.seekDeltaSec != 0) {
+                        val delta = staat.seekDeltaSec
+                        Icon(
+                            if (delta < 0) Icons.Filled.FastRewind else Icons.Filled.FastForward,
+                            null, Modifier.size(18.dp), tint = Color.White,
+                        )
+                        Text(
+                            if (delta > 0) "+${delta}s" else "${delta}s",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = Color.White,
+                        )
+                    } else {
+                        Text(
+                            "${formatTijdMs(curMs)} / ${if (durMs > 0) formatTijdMs(durMs) else "--:--"}",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = Color.White,
+                        )
+                    }
+                }
+                Row(
+                    Modifier.background(Color(0x8018181C), RoundedCornerShape(14.dp))
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Icon(Icons.Filled.FastRewind, null, Modifier.size(15.dp), tint = Color(0xCCFFFFFF))
+                        Text("◀  ▶", style = MaterialTheme.typography.labelMedium, color = Color.White)
+                        Icon(Icons.Filled.FastForward, null, Modifier.size(15.dp), tint = Color(0xCCFFFFFF))
+                    }
+                    Text("·", color = Color(0x80FFFFFF))
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text("OK", style = MaterialTheme.typography.labelMedium, color = Color.White)
+                        Icon(if (staat.videoGepauzeerd) Icons.Filled.PlayArrow else Icons.Filled.Pause, null, Modifier.size(15.dp), tint = Color(0xCCFFFFFF))
+                    }
+                    Text("·", color = Color(0x80FFFFFF))
+                    Text("▲", style = MaterialTheme.typography.labelMedium, color = Color(0xCCFFFFFF))
+                }
+            }
+
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                Text(formatTijdMs(curMs), style = MaterialTheme.typography.labelLarge, color = Color.White)
+                BoxWithConstraints(Modifier.weight(1f).height(20.dp), contentAlignment = Alignment.CenterStart) {
+                    val spoorBreedte = maxWidth
+                    Box(Modifier.fillMaxWidth().height(6.dp).clip(CircleShape).background(Color(0x40FFFFFF))) {
+                        Box(Modifier.fillMaxHeight().fillMaxWidth(bufDeel).background(Color(0x66FFFFFF)))
+                        Box(Modifier.fillMaxHeight().fillMaxWidth(deel).background(Kleur.primair))
+                    }
+                    Box(
+                        Modifier.offset(x = (spoorBreedte * deel - 8.dp).coerceIn(0.dp, (spoorBreedte - 16.dp).coerceAtLeast(0.dp)))
+                            .size(16.dp)
+                            .clip(CircleShape)
+                            .background(Color.White)
+                            .border(2.5.dp, Kleur.primair, CircleShape),
+                    )
+                }
+                Text(if (durMs > 0) formatTijdMs(durMs) else "--:--", style = MaterialTheme.typography.labelLarge, color = Color(0xCCFFFFFF))
+            }
         }
     }
 }
