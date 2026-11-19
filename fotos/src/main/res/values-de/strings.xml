@@ -575,7 +575,10 @@
     <string name="nieuw_regel">Was ist neu</string>
     <string name="nieuw_regel_uitleg">Änderungen in dieser Version</string>
     <string-array name="wat_nieuw">
-        <item>Datumsformat: Tag zuerst oder Monat zuerst („So, Sep. 3, 2023“)</item>
-        <item>Zeitformat: automatisch, 24 Stunden oder 12 Stunden</item>
+        <item>Amlogic- und Android-10+-Video-Fixes sowie D-Pad-Spulleiste</item>
+        <item>Flüssiges schnelles Scrollen ohne Hänger bei gedrückter Taste</item>
+        <item>Hochformat-Fotos nebeneinander und Schalter für die Datumsleiste</item>
+        <item>Bereich Zufällig, Ordner unter Fotos und Hintergrundradio (SomaFM)</item>
+        <item>Russische Übersetzung und kyrillische Suchtastatur</item>
     </string-array>
 </resources>

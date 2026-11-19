@@ -592,7 +592,10 @@
     <string name="nieuw_regel">What\'s new</string>
     <string name="nieuw_regel_uitleg">Changes in this version</string>
     <string-array name="wat_nieuw">
-        <item>Date format: day first or month first (“Sun, Sep 3, 2023”)</item>
-        <item>Time format: automatic, 24 hours or 12 hours</item>
+        <item>Amlogic &amp; Android 10+ video playback fixes + D-Pad seek HUD</item>
+        <item>Smooth fast scrolling with D-Pad repeat throttling &amp; prefetch</item>
+        <item>Side-by-side portrait photos and a toggle to show/hide the date bar</item>
+        <item>New Shuffle section, Folders moved under Photos, and SomaFM ambient music</item>
+        <item>Russian localization and Cyrillic on-screen keyboard</item>
     </string-array>
 </resources>

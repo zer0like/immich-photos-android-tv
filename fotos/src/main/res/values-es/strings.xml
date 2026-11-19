@@ -582,7 +582,10 @@
     <string name="nieuw_regel">Novedades</string>
     <string name="nieuw_regel_uitleg">Cambios en esta versión</string>
     <string-array name="wat_nieuw">
-        <item>Formato de fecha: primero el día o primero el mes («dom, sept 3, 2023»)</item>
-        <item>Formato de hora: automático, 24 horas o 12 horas</item>
+        <item>Mejoras de vídeo en Amlogic / Android 10+ y barra de avance rápido</item>
+        <item>Desplazamiento rápido fluido sin bloqueos al mantener pulsado</item>
+        <item>Fotos verticales lado a lado e interruptor para la barra de fecha y lugar</item>
+        <item>Sección Aleatorio, Carpetas bajo Fotos y radio ambient (SomaFM)</item>
+        <item>Traducción al ruso y teclado cirílico en pantalla</item>
     </string-array>
 </resources>
