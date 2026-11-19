@@ -224,7 +224,7 @@ enum class Uiterlijk(@StringRes val label: Int, val alias: String, @StringRes va
     HERINNERINGEN(R.string.alias_herinneringen, "Herinneringen", R.string.uiterlijk_herinneringen),
     FAMILIE(R.string.alias_familie, "Familie", R.string.uiterlijk_familie);
 
-    private fun component(c: Context) = ComponentName(c, "${c.packageName}.$alias")
+    private fun component(c: Context) = ComponentName(c.packageName, "com.immichclient.tv.$alias")
     fun aan(c: Context) = c.packageManager.getComponentEnabledSetting(component(c)) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED ||
         (c.packageManager.getComponentEnabledSetting(component(c)) == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT && this == FOTOS)
 

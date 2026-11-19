@@ -11,7 +11,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.immichclient.tv"
+        applicationId = "com.zer0like.immich.tv"
         minSdk = 26
         targetSdk = 35
         versionCode = 26

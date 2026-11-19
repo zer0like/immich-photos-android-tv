@@ -54,7 +54,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 
 ## Installation
 
-1. Download the APK from the [latest release](https://github.com/zer0like/immich-photos-android-tv/releases/latest), or build it yourself (see [Building](#building)). Note: if you already have the upstream build installed, uninstall it first (this fork uses a different signing key).
+1. Download the APK from the [latest release](https://github.com/zer0like/immich-photos-android-tv/releases/latest), or build it yourself (see [Building](#building)). This fork uses its own package ID (`com.zer0like.immich.tv`), so it installs cleanly alongside the upstream app without conflicts.
 2. Copy it to your TV box, for example with the **Downloader** app (Play Store) or a USB stick and a file manager, and install it. You may need to allow installing apps from unknown sources for that app.
 3. Open the app, choose your language and pair it with your Immich server (see below).
 
