@@ -71,31 +71,39 @@ object ThumbHash {
         val px = IntArray(w * hh)
         val nx = max(lx, if (hasAlpha) 5 else 3)
         val ny = max(ly, if (hasAlpha) 5 else 3)
-        val fx = FloatArray(nx)
-        val fy = FloatArray(ny)
+        val fxTab = FloatArray(w * nx) { idx ->
+            val x = idx / nx
+            val cx = idx % nx
+            cos(PI / w * (x + 0.5) * cx).toFloat()
+        }
+        val fyTab = FloatArray(hh * ny) { idx ->
+            val y = idx / ny
+            val cy = idx % ny
+            cos(PI / hh * (y + 0.5) * cy).toFloat()
+        }
         for (y in 0 until hh) {
-            for (cy in 0 until ny) fy[cy] = cos(PI / hh * (y + 0.5) * cy).toFloat()
+            val yOff = y * ny
             for (x in 0 until w) {
+                val xOff = x * nx
                 var l = lDc; var p = pDc; var q = qDc; var a = aDc
-                for (cx in 0 until nx) fx[cx] = cos(PI / w * (x + 0.5) * cx).toFloat()
                 var j = 0
                 for (cy in 0 until ly) {
                     var cx = if (cy > 0) 0 else 1
-                    val fy2 = fy[cy] * 2
-                    while (cx * ly < lx * (ly - cy)) { l += lAc[j++] * fx[cx] * fy2; cx++ }
+                    val fy2 = fyTab[yOff + cy] * 2
+                    while (cx * ly < lx * (ly - cy)) { l += lAc[j++] * fxTab[xOff + cx] * fy2; cx++ }
                 }
                 j = 0
                 for (cy in 0 until 3) {
                     var cx = if (cy > 0) 0 else 1
-                    val fy2 = fy[cy] * 2
-                    while (cx < 3 - cy) { val f = fx[cx] * fy2; p += pAc[j] * f; q += qAc[j] * f; j++; cx++ }
+                    val fy2 = fyTab[yOff + cy] * 2
+                    while (cx < 3 - cy) { val f = fxTab[xOff + cx] * fy2; p += pAc[j] * f; q += qAc[j] * f; j++; cx++ }
                 }
                 if (aAc != null) {
                     j = 0
                     for (cy in 0 until 5) {
                         var cx = if (cy > 0) 0 else 1
-                        val fy2 = fy[cy] * 2
-                        while (cx < 5 - cy) { a += aAc[j++] * fx[cx] * fy2; cx++ }
+                        val fy2 = fyTab[yOff + cy] * 2
+                        while (cx < 5 - cy) { a += aAc[j++] * fxTab[xOff + cx] * fy2; cx++ }
                     }
                 }
                 val b = l - 2f / 3f * p

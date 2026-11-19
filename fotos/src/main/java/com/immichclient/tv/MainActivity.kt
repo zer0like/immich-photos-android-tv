@@ -81,11 +81,16 @@ class App : Application(), SingletonImageLoader.Factory {
      * ruimt bij geheugennood ook de app vooraan op (gezien tijdens een video). Bitmaps zijn hardware-bitmaps
      * (GPU-geheugen, telt mee in "Graphics" van meminfo); met 35 % van de grote heap stond er 220 MB aan previews in de cache.
      */
-    override fun newImageLoader(context: PlatformContext) = ImageLoader.Builder(context)
-        .components { add(OkHttpNetworkFetcherFactory(callFactory = { Immich.http })) }
-        .memoryCache { MemoryCache.Builder().maxSizeBytes(CACHE_MB * 1024L * 1024).build() }
-        .diskCache { DiskCache.Builder().directory(cacheDir.resolve("beelden").toOkioPath()).maxSizeBytes(400L * 1024 * 1024).build() }
-        .build()
+    override fun newImageLoader(context: PlatformContext): ImageLoader {
+        val am = getSystemService(android.content.Context.ACTIVITY_SERVICE) as? android.app.ActivityManager
+        val memMb = am?.let { android.app.ActivityManager.MemoryInfo().also(it::getMemoryInfo).totalMem / (1024 * 1024) } ?: 2048L
+        val cacheMb = (memMb * 0.04).toInt().coerceIn(CACHE_MB, 160)
+        return ImageLoader.Builder(this)
+            .components { add(OkHttpNetworkFetcherFactory(callFactory = { Immich.http })) }
+            .memoryCache { MemoryCache.Builder().maxSizeBytes(cacheMb * 1024L * 1024).build() }
+            .diskCache { DiskCache.Builder().directory(cacheDir.resolve("beelden").toOkioPath()).maxSizeBytes(400L * 1024 * 1024).build() }
+            .build()
+    }
 
     // Geheugennood of naar de achtergrond: cache leeg (thumbnails komen in ms terug van schijf).
     override fun onTrimMemory(level: Int) {

@@ -27,19 +27,27 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
+import coil3.SingletonImageLoader
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.withContext
 
 /** Een regel in een fotoraster (LazyColumn). */
 sealed interface Rij { val sleutel: String }
@@ -112,10 +120,36 @@ fun FotoRaster(
     onWacht: (String) -> Unit = {},
     boven: LazyListScope.() -> Unit = {},
 ) {
-    androidx.compose.runtime.LaunchedEffect(staat.terugNaar, rijen) {
+    val ctx = LocalContext.current
+    LaunchedEffect(staat.terugNaar, rijen) {
         val id = staat.terugNaar ?: return@LaunchedEffect
         staat.gaNaar(id, rijen, bovenAantal)
         staat.terugNaar = null
+    }
+    // Prefetch thumbnails + ThumbHash 5 rows ahead and 2 rows behind so scrolling hits RAM cache
+    LaunchedEffect(rijen) {
+        if (rijen.isEmpty()) return@LaunchedEffect
+        val loader = SingletonImageLoader.get(ctx)
+        snapshotFlow {
+            val info = staat.lijst.layoutInfo.visibleItemsInfo
+            if (info.isEmpty()) -1 to -1 else info.first().index to info.last().index
+        }.distinctUntilChanged().collectLatest { (eerste, laatste) ->
+            if (eerste < 0) return@collectLatest
+            val van = (eerste - bovenAantal - 2).coerceAtLeast(0)
+            val tot = (laatste - bovenAantal + 5).coerceAtMost(rijen.lastIndex)
+            if (tot < van) return@collectLatest
+            val hashes = ArrayList<String>()
+            for (ri in van..tot) {
+                val r = rijen[ri] as? RijFotos ?: continue
+                for (s in r.regel.stukken) for (v in s.vakken) {
+                    loader.enqueue(thumbVerzoek(ctx, v.asset.id))
+                    v.asset.thumbhash?.let { if (ThumbHash.inCache(it) == null) hashes += it }
+                }
+            }
+            if (hashes.isNotEmpty()) withContext(Dispatchers.Default) {
+                for (h in hashes) ThumbHash.bitmap(h)
+            }
+        }
     }
     LazyColumn(
         state = staat.lijst,
@@ -158,8 +192,7 @@ private fun FotoRegel(regel: Regel, staat: RasterStaat, onKlik: (Asset) -> Unit)
         horizontalArrangement = Arrangement.spacedBy(GROEP_TUSSEN.dp),
     ) {
         for (stuk in regel.stukken) {
-            var stukFocus by remember { mutableStateOf(false) }
-            Column(Modifier.zIndex(if (stukFocus) 1f else 0f).onFocusChanged { stukFocus = it.hasFocus }) {
+            Column {
                 if (regel.metKop) Text(
                     stuk.kop.orEmpty(), style = MaterialTheme.typography.titleSmall, maxLines = 1,
                     modifier = Modifier.height(KOP_HOOGTE.dp).padding(top = 6.dp),

@@ -27,13 +27,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -122,7 +125,17 @@ fun FotosThema(inhoud: @Composable () -> Unit) {
 @Composable
 fun beeld(url: String): ImageRequest {
     val ctx = LocalContext.current
-    return remember(url) { ImageRequest.Builder(ctx).data(url).size(Size.ORIGINAL).crossfade(90).build() }
+    return remember(url) { ImageRequest.Builder(ctx).data(url).size(Size.ORIGINAL).crossfade(80).build() }
+}
+
+/** Thumbnail-verzoek voor het raster (ook gebruikt door de prefetcher). */
+fun thumbVerzoek(ctx: android.content.Context, id: String): ImageRequest =
+    ImageRequest.Builder(ctx).data(Immich.thumb(id)).size(420, 420).precision(Precision.INEXACT).crossfade(80).build()
+
+@Composable
+fun thumbBeeld(id: String): ImageRequest {
+    val ctx = LocalContext.current
+    return remember(id) { thumbVerzoek(ctx, id) }
 }
 
 /**
@@ -165,10 +178,8 @@ fun FotoVak(
     }
     // Bewust geen tv-Surface: daarvan staan er tientallen tegelijk in beeld en bij snel scrollen telt elke ms.
     var focus by remember { mutableStateOf(false) }
-    val schaal by animateFloatAsState(if (focus) 1.06f else 1f, tween(140), label = "schaal")
-    // Focus en klik staan vóór de graphicsLayer: anders rekent "bring into view" met de geschaalde rechthoek, die tijdens
-    // de schaalanimatie verandert, en schuift de hele lijst bij elke focuswissel een paar px heen en weer.
-    // zIndex: de vergrote foto (en zijn witte rand) boven de buurfoto's tekenen.
+    var geladen by remember(asset.id) { mutableStateOf(false) }
+    val schaal = animateFloatAsState(if (focus) 1.06f else 1f, tween(110), label = "schaal")
     Box(
         modifier.size(breedte, hoogte)
             .zIndex(if (focus) 1f else 0f)
@@ -176,21 +187,31 @@ fun FotoVak(
             .onFocusChanged { focus = it.isFocused; if (it.isFocused) onFocus() }
             .clickable(interactionSource = null, indication = null, onClick = onKlik)
             .graphicsLayer {
-                scaleX = schaal; scaleY = schaal; shape = vorm; clip = true
-                // zachte blauwe gloed rond de gekozen foto (schaduw van de laag: één RenderNode-eigenschap, geen extra tekenwerk)
-                shadowElevation = if (focus) 16.dp.toPx() else 0f
-                spotShadowColor = Kleur.primair; ambientShadowColor = Kleur.primair
+                val s = schaal.value
+                scaleX = s; scaleY = s
+                if (focus || s > 1.001f) { shape = vorm; clip = true }
+            }
+            .drawWithContent {
+                drawContent()
+                if (focus) {
+                    val r = 5.dp.toPx()
+                    drawRoundRect(Color.White, cornerRadius = CornerRadius(r, r), style = Stroke(width = 3.dp.toPx()))
+                }
             }
             .background(Kleur.vlak),
     ) {
-        val hash = remember(asset.thumbhash) { asset.thumbhash?.let { ThumbHash.bitmap(it) } }
-        if (hash != null) Image(hash, null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
-        AsyncImage(beeld(Immich.thumb(asset.id)), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        if (!geladen) {
+            val hash = remember(asset.thumbhash) { asset.thumbhash?.let { ThumbHash.inCache(it) } }
+            if (hash != null) Image(hash, null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        }
+        AsyncImage(
+            thumbBeeld(asset.id), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop,
+            onSuccess = { geladen = true },
+        )
         if (asset.video) VideoLabel(asset, Modifier.align(Alignment.TopEnd))
         if (asset.favoriet) Icon(
             Icons.Filled.Favorite, null, Modifier.align(Alignment.BottomStart).padding(6.dp).size(16.dp), tint = Color.White,
         )
-        if (focus) Box(Modifier.matchParentSize().border(3.dp, Color.White, vorm))
     }
 }
 
