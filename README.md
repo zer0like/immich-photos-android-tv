@@ -85,7 +85,7 @@ The pairing page is only served while the pairing screen is open, only on the lo
 <summary>Setting the key with adb (for developers)</summary>
 
 ```sh
-adb shell am broadcast -a com.immichclient.tv.SET_KEY -n com.immichclient.tv/.SleutelOntvanger \
+adb shell am broadcast -a com.zer0like.immich.tv.SET_KEY -n com.zer0like.immich.tv/com.immichclient.tv.SleutelOntvanger \
   --es sleutel <API key> --es server http://192.168.1.10:2283 [--es taal en]
 ```
 
@@ -125,7 +125,10 @@ The first line, **Show settings**, switches between **Basic** (the settings most
 | | Videos | play / skip |
 | | Transition | fade / slide |
 | | During the slideshow | everything / no progress ring / photo only |
+| Music | Background music | off / slideshow only / always |
+| | Radio station | Deep Space One / Drone Zone / Space Station Soma / Groove Salad |
 | Viewer | Country map on the photo | off / small / large |
+| | Show date and place | on / off |
 | | Date and place bar | hide after 2 – 10 s / always show |
 | | Counter | on / off |
 | | Album name | on / off |
@@ -133,12 +136,12 @@ The first line, **Show settings**, switches between **Basic** (the settings most
 | | Default order | newest / oldest first |
 | | Partner's photos | on / off |
 | | Memories at the top | on / off |
-| | Start screen | Photos / Memories / Map / Albums / Folders / Favorites |
+| | Start screen | Photos / Folders / Shuffle / Memories / Map / Albums / Favorites |
 | | Greeting | off / automatic ("Good evening, Anna") / custom text |
 | Map | Start view | whole world / Europe / country with the most photos / last viewed place |
 | | Clustering | fine / normal / coarse |
 | | Map style | dark / light / satellite |
-| Appearance | Language | English, Nederlands, Deutsch, Français, Español |
+| Appearance | Language | English, 中文, हिन्दी, Español, Français, Русский, Deutsch, 日本語, 한국어, Nederlands |
 | | Date format | day first ("Sun 3 Sep 2023") / month first ("Sun, Sep 3, 2023") |
 | | Time format | automatic (follows the language) / 24 hours / 12 hours |
 | | Accent colour | blue / green / orange / pink / purple / grey |
@@ -185,11 +188,11 @@ Android TV and Google TV have no menu for picking a third-party screensaver. The
    - **From a computer with adb** ([platform tools](https://developer.android.com/tools/releases/platform-tools)):
      ```
      adb connect <ip-of-your-tv>
-     adb shell pm grant com.immichclient.tv android.permission.WRITE_SECURE_SETTINGS
+     adb shell pm grant com.zer0like.immich.tv android.permission.WRITE_SECURE_SETTINGS
      ```
      From then on the app can turn the screensaver on and off by itself (Settings → Screensaver). To set it directly instead:
      ```
-     adb shell settings put secure screensaver_components com.immichclient.tv/.FotoDream
+     adb shell settings put secure screensaver_components com.zer0like.immich.tv/com.immichclient.tv.FotoDream
      adb shell settings put secure screensaver_enabled 1
      ```
 
@@ -199,7 +202,7 @@ The screensaver starts after the device's normal idle time; the setup screen in 
 
 - In the app: Settings → Screensaver → **Off**. This restores the screensaver that was active before.
 - With adb: `adb shell settings delete secure screensaver_components`. The system falls back to its default screensaver. Uninstalling the app does the same.
-- Optional: `adb shell pm revoke com.immichclient.tv android.permission.WRITE_SECURE_SETTINGS`
+- Optional: `adb shell pm revoke com.zer0like.immich.tv android.permission.WRITE_SECURE_SETTINGS`
 
 ## Building
 
