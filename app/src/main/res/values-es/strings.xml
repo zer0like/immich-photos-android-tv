@@ -583,10 +583,10 @@
     <string name="whats_new_row">Novedades</string>
     <string name="whats_new_row_desc">Cambios en esta versión</string>
     <string-array name="whats_new_items">
-        <item>Mejoras de vídeo en Amlogic / Android 10+ y barra de avance rápido</item>
-        <item>Desplazamiento rápido fluido sin bloqueos al mantener pulsado</item>
-        <item>Fotos verticales lado a lado e interruptor para la barra de fecha y lugar</item>
-        <item>Sección Aleatorio, Carpetas bajo Fotos y radio ambient (SomaFM)</item>
-        <item>Traducción al ruso y teclado cirílico en pantalla</item>
+        <item>Reproducción directa 4K / 10-bit HDR sin transcodificar + barra de avance</item>
+        <item>Desplazamiento fluido, verticales lado a lado y Carpetas igual que Fotos</item>
+        <item>Sección Aleatorio, radio SomaFM y ocultación total de la barra de fecha y lugar</item>
+        <item>Ajustes reordenados e iconos y banners vectoriales nítidos en 4K</item>
+        <item>Idiomas añadidos: chino, hindi, ruso, japonés y coreano</item>
     </string-array>
 </resources>

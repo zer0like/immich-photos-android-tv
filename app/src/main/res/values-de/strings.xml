@@ -576,10 +576,10 @@
     <string name="whats_new_row">Was ist neu</string>
     <string name="whats_new_row_desc">Änderungen in dieser Version</string>
     <string-array name="whats_new_items">
-        <item>Amlogic- und Android-10+-Video-Fixes sowie D-Pad-Spulleiste</item>
-        <item>Flüssiges schnelles Scrollen ohne Hänger bei gedrückter Taste</item>
-        <item>Hochformat-Fotos nebeneinander und Schalter für die Datumsleiste</item>
-        <item>Bereich Zufällig, Ordner unter Fotos und Hintergrundradio (SomaFM)</item>
-        <item>Russische Übersetzung und kyrillische Suchtastatur</item>
+        <item>Direkte 4K-/10-Bit-HDR-Videowiedergabe ohne Transcodierung + Spulleiste</item>
+        <item>Flüssiges Scrollen, Hochformat-Paare und Ordner-Raster wie unter Fotos</item>
+        <item>Bereich Zufällig, SomaFM-Radio und Datumsleiste komplett abschaltbar</item>
+        <item>Neu geordnete Einstellungen (Fotoansicht oben) und scharfe 4K-Icons &amp; Banner</item>
+        <item>Neue Sprachen: Chinesisch, Hindi, Russisch, Japanisch und Koreanisch</item>
     </string-array>
 </resources>

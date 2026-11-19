@@ -593,10 +593,10 @@
     <string name="whats_new_row">What\'s new</string>
     <string name="whats_new_row_desc">Changes in this version</string>
     <string-array name="whats_new_items">
-        <item>Amlogic &amp; Android 10+ video playback fixes + D-Pad seek HUD</item>
-        <item>Smooth fast scrolling with D-Pad repeat throttling &amp; prefetch</item>
-        <item>Side-by-side portrait photos and a toggle to show/hide the date bar</item>
-        <item>New Shuffle section, Folders moved under Photos, and SomaFM ambient music</item>
-        <item>Russian localization and Cyrillic on-screen keyboard</item>
+        <item>Direct 4K / 10-bit HDR video playback without server transcoding + D-Pad seek HUD</item>
+        <item>Smooth fast scrolling, side-by-side portrait photos, and justified Folders grid</item>
+        <item>Shuffle feed, SomaFM ambient radio, and full disable for date &amp; place bar</item>
+        <item>Reordered Settings (Viewing photos on top) and 4K vector icons &amp; banners</item>
+        <item>Added Chinese, Hindi, Russian, Japanese, and Korean localizations</item>
     </string-array>
 </resources>

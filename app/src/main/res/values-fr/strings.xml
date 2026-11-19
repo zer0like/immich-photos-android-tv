@@ -583,10 +583,10 @@
     <string name="whats_new_row">Nouveautés</string>
     <string name="whats_new_row_desc">Changements de cette version</string>
     <string-array name="whats_new_items">
-        <item>Correctifs vidéo Amlogic / Android 10+ et barre d\'avance rapide</item>
-        <item>Défilement rapide fluide sans blocage en maintenant la touche</item>
-        <item>Photos portrait côte à côte et option pour masquer la barre de date</item>
-        <item>Section Aléatoire, Dossiers sous Photos et radio ambient (SomaFM)</item>
-        <item>Traduction russe et clavier cyrillique intégré</item>
+        <item>Lecture vidéo 4K / HDR 10 bits directe sans transcodage + barre de recherche</item>
+        <item>Défilement fluide, portraits côte à côte et grille Dossiers identique à Photos</item>
+        <item>Section Aléatoire, radio SomaFM et masquage complet de la barre de date</item>
+        <item>Paramètres réorganisés et icônes/bannières 4K nettes pour toutes les langues</item>
+        <item>Nouvelles langues : chinois, hindi, russe, japonais et coréen</item>
     </string-array>
 </resources>
