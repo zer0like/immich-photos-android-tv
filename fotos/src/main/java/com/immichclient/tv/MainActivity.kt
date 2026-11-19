@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Photo
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -136,6 +137,7 @@ sealed class Scherm {
     class Personen(val lijst: List<Persoon>) : Scherm() { val staat = PersonenStaat(lijst) }
     /** een map uit de mappenboom (null = het startpunt van de boom, zodra die geladen is) */
     class Mappen(boom: MappenBoom, knoop: MapKnoop?, scope: CoroutineScope) : Scherm() { val staat = MapStaat(boom, knoop, scope) }
+    class Willekeurig(scope: CoroutineScope) : Scherm() { val staat = WillekeurigStaat(scope) }
     data object Instellingen : Scherm()
     class Lijst(val titel: String, val sub: String?, val perDag: Boolean, scope: CoroutineScope, laad: suspend (Int) -> Pagina) : Scherm() {
         val res = Resultaten(scope).also { it.start(laad) }
@@ -165,12 +167,13 @@ object Toetsen {
 
 enum class Sectie(@StringRes val label: Int, val icoon: ImageVector) {
     FOTOS(R.string.sectie_fotos, Icons.Filled.Photo),
+    MAPPEN(R.string.sectie_mappen, Icons.Filled.Folder),
+    WILLEKEURIG(R.string.sectie_willekeurig, Icons.Filled.Shuffle),
     HERINNERINGEN(R.string.sectie_herinneringen, Icons.Filled.AutoAwesome),
     ZOEKEN(R.string.sectie_zoeken, Icons.Filled.Search),
     VERKENNEN(R.string.sectie_verkennen, Icons.Filled.Explore),
     KAART(R.string.sectie_kaart, Icons.Filled.Map),
     ALBUMS(R.string.sectie_albums, Icons.Filled.PhotoLibrary),
-    MAPPEN(R.string.sectie_mappen, Icons.Filled.Folder),
     FAVORIETEN(R.string.sectie_favorieten, Icons.Filled.Favorite),
     INSTELLINGEN(R.string.sectie_instellingen, Icons.Filled.Settings),
 }
@@ -313,12 +316,13 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
     fun wortel(s: Sectie): Scherm = wortels.getOrPut(s) {
         when (s) {
             Sectie.FOTOS -> Scherm.Tijdlijn(naamApp, null, Filter(), Instellingen.nieuwsteEerst, true, scope)
+            Sectie.MAPPEN -> Scherm.Mappen(MappenBoom(scope), null, scope)
+            Sectie.WILLEKEURIG -> Scherm.Willekeurig(scope)
             Sectie.HERINNERINGEN -> Scherm.Herinneringen(scope)
             Sectie.ZOEKEN -> Scherm.Zoeken(scope)
             Sectie.VERKENNEN -> Scherm.Verkennen(scope)
             Sectie.KAART -> Scherm.Kaart(scope)
             Sectie.ALBUMS -> Scherm.Albums(scope)
-            Sectie.MAPPEN -> Scherm.Mappen(MappenBoom(scope), null, scope)
             Sectie.FAVORIETEN -> Scherm.Tijdlijn(ctx.getString(R.string.sectie_favorieten), null, Filter(favorieten = true), Instellingen.nieuwsteEerst, false, scope)
             Sectie.INSTELLINGEN -> Scherm.Instellingen
         }
@@ -421,7 +425,7 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
                         }
                         .padding(12.dp).selectableGroup(),
                 ) {
-                    Spacer(Modifier.height(24.dp))
+                    Spacer(Modifier.height(16.dp))
                     for (s in Sectie.entries) {
                         if (s == Sectie.INSTELLINGEN) Spacer(Modifier.weight(1f))
                         NavigationDrawerItem(
@@ -471,6 +475,7 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
                         is Scherm.KaartFotos -> KaartFotosScherm(scherm, nav)
                         is Scherm.Personen -> PersonenScherm(scherm.staat, nav)
                         is Scherm.Mappen -> MappenScherm(scherm, nav)
+                        is Scherm.Willekeurig -> WillekeurigScherm(scherm.staat, nav)
                         is Scherm.Lijst -> LijstScherm(scherm, nav)
                         is Scherm.Instellingen -> InstellingenScherm(opnieuwKoppelen = { instellen = true }, ontkoppeld = { sectie = Sectie.FOTOS }, toetsen = { toetsen = true })
                     }

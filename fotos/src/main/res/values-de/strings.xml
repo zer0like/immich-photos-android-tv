@@ -27,6 +27,9 @@
     <string name="sectie_kaart">Karte</string>
     <string name="sectie_albums">Alben</string>
     <string name="sectie_favorieten">Favoriten</string>
+    <string name="sectie_willekeurig">Zufällig</string>
+    <string name="schudden">Neu mischen</string>
+    <string name="willekeurig_leeg">Noch keine Fotos oder Videos</string>
     <string name="sectie_instellingen">Einstellungen</string>
 
     <string name="laden">Wird geladen…</string>

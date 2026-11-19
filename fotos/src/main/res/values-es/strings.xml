@@ -27,6 +27,9 @@
     <string name="sectie_kaart">Mapa</string>
     <string name="sectie_albums">Álbumes</string>
     <string name="sectie_favorieten">Favoritos</string>
+    <string name="sectie_willekeurig">Aleatorio</string>
+    <string name="schudden">Mezclar</string>
+    <string name="willekeurig_leeg">Aún no hay fotos ni vídeos</string>
     <string name="sectie_instellingen">Ajustes</string>
 
     <string name="laden">Cargando…</string>

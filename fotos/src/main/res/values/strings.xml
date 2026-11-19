@@ -31,6 +31,9 @@
     <string name="sectie_kaart">Map</string>
     <string name="sectie_albums">Albums</string>
     <string name="sectie_favorieten">Favorites</string>
+    <string name="sectie_willekeurig">Shuffle</string>
+    <string name="schudden">Shuffle</string>
+    <string name="willekeurig_leeg">No photos or videos yet</string>
     <string name="sectie_instellingen">Settings</string>
 
     <!-- General -->

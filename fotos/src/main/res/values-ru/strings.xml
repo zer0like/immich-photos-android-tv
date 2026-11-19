@@ -31,6 +31,9 @@
     <string name="sectie_kaart">Карта</string>
     <string name="sectie_albums">Альбомы</string>
     <string name="sectie_favorieten">Избранное</string>
+    <string name="sectie_willekeurig">Вперемешку</string>
+    <string name="schudden">Перемешать</string>
+    <string name="willekeurig_leeg">Фотографий и видео пока нет</string>
     <string name="sectie_instellingen">Настройки</string>
 
     <!-- General -->

@@ -205,7 +205,7 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
         if (alles) schakel(R.string.partner, R.string.partner_uitleg, uitAan, Instellingen.partners) { Instellingen.partners = it }
         if (alles) schakel(R.string.herinneringen_boven, R.string.herinneringen_boven_uitleg, uitAan, Instellingen.herinneringen) { Instellingen.herinneringen = it }
         item {
-            val keuzes = listOf(Sectie.FOTOS, Sectie.HERINNERINGEN, Sectie.KAART, Sectie.ALBUMS, Sectie.MAPPEN, Sectie.FAVORIETEN)
+            val keuzes = listOf(Sectie.FOTOS, Sectie.MAPPEN, Sectie.WILLEKEURIG, Sectie.HERINNERINGEN, Sectie.KAART, Sectie.ALBUMS, Sectie.FAVORIETEN)
             Keuzes(stringResource(R.string.startscherm), stringResource(R.string.startscherm_uitleg), keuzes.map { stringResource(if (it == Sectie.FOTOS) Instellingen.uiterlijk.label else it.label) },
                 keuzes.indexOf(Instellingen.start).coerceAtLeast(0)) { Instellingen.start = keuzes[it] }
         }
