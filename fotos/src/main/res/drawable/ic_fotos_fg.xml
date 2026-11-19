@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Coral back card -->
+    <path
+        android:fillColor="#EB5C52"
+        android:pathData="M35,28 L73,28 A4,4 0 0,1 77,32 L77,52 A4,4 0 0,1 73,56 L35,56 A4,4 0 0,1 31,52 L31,32 A4,4 0 0,1 35,28 Z" />
+    <!-- Subtle shadow separator -->
+    <path
+        android:fillColor="#38040816"
+        android:pathData="M31.5,33 L76.5,33 A4.5,4.5 0 0,1 81,37.5 L81,58.5 A4.5,4.5 0 0,1 76.5,63 L31.5,63 A4.5,4.5 0 0,1 27,58.5 L27,37.5 A4.5,4.5 0 0,1 31.5,33 Z" />
+    <!-- Amber middle card -->
+    <path
+        android:fillColor="#F8B93E"
+        android:pathData="M31.5,32 L76.5,32 A4.5,4.5 0 0,1 81,36.5 L81,57.5 A4.5,4.5 0 0,1 76.5,62 L31.5,62 A4.5,4.5 0 0,1 27,57.5 L27,36.5 A4.5,4.5 0 0,1 31.5,32 Z" />
+    <!-- Front card soft drop shadow -->
+    <path
+        android:fillColor="#44040816"
+        android:pathData="M28.5,38 L79.5,38 A5.5,5.5 0 0,1 85,43.5 L85,74.5 A5.5,5.5 0 0,1 79.5,80 L28.5,80 A5.5,5.5 0 0,1 23,74.5 L23,43.5 A5.5,5.5 0 0,1 28.5,38 Z" />
+    <!-- Front white frame (straight 0°) -->
+    <path
+        android:fillColor="#F2F6FC"
+        android:pathData="M28.5,36 L79.5,36 A5.5,5.5 0 0,1 85,41.5 L85,72.5 A5.5,5.5 0 0,1 79.5,78 L28.5,78 A5.5,5.5 0 0,1 23,72.5 L23,41.5 A5.5,5.5 0 0,1 28.5,36 Z" />
+    <!-- Clipped inner photo window -->
+    <group>
+        <clip-path android:pathData="M29.5,39 L78.5,39 A3.5,3.5 0 0,1 82,42.5 L82,71.5 A3.5,3.5 0 0,1 78.5,75 L29.5,75 A3.5,3.5 0 0,1 26,71.5 L26,42.5 A3.5,3.5 0 0,1 29.5,39 Z" />
+        <path android:pathData="M26,39h56v36h-56z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:endX="54"
+                    android:endY="75"
+                    android:startX="54"
+                    android:startY="39"
+                    android:type="linear">
+                    <item android:color="#FF70AEF8" android:offset="0" />
+                    <item android:color="#FFBADAFF" android:offset="1" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <!-- Sun -->
+        <path
+            android:fillColor="#FFF6CE"
+            android:pathData="M67,44 A4.5,4.5 0 1,0 67,53 A4.5,4.5 0 1,0 67,44 Z" />
+        <!-- Back & front mountains -->
+        <path
+            android:fillColor="#1D294A"
+            android:pathData="M26,75 L45.5,54 L65,75 Z" />
+        <path
+            android:fillColor="#31426C"
+            android:pathData="M48,75 L66.5,58.5 L82,75 Z" />
+    </group>
+</vector>

@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-"""Banners (640×360) en iconen (192×192 / 288×288 / 384×384) voor de uiterlijk-varianten (activity-aliassen in het manifest),
-in één stijl: vloeiend verloop, strakke anti-aliased fotokaartjes met zachte schaduw, grote witte titel per taal.
+"""Banners (1280×720 xxxhdpi & 960×540 xxhdpi) en fallback-iconen (192/288/384) voor de uiterlijk-varianten,
+met rechte 0°-fotokaarten zonder gekartelde schuine randen.
 Draaien (PIL nodig):
     python3 banners.py [src/main/res]
-Eigen ontwerpen (geen Immich-logo of ander merk)."""
+"""
 import math, os, sys
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-S = 6  # supersampling voor scherpe randen zonder kartels
 RES = sys.argv[1] if len(sys.argv) > 1 else "src/main/res"
 FONT = os.path.join(RES, "font/overpass.ttf")
 
-# titels per taal; "" = de standaardmap (Engels), de rest = taalcode in de mapnaam (drawable-<taal>-nodpi)
 TITELS = {
     "": {"fotos": "Photos", "album": "Photo album", "herinneringen": "Memories", "familie": "Family photos"},
     "nl": {"fotos": "Foto’s", "album": "Fotoalbum", "herinneringen": "Herinneringen", "familie": "Familiefoto’s"},
@@ -22,6 +20,7 @@ TITELS = {
 }
 
 MIPMAPS = (("mipmap-xhdpi", 192), ("mipmap-xxhdpi", 288), ("mipmap-xxxhdpi", 384))
+BANNER_SIZES = (("xxhdpi", (960, 540)), ("xxxhdpi", (1280, 720)))
 
 
 def font(px):
@@ -33,8 +32,7 @@ def font(px):
         return ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", px)
 
 
-def verloop(w, h, links, rechts, cx_frac=0.35, cy_frac=0.45):
-    """Vloeiende radiale kleurovergang zonder harde verticale overgangen."""
+def verloop(w, h, links, rechts, cx_frac=0.30, cy_frac=0.42):
     im = Image.new("RGB", (w, h))
     px = im.load()
     cx, cy = w * cx_frac, h * cy_frac
@@ -45,173 +43,157 @@ def verloop(w, h, links, rechts, cx_frac=0.35, cy_frac=0.45):
             d = min(1.0, math.hypot(x - cx, dy) / max_d)
             t = d * d * (3.0 - 2.0 * d)
             px[x, y] = tuple(int(links[i] * (1.0 - t) + rechts[i] * t) for i in range(3))
+    return im.convert("RGBA")
+
+
+def vgrad(w, h, top, bot):
+    im = Image.new("RGBA", (w, h))
+    px = im.load()
+    for y in range(h):
+        t = y / max(1, h - 1)
+        c = tuple(int(top[i] * (1.0 - t) + bot[i] * t) for i in range(3)) + (255,)
+        for x in range(w):
+            px[x, y] = c
     return im
 
 
-def fotokaart(w, h, hoek, lucht_top=(148, 192, 248), lucht_bot=(192, 218, 252),
-              berg1=(28, 38, 64), berg2=(48, 62, 92), rand=10 * S, zon=True,
-              r_buiten=14 * S, r_binnen=7 * S):
-    """Witomrand fotokaartje met luchtverloop, zon, bergen en zachte schaduw, supersampled geroteerd."""
-    cw, ch = w + 2 * rand, h + 2 * rand
-    pad = 20 * S
-    kaart = Image.new("RGBA", (cw + 2 * pad, ch + 2 * pad), (0, 0, 0, 0))
+def round_mask(w, h, r):
+    m = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(m).rounded_rectangle([0, 0, w, h], radius=r, fill=255)
+    return m
 
-    sh = Image.new("RGBA", kaart.size, (0, 0, 0, 0))
-    sd = ImageDraw.Draw(sh)
-    sd.rounded_rectangle([pad + int(1 * S), pad + int(3 * S), pad + cw + int(1 * S), pad + ch + int(3 * S)],
-                         radius=r_buiten, fill=(4, 8, 22, 130))
-    sh = sh.filter(ImageFilter.GaussianBlur(radius=4 * S))
-    kaart = Image.alpha_composite(kaart, sh)
 
-    d = ImageDraw.Draw(kaart)
-    d.rounded_rectangle([pad, pad, pad + cw, pad + ch], radius=r_buiten, fill=(246, 248, 252, 255))
+def shadow_box(base, x0, y0, x1, y1, r, blur, alpha, dy):
+    sh = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    ImageDraw.Draw(sh).rounded_rectangle([x0, y0 + dy, x1, y1 + dy], radius=r, fill=(4, 8, 22, alpha))
+    sh = sh.filter(ImageFilter.GaussianBlur(radius=blur))
+    return Image.alpha_composite(base, sh)
 
-    binnen = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    ipx = binnen.load()
-    for yy in range(h):
-        t = yy / max(1, h - 1)
-        c = tuple(int(lucht_top[i] * (1.0 - t) + lucht_bot[i] * t) for i in range(3)) + (255,)
-        for xx in range(w):
-            ipx[xx, yy] = c
-    idraw = ImageDraw.Draw(binnen)
+
+def rechte_fotokaart(base, cx, cy, fw, fh, s, lucht_top, lucht_bot, berg1, berg2, bd, zon=True):
+    fx, fy = int(cx - fw / 2), int(cy - fh / 2)
+    ro, ri = int(24 * s), int(16 * s)
+    base = shadow_box(base, fx, fy, fx + fw, fy + fh, ro, blur=max(2, int(16 * s)), alpha=140, dy=max(2, int(9 * s)))
+    ImageDraw.Draw(base).rounded_rectangle([fx, fy, fx + fw, fy + fh], radius=ro, fill=(242, 246, 252, 255))
+    iw, ih = fw - 2 * bd, fh - 2 * bd
+    inner = vgrad(iw, ih, lucht_top, lucht_bot)
+    idraw = ImageDraw.Draw(inner)
     if zon:
-        r = int(h * 0.125)
-        sx, sy = int(w * 0.72), int(h * 0.25)
-        idraw.ellipse([sx - r, sy - r, sx + r, sy + r], fill=(255, 247, 214, 255))
-    idraw.polygon([(0, h), (int(w * 0.34), int(h * 0.42)), (int(w * 0.68), h)], fill=berg1 + (255,))
-    idraw.polygon([(int(w * 0.42), h), (int(w * 0.72), int(h * 0.54)), (w, h)], fill=berg2 + (255,))
-
-    mask = Image.new("L", (w, h), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, w, h], radius=r_binnen, fill=255)
-    kaart.paste(binnen, (pad + rand, pad + rand), mask)
-    return kaart.rotate(hoek, resample=Image.BICUBIC, expand=True)
+        sr = int(ih * 0.14)
+        idraw.ellipse([int(iw * 0.73) - sr, int(ih * 0.26) - sr, int(iw * 0.73) + sr, int(ih * 0.26) + sr], fill=(255, 246, 206, 255))
+    idraw.polygon([(0, ih), (int(iw * 0.35), int(ih * 0.42)), (int(iw * 0.70), ih)], fill=berg1 + (255,))
+    idraw.polygon([(int(iw * 0.40), ih), (int(iw * 0.72), int(ih * 0.54)), (iw, ih)], fill=berg2 + (255,))
+    base.paste(inner, (fx + bd, fy + bd), round_mask(iw, ih, ri))
+    return base
 
 
-def plaats(basis, laag, cx, cy):
-    basis.alpha_composite(laag, (int(cx - laag.width / 2), int(cy - laag.height / 2)))
+def m_fotos(base, cx, cy, s):
+    # Rechte 0°-stapel met kleurtabjes bovenop (geen schuine kartelranden)
+    w1, h1 = int(170 * s), int(120 * s)
+    x0, y0 = int(cx - w1 / 2), int(cy - h1 / 2 - 22 * s)
+    base = shadow_box(base, x0, y0, x0 + w1, y0 + h1, int(20 * s), blur=max(2, int(10 * s)), alpha=90, dy=max(1, int(5 * s)))
+    ImageDraw.Draw(base).rounded_rectangle([x0, y0, x0 + w1, y0 + h1], radius=int(20 * s), fill=(235, 92, 82, 255))
+
+    w2, h2 = int(196 * s), int(134 * s)
+    x0, y0 = int(cx - w2 / 2), int(cy - h2 / 2 - 8 * s)
+    base = shadow_box(base, x0, y0, x0 + w2, y0 + h2, int(22 * s), blur=max(2, int(10 * s)), alpha=100, dy=max(1, int(5 * s)))
+    ImageDraw.Draw(base).rounded_rectangle([x0, y0, x0 + w2, y0 + h2], radius=int(22 * s), fill=(248, 185, 62, 255))
+
+    return rechte_fotokaart(base, cx, cy + 16 * s, int(222 * s), int(162 * s), s,
+                            (112, 174, 248), (186, 218, 255), (29, 41, 74), (49, 66, 108), int(10 * s), zon=True)
 
 
-def ster(d, cx, cy, r, kleur):
-    pts = []
-    for i in range(8):
-        a = math.pi / 4 * i - math.pi / 2
-        rr = r if i % 2 == 0 else r * 0.38
-        pts.append((cx + rr * math.cos(a), cy + rr * math.sin(a)))
-    d.polygon(pts, fill=kleur)
+def m_album(base, cx, cy, s):
+    pw, ph = int(108 * s), int(146 * s)
+    gap = int(8 * s)
+    for kant in (-1, 1):
+        px0 = int(cx + (gap if kant > 0 else -gap - pw))
+        py0 = int(cy - ph / 2)
+        base = shadow_box(base, px0, py0, px0 + pw, py0 + ph, int(14 * s), blur=max(2, int(10 * s)), alpha=110, dy=max(1, int(6 * s)))
+        ImageDraw.Draw(base).rounded_rectangle([px0, py0, px0 + pw, py0 + ph], radius=int(14 * s), fill=(250, 244, 232, 255))
+        ltop, lbot = ((112, 174, 248), (186, 218, 255)) if kant < 0 else ((250, 186, 120), (254, 224, 188))
+        base = rechte_fotokaart(base, px0 + pw / 2, py0 + ph * 0.43, int(pw * 0.80), int(pw * 0.64), s * 0.45,
+                                ltop, lbot, (32, 42, 68), (52, 66, 98), max(2, int(4 * s)), zon=kant > 0)
+    ImageDraw.Draw(base).rounded_rectangle([int(cx - 5 * s), int(cy - ph * 0.48), int(cx + 5 * s), int(cy + ph * 0.48)],
+                                           radius=int(4 * s), fill=(120, 60, 30, 255))
+    return base
 
 
-def hart(d, cx, cy, r, kleur):
-    pts = []
-    for i in range(200):
-        t = 2 * math.pi * i / 200
-        x = 16 * math.sin(t) ** 3
-        y = -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t))
-        pts.append((cx + x * r / 16, cy + y * r / 16))
-    d.polygon(pts, fill=kleur)
+def m_herinneringen(base, cx, cy, s):
+    base = rechte_fotokaart(base, cx, cy + 6 * s, int(212 * s), int(156 * s), s,
+                            (168, 138, 238), (218, 200, 252), (52, 28, 86), (78, 46, 118), int(10 * s), zon=True)
+    d = ImageDraw.Draw(base)
+    for scx, scy, sr, col in ((cx + 88 * s, cy - 58 * s, 26 * s, (255, 214, 102)), (cx + 114 * s, cy - 22 * s, 12 * s, (255, 236, 180))):
+        pts = []
+        for i in range(8):
+            a = math.pi / 4 * i - math.pi / 2
+            rr = sr if i % 2 == 0 else sr * 0.38
+            pts.append((scx + rr * math.cos(a), scy + rr * math.sin(a)))
+        d.polygon(pts, fill=col)
+    return base
+
+
+def m_familie(base, cx, cy, s):
+    # Rechte achterkaart + rechte voorgrondkaart met hart
+    w1, h1 = int(196 * s), int(140 * s)
+    x0, y0 = int(cx - w1 / 2 - 12 * s), int(cy - h1 / 2 - 16 * s)
+    base = shadow_box(base, x0, y0, x0 + w1, y0 + h1, int(22 * s), blur=max(2, int(10 * s)), alpha=100, dy=max(1, int(5 * s)))
+    ImageDraw.Draw(base).rounded_rectangle([x0, y0, x0 + w1, y0 + h1], radius=int(22 * s), fill=(154, 216, 178, 255))
+    base = rechte_fotokaart(base, cx + 10 * s, cy + 12 * s, int(206 * s), int(150 * s), s,
+                            (124, 194, 238), (188, 224, 250), (26, 62, 70), (44, 88, 98), int(10 * s), zon=True)
+    d = ImageDraw.Draw(base)
+    hcx, hcy = cx + 82 * s, cy + 52 * s
+    for hr, col, dy in ((26 * s, (226, 56, 78), 0), (20 * s, (248, 86, 108), -2 * s)):
+        pts = []
+        for i in range(200):
+            t = 2 * math.pi * i / 200
+            hx = 16 * math.sin(t) ** 3
+            hy = -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t))
+            pts.append((hcx + hx * hr / 16, hcy + dy + hy * hr / 16))
+        d.polygon(pts, fill=col)
+    return base
 
 
 def titel_laag(w, h, titel, x):
-    """Titel op een transparante laag (supersample), links uitgelijnd op [x]; lettergrootte zó dat hij past."""
     laag = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(laag)
-    maat = 78 * S
+    maat = 156
     while True:
         f = font(int(maat))
-        if d.textlength(titel, font=f) <= w - 24 * S - x or maat < 30 * S:
+        if d.textlength(titel, font=f) <= w - 48 - x or maat < 60:
             break
         maat *= 0.94
     d.text((x, h / 2), titel, font=f, fill=(255, 255, 255, 255), anchor="lm")
-    return laag.resize((w // S, h // S), Image.LANCZOS)
+    return laag
 
 
-def bewaar(im, taal, naam):
-    map_ = os.path.join(RES, "drawable-%snodpi" % (taal + "-" if taal else ""))
-    os.makedirs(map_, exist_ok=True)
-    im.convert("RGB").save(os.path.join(map_, naam), optimize=True)
-
-
-def maak_variant(naam, sleutel, banner_naam, links, rechts, motief, titel_x=295):
-    w, h = 640 * S, 360 * S
-    basis = verloop(w, h, links, rechts, cx_frac=0.28, cy_frac=0.45).convert("RGBA")
-    motief(basis, cx=155 * S, cy=180 * S, schaal=0.85)
-    basis_klein = basis.resize((640, 360), Image.LANCZOS)
+def maak_variant(naam, sleutel, banner_naam, links, rechts, motief, titel_x=600):
+    # Banner renders at 2560×1440 (2x of 1280×720 xxxhdpi), then downsampled to xxxhdpi (1280×720) and xxhdpi (960×540)
+    bw, bh = 2560, 1440
+    basis = verloop(bw, bh, links, rechts, cx_frac=0.28, cy_frac=0.46)
+    basis = motief(basis, 640, 720, 3.1).resize((1280, 720), Image.LANCZOS)
     for taal, titels in TITELS.items():
-        im = basis_klein.copy()
-        im.alpha_composite(titel_laag(w, h, titels[sleutel], titel_x * S))
-        bewaar(im, taal, banner_naam)
+        im = basis.copy()
+        im.alpha_composite(titel_laag(1280, 720, titels[sleutel], titel_x))
+        rgb = im.convert("RGB")
+        for dpi, size in BANNER_SIZES:
+            map_ = os.path.join(RES, "drawable-%s%s" % (taal + "-" if taal else "", dpi))
+            os.makedirs(map_, exist_ok=True)
+            out = rgb if rgb.size == size else rgb.resize(size, Image.LANCZOS)
+            out.save(os.path.join(map_, banner_naam), optimize=True)
 
-    # Iconen in hoge resolutie (192×S teruggeschaald naar 192/288/384) met nette marges zonder kartels
-    iw, ih = 192 * S, 192 * S
-    ik_hi = verloop(iw, ih, links, rechts, cx_frac=0.35, cy_frac=0.38).convert("RGBA")
-    motief(ik_hi, cx=iw / 2, cy=ih / 2, schaal=0.56)
-    ik_hi = ik_hi.convert("RGB")
+    # Fallback mipmap PNGs (voor launchers zonder anydpi-v26 ondersteuning)
+    iw = 768
+    ik = verloop(iw, iw, links, rechts, cx_frac=0.35, cy_frac=0.38)
+    ik = motief(ik, iw / 2, iw / 2, 2.05).convert("RGB")
     for map_naam, px_maat in MIPMAPS:
         uit = os.path.join(RES, map_naam)
         os.makedirs(uit, exist_ok=True)
-        ik_hi.resize((px_maat, px_maat), Image.LANCZOS).save(os.path.join(uit, "ic_%s.png" % naam), optimize=True)
+        ik.resize((px_maat, px_maat), Image.LANCZOS).save(os.path.join(uit, "ic_%s.png" % naam), optimize=True)
 
 
-def m_fotos(im, cx, cy, schaal=1.0):
-    pw, ph, bd = int(156 * S * schaal), int(126 * S * schaal), int(16 * S * schaal)
-    ro, ri = int(20 * S * schaal), int(10 * S * schaal)
-    c1 = fotokaart(pw, ph, 12, (235, 78, 66), (185, 42, 48), (42, 22, 34), (65, 34, 48), rand=bd, zon=False, r_buiten=ro, r_binnen=ri)
-    c2 = fotokaart(pw, ph, 6, (248, 184, 58), (224, 134, 34), (52, 36, 22), (78, 54, 34), rand=bd, zon=False, r_buiten=ro, r_binnen=ri)
-    c3 = fotokaart(pw, ph, -4, (148, 192, 248), (192, 218, 252), (28, 38, 64), (48, 62, 92), rand=bd, zon=True, r_buiten=ro, r_binnen=ri)
-    plaats(im, c1, cx - 22 * S * schaal, cy - 6 * S * schaal)
-    plaats(im, c2, cx + 2 * S * schaal, cy - 2 * S * schaal)
-    plaats(im, c3, cx + 26 * S * schaal, cy + 5 * S * schaal)
-
-
-def m_album(im, cx, cy, schaal=1.0):
-    """Opengeslagen album: twee pagina's met elk een foto, ruggetje in het midden."""
-    pw, ph = int(146 * S * schaal), int(184 * S * schaal)
-    for kant, hoek in ((-1, 6), (1, -6)):
-        laag = Image.new("RGBA", (pw + 40 * S, ph + 40 * S), (0, 0, 0, 0))
-        ld = ImageDraw.Draw(laag)
-        ox = 20 * S
-        ld.rounded_rectangle([ox, ox, ox + pw, ox + ph], radius=10 * S, fill=(250, 244, 232, 255))
-        laag = laag.rotate(hoek, resample=Image.BICUBIC, expand=True)
-        plaats(im, laag, cx + kant * pw * 0.52, cy)
-    for kant, hoek, ltop, lbot in (
-        (-1, 6, (148, 192, 248), (192, 218, 252)),
-        (1, -6, (250, 190, 130), (254, 222, 184)),
-    ):
-        laag = fotokaart(int(pw * 0.72), int(pw * 0.54), hoek, ltop, lbot,
-                         rand=int(7 * S * schaal), zon=kant > 0,
-                         r_buiten=int(8 * S * schaal), r_binnen=int(5 * S * schaal))
-        plaats(im, laag, cx + kant * pw * 0.52, cy - ph * 0.08)
-    d = ImageDraw.Draw(im)
-    d.rounded_rectangle([cx - 5 * S * schaal, cy - ph * 0.46, cx + 5 * S * schaal, cy + ph * 0.46],
-                        radius=4 * S * schaal, fill=(120, 60, 30, 255))
-
-
-def m_herinneringen(im, cx, cy, schaal=1.0):
-    """Eén fotokaartje, iets gedraaid, met een gouden ster op de hoek."""
-    pw, ph = int(190 * S * schaal), int(142 * S * schaal)
-    laag = fotokaart(pw, ph, 8, (186, 158, 242), (222, 206, 252), (56, 32, 88), (80, 48, 118),
-                     rand=int(14 * S * schaal), r_buiten=int(16 * S * schaal), r_binnen=int(8 * S * schaal))
-    plaats(im, laag, cx, cy + 8 * S * schaal)
-    d = ImageDraw.Draw(im)
-    ster(d, cx + pw * 0.48, cy - ph * 0.46, 34 * S * schaal, (255, 214, 102))
-    ster(d, cx + pw * 0.66, cy - ph * 0.14, 16 * S * schaal, (255, 236, 180))
-
-
-def m_familie(im, cx, cy, schaal=1.0):
-    """Twee gestapelde fotokaartjes met een rood hart."""
-    pw, ph = int(180 * S * schaal), int(134 * S * schaal)
-    c1 = fotokaart(pw, ph, 9, (176, 226, 194), (214, 242, 224), (28, 70, 48), (44, 96, 66),
-                   rand=int(14 * S * schaal), zon=False, r_buiten=int(16 * S * schaal), r_binnen=int(8 * S * schaal))
-    c2 = fotokaart(pw, ph, -5, (152, 204, 244), (198, 228, 250), (30, 60, 74), (48, 86, 104),
-                   rand=int(14 * S * schaal), r_buiten=int(16 * S * schaal), r_binnen=int(8 * S * schaal))
-    plaats(im, c1, cx - 14 * S * schaal, cy - 8 * S * schaal)
-    plaats(im, c2, cx + 12 * S * schaal, cy + 12 * S * schaal)
-    d = ImageDraw.Draw(im)
-    hart(d, cx + pw * 0.42, cy + ph * 0.40, 30 * S * schaal, (232, 64, 84))
-    hart(d, cx + pw * 0.42, cy + ph * 0.40 - 3 * S * schaal, 24 * S * schaal, (250, 90, 110))
-
-
-maak_variant("fotos", "fotos", "banner.png", (40, 56, 118), (10, 14, 28), m_fotos, titel_x=325)
-maak_variant("album", "album", "banner_album.png", (122, 52, 18), (14, 8, 4), m_album)
-maak_variant("herinneringen", "herinneringen", "banner_herinneringen.png", (62, 30, 110), (10, 6, 20), m_herinneringen)
-maak_variant("familie", "familie", "banner_familie.png", (18, 76, 48), (5, 20, 12), m_familie)
+maak_variant("fotos", "fotos", "banner.png", (36, 52, 112), (10, 14, 28), m_fotos, titel_x=610)
+maak_variant("album", "album", "banner_album.png", (122, 52, 18), (14, 8, 4), m_album, titel_x=570)
+maak_variant("herinneringen", "herinneringen", "banner_herinneringen.png", (62, 30, 110), (10, 6, 20), m_herinneringen, titel_x=570)
+maak_variant("familie", "familie", "banner_familie.png", (18, 76, 48), (5, 20, 12), m_familie, titel_x=570)
 print("klaar")

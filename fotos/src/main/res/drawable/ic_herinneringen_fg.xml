@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#44040816"
+        android:pathData="M28.5,36 L79.5,36 A5.5,5.5 0 0,1 85,41.5 L85,72.5 A5.5,5.5 0 0,1 79.5,78 L28.5,78 A5.5,5.5 0 0,1 23,72.5 L23,41.5 A5.5,5.5 0 0,1 28.5,36 Z" />
+    <path
+        android:fillColor="#F2F6FC"
+        android:pathData="M28.5,34 L79.5,34 A5.5,5.5 0 0,1 85,39.5 L85,70.5 A5.5,5.5 0 0,1 79.5,76 L28.5,76 A5.5,5.5 0 0,1 23,70.5 L23,39.5 A5.5,5.5 0 0,1 28.5,34 Z" />
+    <group>
+        <clip-path android:pathData="M29.5,37 L78.5,37 A3.5,3.5 0 0,1 82,40.5 L82,69.5 A3.5,3.5 0 0,1 78.5,73 L29.5,73 A3.5,3.5 0 0,1 26,69.5 L26,40.5 A3.5,3.5 0 0,1 29.5,37 Z" />
+        <path android:pathData="M26,37h56v36h-56z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:endX="54"
+                    android:endY="73"
+                    android:startX="54"
+                    android:startY="37"
+                    android:type="linear">
+                    <item android:color="#FFA88AEE" android:offset="0" />
+                    <item android:color="#FFDAC8FC" android:offset="1" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path android:fillColor="#FFF6CE" android:pathData="M66,42 A4.2,4.2 0 1,0 66,50.4 A4.2,4.2 0 1,0 66,42 Z" />
+        <path android:fillColor="#341C56" android:pathData="M26,73 L45,52 L64,73 Z" />
+        <path android:fillColor="#4E2E76" android:pathData="M48,73 L66,56.5 L82,73 Z" />
+    </group>
+    <!-- Stars -->
+    <path android:fillColor="#FFD666" android:pathData="M78,24 L80.5,30.5 L87,33 L80.5,35.5 L78,42 L75.5,35.5 L69,33 L75.5,30.5 Z" />
+    <path android:fillColor="#FFEBB4" android:pathData="M85,43 L86.4,46.6 L90,48 L86.4,49.4 L85,53 L83.6,49.4 L80,48 L83.6,46.6 Z" />
+</vector>
