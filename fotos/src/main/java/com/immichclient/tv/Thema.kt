@@ -1,8 +1,6 @@
 package com.immichclient.tv
 
 import androidx.compose.foundation.Image
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -38,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.ExperimentalTextApi
@@ -130,7 +129,7 @@ fun beeld(url: String): ImageRequest {
 
 /** Thumbnail-verzoek voor het raster (ook gebruikt door de prefetcher). */
 fun thumbVerzoek(ctx: android.content.Context, id: String): ImageRequest =
-    ImageRequest.Builder(ctx).data(Immich.thumb(id)).size(420, 420).precision(Precision.INEXACT).crossfade(80).build()
+    ImageRequest.Builder(ctx).data(Immich.thumb(id)).size(Size.ORIGINAL).crossfade(70).build()
 
 @Composable
 fun thumbBeeld(id: String): ImageRequest {
@@ -176,10 +175,8 @@ fun FotoVak(
         repeat(5) { if (runCatching { fr.requestFocus() }.isSuccess) { onFocusDoelKlaar(); return@LaunchedEffect }; delay(16) }
         onFocusDoelKlaar()
     }
-    // Bewust geen tv-Surface: daarvan staan er tientallen tegelijk in beeld en bij snel scrollen telt elke ms.
+    // Bewust geen tv-Surface en geen per-tegel animateFloatAsState-coroutine: houdt snel scrollen ANR-vrij.
     var focus by remember { mutableStateOf(false) }
-    var geladen by remember(asset.id) { mutableStateOf(false) }
-    val schaal = animateFloatAsState(if (focus) 1.06f else 1f, tween(110), label = "schaal")
     Box(
         modifier.size(breedte, hoogte)
             .zIndex(if (focus) 1f else 0f)
@@ -187,9 +184,10 @@ fun FotoVak(
             .onFocusChanged { focus = it.isFocused; if (it.isFocused) onFocus() }
             .clickable(interactionSource = null, indication = null, onClick = onKlik)
             .graphicsLayer {
-                val s = schaal.value
-                scaleX = s; scaleY = s
-                if (focus || s > 1.001f) { shape = vorm; clip = true }
+                if (focus) {
+                    scaleX = 1.06f; scaleY = 1.06f
+                    shape = vorm; clip = true
+                }
             }
             .drawWithContent {
                 drawContent()
@@ -200,13 +198,15 @@ fun FotoVak(
             }
             .background(Kleur.vlak),
     ) {
-        if (!geladen) {
-            val hash = remember(asset.thumbhash) { asset.thumbhash?.let { ThumbHash.inCache(it) } }
-            if (hash != null) Image(hash, null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        val hashPainter = remember(asset.thumbhash) {
+            asset.thumbhash?.let { ThumbHash.bitmap(it) }?.let { BitmapPainter(it) }
         }
         AsyncImage(
-            thumbBeeld(asset.id), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop,
-            onSuccess = { geladen = true },
+            model = thumbBeeld(asset.id),
+            contentDescription = null,
+            placeholder = hashPainter,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
         )
         if (asset.video) VideoLabel(asset, Modifier.align(Alignment.TopEnd))
         if (asset.favoriet) Icon(

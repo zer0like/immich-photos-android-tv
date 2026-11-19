@@ -140,8 +140,8 @@ class TijdlijnStaat(val filter: Filter, nieuwsteEerst: Boolean, private val scop
         scope.launch {
             runCatching { Immich.maand(filter, nieuwsteEerst, m) }
                 .onSuccess { a ->
-                    // thumbhashes alvast op de achtergrond, dan hoeft het scrollen dat niet te doen
-                    withContext(Dispatchers.Default) { a.take(600).forEach { x -> x.thumbhash?.let(ThumbHash::bitmap) } }
+                    // thumbhashes alvast voor de eerste rijen van de maand (niet 600 tegelijk: voorkomt GC/evictie)
+                    withContext(Dispatchers.Default) { a.take(60).forEach { x -> x.thumbhash?.let(ThumbHash::bitmap) } }
                     val i = maanden.indexOfFirst { it.sleutel == m }
                     if (i >= 0 && maanden[i].aantal != a.size) {
                         maanden = maanden.toMutableList().also { l -> l[i] = Maand(m, a.size) }; telOp()
@@ -218,12 +218,13 @@ fun TijdlijnScherm(scherm: Scherm.Tijdlijn, nav: Nav) {
         val (rijen, maandVan) = remember(staat.maanden, staat.geladen.size, breedte, rijHoogte) { staat.rijen(breedte, rijHoogte) }
         val boven = 1 // kop-item (titel + knoppen + herinneringen)
 
-        // laad wat (bijna) in beeld is
+        // laad wat (bijna) in beeld is (kleine debounce zodat snel voorbijscrollen geen onnodige maanden triggert)
         LaunchedEffect(rijen) {
             snapshotFlow { staat.raster.lijst.layoutInfo.visibleItemsInfo.map { it.index } }
                 .distinctUntilChanged()
                 .collectLatest { zicht ->
                     if (zicht.isEmpty()) return@collectLatest
+                    delay(80)
                     val van = (zicht.first() - boven).coerceAtLeast(0)
                     val tot = (zicht.last() - boven).coerceAtMost(maandVan.size - 1)
                     if (tot < 0) { staat.maanden.firstOrNull()?.let { staat.laad(it.sleutel) }; return@collectLatest }

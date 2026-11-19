@@ -1,5 +1,7 @@
 package com.immichclient.tv
 
+import android.os.SystemClock
+import android.view.KeyEvent
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
@@ -31,11 +33,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.nativeKeyCode
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -45,6 +53,7 @@ import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 import coil3.SingletonImageLoader
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
@@ -121,29 +130,39 @@ fun FotoRaster(
     boven: LazyListScope.() -> Unit = {},
 ) {
     val ctx = LocalContext.current
+    val rijenNu by rememberUpdatedState(rijen)
+    val gezien = remember { android.util.LruCache<String, Boolean>(180) }
     LaunchedEffect(staat.terugNaar, rijen) {
         val id = staat.terugNaar ?: return@LaunchedEffect
         staat.gaNaar(id, rijen, bovenAantal)
         staat.terugNaar = null
     }
-    // Prefetch thumbnails + ThumbHash 5 rows ahead and 2 rows behind so scrolling hits RAM cache
-    LaunchedEffect(rijen) {
-        if (rijen.isEmpty()) return@LaunchedEffect
+    // Direction-aware debounced prefetch (2 rows ahead in scroll direction)
+    LaunchedEffect(staat) {
         val loader = SingletonImageLoader.get(ctx)
+        var vorigEerste = -1
         snapshotFlow {
             val info = staat.lijst.layoutInfo.visibleItemsInfo
             if (info.isEmpty()) -1 to -1 else info.first().index to info.last().index
         }.distinctUntilChanged().collectLatest { (eerste, laatste) ->
             if (eerste < 0) return@collectLatest
-            val van = (eerste - bovenAantal - 2).coerceAtLeast(0)
-            val tot = (laatste - bovenAantal + 5).coerceAtMost(rijen.lastIndex)
+            val lijst = rijenNu
+            if (lijst.isEmpty()) return@collectLatest
+            val omhoog = vorigEerste in 0 until Int.MAX_VALUE && eerste < vorigEerste
+            vorigEerste = eerste
+            delay(200)
+            val van = if (omhoog) (eerste - bovenAantal - 2).coerceAtLeast(0) else (laatste - bovenAantal + 1).coerceAtLeast(0)
+            val tot = if (omhoog) (eerste - bovenAantal - 1).coerceAtMost(lijst.lastIndex) else (laatste - bovenAantal + 2).coerceAtMost(lijst.lastIndex)
             if (tot < van) return@collectLatest
             val hashes = ArrayList<String>()
             for (ri in van..tot) {
-                val r = rijen[ri] as? RijFotos ?: continue
+                val r = lijst.getOrNull(ri) as? RijFotos ?: continue
                 for (s in r.regel.stukken) for (v in s.vakken) {
-                    loader.enqueue(thumbVerzoek(ctx, v.asset.id))
-                    v.asset.thumbhash?.let { if (ThumbHash.inCache(it) == null) hashes += it }
+                    if (gezien.get(v.asset.id) == null) {
+                        gezien.put(v.asset.id, true)
+                        loader.enqueue(thumbVerzoek(ctx, v.asset.id))
+                        v.asset.thumbhash?.let { if (ThumbHash.inCache(it) == null) hashes += it }
+                    }
                 }
             }
             if (hashes.isNotEmpty()) withContext(Dispatchers.Default) {
@@ -151,9 +170,24 @@ fun FotoRaster(
             }
         }
     }
+    val dpadGate = remember { LongArray(1) }
     LazyColumn(
         state = staat.lijst,
-        modifier = modifier,
+        modifier = modifier.onPreviewKeyEvent { e ->
+            if (e.type != KeyEventType.KeyDown || e.nativeKeyEvent.repeatCount == 0) return@onPreviewKeyEvent false
+            when (e.key.nativeKeyCode) {
+                KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN,
+                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    val nu = SystemClock.uptimeMillis()
+                    if (nu - dpadGate[0] < 95L) true
+                    else {
+                        dpadGate[0] = nu
+                        false
+                    }
+                }
+                else -> false
+            }
+        },
         contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 20.dp, bottom = 120.dp),
         verticalArrangement = Arrangement.spacedBy(TUSSEN.dp),
     ) {
