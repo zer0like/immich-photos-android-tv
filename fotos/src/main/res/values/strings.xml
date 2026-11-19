@@ -187,6 +187,8 @@
     <string name="landkaart_uitleg">Outline of the country with the photo\'s location, bottom right</string>
     <string name="klein">Small</string>
     <string name="groot">Large</string>
+    <string name="toon_datum_plaats">Show date and place</string>
+    <string name="toon_datum_plaats_uitleg">Show the date and place bar at the bottom while viewing</string>
     <string name="datum_plaats">Date and place</string>
     <string name="datum_plaats_uitleg">Hide the bar at the bottom after a few seconds, or keep it visible</string>
     <string name="altijd_tonen">Always show</string>

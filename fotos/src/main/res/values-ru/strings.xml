@@ -199,7 +199,9 @@
     <string name="landkaart_uitleg">Контур страны со съёмкой фото в правом нижнем углу</string>
     <string name="klein">Маленький</string>
     <string name="groot">Большой</string>
-    <string name="datum_plaats">Дата и место</string>
+    <string name="toon_datum_plaats">Показывать дату и место</string>
+    <string name="toon_datum_plaats_uitleg">Показывать панель с датой и местом внизу экрана при просмотре</string>
+    <string name="datum_plaats">Время показа панели</string>
     <string name="datum_plaats_uitleg">Скрывать нижнюю панель через несколько секунд или показывать всегда</string>
     <string name="altijd_tonen">Всегда показывать</string>
     <string name="teller">Счётчик</string>

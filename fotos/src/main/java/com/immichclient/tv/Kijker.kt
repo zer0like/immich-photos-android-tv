@@ -408,9 +408,12 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
             breedtePx = breedtePx, hoogtePx = hoogtePx, maat = kaartMaat,
         )
 
-        // balk onderin: datum en plaats, verdwijnt vanzelf (instelbaar, 0 = altijd)
-        var balk by remember { mutableStateOf(true) }
-        LaunchedEffect(staat.actief, staat.index) { balk = true; val ms = Instellingen.balkMs; if (ms > 0) { delay(ms.toLong()); balk = false } }
+        // balk onderin: datum en plaats, uit te zetten of verdwijnt vanzelf (instelbaar, 0 = altijd)
+        var balk by remember { mutableStateOf(Instellingen.toonBalk) }
+        LaunchedEffect(staat.actief, staat.index, Instellingen.toonBalk) {
+            if (!Instellingen.toonBalk) { balk = false; return@LaunchedEffect }
+            balk = true; val ms = Instellingen.balkMs; if (ms > 0) { delay(ms.toLong()); balk = false }
+        }
         AnimatedVisibility(
             ((balk && !schoon) || staat.info) && huidig != null && !staat.speeltVideo && !staat.videoHud, Modifier.align(Alignment.BottomStart),
             enter = fadeIn(), exit = fadeOut(),

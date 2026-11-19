@@ -180,6 +180,8 @@
     <string name="landkaart_uitleg">Contour du pays avec le lieu de la photo, en bas à droite</string>
     <string name="klein">Petite</string>
     <string name="groot">Grande</string>
+    <string name="toon_datum_plaats">Afficher date et lieu</string>
+    <string name="toon_datum_plaats_uitleg">Afficher la barre avec la date et le lieu en bas lors de l\'affichage</string>
     <string name="datum_plaats">Date et lieu</string>
     <string name="datum_plaats_uitleg">Masquer la barre du bas après quelques secondes, ou la laisser affichée</string>
     <string name="altijd_tonen">Toujours afficher</string>

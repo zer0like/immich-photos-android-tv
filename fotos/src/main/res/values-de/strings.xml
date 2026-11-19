@@ -174,6 +174,8 @@
     <string name="landkaart_uitleg">Umriss des Landes mit dem Aufnahmeort, unten rechts</string>
     <string name="klein">Klein</string>
     <string name="groot">Groß</string>
+    <string name="toon_datum_plaats">Datum und Ort anzeigen</string>
+    <string name="toon_datum_plaats_uitleg">Leiste mit Datum und Ort unten beim Betrachten anzeigen</string>
     <string name="datum_plaats">Datum und Ort</string>
     <string name="datum_plaats_uitleg">Leiste unten nach ein paar Sekunden ausblenden, oder immer anzeigen</string>
     <string name="altijd_tonen">Immer anzeigen</string>

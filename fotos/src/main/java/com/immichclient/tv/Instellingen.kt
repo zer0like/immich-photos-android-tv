@@ -62,6 +62,8 @@ object Instellingen {
 
     // ---- Viewer ----
     var viewerKaart by keuze("viewer_kaart", KaartMaat.GROOT)
+    /** Balk met datum en plaats tonen tijdens bekijken. */
+    var toonBalk by bool("toon_balk", true)
     /** Balk met datum/plaats verbergen na … ms (0 = altijd tonen). */
     var balkMs by getal("balk_ms", 3500)
     val BALK_TIJDEN = listOf(2000, 3500, 6000, 10000, 0)

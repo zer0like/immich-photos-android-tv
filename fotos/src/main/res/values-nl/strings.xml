@@ -174,6 +174,8 @@
     <string name="landkaart_uitleg">Contour van het land met de plek van de foto, rechtsonder</string>
     <string name="klein">Klein</string>
     <string name="groot">Groot</string>
+    <string name="toon_datum_plaats">Datum en plaats tonen</string>
+    <string name="toon_datum_plaats_uitleg">Balk met datum en plaats onderin bij het bekijken</string>
     <string name="datum_plaats">Datum en plaats</string>
     <string name="datum_plaats_uitleg">Balk onderin verbergen na een paar seconden, of altijd laten staan</string>
     <string name="altijd_tonen">Altijd tonen</string>
