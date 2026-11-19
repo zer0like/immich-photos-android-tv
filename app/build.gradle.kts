@@ -14,8 +14,8 @@ android {
         applicationId = "com.zer0like.immich.tv"
         minSdk = 26
         targetSdk = 35
-        versionCode = 27
-        versionName = "3.0.0"
+        versionCode = 28
+        versionName = "3.0.1"
         // MapLibre includes native code: 32-bit (NVIDIA Shield: abilist armeabi-v7a) and 64-bit for newer boxes; skip x86.
         // Each ABI adds ~8 MB to the APK.
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a") }
