@@ -420,9 +420,10 @@
     <string name="dream_tijd_uitleg">1枚あたりの表示時間（リモコン ◀ ▶：前 / 次）</string>
     <string name="dream_klok">時計</string>
     <string name="dream_klok_uitleg">左上に時刻と日付を表示</string>
+    <string name="dream_kaart">スクリーンセーバー上の地図</string>
     <string name="dream_kaart_uitleg">右下に撮影国の輪郭を表示</string>
     <string name="dream_ken_burns_uitleg">各写真をゆっくりズーム</string>
-    <string name="dream_info">日付と場所</string>
+    <string name="dream_info">スクリーンセーバーの日付と場所</string>
     <string name="dream_info_uitleg">左下に日付、場所、アルバム名を表示</string>
     <string name="dream_geen_fotos">このスクリーンセーバーのソースに写真が見つかりません</string>
     <string name="dream_geen_verbinding">Immich サーバーに接続できません。再試行中…</string>

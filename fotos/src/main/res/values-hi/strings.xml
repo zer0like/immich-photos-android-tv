@@ -426,9 +426,10 @@
     <string name="dream_tijd_uitleg">प्रत्येक फ़ोटो स्क्रीन पर कितनी देर रहे (रिमोट पर ◀ ▶: पिछला / अगला)</string>
     <string name="dream_klok">घड़ी</string>
     <string name="dream_klok_uitleg">ऊपर बाएँ कोने में समय और तारीख़</string>
+    <string name="dream_kaart">स्क्रीनसेवर में मानचित्र</string>
     <string name="dream_kaart_uitleg">नीचे दाईं ओर फ़ोटो के स्थान वाले देश की रूपरेखा</string>
     <string name="dream_ken_burns_uitleg">प्रत्येक फ़ोटो पर धीरे-धीरे ज़ूम इन करें</string>
-    <string name="dream_info">तारीख़ और स्थान</string>
+    <string name="dream_info">स्क्रीनसेवर में तारीख़ और स्थान</string>
     <string name="dream_info_uitleg">नीचे बाईं ओर तारीख़, स्थान और एल्बम का नाम</string>
     <string name="dream_geen_fotos">इस स्क्रीनसेवर स्रोत के लिए कोई फ़ोटो नहीं मिली</string>
     <string name="dream_geen_verbinding">Immich सर्वर से कोई कनेक्शन नहीं; फिर से कोशिश हो रही है…</string>

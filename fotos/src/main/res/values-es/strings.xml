@@ -415,9 +415,10 @@
     <string name="dream_tijd_uitleg">Cuánto tiempo se muestra cada foto (◀ ▶ en el mando: anterior / siguiente)</string>
     <string name="dream_klok">Reloj</string>
     <string name="dream_klok_uitleg">Hora y fecha arriba a la izquierda</string>
+    <string name="dream_kaart">Mapa en salvapantallas</string>
     <string name="dream_kaart_uitleg">Contorno del país con el lugar de la foto, abajo a la derecha</string>
     <string name="dream_ken_burns_uitleg">Acercar lentamente cada foto</string>
-    <string name="dream_info">Fecha y lugar</string>
+    <string name="dream_info">Fecha y lugar en salvapantallas</string>
     <string name="dream_info_uitleg">Fecha, lugar y nombre del álbum abajo a la izquierda</string>
     <string name="dream_geen_fotos">No se encontraron fotos para esta fuente del salvapantallas</string>
     <string name="dream_geen_verbinding">Sin conexión con el servidor Immich; reintentando…</string>

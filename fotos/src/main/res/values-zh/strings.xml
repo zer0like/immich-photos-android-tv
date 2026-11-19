@@ -420,9 +420,10 @@
     <string name="dream_tijd_uitleg">每张照片停留时间（遥控器 ◀ ▶：上一张 / 下一张）</string>
     <string name="dream_klok">时钟</string>
     <string name="dream_klok_uitleg">左上角显示时间和日期</string>
+    <string name="dream_kaart">屏保照片小地图</string>
     <string name="dream_kaart_uitleg">右下角显示拍摄国家轮廓</string>
     <string name="dream_ken_burns_uitleg">每张照片缓慢缩放</string>
-    <string name="dream_info">日期与地点</string>
+    <string name="dream_info">屏保日期与地点</string>
     <string name="dream_info_uitleg">左下角显示日期、地点与相册名称</string>
     <string name="dream_geen_fotos">所选屏保来源中未找到照片</string>
     <string name="dream_geen_verbinding">无法连接 Immich 服务器，正在重试…</string>

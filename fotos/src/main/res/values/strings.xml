@@ -426,9 +426,10 @@
     <string name="dream_tijd_uitleg">How long each photo stays on screen (◀ ▶ on the remote: previous / next)</string>
     <string name="dream_klok">Clock</string>
     <string name="dream_klok_uitleg">Time and date in the top left corner</string>
+    <string name="dream_kaart">Map in screensaver</string>
     <string name="dream_kaart_uitleg">Outline of the country with the photo\'s location, bottom right</string>
     <string name="dream_ken_burns_uitleg">Slowly zoom in on each photo</string>
-    <string name="dream_info">Date and place</string>
+    <string name="dream_info">Date and place in screensaver</string>
     <string name="dream_info_uitleg">Date, place and album name at the bottom left</string>
     <string name="dream_geen_fotos">No photos found for this screensaver source</string>
     <string name="dream_geen_verbinding">No connection to the Immich server; trying again…</string>

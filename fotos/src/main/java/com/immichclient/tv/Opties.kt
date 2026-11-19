@@ -137,7 +137,19 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
                 listOf(stringResource(R.string.instellingen_basis), stringResource(R.string.instellingen_alle)), if (alles) 1 else 0, Modifier.focusRequester(eerste)) { Instellingen.alleInstellingen = it == 1 }
         }
 
-        // aantallen regels per modus staan ook in dreamItem()
+        // ---- Просмотр фото и слайд-шоу наверху: системная заставка ниже ----
+        groep(R.string.groep_bekijken)
+        item { Keuzes(stringResource(R.string.landkaart), stringResource(R.string.landkaart_uitleg), KaartMaat.entries.map { stringResource(it.label) }, Instellingen.viewerKaart.ordinal) { Instellingen.viewerKaart = KaartMaat.entries[it] } }
+        schakel(R.string.toon_datum_plaats, R.string.toon_datum_plaats_uitleg, uitAan, Instellingen.toonBalk) { Instellingen.toonBalk = it }
+        if (Instellingen.toonBalk) item {
+            val altijd = stringResource(R.string.altijd_tonen)
+            val labels = Instellingen.BALK_TIJDEN.map { if (it == 0) altijd else stringResource(R.string.seconden_s, (it / 1000.0).let { s -> if (s % 1 == 0.0) "%.0f".format(Taal.locale, s) else "%.1f".format(Taal.locale, s) }) }
+            Keuzes(stringResource(R.string.datum_plaats), stringResource(R.string.datum_plaats_uitleg), labels, Instellingen.BALK_TIJDEN.indexOf(Instellingen.balkMs).coerceAtLeast(0)) { Instellingen.balkMs = Instellingen.BALK_TIJDEN[it] }
+        }
+        if (alles) item { Keuzes(stringResource(R.string.teller), stringResource(R.string.teller_uitleg, Taal.getal(12345)), uitAan, if (Instellingen.teller) 1 else 0) { Instellingen.teller = it == 1 } }
+        if (alles) schakel(R.string.album_naam, R.string.album_naam_uitleg, uitAan, Instellingen.albumNaam) { Instellingen.albumNaam = it }
+        if (alles) schakel(R.string.wazig, R.string.wazig_uitleg, uitAan, Instellingen.wazig) { Instellingen.wazig = it }
+
         groep(R.string.groep_diashow)
         item {
             Keuzes(stringResource(R.string.tijd_per_foto), stringResource(R.string.tijd_per_foto_uitleg), Instellingen.DIA_TIJDEN.map { stringResource(R.string.seconden, it) },
@@ -160,56 +172,6 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
                 Instellingen.muziekZender = MuziekZender.entries[it]
             }
         }
-
-        // ---- Screensaver (item-index dreamItem() = de groepskop; de volgorde hierboven niet veranderen zonder die aan te passen) ----
-        if (SCREENSAVER_AAN) {
-        groep(R.string.groep_screensaver)
-        item {
-            // met schrijfrecht: aan/uit zet het meteen; zonder: OK opent de uitleg (adb, systeeminstellingen)
-            if (dreamMag) Keuzes(stringResource(R.string.screensaver), stringResource(if (dreamActief) R.string.dream_status_aan else R.string.dream_aan_uitleg), uitAan, if (dreamActief) 1 else 0, Modifier.focusRequester(dreamRegel)) {
-                Screensaver.zet(ctx, it == 1); dreamRonde++
-            } else Regel(stringResource(R.string.screensaver), stringResource(if (dreamActief) R.string.dream_status_aan else R.string.dream_status_uit_ok), Modifier.focusRequester(dreamRegel), onKlik = { hulp = true }) { focus ->
-                Text(stringResource(if (dreamActief) R.string.aan else R.string.uit), style = MaterialTheme.typography.titleMedium, color = if (focus) Kleur.opPrimair else Kleur.tekst, modifier = Modifier.padding(end = 10.dp))
-            }
-        }
-        item { Actie(stringResource(R.string.dream_instellen), stringResource(R.string.dream_instellen_uitleg)) { hulp = true } }
-        item { Actie(stringResource(R.string.dream_voorbeeld), stringResource(R.string.dream_voorbeeld_uitleg)) { runCatching { ctx.startActivity(android.content.Intent(ctx, VoorbeeldActivity::class.java)) } } }
-        item { Keuzes(stringResource(R.string.dream_bron), stringResource(R.string.dream_bron_uitleg), DreamBron.entries.map { stringResource(it.label) }, Instellingen.dreamBron.ordinal) { Instellingen.dreamBron = DreamBron.entries[it] } }
-        val bron = Instellingen.dreamBron
-        if (bron == DreamBron.ALBUM || bron == DreamBron.COMBI) item { Actie(stringResource(R.string.dream_albums), Instellingen.dreamAlbumNamen.joinToString(", ").ifBlank { stringResource(R.string.dream_kies) }, Modifier.focusRequester(albumRegel)) { albumKiezer = true } }
-        if (bron == DreamBron.PERSOON || bron == DreamBron.COMBI) item { Actie(stringResource(R.string.dream_personen), Instellingen.dreamPersoonNamen.joinToString(", ").ifBlank { stringResource(R.string.dream_kies) }, Modifier.focusRequester(persoonRegel)) { persoonKiezer = true } }
-        if (bron != DreamBron.ALLES && bron != DreamBron.HERINNERINGEN)
-            schakel(R.string.dream_ander_album, R.string.dream_ander_album_uitleg, uitAan, Instellingen.dreamAnderAlbum) { Instellingen.dreamAnderAlbum = it }
-        item {
-            val jaren = Instellingen.DREAM_JAREN
-            Keuzes(stringResource(R.string.dream_vanaf), stringResource(R.string.dream_vanaf_uitleg), jaren.map { if (it == 0) stringResource(R.string.alle_jaren) else it.toString() },
-                jaren.indexOf(Instellingen.dreamVanaf).coerceAtLeast(0)) { Instellingen.dreamVanaf = jaren[it] }
-        }
-        if (bron != DreamBron.HERINNERINGEN) item {
-            Keuzes(stringResource(R.string.volgorde), stringResource(R.string.dream_volgorde_uitleg), DreamVolgorde.entries.map { stringResource(it.label) }, Instellingen.dreamVolgorde.ordinal) { Instellingen.dreamVolgorde = DreamVolgorde.entries[it] }
-        }
-        item {
-            val labels = Instellingen.DREAM_TIJDEN.map { if (it >= 60) stringResource(R.string.minuten, it / 60) else stringResource(R.string.seconden, it) }
-            Keuzes(stringResource(R.string.tijd_per_foto), stringResource(R.string.dream_tijd_uitleg), labels, Instellingen.DREAM_TIJDEN.indexOf(Instellingen.dreamSeconden).coerceAtLeast(0)) { Instellingen.dreamSeconden = Instellingen.DREAM_TIJDEN[it] }
-        }
-        schakel(R.string.dream_klok, R.string.dream_klok_uitleg, uitAan, Instellingen.dreamKlok) { Instellingen.dreamKlok = it }
-        item { Keuzes(stringResource(R.string.landkaart), stringResource(R.string.dream_kaart_uitleg), KaartMaat.entries.map { stringResource(it.label) }, Instellingen.dreamKaart.ordinal) { Instellingen.dreamKaart = KaartMaat.entries[it] } }
-        if (alles) schakel(R.string.ken_burns, R.string.dream_ken_burns_uitleg, uitAan, Instellingen.dreamKenBurns) { Instellingen.dreamKenBurns = it }
-        if (alles) schakel(R.string.dream_info, R.string.dream_info_uitleg, uitAan, Instellingen.dreamInfo) { Instellingen.dreamInfo = it }
-        if (alles) schakel(R.string.dream_ring, R.string.dream_ring_uitleg, uitAan, Instellingen.dreamRing) { Instellingen.dreamRing = it }
-        }
-
-        groep(R.string.groep_bekijken)
-        item { Keuzes(stringResource(R.string.landkaart), stringResource(R.string.landkaart_uitleg), KaartMaat.entries.map { stringResource(it.label) }, Instellingen.viewerKaart.ordinal) { Instellingen.viewerKaart = KaartMaat.entries[it] } }
-        schakel(R.string.toon_datum_plaats, R.string.toon_datum_plaats_uitleg, uitAan, Instellingen.toonBalk) { Instellingen.toonBalk = it }
-        if (Instellingen.toonBalk) item {
-            val altijd = stringResource(R.string.altijd_tonen)
-            val labels = Instellingen.BALK_TIJDEN.map { if (it == 0) altijd else stringResource(R.string.seconden_s, (it / 1000.0).let { s -> if (s % 1 == 0.0) "%.0f".format(Taal.locale, s) else "%.1f".format(Taal.locale, s) }) }
-            Keuzes(stringResource(R.string.datum_plaats), stringResource(R.string.datum_plaats_uitleg), labels, Instellingen.BALK_TIJDEN.indexOf(Instellingen.balkMs).coerceAtLeast(0)) { Instellingen.balkMs = Instellingen.BALK_TIJDEN[it] }
-        }
-        if (alles) item { Keuzes(stringResource(R.string.teller), stringResource(R.string.teller_uitleg, Taal.getal(12345)), uitAan, if (Instellingen.teller) 1 else 0) { Instellingen.teller = it == 1 } }
-        if (alles) schakel(R.string.album_naam, R.string.album_naam_uitleg, uitAan, Instellingen.albumNaam) { Instellingen.albumNaam = it }
-        if (alles) schakel(R.string.wazig, R.string.wazig_uitleg, uitAan, Instellingen.wazig) { Instellingen.wazig = it }
 
         groep(R.string.groep_tijdlijn)
         item { Keuzes(stringResource(R.string.grootte), stringResource(R.string.grootte_uitleg), RijMaat.entries.map { stringResource(it.label) }, Instellingen.rijMaat.ordinal) { Instellingen.rijMaat = RijMaat.entries[it] } }
@@ -265,6 +227,43 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
             Keuzes(stringResource(R.string.naam_icoon), stringResource(R.string.naam_icoon_uitleg, stringResource(u.uitleg)), Uiterlijk.entries.map { stringResource(it.label) }, u.ordinal) {
                 val nieuw = Uiterlijk.entries[it]; Instellingen.uiterlijk = nieuw; nieuw.pasToe(ctx)
             }
+        }
+
+        // ---- Screensaver (item-index dreamItem() = de groepskop; aantal regels hierboven bijhouden) ----
+        if (SCREENSAVER_AAN) {
+        groep(R.string.groep_screensaver)
+        item {
+            if (dreamMag) Keuzes(stringResource(R.string.screensaver), stringResource(if (dreamActief) R.string.dream_status_aan else R.string.dream_aan_uitleg), uitAan, if (dreamActief) 1 else 0, Modifier.focusRequester(dreamRegel)) {
+                Screensaver.zet(ctx, it == 1); dreamRonde++
+            } else Regel(stringResource(R.string.screensaver), stringResource(if (dreamActief) R.string.dream_status_aan else R.string.dream_status_uit_ok), Modifier.focusRequester(dreamRegel), onKlik = { hulp = true }) { focus ->
+                Text(stringResource(if (dreamActief) R.string.aan else R.string.uit), style = MaterialTheme.typography.titleMedium, color = if (focus) Kleur.opPrimair else Kleur.tekst, modifier = Modifier.padding(end = 10.dp))
+            }
+        }
+        item { Actie(stringResource(R.string.dream_instellen), stringResource(R.string.dream_instellen_uitleg)) { hulp = true } }
+        item { Actie(stringResource(R.string.dream_voorbeeld), stringResource(R.string.dream_voorbeeld_uitleg)) { runCatching { ctx.startActivity(android.content.Intent(ctx, VoorbeeldActivity::class.java)) } } }
+        item { Keuzes(stringResource(R.string.dream_bron), stringResource(R.string.dream_bron_uitleg), DreamBron.entries.map { stringResource(it.label) }, Instellingen.dreamBron.ordinal) { Instellingen.dreamBron = DreamBron.entries[it] } }
+        val bron = Instellingen.dreamBron
+        if (bron == DreamBron.ALBUM || bron == DreamBron.COMBI) item { Actie(stringResource(R.string.dream_albums), Instellingen.dreamAlbumNamen.joinToString(", ").ifBlank { stringResource(R.string.dream_kies) }, Modifier.focusRequester(albumRegel)) { albumKiezer = true } }
+        if (bron == DreamBron.PERSOON || bron == DreamBron.COMBI) item { Actie(stringResource(R.string.dream_personen), Instellingen.dreamPersoonNamen.joinToString(", ").ifBlank { stringResource(R.string.dream_kies) }, Modifier.focusRequester(persoonRegel)) { persoonKiezer = true } }
+        if (bron != DreamBron.ALLES && bron != DreamBron.HERINNERINGEN)
+            schakel(R.string.dream_ander_album, R.string.dream_ander_album_uitleg, uitAan, Instellingen.dreamAnderAlbum) { Instellingen.dreamAnderAlbum = it }
+        item {
+            val jaren = Instellingen.DREAM_JAREN
+            Keuzes(stringResource(R.string.dream_vanaf), stringResource(R.string.dream_vanaf_uitleg), jaren.map { if (it == 0) stringResource(R.string.alle_jaren) else it.toString() },
+                jaren.indexOf(Instellingen.dreamVanaf).coerceAtLeast(0)) { Instellingen.dreamVanaf = jaren[it] }
+        }
+        if (bron != DreamBron.HERINNERINGEN) item {
+            Keuzes(stringResource(R.string.volgorde), stringResource(R.string.dream_volgorde_uitleg), DreamVolgorde.entries.map { stringResource(it.label) }, Instellingen.dreamVolgorde.ordinal) { Instellingen.dreamVolgorde = DreamVolgorde.entries[it] }
+        }
+        item {
+            val labels = Instellingen.DREAM_TIJDEN.map { if (it >= 60) stringResource(R.string.minuten, it / 60) else stringResource(R.string.seconden, it) }
+            Keuzes(stringResource(R.string.tijd_per_foto), stringResource(R.string.dream_tijd_uitleg), labels, Instellingen.DREAM_TIJDEN.indexOf(Instellingen.dreamSeconden).coerceAtLeast(0)) { Instellingen.dreamSeconden = Instellingen.DREAM_TIJDEN[it] }
+        }
+        schakel(R.string.dream_klok, R.string.dream_klok_uitleg, uitAan, Instellingen.dreamKlok) { Instellingen.dreamKlok = it }
+        item { Keuzes(stringResource(R.string.dream_kaart), stringResource(R.string.dream_kaart_uitleg), KaartMaat.entries.map { stringResource(it.label) }, Instellingen.dreamKaart.ordinal) { Instellingen.dreamKaart = KaartMaat.entries[it] } }
+        if (alles) schakel(R.string.ken_burns, R.string.dream_ken_burns_uitleg, uitAan, Instellingen.dreamKenBurns) { Instellingen.dreamKenBurns = it }
+        if (alles) schakel(R.string.dream_info, R.string.dream_info_uitleg, uitAan, Instellingen.dreamInfo) { Instellingen.dreamInfo = it }
+        if (alles) schakel(R.string.dream_ring, R.string.dream_ring_uitleg, uitAan, Instellingen.dreamRing) { Instellingen.dreamRing = it }
         }
 
         if (alles) {
@@ -331,8 +330,17 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
     }
 }
 
-/** Item-index van de groepskop "Screensaver" in de lijst: kop + regel Basis/Alle + groep Diashow (1 + 3/6 regels) + groep Muziek (2 of 3 regels). */
-private fun dreamItem(alles: Boolean) = 3 + (if (alles) 6 else 3) + 2 + (if (Instellingen.muziekModus != MuziekModus.UIT) 1 else 0)
+/** Item-index van de groepskop "Screensaver" in de lijst (alle groepen erboven opgeteld). */
+private fun dreamItem(alles: Boolean): Int {
+    val kop = 2
+    val bekijken = 3 + (if (Instellingen.toonBalk) 1 else 0) + (if (alles) 3 else 0)
+    val diashow = 4 + (if (alles) 3 else 0)
+    val muziek = 2 + (if (Instellingen.muziekModus != MuziekModus.UIT) 1 else 0)
+    val tijdlijn = 3 + (if (alles) 4 else 0) + (if (alles && Instellingen.groet == Groet.EIGEN) 1 else 0)
+    val kaart = 2 + (if (alles) 2 else 0)
+    val uiterlijk = 5 + (if (alles) 1 else 0)
+    return kop + bekijken + diashow + muziek + tijdlijn + kaart + uiterlijk
+}
 /** Screensaver-groep in de instellingen tonen (sinds 2.2; false verbergt de groep weer, de DreamService blijft bestaan). */
 const val SCREENSAVER_AAN = true
 

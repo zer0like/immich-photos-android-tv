@@ -409,9 +409,10 @@
     <string name="dream_tijd_uitleg">Hoe lang elke foto blijft staan (◀ ▶ op de afstandsbediening: vorige / volgende)</string>
     <string name="dream_klok">Klok</string>
     <string name="dream_klok_uitleg">Tijd en datum linksboven</string>
+    <string name="dream_kaart">Landkaart in screensaver</string>
     <string name="dream_kaart_uitleg">Contour van het land met de plek van de foto, rechtsonder</string>
     <string name="dream_ken_burns_uitleg">Langzaam inzoomen op elke foto</string>
-    <string name="dream_info">Datum en plaats</string>
+    <string name="dream_info">Datum en plaats in screensaver</string>
     <string name="dream_info_uitleg">Datum, plaats en albumnaam linksonder</string>
     <string name="dream_geen_fotos">Geen foto\'s gevonden voor deze bron van de screensaver</string>
     <string name="dream_geen_verbinding">Geen verbinding met de Immich-server; probeert het opnieuw…</string>

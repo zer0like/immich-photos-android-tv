@@ -438,9 +438,10 @@
     <string name="dream_tijd_uitleg">Сколько времени показывать каждое фото (◀ ▶ на пульте: назад / вперёд)</string>
     <string name="dream_klok">Часы</string>
     <string name="dream_klok_uitleg">Время и дата в левом верхнем углу</string>
+    <string name="dream_kaart">Карта в заставке</string>
     <string name="dream_kaart_uitleg">Контур страны со съёмкой фото в правом нижнем углу</string>
     <string name="dream_ken_burns_uitleg">Плавное приближение каждого фото</string>
-    <string name="dream_info">Дата и место</string>
+    <string name="dream_info">Дата и место в заставке</string>
     <string name="dream_info_uitleg">Дата, место и название альбома в левом нижнем углу</string>
     <string name="dream_geen_fotos">Для выбранного источника заставки фото не найдены</string>
     <string name="dream_geen_verbinding">Нет связи с сервером Immich; повторная попытка…</string>

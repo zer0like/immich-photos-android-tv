@@ -420,9 +420,10 @@
     <string name="dream_tijd_uitleg">각 사진이 화면에 표시되는 시간 (리모컨 ◀ ▶: 이전 / 다음)</string>
     <string name="dream_klok">시계</string>
     <string name="dream_klok_uitleg">왼쪽 상단에 시간과 날짜 표시</string>
+    <string name="dream_kaart">화면 보호기 지도</string>
     <string name="dream_kaart_uitleg">오른쪽 하단에 촬영 국가 윤곽 표시</string>
     <string name="dream_ken_burns_uitleg">각 사진을 천천히 확대</string>
-    <string name="dream_info">날짜 및 장소</string>
+    <string name="dream_info">화면 보호기 날짜 및 장소</string>
     <string name="dream_info_uitleg">왼쪽 하단에 날짜, 장소 및 앨범 이름 표시</string>
     <string name="dream_geen_fotos">이 화면 보호기 소스에서 사진을 찾지 못했습니다</string>
     <string name="dream_geen_verbinding">Immich 서버에 연결할 수 없습니다; 다시 시도 중…</string>

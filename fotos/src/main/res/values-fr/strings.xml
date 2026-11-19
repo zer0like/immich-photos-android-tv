@@ -415,9 +415,10 @@
     <string name="dream_tijd_uitleg">Durée d\'affichage de chaque photo (◀ ▶ sur la télécommande : précédente / suivante)</string>
     <string name="dream_klok">Horloge</string>
     <string name="dream_klok_uitleg">Heure et date en haut à gauche</string>
+    <string name="dream_kaart">Carte en écran de veille</string>
     <string name="dream_kaart_uitleg">Contour du pays avec le lieu de la photo, en bas à droite</string>
     <string name="dream_ken_burns_uitleg">Zoomer lentement sur chaque photo</string>
-    <string name="dream_info">Date et lieu</string>
+    <string name="dream_info">Date et lieu en écran de veille</string>
     <string name="dream_info_uitleg">Date, lieu et nom de l\'album en bas à gauche</string>
     <string name="dream_geen_fotos">Aucune photo trouvée pour cette source de l\'écran de veille</string>
     <string name="dream_geen_verbinding">Pas de connexion au serveur Immich ; nouvel essai…</string>

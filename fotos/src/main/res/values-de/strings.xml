@@ -409,9 +409,10 @@
     <string name="dream_tijd_uitleg">Wie lange jedes Foto zu sehen ist (◀ ▶ auf der Fernbedienung: zurück / weiter)</string>
     <string name="dream_klok">Uhr</string>
     <string name="dream_klok_uitleg">Uhrzeit und Datum oben links</string>
+    <string name="dream_kaart">Landkarte im Bildschirmschoner</string>
     <string name="dream_kaart_uitleg">Umriss des Landes mit dem Aufnahmeort, unten rechts</string>
     <string name="dream_ken_burns_uitleg">Jedes Foto langsam heranzoomen</string>
-    <string name="dream_info">Datum und Ort</string>
+    <string name="dream_info">Datum und Ort im Bildschirmschoner</string>
     <string name="dream_info_uitleg">Datum, Ort und Albumname unten links</string>
     <string name="dream_geen_fotos">Keine Fotos für diese Quelle des Bildschirmschoners gefunden</string>
     <string name="dream_geen_verbinding">Keine Verbindung zum Immich-Server; neuer Versuch…</string>
