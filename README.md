@@ -1,13 +1,24 @@
-# TV Client for Immich (unofficial)
+# Photos for Android TV (Immich client)
 
-[![Downloads](https://img.shields.io/github/downloads/neforce/android-tv-immich-client/total?label=downloads&color=4250af)](https://github.com/neforce/android-tv-immich-client/releases)
-[![Latest release](https://img.shields.io/github/v/release/neforce/android-tv-immich-client?color=accbfa)](https://github.com/neforce/android-tv-immich-client/releases/latest)
-[![License: MIT](https://img.shields.io/github/license/neforce/android-tv-immich-client)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/neforce)
+[![Downloads](https://img.shields.io/github/downloads/zer0like/immich-photos-android-tv/total?label=downloads&color=4250af)](https://github.com/zer0like/immich-photos-android-tv/releases)
+[![Latest release](https://img.shields.io/github/v/release/zer0like/immich-photos-android-tv?color=accbfa)](https://github.com/zer0like/immich-photos-android-tv/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/zer0like/immich-photos-android-tv)](LICENSE)
 
-A fast, remote-friendly client for [Immich](https://immich.app) for Android TV boxes (NVIDIA Shield, Chromecast with Google TV, and other Android TV 8+ devices). Browse your whole photo library on the big screen, relive memories, search with Immich's smart search and explore your photos on a world map, all with the remote control.
+Forked from [neforce/android-tv-immich-client](https://github.com/neforce/android-tv-immich-client) with Amlogic playback fixes, D-Pad scroll stability improvements, Russian localization, Shuffle mode, and ambient background music.
+
+A fast, remote-friendly client for [Immich](https://immich.app) for Android TV boxes (Dune HD, Homatics, NVIDIA Shield, Chromecast with Google TV, and other Android TV 8+ devices). Browse your whole photo library on the big screen, relive memories, search with Immich's smart search and explore your photos on a world map, all with the remote control.
 
 > **Unofficial app.** This is an independent, community-made client. It is **not** made, endorsed or supported by the Immich project or its maintainers, and it is not the official Immich app. Please don't report problems with this app to the Immich team. "Immich" is a trademark of its respective owners and is only used here to describe compatibility.
+
+## Fork highlights
+
+- **Amlogic & Android 10+ video playback:** uses `SurfaceView` on API 29+ for hardware HWC rotation and 10-bit/4K playback, increases ExoPlayer buffering, clamps `>60 fps` metadata quirks on Amlogic decoders, disables mid-stream AFR stalls, and adds a D-Pad video seek HUD (`◀` / `▶` / `⏪` / `⏩`).
+- **Smooth D-Pad fast scrolling:** throttles D-Pad key-repeat events to avoid ANR, removes per-tile animation coroutines, prefetches upcoming grid rows, and skips destructive cache clears on `TRIM_MEMORY_RUNNING_LOW`.
+- **Side-by-side portrait photos:** automatically pairs two consecutive portrait photos on widescreen TVs when both fit cleanly side by side.
+- **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** (`Вперемешку`) infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
+- **Background music (`Music` settings):** ad-free [SomaFM](https://somafm.com) ambient radio (`Off` / `Slideshow only` / `Always`), single-player architecture to prevent overlap, auto-pause when minimized, and smooth 2.5 s audio ducking during video playback.
+- **Russian UI & Cyrillic keyboard:** full Russian translation (`Русский`) with Russian plurals, date formatting, and a Cyrillic/Latin (`ABC`/`АБВ`) toggle on the built-in TV keyboard.
+- **Date & place bar toggle:** added a **Show date and place** toggle above the bottom bar duration setting.
 
 ![Timeline](docs/screenshots/timeline.png)
 
@@ -27,7 +38,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Scroll bar** with the position in your whole library (month, photo number, years). Move onto it with ▶ to jump through months and years quickly.
 - **Diagnostics** under Settings → About: the reason the app last stopped, kept on the device only.
 - **Settings**: slideshow, viewer, timeline, map, accent colour, app name and icon, greeting, start screen and more. See [Settings](#settings).
-- **Languages**: English, Dutch, German, French and Spanish, with a language picker on first start.
+- **Languages**: English, Dutch, German, French, Spanish and Russian, with a language picker on first start.
 - **Easy pairing**: scan a QR code with your phone and log in. No typing of long API keys with the remote.
 
 | | |
@@ -43,7 +54,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 
 ## Installation
 
-1. Download the APK from the [latest release](https://github.com/neforce/android-tv-immich-client/releases/latest), or build it yourself (see [Building](#building)).
+1. Download the APK from the [latest release](https://github.com/zer0like/immich-photos-android-tv/releases/latest), or build it yourself (see [Building](#building)). Note: if you already have the upstream build installed, uninstall it first (this fork uses a different signing key).
 2. Copy it to your TV box, for example with the **Downloader** app (Play Store) or a USB stick and a file manager, and install it. You may need to allow installing apps from unknown sources for that app.
 3. Open the app, choose your language and pair it with your Immich server (see below).
 
@@ -223,15 +234,11 @@ or set the environment variables `IMMICHCLIENT_KEYSTORE`, `IMMICHCLIENT_KEYSTORE
 - The app is tuned for 2 GB TV boxes: a fixed, small image cache, previews decoded at screen size, small video buffers and a lazily loaded timeline. Keep memory usage in mind when adding features.
 - `fotos/landen_bin.py` builds `assets/landen.bin` (country outlines for the map in the viewer) from Natural Earth data.
 
-## Support the project
-
-Like the app? You can support its development through [GitHub Sponsors](https://github.com/sponsors/neforce). It is appreciated, but never required.
-
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/neforce)
-
 ## Credits and licences
 
+- Original upstream project: [neforce/android-tv-immich-client](https://github.com/neforce/android-tv-immich-client) (MIT).
 - [Immich](https://immich.app) (unofficial client, not affiliated). This app uses its public API and the map styles the Immich server provides (vector tiles © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, [Protomaps](https://protomaps.com)).
+- Ambient background radio streams: [SomaFM](https://somafm.com) (Deep Space One, Drone Zone, Space Station Soma, Groove Salad).
 - Satellite imagery: [Sentinel-2 cloudless](https://s2maps.eu) by [EOX IT Services GmbH](https://eox.at) (contains modified Copernicus Sentinel data), licensed CC BY-NC-SA 4.0, **non-commercial use only**.
 - Country outlines: [Natural Earth](https://www.naturalearthdata.com) (public domain).
 - [ThumbHash](https://github.com/evanw/thumbhash) by Evan Wallace (MIT), ported to Kotlin.

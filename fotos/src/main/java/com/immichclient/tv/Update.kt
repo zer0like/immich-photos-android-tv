@@ -63,7 +63,7 @@ import java.util.concurrent.TimeUnit
  * Er gaat niets naar GitHub behalve een gewone, anonieme API-aanvraag (geen sleutel, geen apparaatgegevens).
  */
 object Update {
-    private const val REPO = "neforce/android-tv-immich-client"
+    private const val REPO = "zer0like/immich-photos-android-tv"
     private const val PREFS = "update"
     private const val TAG = "Fotos"
 
