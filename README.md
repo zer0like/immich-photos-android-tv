@@ -4,6 +4,8 @@
 [![Latest release](https://img.shields.io/github/v/release/zer0like/immich-photos-android-tv?color=accbfa)](https://github.com/zer0like/immich-photos-android-tv/releases/latest)
 [![License: MIT](https://img.shields.io/github/license/zer0like/immich-photos-android-tv)](LICENSE)
 
+**UI languages:** English · 简体中文 · हिन्दी · Español · Français · Русский · Deutsch · 日本語 · 한국어 · Nederlands
+
 Forked from [neforce/android-tv-immich-client](https://github.com/neforce/android-tv-immich-client) with Amlogic playback fixes, D-Pad scroll stability improvements, 5 new localizations, Shuffle mode, ambient background music, and refreshed launcher icons.
 
 A fast, remote-friendly client for [Immich](https://immich.app) for Android TV boxes (Dune HD, Homatics, NVIDIA Shield, Chromecast with Google TV, and other Android TV 8+ devices). Browse your whole photo library on the big screen, relive memories, search with Immich's smart search and explore your photos on a world map, all with the remote control.
@@ -18,7 +20,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
 - **Background music (`Music` settings):** ad-free [SomaFM](https://somafm.com) ambient radio (`Off` / `Slideshow only` / `Always`), single-player architecture to prevent overlap, auto-pause when minimized, and smooth 2.5 s audio ducking during video playback.
 - **New localizations & 5×2 language picker:** added Chinese (Simplified), Hindi, Russian (with a Cyrillic/Latin `ABC`/`АБВ` toggle on the TV keyboard), Japanese, and Korean; both the first-run `5×2` language grid and the Settings language selector are ordered by total worldwide speakers.
-- **Refreshed launcher icons & banners:** smooth 6× supersampled adaptive-ready launcher icons (`xhdpi` / `xxhdpi` / `xxxhdpi`) and localized Russian launcher banners.
+- **Refreshed 4K launcher icons & banners:** vector `<adaptive-icon>` (`mipmap-anydpi-v26`) for crisp rendering on 4K TVs, straight `0°` card banners at native `xxhdpi` (`960×540`) and `xxxhdpi` (`1280×720`) resolutions (removing legacy `nodpi` assets), and localized Russian launcher banners.
 - **Date & place bar toggle:** added a **Show date and place** toggle above the bottom bar duration setting.
 
 ![Timeline](docs/screenshots/timeline.png)

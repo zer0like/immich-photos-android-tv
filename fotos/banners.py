@@ -88,18 +88,18 @@ def rechte_fotokaart(base, cx, cy, fw, fh, s, lucht_top, lucht_bot, berg1, berg2
 
 
 def m_fotos(base, cx, cy, s):
-    # Rechte 0°-stapel met kleurtabjes bovenop (geen schuine kartelranden)
+    # Rechte 0°-stapel met kleurtabjes bovenop (geen schuine kartelranden), verticaal gecentreerd rond cy
     w1, h1 = int(170 * s), int(120 * s)
-    x0, y0 = int(cx - w1 / 2), int(cy - h1 / 2 - 22 * s)
+    x0, y0 = int(cx - w1 / 2), int(cy - h1 / 2 - 29.5 * s)
     base = shadow_box(base, x0, y0, x0 + w1, y0 + h1, int(20 * s), blur=max(2, int(10 * s)), alpha=90, dy=max(1, int(5 * s)))
     ImageDraw.Draw(base).rounded_rectangle([x0, y0, x0 + w1, y0 + h1], radius=int(20 * s), fill=(235, 92, 82, 255))
 
     w2, h2 = int(196 * s), int(134 * s)
-    x0, y0 = int(cx - w2 / 2), int(cy - h2 / 2 - 8 * s)
+    x0, y0 = int(cx - w2 / 2), int(cy - h2 / 2 - 15.5 * s)
     base = shadow_box(base, x0, y0, x0 + w2, y0 + h2, int(22 * s), blur=max(2, int(10 * s)), alpha=100, dy=max(1, int(5 * s)))
     ImageDraw.Draw(base).rounded_rectangle([x0, y0, x0 + w2, y0 + h2], radius=int(22 * s), fill=(248, 185, 62, 255))
 
-    return rechte_fotokaart(base, cx, cy + 16 * s, int(222 * s), int(162 * s), s,
+    return rechte_fotokaart(base, cx, cy + 8.5 * s, int(222 * s), int(162 * s), s,
                             (112, 174, 248), (186, 218, 255), (29, 41, 74), (49, 66, 108), int(10 * s), zon=True)
 
 
@@ -163,7 +163,8 @@ def titel_laag(w, h, titel, x):
         if d.textlength(titel, font=f) <= w - 48 - x or maat < 60:
             break
         maat *= 0.94
-    d.text((x, h / 2), titel, font=f, fill=(255, 255, 255, 255), anchor="lm")
+    cap_h = -d.textbbox((0, 0), "H", font=f, anchor="ls")[1]
+    d.text((x, h / 2 + cap_h / 2), titel, font=f, fill=(255, 255, 255, 255), anchor="ls")
     return laag
 
 
