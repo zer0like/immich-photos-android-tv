@@ -191,6 +191,8 @@
     <string name="random">Случайно</string>
     <string name="videos">Видео</string>
     <string name="slideshow_videos_desc">Воспроизводить видео в слайд-шоу или пропускать их</string>
+    <string name="keep_awake">Не выключать экран</string>
+    <string name="keep_awake_desc">Предотвращать засыпание и запуск системной заставки во время слайд-шоу</string>
     <string name="play">Воспроизводить</string>
     <string name="skip">Пропускать</string>
     <string name="transition">Переход</string>

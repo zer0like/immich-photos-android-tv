@@ -172,6 +172,8 @@
     <string name="random">Aléatoire</string>
     <string name="videos">Vidéos</string>
     <string name="slideshow_videos_desc">Lire les vidéos dans le diaporama, ou les sauter</string>
+    <string name="keep_awake">Empêcher la mise en veille</string>
+    <string name="keep_awake_desc">Empêcher la veille et l\'écran de veille système pendant le diaporama</string>
     <string name="play">Lire</string>
     <string name="skip">Sauter</string>
     <string name="transition">Transition</string>

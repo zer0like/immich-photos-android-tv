@@ -166,6 +166,8 @@
     <string name="random">Zufällig</string>
     <string name="videos">Videos</string>
     <string name="slideshow_videos_desc">Videos in der Diashow abspielen oder überspringen</string>
+    <string name="keep_awake">Ruhemodus verhindern</string>
+    <string name="keep_awake_desc">Standby und Systembildschirmschoner während einer Diashow verhindern</string>
     <string name="play">Abspielen</string>
     <string name="skip">Überspringen</string>
     <string name="transition">Übergang</string>

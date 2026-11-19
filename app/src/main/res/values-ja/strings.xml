@@ -173,6 +173,8 @@
     <string name="random">ランダム</string>
     <string name="videos">動画</string>
     <string name="slideshow_videos_desc">スライドショーで動画を再生するかスキップします</string>
+    <string name="keep_awake">スリープを防止</string>
+    <string name="keep_awake_desc">スライドショー再生中はスリープとシステムスクリーンセーバーを無効にします</string>
     <string name="play">再生</string>
     <string name="skip">スキップ</string>
     <string name="transition">切り替え効果</string>

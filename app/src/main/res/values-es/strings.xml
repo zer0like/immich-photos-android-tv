@@ -172,6 +172,8 @@
     <string name="random">Aleatorio</string>
     <string name="videos">Vídeos</string>
     <string name="slideshow_videos_desc">Reproducir los vídeos en la presentación, o saltarlos</string>
+    <string name="keep_awake">Evitar reposo</string>
+    <string name="keep_awake_desc">Evitar el reposo y el salvapantallas del sistema durante la presentación</string>
     <string name="play">Reproducir</string>
     <string name="skip">Saltar</string>
     <string name="transition">Transición</string>

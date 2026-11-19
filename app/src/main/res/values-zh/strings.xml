@@ -173,6 +173,8 @@
     <string name="random">随机</string>
     <string name="videos">视频</string>
     <string name="slideshow_videos_desc">在幻灯片中播放或跳过视频</string>
+    <string name="keep_awake">保持屏幕常亮</string>
+    <string name="keep_awake_desc">幻灯片播放期间阻止设备休眠和系统屏保</string>
     <string name="play">播放</string>
     <string name="skip">跳过</string>
     <string name="transition">切换效果</string>

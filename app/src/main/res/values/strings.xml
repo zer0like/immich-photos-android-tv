@@ -179,6 +179,8 @@
     <string name="random">Random</string>
     <string name="videos">Videos</string>
     <string name="slideshow_videos_desc">Play videos in the slideshow, or skip them</string>
+    <string name="keep_awake">Keep screen awake</string>
+    <string name="keep_awake_desc">Prevent sleep and the system screensaver while a slideshow is playing</string>
     <string name="play">Play</string>
     <string name="skip">Skip</string>
     <string name="transition">Transition</string>

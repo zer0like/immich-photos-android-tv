@@ -173,6 +173,8 @@
     <string name="random">무작위</string>
     <string name="videos">동영상</string>
     <string name="slideshow_videos_desc">슬라이드쇼에서 동영상을 재생하거나 건너뜁니다</string>
+    <string name="keep_awake">절전 방지</string>
+    <string name="keep_awake_desc">슬라이드쇼 재생 중 절전 모드 및 시스템 화면 보호기 실행을 방지합니다</string>
     <string name="play">재생</string>
     <string name="skip">건너뛰기</string>
     <string name="transition">전환 효과</string>

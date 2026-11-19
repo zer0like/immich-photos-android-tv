@@ -61,6 +61,8 @@ object Settings {
     var slideTransitionSlide by bool("slide_transition_slide", false)
     /** What is shown over the photo during a running slideshow (ring, badge, date/place, country map). */
     var slideshowOverlay by choice("slideshow_overlay", SlideshowOverlay.ALL)
+    /** Prevent screen sleep and system screensaver while a slideshow is playing. */
+    var slideKeepAwake by bool("slide_keep_awake", true)
 
     // ---- Music ----
     /** Background music: off / slideshow only / always in the app. */

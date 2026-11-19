@@ -166,6 +166,8 @@
     <string name="random">Willekeurig</string>
     <string name="videos">Video\'s</string>
     <string name="slideshow_videos_desc">Video\'s in de diashow afspelen of overslaan</string>
+    <string name="keep_awake">Scherm wakker houden</string>
+    <string name="keep_awake_desc">Voorkom slaapstand en de systeemscreensaver tijdens een diashow</string>
     <string name="play">Afspelen</string>
     <string name="skip">Overslaan</string>
     <string name="transition">Overgang</string>

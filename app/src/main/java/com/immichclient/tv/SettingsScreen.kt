@@ -178,6 +178,7 @@ fun SettingsScreen(reconnect: () -> Unit, disconnected: () -> Unit, showKeys: ()
         if (showAll) toggleRow(R.string.ken_burns, R.string.ken_burns_desc, offOn, Settings.kenBurns) { Settings.kenBurns = it }
         item { OptionRow(stringResource(R.string.order), stringResource(R.string.slideshow_order_desc), listOf(stringResource(R.string.by_date), stringResource(R.string.random)), if (Settings.slideShuffle) 1 else 0) { Settings.slideShuffle = it == 1 } }
         item { OptionRow(stringResource(R.string.videos), stringResource(R.string.slideshow_videos_desc), listOf(stringResource(R.string.play), stringResource(R.string.skip)), if (Settings.slideVideos) 0 else 1) { Settings.slideVideos = it == 0 } }
+        toggleRow(R.string.keep_awake, R.string.keep_awake_desc, offOn, Settings.slideKeepAwake) { Settings.slideKeepAwake = it }
         if (showAll) item { OptionRow(stringResource(R.string.transition), stringResource(R.string.transition_desc), listOf(stringResource(R.string.fade), stringResource(R.string.slide)), if (Settings.slideTransitionSlide) 1 else 0) { Settings.slideTransitionSlide = it == 1 } }
         if (showAll) item { OptionRow(stringResource(R.string.slideshow_overlay), stringResource(R.string.slideshow_overlay_desc), SlideshowOverlay.entries.map { stringResource(it.label) }, Settings.slideshowOverlay.ordinal) { Settings.slideshowOverlay = SlideshowOverlay.entries[it] } }
 
@@ -361,7 +362,7 @@ fun SettingsScreen(reconnect: () -> Unit, disconnected: () -> Unit, showKeys: ()
 private fun dreamGroupIndex(all: Boolean): Int {
     val header = 2
     val viewing = 3 + (if (Settings.showBar) 1 else 0) + (if (all) 3 else 0)
-    val slideshow = 4 + (if (all) 3 else 0)
+    val slideshow = 5 + (if (all) 3 else 0)
     val music = 2 + (if (Settings.musicMode != MusicMode.OFF) 1 else 0)
     val timeline = 3 + (if (all) 4 else 0) + (if (all && Settings.greeting == Greeting.CUSTOM) 1 else 0)
     val map = 2 + (if (all) 2 else 0)

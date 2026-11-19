@@ -1,13 +1,17 @@
 package com.immichclient.tv
 
+import android.app.Activity
 import android.content.Context
 import android.media.MediaFormat
+import android.media.session.MediaSession
+import android.media.session.PlaybackState
 import android.os.Build
 import android.os.Handler
 import android.util.Log
 import android.view.KeyEvent
 import android.view.SurfaceView
 import android.view.TextureView
+import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.annotation.OptIn
 import androidx.compose.animation.AnimatedContent
@@ -197,12 +201,35 @@ fun Viewer(state: ViewerState, onMap: ((Asset) -> Unit)? = null, close: (Asset?)
         }
     }
     LaunchedEffect(Unit) { fr.requestFocus() }
-    // Keep screen awake during a slideshow so the system screensaver doesn't interrupt it.
-    // Once paused or stopped, normal idle timeout resumes.
+    // Prevent screen sleep and Android TV Ambient/Screensaver during a slideshow when enabled.
+    // Combining View.keepScreenOn, Window FLAG_KEEP_SCREEN_ON, and an active passive MediaSession
+    // keeps Android TV DreamManagerService from interrupting non-video photo slideshows.
     val view = LocalView.current
-    DisposableEffect(state.slideshow) {
-        view.keepScreenOn = state.slideshow
-        onDispose { view.keepScreenOn = false }
+    val keepAwake = state.slideshow && Settings.slideKeepAwake
+    DisposableEffect(keepAwake) {
+        val win = (ctx as? Activity)?.window
+        view.keepScreenOn = keepAwake
+        if (keepAwake) win?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        else win?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        val session = if (keepAwake) runCatching {
+            MediaSession(ctx, "ImmichSlideshow").apply {
+                setFlags(0)
+                setPlaybackState(
+                    PlaybackState.Builder()
+                        .setState(PlaybackState.STATE_PLAYING, 0L, 1f)
+                        .build(),
+                )
+                isActive = true
+            }
+        }.getOrNull() else null
+        onDispose {
+            view.keepScreenOn = false
+            win?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            session?.runCatching {
+                isActive = false
+                release()
+            }
+        }
     }
 
     fun step(d: Int) {

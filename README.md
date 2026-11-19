@@ -21,6 +21,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Justified Folders grid matching Photos:** replaced the fixed square grid in **Folders** with the same aspect-ratio-preserving, day-grouped tile layout (`Photo size` setting, quick-jump scroll bar, and row prefetching) used in **Photos** — no square cropping and consistent TV navigation.
 - **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
 - **Background music (`Music` settings):** ad-free [SomaFM](https://somafm.com) ambient radio (`Off` / `Slideshow only` / `Always`), single-player architecture to prevent overlap, auto-pause when minimized, and smooth 2.5 s audio ducking during video playback.
+- **Slideshow wake lock & screensaver suppression:** added a **Keep screen awake** toggle under **Slideshow** (enabled by default) combining `FLAG_KEEP_SCREEN_ON`, `View.keepScreenOn`, and a passive active `MediaSession` so the TV sleep timer or system screensaver never interrupts a slideshow.
 - **New localizations & 5×2 language picker:** added Chinese (Simplified), Hindi, Russian (with a Cyrillic/Latin `ABC`/`АБВ` toggle on the TV keyboard), Japanese, and Korean; both the first-run `5×2` language grid and the Settings language selector are ordered by total worldwide speakers.
 - **Refreshed 4K launcher icons & banners:** vector `<adaptive-icon>` (`mipmap-anydpi-v26`) for crisp 4K icons, and `6×`-supersampled straight `0°` card banners across all Android TV density buckets (`mdpi` through `xxxhdpi` `640×360`) for all 10 supported languages.
 - **Full disable for date, time & place overlay:** added a **Show date and place** toggle (under **Viewing photos**, placed at the top of Settings above **Screensaver**) so you can completely turn off the bottom date/time/location bar while viewing photos instead of only setting a hide delay.
@@ -134,6 +135,7 @@ The first line, **Show settings**, switches between **Basic** (the settings most
 | | Ken Burns effect | on / off |
 | | Order | by date / shuffled |
 | | Videos | play / skip |
+| | Keep screen awake | on / off (default on) |
 | | Transition | fade / slide |
 | | During the slideshow | everything / no progress ring / photo only |
 | Music | Background music | off / slideshow only / always |
