@@ -20,7 +20,15 @@ TITELS = {
 }
 
 MIPMAPS = (("mipmap-xhdpi", 192), ("mipmap-xxhdpi", 288), ("mipmap-xxxhdpi", 384))
-BANNER_SIZES = (("xxhdpi", (960, 540)), ("xxxhdpi", (1280, 720)))
+# Officiële Android TV-bannerresoluties voor 160×90 dp across all TV UI densities
+BANNER_SIZES = (
+    ("mdpi", (160, 90)),
+    ("tvdpi", (213, 120)),
+    ("hdpi", (240, 135)),
+    ("xhdpi", (320, 180)),
+    ("xxhdpi", (480, 270)),
+    ("xxxhdpi", (640, 360)),
+)
 
 
 def font(px):
@@ -33,16 +41,20 @@ def font(px):
 
 
 def verloop(w, h, links, rechts, cx_frac=0.30, cy_frac=0.42):
-    im = Image.new("RGB", (w, h))
+    # Render smooth radial gradient at base grid then bicubic-scale to target size
+    gw, gh = min(w, 640), min(h, 360)
+    im = Image.new("RGB", (gw, gh))
     px = im.load()
-    cx, cy = w * cx_frac, h * cy_frac
-    max_d = math.hypot(w * 0.85, h * 0.85)
-    for y in range(h):
+    cx, cy = gw * cx_frac, gh * cy_frac
+    max_d = math.hypot(gw * 0.85, gh * 0.85)
+    for y in range(gh):
         dy = y - cy
-        for x in range(w):
+        for x in range(gw):
             d = min(1.0, math.hypot(x - cx, dy) / max_d)
             t = d * d * (3.0 - 2.0 * d)
             px[x, y] = tuple(int(links[i] * (1.0 - t) + rechts[i] * t) for i in range(3))
+    if (gw, gh) != (w, h):
+        im = im.resize((w, h), Image.BICUBIC)
     return im.convert("RGBA")
 
 
@@ -157,10 +169,10 @@ def m_familie(base, cx, cy, s):
 def titel_laag(w, h, titel, x):
     laag = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(laag)
-    maat = 156
+    maat = 504
     while True:
         f = font(int(maat))
-        if d.textlength(titel, font=f) <= w - 48 - x or maat < 60:
+        if d.textlength(titel, font=f) <= w - 150 - x or maat < 180:
             break
         maat *= 0.94
     cap_h = -d.textbbox((0, 0), "H", font=f, anchor="ls")[1]
@@ -168,20 +180,19 @@ def titel_laag(w, h, titel, x):
     return laag
 
 
-def maak_variant(naam, sleutel, banner_naam, links, rechts, motief, titel_x=600):
-    # Banner renders at 2560×1440 (2x of 1280×720 xxxhdpi), then downsampled to xxxhdpi (1280×720) and xxhdpi (960×540)
-    bw, bh = 2560, 1440
+def maak_variant(naam, sleutel, banner_naam, links, rechts, motief, titel_x=1720):
+    # Supersample both graphics and text at 3840×2160 (6× xxxhdpi / 12× xhdpi) before LANCZOS downsampling
+    bw, bh = 3840, 2160
     basis = verloop(bw, bh, links, rechts, cx_frac=0.28, cy_frac=0.46)
-    basis = motief(basis, 640, 720, 3.1).resize((1280, 720), Image.LANCZOS)
+    basis = motief(basis, 940, 1080, 4.35)
     for taal, titels in TITELS.items():
         im = basis.copy()
-        im.alpha_composite(titel_laag(1280, 720, titels[sleutel], titel_x))
+        im.alpha_composite(titel_laag(bw, bh, titels[sleutel], titel_x))
         rgb = im.convert("RGB")
         for dpi, size in BANNER_SIZES:
             map_ = os.path.join(RES, "drawable-%s%s" % (taal + "-" if taal else "", dpi))
             os.makedirs(map_, exist_ok=True)
-            out = rgb if rgb.size == size else rgb.resize(size, Image.LANCZOS)
-            out.save(os.path.join(map_, banner_naam), optimize=True)
+            rgb.resize(size, Image.LANCZOS).save(os.path.join(map_, banner_naam), optimize=True)
 
     # Fallback mipmap PNGs (voor launchers zonder anydpi-v26 ondersteuning)
     iw = 768
@@ -193,8 +204,8 @@ def maak_variant(naam, sleutel, banner_naam, links, rechts, motief, titel_x=600)
         ik.resize((px_maat, px_maat), Image.LANCZOS).save(os.path.join(uit, "ic_%s.png" % naam), optimize=True)
 
 
-maak_variant("fotos", "fotos", "banner.png", (36, 52, 112), (10, 14, 28), m_fotos, titel_x=610)
-maak_variant("album", "album", "banner_album.png", (122, 52, 18), (14, 8, 4), m_album, titel_x=570)
-maak_variant("herinneringen", "herinneringen", "banner_herinneringen.png", (62, 30, 110), (10, 6, 20), m_herinneringen, titel_x=570)
-maak_variant("familie", "familie", "banner_familie.png", (18, 76, 48), (5, 20, 12), m_familie, titel_x=570)
+maak_variant("fotos", "fotos", "banner.png", (36, 52, 112), (10, 14, 28), m_fotos, titel_x=1750)
+maak_variant("album", "album", "banner_album.png", (122, 52, 18), (14, 8, 4), m_album, titel_x=1660)
+maak_variant("herinneringen", "herinneringen", "banner_herinneringen.png", (62, 30, 110), (10, 6, 20), m_herinneringen, titel_x=1680)
+maak_variant("familie", "familie", "banner_familie.png", (18, 76, 48), (5, 20, 12), m_familie, titel_x=1660)
 print("klaar")
