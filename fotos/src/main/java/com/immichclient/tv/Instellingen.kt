@@ -59,9 +59,11 @@ object Instellingen {
     var diaSchuiven by bool("dia_schuiven", false)
     /** wat er tijdens een lopende diashow over de foto heen staat (ringetje, badge, datum/plaats, landkaart) */
     var diaBeeld by keuze("dia_beeld", DiaBeeld.ALLES)
-    /** Achtergrondmuziek (ambient radio) afspelen tijdens een diashow. */
-    var diaMuziek by bool("dia_muziek", false)
-    var diaMuziekZender by keuze("dia_muziek_zender", MuziekZender.DEEP_SPACE_ONE)
+
+    // ---- Muziek ----
+    /** Achtergrondmuziek: uit / alleen tijdens diashow / altijd in de app. */
+    var muziekModus by keuze("muziek_modus", MuziekModus.UIT)
+    var muziekZender by keuze("dia_muziek_zender", MuziekZender.DEEP_SPACE_ONE)
 
     // ---- Viewer ----
     var viewerKaart by keuze("viewer_kaart", KaartMaat.GROOT)
@@ -142,6 +144,8 @@ object Instellingen {
         p.getString("kaart_start$na", null)?.let { oud -> if (KaartStart.entries.none { it.name == oud }) kaartStart = KaartStart.HOOFDLAND }
         // t/m 2.7.2 was de screensaver-kaart alleen aan/uit
         if (!p.contains("dream_kaart_maat$na") && !p.getBoolean("dream_kaart$na", true)) dreamKaart = KaartMaat.UIT
+        // Migratie vanaf oudere toggle dia_muziek -> muziekModus
+        if (!p.contains("muziek_modus$na") && p.getBoolean("dia_muziek$na", false)) muziekModus = MuziekModus.DIASHOW
         // het manifest is de waarheid voor naam/icoon (bijv. na een herinstallatie met oude prefs)
         Uiterlijk.entries.firstOrNull { it.aan(c) }?.let { if (it != uiterlijk) uiterlijk = it }
     }
@@ -180,7 +184,8 @@ enum class ClusterNiveau(@StringRes val label: Int, val straal: Float, val maxZo
 enum class KaartStijl(@StringRes val label: Int) { DONKER(R.string.donker), LICHT(R.string.licht), SATELLIET(R.string.satelliet) }
 /** Wat er tijdens een lopende diashow in beeld staat; gepauzeerd (of na een toets) komt de info gewoon terug. */
 enum class DiaBeeld(@StringRes val label: Int) { ALLES(R.string.dia_beeld_alles), ZONDER_RING(R.string.dia_beeld_zonder_ring), ALLEEN_FOTO(R.string.dia_beeld_alleen_foto) }
-/** Reclamevrije ambient/space-radiostreams (SomaFM) voor tijdens de diashow. */
+enum class MuziekModus(@StringRes val label: Int) { UIT(R.string.uit), DIASHOW(R.string.muziek_diashow), ALTIJD(R.string.muziek_altijd) }
+/** Reclamevrije ambient/space-radiostreams (SomaFM). */
 enum class MuziekZender(val titel: String, val url: String) {
     DEEP_SPACE_ONE("Deep Space One", "https://ice2.somafm.com/deepspaceone-128-aac"),
     DRONE_ZONE("Drone Zone", "https://ice2.somafm.com/dronezone-128-aac"),

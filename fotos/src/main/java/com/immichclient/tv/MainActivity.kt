@@ -9,14 +9,18 @@ import androidx.annotation.StringRes
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Explore
@@ -29,7 +33,11 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -300,6 +308,28 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
     var toetsen by remember { mutableStateOf(false) }
     val ctx = androidx.compose.ui.platform.LocalContext.current
     val naamApp = stringResource(Instellingen.uiterlijk.label)
+    // Единый фоновый плеер радио: исключает наложение и ставится на паузу при сворачивании приложения
+    val levensloop = LocalLifecycleOwner.current.lifecycle
+    var appOpVoorgrond by remember { mutableStateOf(levensloop.currentState.isAtLeast(Lifecycle.State.STARTED)) }
+    DisposableEffect(levensloop) {
+        val obs = LifecycleEventObserver { _, e ->
+            when (e) {
+                Lifecycle.Event.ON_START -> appOpVoorgrond = true
+                Lifecycle.Event.ON_STOP -> appOpVoorgrond = false
+                else -> {}
+            }
+        }
+        levensloop.addObserver(obs)
+        onDispose { levensloop.removeObserver(obs) }
+    }
+    val muziekActief = appOpVoorgrond && when (Instellingen.muziekModus) {
+        MuziekModus.UIT -> false
+        MuziekModus.DIASHOW -> kijker?.first?.diashow == true
+        MuziekModus.ALTIJD -> true
+    }
+    if (muziekActief) {
+        MuziekSpeler(url = Instellingen.muziekZender.url, gedempt = kijker?.first?.speeltVideo == true)
+    }
     // instellingen die een bestaande tijdlijn raken (volgorde, partner-foto's): toepassen zonder herstart
     val volgorde = Instellingen.nieuwsteEerst; val partners = Instellingen.partners
     androidx.compose.runtime.LaunchedEffect(volgorde, partners) {
@@ -414,8 +444,12 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
             drawerState = lade,
             modifier = Modifier.graphicsLayer { alpha = if (kijker != null) 0f else 1f },
             drawerContent = { waarde ->
-                Column(
-                    Modifier.fillMaxHeight().background(if (waarde == DrawerValue.Open) Kleur.vlak else Kleur.achtergrond)
+                BoxWithConstraints(
+                    Modifier.fillMaxHeight().background(if (waarde == DrawerValue.Open) Kleur.vlak else Kleur.achtergrond),
+                ) {
+                    val metScroll = maxHeight < 495.dp
+                    val basisMod = Modifier.fillMaxHeight()
+                        .then(if (metScroll) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                         .focusProperties { canFocus = !ladeDicht }
                         // binnenkomen (◀ aan de rand, lang Terug) = altijd focus op het item van de huidige sectie, niet op wat het
                         // dichtstbij ligt of het laatst gefocust was; daarna loopt de focus gewoon item voor item
@@ -423,27 +457,30 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
                             ladeFocusNu.value = it.hasFocus
                             if (it.hasFocus) Log.i("Fotos", "lade focus (wisselt=$ladeDicht)")
                         }
-                        .padding(12.dp).selectableGroup(),
-                ) {
-                    Spacer(Modifier.height(16.dp))
-                    for (s in Sectie.entries) {
-                        if (s == Sectie.INSTELLINGEN) Spacer(Modifier.weight(1f))
-                        NavigationDrawerItem(
-                            selected = sectie == s && stapel.isEmpty(),
-                            modifier = (if (sectie == s) Modifier.focusRequester(ladeFocus) else Modifier)
-                                .onFocusChanged { if (it.isFocused && !ladeBinnen.value) Log.i("Fotos", "lade: binnen op ${s.name} (huidig ${sectie.name})") },
-                            onClick = {
-                                stapel.clear(); sectie = s
-                                lade.setValue(DrawerValue.Closed)
-                            },
-                            leadingContent = { Icon(s.icoon, null) },
-                            colors = NavigationDrawerItemDefaults.colors(
-                                selectedContainerColor = Kleur.primair.copy(alpha = 0.18f), selectedContentColor = Kleur.primair,
-                                focusedContainerColor = Kleur.primair, focusedContentColor = MaterialTheme.colorScheme.onPrimary,
-                            ),
-                        ) { Text(if (s == Sectie.FOTOS) naamApp else stringResource(s.label)) }
+                        .padding(horizontal = 10.dp, vertical = 10.dp)
+                        .selectableGroup()
+                    Column(basisMod, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                        for (s in Sectie.entries) {
+                            if (s == Sectie.INSTELLINGEN) {
+                                if (metScroll) Spacer(Modifier.height(10.dp)) else Spacer(Modifier.weight(1f))
+                            }
+                            NavigationDrawerItem(
+                                selected = sectie == s && stapel.isEmpty(),
+                                modifier = Modifier.height(44.dp)
+                                    .then(if (sectie == s) Modifier.focusRequester(ladeFocus) else Modifier)
+                                    .onFocusChanged { if (it.isFocused && !ladeBinnen.value) Log.i("Fotos", "lade: binnen op ${s.name} (huidig ${sectie.name})") },
+                                onClick = {
+                                    stapel.clear(); sectie = s
+                                    lade.setValue(DrawerValue.Closed)
+                                },
+                                leadingContent = { Icon(s.icoon, null) },
+                                colors = NavigationDrawerItemDefaults.colors(
+                                    selectedContainerColor = Kleur.primair.copy(alpha = 0.18f), selectedContentColor = Kleur.primair,
+                                    focusedContainerColor = Kleur.primair, focusedContentColor = MaterialTheme.colorScheme.onPrimary,
+                                ),
+                            ) { Text(if (s == Sectie.FOTOS) naamApp else stringResource(s.label), maxLines = 1) }
+                        }
                     }
-                    Spacer(Modifier.height(12.dp))
                 }
             },
         ) {

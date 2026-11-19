@@ -535,10 +535,13 @@
     <string name="dia_beeld_alles">Everything</string>
     <string name="dia_beeld_zonder_ring">No progress ring</string>
     <string name="dia_beeld_alleen_foto">Photo only</string>
-    <string name="dia_muziek">Background music</string>
-    <string name="dia_muziek_uitleg">Play ambient internet radio during the slideshow (muted during videos)</string>
+    <string name="groep_muziek">Music</string>
+    <string name="muziek_modus">Background music</string>
+    <string name="muziek_modus_uitleg">Ambient radio in the app (muted during videos, pauses when minimized)</string>
+    <string name="muziek_diashow">Slideshow only</string>
+    <string name="muziek_altijd">Always</string>
     <string name="dia_muziek_zender">Radio station</string>
-    <string name="dia_muziek_zender_uitleg">Ad-free SomaFM stream (Deep Space One is similar to Space Dreams)</string>
+    <string name="dia_muziek_zender_uitleg">Ad-free ambient internet radio (SomaFM)</string>
     <string name="dream_ring">Progress ring</string>
     <string name="dream_ring_uitleg">Small ring at the bottom left that fills until the next photo</string>
     <string name="album_naam">Album name</string>

@@ -148,10 +148,16 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
         item { Keuzes(stringResource(R.string.videos), stringResource(R.string.dia_videos_uitleg), listOf(stringResource(R.string.afspelen), stringResource(R.string.overslaan)), if (Instellingen.diaVideos) 0 else 1) { Instellingen.diaVideos = it == 0 } }
         if (alles) item { Keuzes(stringResource(R.string.overgang), stringResource(R.string.overgang_uitleg), listOf(stringResource(R.string.vervagen), stringResource(R.string.schuiven)), if (Instellingen.diaSchuiven) 1 else 0) { Instellingen.diaSchuiven = it == 1 } }
         if (alles) item { Keuzes(stringResource(R.string.dia_beeld), stringResource(R.string.dia_beeld_uitleg), DiaBeeld.entries.map { stringResource(it.label) }, Instellingen.diaBeeld.ordinal) { Instellingen.diaBeeld = DiaBeeld.entries[it] } }
-        schakel(R.string.dia_muziek, R.string.dia_muziek_uitleg, uitAan, Instellingen.diaMuziek) { Instellingen.diaMuziek = it }
-        if (Instellingen.diaMuziek) item {
-            Keuzes(stringResource(R.string.dia_muziek_zender), stringResource(R.string.dia_muziek_zender_uitleg), MuziekZender.entries.map { it.titel }, Instellingen.diaMuziekZender.ordinal) {
-                Instellingen.diaMuziekZender = MuziekZender.entries[it]
+
+        groep(R.string.groep_muziek)
+        item {
+            Keuzes(stringResource(R.string.muziek_modus), stringResource(R.string.muziek_modus_uitleg), MuziekModus.entries.map { stringResource(it.label) }, Instellingen.muziekModus.ordinal) {
+                Instellingen.muziekModus = MuziekModus.entries[it]
+            }
+        }
+        if (Instellingen.muziekModus != MuziekModus.UIT) item {
+            Keuzes(stringResource(R.string.dia_muziek_zender), stringResource(R.string.dia_muziek_zender_uitleg), MuziekZender.entries.map { it.titel }, Instellingen.muziekZender.ordinal) {
+                Instellingen.muziekZender = MuziekZender.entries[it]
             }
         }
 
@@ -325,8 +331,8 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
     }
 }
 
-/** Item-index van de groepskop "Screensaver" in de lijst: kop + regel Basis/Alle + groep Diashow (1 + 3/6 regels + muziek). */
-private fun dreamItem(alles: Boolean) = 3 + (if (alles) 6 else 3) + 1 + (if (Instellingen.diaMuziek) 1 else 0)
+/** Item-index van de groepskop "Screensaver" in de lijst: kop + regel Basis/Alle + groep Diashow (1 + 3/6 regels) + groep Muziek (2 of 3 regels). */
+private fun dreamItem(alles: Boolean) = 3 + (if (alles) 6 else 3) + 2 + (if (Instellingen.muziekModus != MuziekModus.UIT) 1 else 0)
 /** Screensaver-groep in de instellingen tonen (sinds 2.2; false verbergt de groep weer, de DreamService blijft bestaan). */
 const val SCREENSAVER_AAN = true
 
