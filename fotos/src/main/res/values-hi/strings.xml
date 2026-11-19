@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and launcher variants (Settings → Name and icon) -->
+    <string name="app_name">फ़ोटो</string>
+    <string name="alias_fotos">फ़ोटो</string>
+    <string name="alias_album">फ़ोटो एल्बम</string>
+    <string name="alias_herinneringen">यादें</string>
+    <string name="alias_familie">पारिवारिक फ़ोटो</string>
+    <string name="uiterlijk_fotos">नीला, रखी हुई फ़ोटो (डिफ़ॉल्ट)</string>
+    <string name="uiterlijk_album">गर्म नारंगी, खुला एल्बम</string>
+    <string name="uiterlijk_herinneringen">बैंगनी, सितारे वाली फ़ोटो</string>
+    <string name="uiterlijk_familie">हरा, दिल वाली फ़ोटो</string>
+
+    <!-- Date/time patterns (java.time) for this language -->
+    <string name="patroon_maand_jaar">MMMM yyyy</string>
+    <string name="patroon_maand_kort">MMM yyyy</string>
+    <string name="patroon_dag_kort">EEE, d MMM</string>
+    <string name="patroon_dag_jaar">EEE, d MMM yyyy</string>
+    <string name="patroon_dag_lang">EEEE, d MMMM yyyy</string>
+    <string name="patroon_tijd">h:mm a</string>
+
+    <!-- Language screen -->
+    <string name="taal_titel">अपनी भाषा चुनें</string>
+    <string name="taal_sub">आप इसे बाद में सेटिंग्स → भाषा में बदल सकते हैं।</string>
+
+    <!-- Sections (menu) -->
+    <string name="sectie_fotos">फ़ोटो</string>
+    <string name="sectie_herinneringen">यादें</string>
+    <string name="sectie_zoeken">खोजें</string>
+    <string name="sectie_verkennen">एक्सप्लोर</string>
+    <string name="sectie_kaart">मानचित्र</string>
+    <string name="sectie_albums">एल्बम</string>
+    <string name="sectie_favorieten">पसंदीदा</string>
+    <string name="sectie_willekeurig">शफ़ल</string>
+    <string name="schudden">फिर से शफ़ल करें</string>
+    <string name="willekeurig_leeg">अभी तक कोई फ़ोटो या वीडियो नहीं है</string>
+    <string name="sectie_instellingen">सेटिंग्स</string>
+
+    <!-- General -->
+    <string name="laden">लोड हो रहा है…</string>
+    <string name="vandaag">आज</string>
+    <string name="gisteren">कल</string>
+    <string name="geen_datum">कोई तारीख़ नहीं</string>
+    <string name="persoon">व्यक्ति</string>
+    <plurals name="items">
+        <item quantity="one">%d आइटम</item>
+        <item quantity="other">%d आइटम</item>
+    </plurals>
+    <plurals name="fotos">
+        <item quantity="one">%s फ़ोटो</item>
+        <item quantity="other">%s फ़ोटो</item>
+    </plurals>
+    <plurals name="jaren_geleden">
+        <item quantity="one">%d साल पहले</item>
+        <item quantity="other">%d साल पहले</item>
+    </plurals>
+
+    <!-- Timeline -->
+    <string name="nieuwste_eerst">नवीनतम पहले</string>
+    <string name="oudste_eerst">सबसे पुराना पहले</string>
+    <string name="ga_naar_datum">तारीख़ पर जाएँ</string>
+    <string name="ga_naar_jaar">साल पर जाएँ</string>
+    <string name="immich_onbereikbaar">Immich तक पहुँच नहीं हो सकी</string>
+    <string name="nog_geen_favorieten">अभी तक कोई पसंदीदा नहीं है</string>
+    <string name="nog_geen_fotos">अभी तक कोई फ़ोटो नहीं है</string>
+    <string name="favorieten_tip">Immich में फ़ोटो को दिल से चिह्नित करें और वे यहाँ दिखेंगी।</string>
+    <string name="groet_morgen">सुप्रभात</string>
+    <string name="groet_middag">नमस्कार</string>
+    <string name="groet_avond">शुभ संध्या</string>
+    <string name="groet_nacht">शुभ रात्रि</string>
+    <string name="groet_met_naam">%1$s, %2$s</string>
+
+    <!-- Memories -->
+    <string name="herinneringen_sub">पिछले वर्षों में आज के दिन</string>
+    <string name="geen_herinneringen">इस सप्ताह कोई यादें नहीं हैं</string>
+
+    <!-- Viewer -->
+    <string name="diashow">स्लाइडशो</string>
+    <string name="diashow_pauze">स्लाइडशो रुका हुआ है</string>
+    <string name="video_fout">यह वीडियो नहीं चल सकता</string>
+    <string name="info">जानकारी</string>
+    <string name="hint_info_kaart">"OK मानचित्र पर दिखाएँ   ·   ◀ ▶ बदलें   ·   ⏩ 10 आगे बढ़ें"</string>
+    <string name="hint_info">"◀ ▶ बदलें   ·   OK स्लाइडशो   ·   ⏩ 10 आगे बढ़ें"</string>
+
+    <!-- Search -->
+    <string name="zoeken">खोजें</string>
+    <string name="zoeken_titel">खोजें: %s</string>
+    <string name="zoek_hint">फ़ोटो में क्या है खोजें: समुद्र तट, जन्मदिन, बर्फ़ में कुत्ता…</string>
+    <string name="spraak">वॉइस खोज</string>
+    <string name="spraak_prompt">आप क्या खोज रहे हैं?</string>
+    <string name="modus_slim">स्मार्ट खोज</string>
+    <string name="modus_tekst">फ़ोटो में टेक्स्ट</string>
+    <string name="modus_naam">फ़ाइल नाम</string>
+    <string name="type_alles">सभी</string>
+    <string name="type_fotos">फ़ोटो</string>
+    <string name="type_videos">वीडियो</string>
+    <string name="volg_relevantie">सर्वोत्तम मिलान</string>
+    <string name="volg_nieuw">नवीनतम</string>
+    <string name="volg_oud">सबसे पुराना</string>
+    <string name="zoeken_bezig">खोजा जा रहा है…</string>
+    <string name="zoeken_mislukt">खोज विफल: %s</string>
+    <string name="niets_gevonden">कुछ नहीं मिला</string>
+    <plurals name="resultaten">
+        <item quantity="one">%s परिणाम</item>
+        <item quantity="other">%s परिणाम</item>
+    </plurals>
+    <string name="recent_gezocht">हाल की खोजें</string>
+    <string name="probeer">आज़माएँ</string>
+    <string name="personen">लोग</string>
+    <string-array name="suggesties">
+        <item>समुद्र तट</item>
+        <item>बर्फ़</item>
+        <item>जन्मदिन</item>
+        <item>सूर्यास्त</item>
+        <item>क्रिसमस ट्री</item>
+        <item>पहाड़</item>
+        <item>कुत्ता</item>
+        <item>केक</item>
+        <item>स्विमिंग पूल</item>
+        <item>खाना</item>
+    </string-array>
+    <string name="toets_spatie">स्पेस</string>
+    <string name="toets_wissen">साफ़ करें</string>
+    <string name="actie_zoeken">खोजें</string>
+    <string name="actie_klaar">पूर्ण</string>
+    <string name="laden_mislukt">लोड विफल: %s</string>
+
+    <!-- Albums -->
+    <string name="albums">एल्बम</string>
+    <plurals name="albums_aantal">
+        <item quantity="one">%d एल्बम</item>
+        <item quantity="other">%d एल्बम</item>
+    </plurals>
+    <string name="albums_met">\"%s\" के साथ</string>
+    <string name="volg_recent">हाल ही में अपडेट</string>
+    <string name="volg_nieuwste_fotos">नवीनतम फ़ोटो</string>
+    <string name="volg_naam">नाम</string>
+    <string name="volg_aantal">संख्या</string>
+    <string name="gedeeld">साझा</string>
+    <string name="gedeeld_klein">साझा</string>
+    <string name="zoek_album">एल्बम खोजें</string>
+    <string name="albums_niet_geladen">एल्बम लोड नहीं हो सके</string>
+
+    <!-- Explore -->
+    <string name="verkennen">एक्सप्लोर</string>
+    <string name="niet_geladen">लोड नहीं हो सका</string>
+    <string name="plaatsen">स्थान</string>
+
+    <!-- World map -->
+    <string name="kaart">मानचित्र</string>
+    <string name="kaart_niet_geladen">लोड नहीं हो सका: %s</string>
+    <plurals name="fotos_met_locatie">
+        <item quantity="one">स्थान सहित %s फ़ोटो</item>
+        <item quantity="other">स्थान सहित %s फ़ोटो</item>
+    </plurals>
+    <string name="kaart_geen_achtergrond">मानचित्र पृष्ठभूमि उपलब्ध नहीं (इंटरनेट नहीं है)</string>
+    <string name="kaart_hint">"◀▶▲▼ चुनें/खिसकाएँ   ·   OK ज़ूम इन   ·   OK दबाकर रखें: सभी फ़ोटो   ·   ⏯ स्लाइडशो   ·   ⏪︎⏩︎ ज़ूम   ·   वापस: पूरी दुनिया"</string>
+
+    <!-- Settings -->
+    <string name="instellingen">सेटिंग्स</string>
+    <string name="instellingen_sub">"◀ ▶ या OK: मान चुनें   ·   वापस दबाकर रखें: मेनू   ·   INFO: कुंजियाँ"</string>
+    <string name="instellingen_tonen">सेटिंग्स दिखाएँ</string>
+    <string name="instellingen_basis">बुनियादी</string>
+    <string name="instellingen_alle">सभी</string>
+    <string name="instellingen_basis_uitleg">केवल सबसे अधिक उपयोग की जाने वाली सेटिंग्स। बाकी के लिए सभी चुनें।</string>
+    <string name="instellingen_alle_uitleg">उन्नत सेटिंग्स सहित सब कुछ</string>
+    <string name="uit">बंद</string>
+    <string name="aan">चालू</string>
+    <string name="groep_diashow">स्लाइडशो</string>
+    <string name="tijd_per_foto">प्रति फ़ोटो समय</string>
+    <string name="tijd_per_foto_uitleg">प्रत्येक फ़ोटो स्क्रीन पर कितनी देर रहे</string>
+    <string name="seconden">%d से॰</string>
+    <string name="seconden_s">%s से॰</string>
+    <string name="ken_burns">केन बर्न्स प्रभाव</string>
+    <string name="ken_burns_uitleg">स्लाइडशो के दौरान धीरे-धीरे ज़ूम इन करें</string>
+    <string name="volgorde">क्रम</string>
+    <string name="dia_volgorde_uitleg">तारीख़ के अनुसार जारी रखें, या हर बार कोई भी फ़ोटो चुनें</string>
+    <string name="op_datum">तारीख़ से</string>
+    <string name="willekeurig">यादृच्छिक</string>
+    <string name="videos">वीडियो</string>
+    <string name="dia_videos_uitleg">स्लाइडशो में वीडियो चलाएँ या उन्हें छोड़ें</string>
+    <string name="afspelen">चलाएँ</string>
+    <string name="overslaan">छोड़ें</string>
+    <string name="overgang">ट्रांज़िशन</string>
+    <string name="overgang_uitleg">अगली फ़ोटो स्क्रीन पर कैसे आए</string>
+    <string name="vervagen">फ़ेड</string>
+    <string name="schuiven">स्लाइड</string>
+    <string name="groep_bekijken">फ़ोटो देखना</string>
+    <string name="landkaart">फ़ोटो पर मानचित्र</string>
+    <string name="landkaart_uitleg">नीचे दाईं ओर फ़ोटो के स्थान वाले देश की रूपरेखा</string>
+    <string name="klein">छोटा</string>
+    <string name="groot">बड़ा</string>
+    <string name="toon_datum_plaats">तारीख़ और स्थान दिखाएँ</string>
+    <string name="toon_datum_plaats_uitleg">देखते समय नीचे तारीख़ और स्थान पट्टी दिखाएँ</string>
+    <string name="datum_plaats">तारीख़ और स्थान समय</string>
+    <string name="datum_plaats_uitleg">कुछ सेकंड बाद नीचे की पट्टी छिपाएँ, या हमेशा दिखाएँ</string>
+    <string name="altijd_tonen">हमेशा दिखाएँ</string>
+    <string name="teller">काउंटर</string>
+    <string name="teller_uitleg">तारीख़ के बगल में “68 / %s”</string>
+    <string name="groep_tijdlijn">टाइमलाइन</string>
+    <string name="grootte">फ़ोटो आकार</string>
+    <string name="grootte_uitleg">अवलोकन में पंक्ति की ऊँचाई</string>
+    <string name="normaal_cluster">सामान्य</string>
+    <string name="normaal">सामान्य</string>
+    <string name="tijdlijn_volgorde_uitleg">खोलते समय डिफ़ॉल्ट (टाइमलाइन के शीर्ष पर बटन इसे अस्थायी रूप से उलटता है)</string>
+    <string name="partner">पार्टनर की फ़ोटो</string>
+    <string name="partner_uitleg">Immich में पार्टनर द्वारा साझा की गई फ़ोटो भी दिखाएँ</string>
+    <string name="herinneringen_boven">ऊपर यादें दिखाएँ</string>
+    <string name="herinneringen_boven_uitleg">टाइमलाइन के ऊपर “आज के दिन” पंक्ति</string>
+    <string name="startscherm">प्रारंभ स्क्रीन</string>
+    <string name="startscherm_uitleg">ऐप शुरू होने पर कौन-सा अनुभाग खुले</string>
+    <string name="begroeting">अभिवादन</string>
+    <string name="begroeting_uitleg">टाइमलाइन के शीर्ष पर: “%s” या आपका अपना टेक्स्ट</string>
+    <string name="automatisch">स्वचालित</string>
+    <string name="eigen_tekst">कस्टम टेक्स्ट</string>
+    <string name="nog_niets">अभी तक कुछ दर्ज नहीं किया गया – OK दबाएँ</string>
+    <string name="groep_kaart">मानचित्र</string>
+    <string name="startweergave">प्रारंभ दृश्य</string>
+    <string name="startweergave_uitleg">विश्व मानचित्र कहाँ खुले</string>
+    <string name="hele_wereld">पूरी दुनिया</string>
+    <string name="europa">यूरोप</string>
+    <string name="land_meeste">सबसे अधिक फ़ोटो वाला देश</string>
+    <string name="laatst_bekeken">अंतिम देखा गया स्थान</string>
+    <string name="clusterniveau">क्लस्टर स्तर</string>
+    <string name="cluster_uitleg">सूक्ष्म: अधिक और छोटे समूह; मोटा: कम, बड़े समूह</string>
+    <string name="fijn">सूक्ष्म</string>
+    <string name="grof">मोटा</string>
+    <string name="kaartstijl">मानचित्र शैली</string>
+    <string name="kaartstijl_uitleg">गहरा या हल्का (Immich), या सैटेलाइट (EOX Sentinel-2, सड़कों और नामों सहित)</string>
+    <string name="donker">गहरा</string>
+    <string name="licht">हल्का</string>
+    <string name="satelliet">सैटेलाइट</string>
+    <string name="groep_uiterlijk">रूप</string>
+    <string name="taal">भाषा</string>
+    <string name="taal_uitleg">ऐप की भाषा; तुरंत लागू होती है</string>
+    <string name="datumnotatie">तारीख़ प्रारूप</string>
+    <string name="datumnotatie_uitleg">सभी तारीख़ों में दिन और महीने का क्रम (स्क्रीनसेवर सहित)</string>
+    <string name="kloknotatie">समय प्रारूप</string>
+    <string name="kloknotatie_uitleg">12 या 24 घंटे; स्वचालित भाषा का अनुसरण करता है</string>
+    <string name="accentkleur">एक्सेंट रंग</string>
+    <string name="accent_uitleg">फ़ोकस, बटन और शीर्षकों का रंग</string>
+    <string name="kleur_blauw">नीला</string>
+    <string name="kleur_groen">हरा</string>
+    <string name="kleur_oranje">नारंगी</string>
+    <string name="kleur_roze">गुलाबी</string>
+    <string name="kleur_paars">बैंगनी</string>
+    <string name="kleur_grijs">धूसर</string>
+    <string name="naam_icoon">नाम और आइकन</string>
+    <string name="naam_icoon_uitleg">%s. लॉन्चर में टाइल भी बदलता है (कुछ सेकंड में अपडेट)</string>
+    <string name="groep_opslag">स्टोरेज</string>
+    <string name="cache_legen">छवि कैश साफ़ करें</string>
+    <string name="cache_maat">"डिस्क पर %1$s MB  ·  मेमोरी में %2$s MB"</string>
+    <string name="groep_account">खाता</string>
+    <string name="immich_server">Immich सर्वर</string>
+    <string name="ingelogd_als">लॉग इन</string>
+    <string name="opnieuw_koppelen">फिर से कनेक्ट करें</string>
+    <string name="opnieuw_koppelen_uitleg">अलग सर्वर या खाता</string>
+    <string name="ontkoppelen">डिस्कनेक्ट करें</string>
+    <string name="ontkoppelen_uitleg">इस टीवी से कुंजी हटाएँ; Immich में खाता सेटिंग्स → API कुंजियाँ के अंतर्गत कुंजी स्वयं हटाएँ</string>
+    <string name="zeker_weten">क्या आप सुनिश्चित हैं?</string>
+    <string name="zeker_weten_uitleg">इस टीवी से कुंजी हटाने के लिए फिर से OK दबाएँ</string>
+    <string name="groep_over">जानकारी</string>
+    <string name="toetsen">कुंजियाँ</string>
+    <string name="toetsen_uitleg">सभी शॉर्टकट का अवलोकन (INFO बटन से भी)</string>
+    <string name="app_regel">%s ऐप</string>
+    <string name="versie">संस्करण %s</string>
+    <string name="kaart_bron">© OpenStreetMap · Protomaps via tiles.immich.cloud; सैटेलाइट: %s, CC BY-NC-SA 4.0</string>
+
+    <!-- Keys overview -->
+    <string name="toetsen_sluit">बंद करने के लिए कोई भी कुंजी दबाएँ</string>
+    <string name="tg_overal">हर जगह</string>
+    <string name="t_terug_lang">वापस दबाकर रखें</string>
+    <string name="t_terug_lang_wat">अनुभागों वाला मेनू (यदि रिमोट में MENU है तो वह भी)</string>
+    <string name="t_info">INFO</string>
+    <string name="t_info_wat">यह अवलोकन</string>
+    <string name="t_links_rand">बाएँ किनारे पर ◀</string>
+    <string name="t_links_rand_wat">मेनू</string>
+    <string name="t_terug">वापस</string>
+    <string name="t_terug_wat">एक कदम पीछे; प्रारंभ स्क्रीन पर: ऐप बंद करें</string>
+    <string name="tg_tijdlijn">टाइमलाइन, एल्बम, खोज</string>
+    <string name="t_pijlen">▲ ▼ ◀ ▶</string>
+    <string name="t_pijlen_wat">फ़ोटो चुनें</string>
+    <string name="t_ok">OK</string>
+    <string name="t_ok_open">फ़ोटो खोलें</string>
+    <string name="t_play">चलाएँ/रोकें</string>
+    <string name="t_play_wat">चयनित फ़ोटो से स्लाइडशो</string>
+    <string name="t_spoel">⏪︎ ⏩︎</string>
+    <string name="t_spoel_maand">एक महीना पीछे / आगे</string>
+    <string name="t_terug_boven">शीर्ष पर वापस; फिर से: ऐप बंद करें</string>
+    <string name="tg_instellingen">सेटिंग्स</string>
+    <string name="t_links_rechts">◀ ▶</string>
+    <string name="t_waarde">पिछला / अगला मान</string>
+    <string name="t_ok_waarde">अगला मान, या कार्रवाई चलाएँ</string>
+    <string name="tg_viewer">फ़ोटो देखना</string>
+    <string name="t_vorige_volgende">पिछला / अगला</string>
+    <string name="t_ok_play">"OK  या  चलाएँ/रोकें"</string>
+    <string name="t_diashow_wat">स्लाइडशो चालू/बंद (वीडियो पर: रोकें)</string>
+    <string name="t_info_toets">"▲ ▼  या  INFO"</string>
+    <string name="t_info_paneel">जानकारी (कैमरा, स्थान, मानचित्र)</string>
+    <string name="t_ok_info">जानकारी खुले होने पर OK</string>
+    <string name="t_ok_info_wat">विश्व मानचित्र पर दिखाएँ (स्थान सहित फ़ोटो)</string>
+    <string name="t_spoel_viewer">10 फ़ोटो पीछे / आगे; वीडियो में 10 सेकंड</string>
+    <string name="t_sluiten">बंद करें</string>
+    <string name="tg_kaart">विश्व मानचित्र</string>
+    <string name="t_kaart_pijlen">समूह चुनें, या मानचित्र खिसकाएँ</string>
+    <string name="t_kaart_ok">समूह पर ज़ूम इन; यदि और नहीं बँटता: खोलें</string>
+    <string name="t_kaart_zoom">ज़ूम आउट / इन</string>
+    <string name="t_kaart_terug">पूरी दुनिया; फिर से: प्रारंभ स्क्रीन</string>
+    <string name="t_kaart_links">विश्व स्तर पर ◀</string>
+
+    <!-- Connect screen (TV) -->
+    <string name="koppel_titel">अपने Immich से कनेक्ट करें</string>
+    <string name="koppel_test">परीक्षण मोड: सफल होने तक वर्तमान कनेक्शन बना रहेगा</string>
+    <string name="koppel_eenmalig">एक बार का सेटअप; इसके बाद सब कुछ अपने आप चलता है</string>
+    <string name="stap1">अपने फ़ोन से QR कोड स्कैन करें</string>
+    <string name="stap1_sub">आपका फ़ोन इस टीवी के समान Wi-Fi नेटवर्क पर होना चाहिए।</string>
+    <string name="stap2">अपने Immich सर्वर का पता, ईमेल और पासवर्ड दर्ज करें</string>
+    <string name="stap2_sub">टीवी अपने आप केवल-पठन कुंजी बना लेता है; आपका पासवर्ड सहेजा नहीं जाता।</string>
+    <string name="stap3">पूर्ण</string>
+    <string name="stap3_sub">फ़ोन रख दें: फ़ोटो अपने आप दिखाई देने लगेंगी।</string>
+    <string name="wacht_telefoon">आपके फ़ोन की प्रतीक्षा है…</string>
+    <string name="klaar_titel">पूर्ण! अब आप फ़ोन रख सकते हैं।</string>
+    <string name="gekoppeld_als">%2$s पर %1$s के रूप में कनेक्टेड</string>
+    <string name="koppel_mislukt">कनेक्शन विफल</string>
+    <string name="probeer_opnieuw">अपने फ़ोन पर फिर से प्रयास करें।</string>
+    <string name="geen_netwerk">कोई नेटवर्क नहीं</string>
+    <string name="typ_adres">या अपने ब्राउज़र में यह पता लिखें:</string>
+
+    <!-- Connecting: progress and errors (shown on the TV and sent to the phone) -->
+    <string name="fout_geen_netwerk">कोई नेटवर्क कनेक्शन नहीं है। बॉक्स को Wi-Fi या नेटवर्क केबल से कनेक्ट करें।</string>
+    <string name="fout_geen_poort">पोर्ट नहीं खुल सका।</string>
+    <string name="geen_toegang">कोई पहुँच नहीं</string>
+    <string name="geen_toegang_html">कोई पहुँच नहीं।&lt;br&gt;टीवी पर QR कोड स्कैन करें।</string>
+    <string name="mislukt">विफल</string>
+    <string name="fout_app_inactief">ऐप अब सक्रिय नहीं है।</string>
+    <string name="fout_vul_adres">अपने Immich सर्वर का पता दर्ज करें।</string>
+    <string name="fout_vul_email">अपना ईमेल पता और पासवर्ड दर्ज करें।</string>
+    <string name="bezig_sleutel_rechten">कुंजी और उसकी अनुमतियाँ जाँची जा रही हैं…</string>
+    <string name="gekoppeld_melding">%2$s पर %1$s के रूप में कनेक्टेड।</string>
+    <string name="er_ging_iets_mis">कुछ गड़बड़ हो गई: %s</string>
+    <string name="fout_ssl">%s से सुरक्षित कनेक्शन विफल (प्रमाणपत्र)। http:// के साथ पता आज़माएँ या प्रमाणपत्र जाँचें।</string>
+    <string name="fout_host">पता %s नहीं मिला। वर्तनी जाँचें।</string>
+    <string name="fout_verbinding">%1$s:%2$d से कोई कनेक्शन नहीं। क्या सर्वर चल रहा है और टीवी उसी नेटवर्क पर है?</string>
+    <string name="bezig_server">%s पर सर्वर खोजा जा रहा है…</string>
+    <string name="fout_geen_pong">%s पर कोई Immich सर्वर जवाब नहीं दे रहा है (/api/server/ping पर कोई \'pong\' नहीं)।</string>
+    <string name="fout_geen_immich">%1$s पर कोई Immich सर्वर जवाब नहीं दे रहा है (/api/server/ping पर HTTP %2$d)।</string>
+    <string name="fout_te_oud">यह Immich सर्वर संस्करण %s है, जो इस ऐप के लिए बहुत पुराना है। सर्वर को Immich 3 (या कम से कम 2) पर अपडेट करें।</string>
+    <string name="waarschuwing_versie">नोट: आपका Immich सर्वर संस्करण %s है; यह ऐप Immich 3 के लिए बनाया गया था। यह शायद काम करेगा, लेकिन सब कुछ जाँचा नहीं गया है।</string>
+    <string name="bezig_inloggen">%s के रूप में साइन इन हो रहा है…</string>
+    <string name="fout_login">गलत ईमेल पता या पासवर्ड।</string>
+    <string name="fout_login_adres">Immich इस ईमेल पते को स्वीकार नहीं करता (मान्य पता नहीं)।</string>
+    <string name="fout_login_http">साइन-इन विफल (HTTP %d)।</string>
+    <string name="fout_geen_token">साइन-इन से एक्सेस टोकन नहीं मिला।</string>
+    <string name="bezig_sleutel_aanmaken">API कुंजी बनाई जा रही है…</string>
+    <string name="fout_geen_sleutels">इस खाते को API कुंजी बनाने की अनुमति नहीं है। सर्वर व्यवस्थापक से पूछें, या मौजूदा कुंजी का उपयोग करें।</string>
+    <string name="fout_sleutel_http">API कुंजी बनाना विफल (HTTP %1$d): %2$s</string>
+    <string name="fout_geen_sleutel_terug">Immich ने कुंजी वापस नहीं की।</string>
+    <string name="bezig_sleutel_controleren">कुंजी जाँची जा रही है…</string>
+    <string name="fout_sleutel_werkt_niet">नई कुंजी काम नहीं करती (HTTP %d)।</string>
+    <string name="fout_sleutel_geweigerd">यह API कुंजी %s द्वारा स्वीकार नहीं की गई है। जाँचें कि आपने पूरी कुंजी कॉपी की है।</string>
+    <string name="fout_onverwacht">सर्वर से अप्रत्याशित उत्तर (%2$s पर HTTP %1$d)।</string>
+    <string name="fout_rechten">इस कुंजी में अनुमतियाँ कम हैं: %1$s। Immich में ठीक इन्हीं अनुमतियों के साथ नई कुंजी बनाएँ: %2$s।</string>
+    <string name="onbekende_gebruiker">अज्ञात उपयोगकर्ता</string>
+    <string name="sleutel_naam">%s पर फ़ोटो</string>
+
+    <!-- Phone page (served by the TV) -->
+    <string name="html_titel">फ़ोटो कनेक्ट करें</string>
+    <string name="html_kop">टीवी पर फ़ोटो</string>
+    <string name="html_sub">अपने Immich सर्वर से कनेक्ट करें</string>
+    <string name="html_adres">आपके Immich सर्वर का पता</string>
+    <string name="html_adres_voorbeeld">जैसे 192.168.1.10:2283 या photos.mydomain.com</string>
+    <string name="html_adres_voorbeeld_kort">जैसे 192.168.1.10:2283</string>
+    <string name="html_adres_hint">वही पता जो आपके ब्राउज़र या Immich ऐप में है।</string>
+    <string name="html_email">ईमेल पता</string>
+    <string name="html_wachtwoord">पासवर्ड</string>
+    <string name="html_wachtwoord_hint">आपका पासवर्ड केवल Immich में टीवी के लिए केवल-पठन कुंजी बनाने के लिए उपयोग होता है; यह सहेजा नहीं जाता।</string>
+    <string name="html_koppelen">कनेक्ट करें</string>
+    <string name="html_sleutel_kop">या मौजूदा API कुंजी चिपकाएँ</string>
+    <string name="html_sleutel">API कुंजी</string>
+    <string name="html_sleutel_hint_voor">इसे Immich में यहाँ बनाएँ</string>
+    <string name="html_sleutel_pad">खाता सेटिंग्स → API कुंजियाँ → नई API कुंजी</string>
+    <string name="html_sleutel_hint_na">ठीक इन्हीं अनुमतियों को चुनकर:</string>
+    <string name="html_koppelen_sleutel">कुंजी से कनेक्ट करें</string>
+    <string name="html_voet">यह पृष्ठ केवल आपके अपने नेटवर्क पर काम करता है और कनेक्शन बनते ही बंद हो जाता है।</string>
+    <string name="html_bezig_titel">कनेक्ट हो रहा है…</string>
+    <string name="html_bezig">टीवी सर्वर की जाँच कर रहा है और कुंजी बना रहा है। इसमें कुछ सेकंड लगते हैं।</string>
+    <string name="html_geen_verbinding_titel">टीवी से कोई कनेक्शन नहीं</string>
+    <string name="html_geen_verbinding">क्या टीवी पर कनेक्ट स्क्रीन अभी भी खुली है, और आपका फ़ोन उसी Wi-Fi नेटवर्क पर है?</string>
+
+    <!-- Unofficial (2.1) -->
+    <string name="onofficieel_kort">Immich के लिए अनौपचारिक क्लाइंट</string>
+    <string name="onofficieel_lang">अनौपचारिक ऐप, Immich प्रोजेक्ट से संबद्ध या समर्थित नहीं है। Immich अपने संबंधित स्वामियों का ट्रेडमार्क है।</string>
+    <string name="terug_sluit">बंद करने के लिए वापस दबाएँ</string>
+    <string name="minuten">%d मि॰</string>
+
+    <!-- Screensaver (2.1) -->
+    <string name="dream_naam">फ़ोटो (स्क्रीनसेवर)</string>
+    <string name="groep_screensaver">स्क्रीनसेवर</string>
+    <string name="screensaver">स्क्रीनसेवर</string>
+    <string name="dream_aan_uitleg">इस ऐप को इस डिवाइस के स्क्रीनसेवर के रूप में उपयोग करें</string>
+    <string name="dream_status_aan">सक्रिय: यह ऐप इस डिवाइस का स्क्रीनसेवर है</string>
+    <string name="dream_status_uit">अभी तक इस डिवाइस का स्क्रीनसेवर नहीं है</string>
+    <string name="dream_status_uit_ok">अभी सक्रिय नहीं है – सेटअप करने के लिए OK दबाएँ</string>
+    <string name="dream_instellen">इस डिवाइस पर सेटअप करें</string>
+    <string name="dream_instellen_sub">Android TV में आमतौर पर तृतीय-पक्ष स्क्रीनसेवर चुनने का विकल्प नहीं होता; फिर भी यह इस तरह काम करता है।</string>
+    <string name="dream_instellen_uitleg">स्थिति, सहायता और एक बार का सेटअप (adb)</string>
+    <string name="dream_voorbeeld">पूर्वावलोकन</string>
+    <string name="dream_voorbeeld_uitleg">अभी स्क्रीनसेवर दिखाएँ; कोई भी कुंजी इसे बंद कर देगी</string>
+    <string name="dream_bron">फ़ोटो</string>
+    <string name="dream_bron_uitleg">स्क्रीनसेवर कौन-सी फ़ोटो दिखाए</string>
+    <string name="dream_alle_fotos">सभी फ़ोटो</string>
+    <string name="dream_album">एल्बम</string>
+    <string name="dream_personen">लोग</string>
+    <string name="dream_combi">एल्बम + लोग</string>
+    <string name="dream_vanaf">वर्ष से</string>
+    <string name="dream_vanaf_uitleg">केवल इस वर्ष या उसके बाद ली गई फ़ोटो</string>
+    <string name="alle_jaren">सभी वर्ष</string>
+    <string name="dream_volgorde_uitleg">यादृच्छिक, या तारीख़ के अनुसार (जहाँ छोड़ा था वहाँ से जारी)</string>
+    <string name="dream_albums">एल्बम</string>
+    <string name="dream_albums_hint">"%1$d चयनित  ·  OK = चालू/बंद"</string>
+    <string name="dream_ander_album">दूसरा एल्बम दिखाएँ</string>
+    <string name="dream_ander_album_uitleg">यदि कोई फ़ोटो दूसरे एल्बम में भी है, तो उसके बजाय उस एल्बम का नाम दिखाएँ (जैसे “स्क्रीनसेवर” के बजाय “जन्मदिन”)</string>
+    <string name="dream_herinneringen">आज की यादें</string>
+    <string name="dream_persoon">व्यक्ति</string>
+    <string name="dream_kies">अभी नहीं चुना गया – OK दबाएँ</string>
+    <string name="dream_tijd_uitleg">प्रत्येक फ़ोटो स्क्रीन पर कितनी देर रहे (रिमोट पर ◀ ▶: पिछला / अगला)</string>
+    <string name="dream_klok">घड़ी</string>
+    <string name="dream_klok_uitleg">ऊपर बाएँ कोने में समय और तारीख़</string>
+    <string name="dream_kaart_uitleg">नीचे दाईं ओर फ़ोटो के स्थान वाले देश की रूपरेखा</string>
+    <string name="dream_ken_burns_uitleg">प्रत्येक फ़ोटो पर धीरे-धीरे ज़ूम इन करें</string>
+    <string name="dream_info">तारीख़ और स्थान</string>
+    <string name="dream_info_uitleg">नीचे बाईं ओर तारीख़, स्थान और एल्बम का नाम</string>
+    <string name="dream_geen_fotos">इस स्क्रीनसेवर स्रोत के लिए कोई फ़ोटो नहीं मिली</string>
+    <string name="dream_geen_verbinding">Immich सर्वर से कोई कनेक्शन नहीं; फिर से कोशिश हो रही है…</string>
+    <string name="dream_niet_gekoppeld">अभी कनेक्टेड नहीं: पहले ऐप खोलें</string>
+    <string name="dream_recht_ja">ऐप स्वयं स्क्रीनसेवर सेटिंग बदल सकता है</string>
+    <string name="dream_recht_nee">ऐप अभी स्क्रीनसेवर सेटिंग नहीं बदल सकता (adb से एक बार अनुमति चाहिए, नीचे देखें)</string>
+    <string name="dream_ontw_ja">डेवलपर विकल्प सक्षम हैं</string>
+    <string name="dream_ontw_nee">डेवलपर विकल्प बंद हैं</string>
+    <string name="dream_zet_aan">अभी चालू करें</string>
+    <string name="dream_zet_uit">अभी बंद करें</string>
+    <string name="dream_zet_uitleg">पिछला स्क्रीनसेवर याद रखा जाता है और इसे बंद करने पर वापस आ जाता है</string>
+    <string name="dream_open_systeem">स्क्रीनसेवर सेटिंग्स खोलें</string>
+    <string name="dream_open_systeem_uitleg">सिस्टम सेटिंग्स में “फ़ोटो” चुनें</string>
+    <string name="dream_auto_kop">स्वचालित (नेटवर्क डीबगिंग)</string>
+    <string name="dream_auto_uitleg">डिवाइस अपने डीबग पोर्ट से जुड़कर सब सेट करता है। इसके लिए डेवलपर विकल्प → नेटवर्क डीबगिंग (या ADB over network) चाहिए। पहली बार टीवी पूछेगा: हमेशा अनुमति दें चुनें।</string>
+    <string name="dream_auto_knop">स्वचालित सेटअप करें</string>
+    <string name="dream_auto_knop_uitleg">ऐप को अनुमति देता है और स्क्रीनसेवर बनाता है; कुछ सेकंड लगते हैं</string>
+    <string name="adb_bezig">कनेक्ट हो रहा है… यदि टीवी अनुमति पूछे तो हमेशा अनुमति दें चुनें</string>
+    <string name="adb_klaar">पूर्ण: यह ऐप अब स्क्रीनसेवर है</string>
+    <string name="adb_mislukt">यह काम नहीं किया; नीचे दिए गए मैनुअल चरण अपनाएँ</string>
+    <string name="adb_geen_verbinding">कोई कनेक्शन नहीं: पहले डेवलपर विकल्पों में नेटवर्क डीबगिंग चालू करें</string>
+    <string name="adb_geen_toestemming">टीवी पर अनुमति नहीं दी गई; फिर से प्रयास करें</string>
+    <string name="dream_hand_kop">कंप्यूटर से मैन्युअल रूप से</string>
+    <string name="dream_stap1">डेवलपर विकल्प सक्षम करें: सेटिंग्स → डिवाइस प्राथमिकताएँ → जानकारी → “बिल्ड” पर 7 बार OK दबाएँ।</string>
+    <string name="dream_stap2">सेटिंग्स → डिवाइस प्राथमिकताएँ → डेवलपर विकल्प → नेटवर्क डीबगिंग (या केबल से USB डीबगिंग) चालू करें।</string>
+    <string name="dream_stap3">adb (Android platform tools) वाले कंप्यूटर पर चलाएँ:</string>
+    <string name="dream_stap4">पहली बार टीवी कंप्यूटर को अनुमति देने को कहता है। दूसरे कमांड के बाद ऐप खुद स्क्रीनसेवर चालू/बंद कर सकता है; अंतिम दो कमांड इसे तुरंत सेट करते हैं।</string>
+    <string name="dream_open_over">“जानकारी” खोलें</string>
+    <string name="dream_open_over_uitleg">डेवलपर विकल्प सक्षम करने के लिए</string>
+    <string name="dream_open_ontw">डेवलपर विकल्प खोलें</string>
+    <string name="dream_open_ontw_uitleg">नेटवर्क डीबगिंग चालू करने के लिए</string>
+    <string name="dream_sleutel_fout">Immich सर्वर अब इस डिवाइस की कुंजी स्वीकार नहीं करता: ऐप खोलें और फिर से कनेक्ट चुनें</string>
+    <string name="dream_usb_ja">USB डीबगिंग चालू है</string>
+    <string name="dream_usb_nee">USB डीबगिंग बंद है</string>
+    <string name="dream_net_ja">नेटवर्क डीबगिंग चालू है (पोर्ट 5555)</string>
+    <string name="dream_net_nee">नेटवर्क डीबगिंग बंद है (स्वचालित सेटअप के लिए आवश्यक)</string>
+    <string name="dream_nu">वर्तमान स्क्रीनसेवर: %1$s</string>
+    <string name="dream_start_na">निष्क्रियता के %1$s बाद शुरू होता है</string>
+
+    <!-- Diagnostics (2.1) -->
+    <string name="diagnose">डायग्नोस्टिक्स</string>
+    <string name="diagnose_uitleg">पिछली बार ऐप क्यों बंद हुआ (केवल इसी डिवाइस पर रहता है)</string>
+    <string name="diagnose_sub">अंतिम बार ऐप अप्रत्याशित रूप से क्यों बंद हुआ, कारण सहित। कहीं कुछ नहीं भेजा जाता।</string>
+    <string name="diagnose_leeg">कुछ दर्ज नहीं: ऐप अप्रत्याशित रूप से बंद नहीं हुआ।</string>
+    <string name="diagnose_voet">टिप: क्रैश उसी पल लिखा जाता है; Android जो रिपोर्ट करता है (मेमोरी, ANR) वह अगले स्टार्ट पर दिखता है।</string>
+    <string name="diag_crash">क्रैश (ऐप में त्रुटि)</string>
+    <string name="diag_crash_native">क्रैश (नेटिव कोड)</string>
+    <string name="diag_anr">जवाब नहीं दे रहा (ANR)</string>
+    <string name="diag_geheugen">Android द्वारा बंद: कम मेमोरी</string>
+    <string name="diag_signaal">सिग्नल से बंद (जैसे अपडेट के दौरान)</string>
+    <string name="diag_gebruiker">उपयोगकर्ता या सिस्टम द्वारा रोका गया</string>
+    <string name="diag_systeem">सिस्टम द्वारा बंद</string>
+    <string name="diag_gevangen">त्रुटि पकड़ी गई (ऐप चलता रहा)</string>
+    <string name="diag_anders">अन्य</string>
+    <string name="diag_voorgrond">फ़ोरग्राउंड में रहते हुए</string>
+
+    <!-- 2.5: world map, scroll bar, people -->
+    <string name="deel_europa">यूरोप</string>
+    <string name="deel_azie">एशिया</string>
+    <string name="deel_afrika">अफ़्रीका</string>
+    <string name="deel_noord_amerika">उत्तरी अमेरिका</string>
+    <string name="deel_zuid_amerika">दक्षिण अमेरिका</string>
+    <string name="deel_oceanie">ओशिनिया</string>
+    <string name="deel_antarctica">अंटार्कटिका</string>
+    <string name="deel_overig">अन्य स्थान</string>
+    <string name="regio_noord_europa">उत्तरी यूरोप</string>
+    <string name="regio_west_europa">पश्चिमी यूरोप</string>
+    <string name="regio_zuid_europa">दक्षिणी यूरोप</string>
+    <string name="regio_oost_europa">पूर्वी यूरोप</string>
+    <string name="regio_noord_afrika">उत्तरी अफ़्रीका</string>
+    <string name="regio_west_afrika">पश्चिमी अफ़्रीका</string>
+    <string name="regio_centraal_afrika">मध्य अफ़्रीका</string>
+    <string name="regio_oost_afrika">पूर्वी अफ़्रीका</string>
+    <string name="regio_zuidelijk_afrika">दक्षिणी अफ़्रीका</string>
+    <string name="regio_noordelijk_amerika">अमेरिका और कनाडा</string>
+    <string name="regio_midden_amerika">मध्य अमेरिका</string>
+    <string name="regio_caribisch">कैरेबियन</string>
+    <string name="regio_centraal_azie">मध्य एशिया</string>
+    <string name="regio_oost_azie">पूर्वी एशिया</string>
+    <string name="regio_zuidoost_azie">दक्षिण-पूर्व एशिया</string>
+    <string name="regio_zuid_azie">दक्षिण एशिया</string>
+    <string name="regio_west_azie">मध्य पूर्व</string>
+    <string name="regio_australie">ऑस्ट्रेलिया और न्यूज़ीलैंड</string>
+    <string name="regio_melanesie">मेलानेशिया</string>
+    <string name="regio_micronesie">माइक्रोनेशिया</string>
+    <string name="regio_polynesie">पोलिनेशिया</string>
+    <string name="balk_hint">"▲▼ महीना · दबाकर रखें: साल · OK जाएँ"</string>
+    <string name="zoek_persoon">व्यक्ति खोजें</string>
+    <string name="volg_vaakst">सबसे अधिक फ़ोटो</string>
+    <string name="alle_personen">सभी लोग (%1$d)</string>
+    <string name="t_ok_lang">OK दबाकर रखें</string>
+    <string name="t_kaart_ok_lang">समूह की सभी फ़ोटो ग्रिड में (तारीख़ के क्रम में)</string>
+    <string name="t_kaart_play">समूह का स्लाइडशो</string>
+    <string name="t_balk">दाएँ किनारे पर ▶</string>
+    <string name="t_balk_wat">स्क्रॉल बार: ▲▼ प्रति माह (दबाकर रखें: प्रति वर्ष), OK या ◀ वहाँ ले जाता है</string>
+    <string name="balk_hint_algemeen">"▲▼ चलें · दबाकर रखें: तेज़ · OK जाएँ"</string>
+    <string name="sectie_mappen">फ़ोल्डर</string>
+    <string name="mappen_geen_recht">फ़ोल्डर तक कोई पहुँच नहीं</string>
+    <string name="mappen_geen_recht_uitleg">API कुंजी में folder.read अनुमति नहीं है।</string>
+    <string name="mappen_niet_geladen">फ़ोल्डर लोड नहीं हो सके</string>
+    <string name="map_leeg">यह फ़ोल्डर खाली है</string>
+    <string name="dia_beeld">स्लाइडशो के दौरान</string>
+    <string name="dia_beeld_uitleg">स्लाइडशो चलते समय फ़ोटो के ऊपर क्या दिखे; रोकने पर जानकारी वापस आती है</string>
+    <string name="dia_beeld_alles">सब कुछ</string>
+    <string name="dia_beeld_zonder_ring">प्रगति रिंग नहीं</string>
+    <string name="dia_beeld_alleen_foto">केवल फ़ोटो</string>
+    <string name="groep_muziek">संगीत</string>
+    <string name="muziek_modus">पृष्ठभूमि संगीत</string>
+    <string name="muziek_modus_uitleg">ऐप में एम्बिएंट रेडियो (वीडियो के दौरान म्यूट, मिनिमाइज़ करने पर रुकता है)</string>
+    <string name="muziek_diashow">केवल स्लाइडशो</string>
+    <string name="muziek_altijd">हमेशा</string>
+    <string name="dia_muziek_zender">रेडियो स्टेशन</string>
+    <string name="dia_muziek_zender_uitleg">विज्ञापन-मुक्त एम्बिएंट इंटरनेट रेडियो (SomaFM)</string>
+    <string name="dream_ring">प्रगति रिंग</string>
+    <string name="dream_ring_uitleg">नीचे बाईं ओर छोटी रिंग जो अगली फ़ोटो तक भरती है</string>
+    <string name="album_naam">एल्बम नाम</string>
+    <string name="album_naam_uitleg">दिखाएँ कि फ़ोटो किस एल्बम में है, जैसे किसी व्यक्ति को देखते समय</string>
+    <string name="wazig">धुंधली पृष्ठभूमि</string>
+    <string name="wazig_uitleg">फ़ोटो और वीडियो के किनारों को धुंधले रूप से भरें; बंद = काला (स्क्रीनसेवर में भी)</string>
+    <plurals name="mappen_aantal">
+        <item quantity="one">%d फ़ोल्डर</item>
+        <item quantity="other">%d फ़ोल्डर</item>
+    </plurals>
+    <string name="rechten_titel">कुंजी अनुमतियाँ</string>
+    <string name="rechten_bezig">जाँचा जा रहा है…</string>
+    <string name="rechten_ok">सभी अनुमतियाँ ठीक हैं</string>
+    <string name="rechten_deels_onbekend">कोई कमी नहीं मिली (यह सर्वर सभी सूचीबद्ध नहीं कर सकता)</string>
+    <string name="rechten_kern_mist">अनिवार्य अनुमतियाँ गायब हैं; इनके बिना ऐप काम नहीं कर सकता</string>
+    <string name="rechten_mist">कुछ अनुमतियाँ गायब हैं; वे भाग काम नहीं करेंगे</string>
+    <string name="rechten_mist_kort">गायब: %s</string>
+    <string name="rechten_oplossen">सभी अनुमतियों के साथ नई कुंजी बनाने के लिए फिर से कनेक्ट करें (बाद में Immich में पुरानी कुंजी हटा सकते हैं), या Immich में खाता सेटिंग्स → API कुंजियाँ के अंतर्गत कम अनुमतियाँ जोड़ें।</string>
+    <string name="rechten_koppel_sub">फ़ोन से नई कुंजी</string>
+    <string name="rechten_opnieuw">फिर से जाँचें</string>
+    <string name="rechten_sluiten">बंद करें</string>
+    <string name="rechten_bekijk">क्या कम है देखें और ठीक करें</string>
+    <string name="recht_asset_read">टाइमलाइन, खोज और फ़ोटो विवरण</string>
+    <string name="recht_asset_view">थंबनेल और फ़ोटो</string>
+    <string name="recht_user_read">अभिवादन और सेटिंग्स में आपका नाम</string>
+    <string name="recht_album_read">एल्बम और एल्बम के नाम</string>
+    <string name="recht_memory_read">यादें (“आज के दिन”)</string>
+    <string name="recht_person_read">लोग</string>
+    <string name="recht_map_read">विश्व मानचित्र</string>
+    <string name="recht_folder_read">फ़ोल्डर</string>
+    <string name="update_titel">संस्करण %1$s उपलब्ध है</string>
+    <string name="update_sub">आपके पास संस्करण %1$s है</string>
+    <string name="update_downloaden">डाउनलोड हो रहा है… %1$d%%</string>
+    <string name="update_installeren">इंस्टॉल हो रहा है…</string>
+    <string name="update_toestemming">पहले इस ऐप को अपडेट इंस्टॉल करने की अनुमति दें (अज्ञात स्रोत)। फिर फिर से अपडेट चुनें।</string>
+    <string name="update_toestemming_knop">सेटिंग खोलें</string>
+    <string name="update_fout">अपडेट विफल: %1$s</string>
+    <string name="update_nu">अभी अपडेट करें</string>
+    <string name="update_later">बाद में</string>
+    <string name="nieuw_titel">%1$s में नया क्या है</string>
+    <string name="updates">अपडेट</string>
+    <string name="update_beschikbaar">संस्करण %1$s उपलब्ध है। अपडेट के लिए OK दबाएँ</string>
+    <string name="update_bezig">जाँचा जा रहा है…</string>
+    <string name="update_actueel">आपके पास नवीनतम संस्करण है। फिर जाँचने के लिए OK दबाएँ</string>
+    <string name="update_controleer">नया संस्करण जाँचने के लिए OK दबाएँ</string>
+    <string name="update_auto">अपडेट जाँचें</string>
+    <string name="update_auto_uitleg">स्टार्टअप पर GitHub पर नए संस्करण की तलाश करें</string>
+    <string name="nieuw_regel">नया क्या है</string>
+    <string name="nieuw_regel_uitleg">इस संस्करण में परिवर्तन</string>
+    <string-array name="wat_nieuw">
+        <item>Amlogic और Android 10+ वीडियो प्लेबैक सुधार + रिमोट सीक HUD</item>
+        <item>D-Pad दबाए रखने पर सहज स्क्रॉलिंग और ANR समाधान</item>
+        <item>पोर्ट्रेट फ़ोटो साथ-साथ और तारीख़-स्थान पट्टी का टॉगल</item>
+        <item>नया शफ़ल अनुभाग, फ़ोटो के नीचे फ़ोल्डर और SomaFM संगीत</item>
+        <item>हिन्दी, चीनी, जापानी, कोरियाई और रूसी भाषा समर्थन</item>
+    </string-array>
+</resources>

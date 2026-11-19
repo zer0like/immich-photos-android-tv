@@ -38,7 +38,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Scroll bar** with the position in your whole library (month, photo number, years). Move onto it with ▶ to jump through months and years quickly.
 - **Diagnostics** under Settings → About: the reason the app last stopped, kept on the device only.
 - **Settings**: slideshow, viewer, timeline, map, accent colour, app name and icon, greeting, start screen and more. See [Settings](#settings).
-- **Languages**: English, Dutch, German, French, Spanish and Russian, with a language picker on first start.
+- **Languages**: English, Dutch, German, French, Spanish, Russian, Chinese (Simplified), Japanese, Korean and Hindi, with a language picker on first start.
 - **Easy pairing**: scan a QR code with your phone and log in. No typing of long API keys with the remote.
 
 | | |

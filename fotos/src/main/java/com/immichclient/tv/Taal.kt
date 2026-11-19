@@ -25,14 +25,16 @@ import java.util.Locale
  */
 object Taal {
     /** Ondersteunde talen (ISO 639-1), in de volgorde van het keuzescherm. */
-    val TALEN = listOf("en", "nl", "de", "fr", "es", "ru")
+    val TALEN = listOf("en", "nl", "de", "fr", "es", "ru", "zh", "ja", "ko", "hi")
     private const val PREFS = "instellingen"
     private const val SLEUTEL = "taal"
 
     /** Naam van de taal in die taal zelf (voor het keuzescherm en de instelling). */
     fun naam(code: String) = when (code) {
-        "nl" -> "Nederlands"; "de" -> "Deutsch"; "fr" -> "Français"; "es" -> "Español"; "ru" -> "Русский"; else -> "English"
+        "nl" -> "Nederlands"; "de" -> "Deutsch"; "fr" -> "Français"; "es" -> "Español"; "ru" -> "Русский"; "zh" -> "中文"; "ja" -> "日本語"; "ko" -> "한국어"; "hi" -> "हिन्दी"; else -> "English"
     }
+
+    private fun localeVoor(c: String): Locale = if (c == "zh") Locale.SIMPLIFIED_CHINESE else Locale.forLanguageTag(c)
 
     @Volatile var code: String = "en"
         private set
@@ -43,7 +45,7 @@ object Taal {
     @Volatile var herstartSectie: Sectie? = null
     /** Na die herstart de focus op deze regel zetten ("taal", "datum", "klok"; de lijst staat nog op dezelfde plek, zie InstellingenScherm). */
     @Volatile var focusRegel: String? = null
-    val locale: Locale get() = Locale.forLanguageTag(code)
+    val locale: Locale get() = localeVoor(code)
 
     /** Applicatiecontext in de gekozen taal, voor strings buiten Compose. */
     lateinit var ctx: Context
@@ -88,7 +90,7 @@ object Taal {
 
     /** Resources in een andere ondersteunde taal (koppelpagina in de taal van de telefoon). */
     fun resources(taal: String): Resources =
-        if (taal == code) ctx.resources else basis.createConfigurationContext(configuratie(basis, Locale.forLanguageTag(taal))).resources
+        if (taal == code) ctx.resources else basis.createConfigurationContext(configuratie(basis, localeVoor(taal))).resources
 
     /** Eerste ondersteunde taal uit een Accept-Language-header ("nl-NL,nl;q=0.9,en;q=0.8"), anders de app-taal. */
     fun uitAcceptLanguage(header: String?): String {

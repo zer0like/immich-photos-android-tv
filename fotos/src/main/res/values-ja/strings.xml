@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and launcher variants (Settings → Name and icon) -->
+    <string name="app_name">フォト</string>
+    <string name="alias_fotos">フォト</string>
+    <string name="alias_album">フォトアルバム</string>
+    <string name="alias_herinneringen">思い出</string>
+    <string name="alias_familie">家族の写真</string>
+    <string name="uiterlijk_fotos">ブルー、重ねた写真（デフォルト）</string>
+    <string name="uiterlijk_album">ウォームオレンジ、開いたアルバム</string>
+    <string name="uiterlijk_herinneringen">パープル、星付きの写真</string>
+    <string name="uiterlijk_familie">グリーン、ハート付きの写真</string>
+
+    <!-- Date/time patterns (java.time) for this language -->
+    <string name="patroon_maand_jaar">yyyy年M月</string>
+    <string name="patroon_maand_kort">yyyy年M月</string>
+    <string name="patroon_dag_kort">M月d日(EEE)</string>
+    <string name="patroon_dag_jaar">yyyy年M月d日(EEE)</string>
+    <string name="patroon_dag_lang">yyyy年M月d日 EEEE</string>
+    <string name="patroon_tijd">H:mm</string>
+
+    <!-- Language screen -->
+    <string name="taal_titel">言語を選択</string>
+    <string name="taal_sub">後で「設定 → 言語」から変更できます。</string>
+
+    <!-- Sections (menu) -->
+    <string name="sectie_fotos">フォト</string>
+    <string name="sectie_herinneringen">思い出</string>
+    <string name="sectie_zoeken">検索</string>
+    <string name="sectie_verkennen">見つける</string>
+    <string name="sectie_kaart">マップ</string>
+    <string name="sectie_albums">アルバム</string>
+    <string name="sectie_favorieten">お気に入り</string>
+    <string name="sectie_willekeurig">シャッフル</string>
+    <string name="schudden">シャッフル</string>
+    <string name="willekeurig_leeg">写真や動画はまだありません</string>
+    <string name="sectie_instellingen">設定</string>
+
+    <!-- General -->
+    <string name="laden">読み込み中…</string>
+    <string name="vandaag">今日</string>
+    <string name="gisteren">昨日</string>
+    <string name="geen_datum">日付なし</string>
+    <string name="persoon">人物</string>
+    <plurals name="items">
+        <item quantity="other">%d 件</item>
+    </plurals>
+    <plurals name="fotos">
+        <item quantity="other">%s 枚の写真</item>
+    </plurals>
+    <plurals name="jaren_geleden">
+        <item quantity="other">%d 年前</item>
+    </plurals>
+
+    <!-- Timeline -->
+    <string name="nieuwste_eerst">新しい順</string>
+    <string name="oudste_eerst">古い順</string>
+    <string name="ga_naar_datum">日付へ移動</string>
+    <string name="ga_naar_jaar">年へ移動</string>
+    <string name="immich_onbereikbaar">Immich に接続できません</string>
+    <string name="nog_geen_favorieten">お気に入りはまだありません</string>
+    <string name="nog_geen_fotos">写真はまだありません</string>
+    <string name="favorieten_tip">Immich で写真にハートを付けると、ここに表示されます。</string>
+    <string name="groet_morgen">おはようございます</string>
+    <string name="groet_middag">こんにちは</string>
+    <string name="groet_avond">こんばんは</string>
+    <string name="groet_nacht">おやすみなさい</string>
+    <string name="groet_met_naam">%1$s、%2$s</string>
+
+    <!-- Memories -->
+    <string name="herinneringen_sub">過去の同じ日</string>
+    <string name="geen_herinneringen">今週の思い出はありません</string>
+
+    <!-- Viewer -->
+    <string name="diashow">スライドショー</string>
+    <string name="diashow_pauze">スライドショーを一時停止</string>
+    <string name="video_fout">この動画は再生できません</string>
+    <string name="info">情報</string>
+    <string name="hint_info_kaart">"決定 マップで表示   ·   ◀ ▶ 移動   ·   ⏩ 10件スキップ"</string>
+    <string name="hint_info">"◀ ▶ 移動   ·   決定 スライドショー   ·   ⏩ 10件スキップ"</string>
+
+    <!-- Search -->
+    <string name="zoeken">検索</string>
+    <string name="zoeken_titel">検索：%s</string>
+    <string name="zoek_hint">写真の内容で検索：ビーチ、誕生日、雪の中の犬…</string>
+    <string name="spraak">音声検索</string>
+    <string name="spraak_prompt">何をお探しですか？</string>
+    <string name="modus_slim">スマート検索</string>
+    <string name="modus_tekst">写真内の文字</string>
+    <string name="modus_naam">ファイル名</string>
+    <string name="type_alles">すべて</string>
+    <string name="type_fotos">写真</string>
+    <string name="type_videos">動画</string>
+    <string name="volg_relevantie">関連度順</string>
+    <string name="volg_nieuw">新しい順</string>
+    <string name="volg_oud">古い順</string>
+    <string name="zoeken_bezig">検索中…</string>
+    <string name="zoeken_mislukt">検索に失敗しました：%s</string>
+    <string name="niets_gevonden">見つかりませんでした</string>
+    <plurals name="resultaten">
+        <item quantity="other">%s 件の結果</item>
+    </plurals>
+    <string name="recent_gezocht">最近の検索</string>
+    <string name="probeer">キーワード例</string>
+    <string name="personen">人物</string>
+    <string-array name="suggesties">
+        <item>ビーチ</item>
+        <item>雪</item>
+        <item>誕生日</item>
+        <item>夕日</item>
+        <item>クリスマスツリー</item>
+        <item>山</item>
+        <item>犬</item>
+        <item>ケーキ</item>
+        <item>プール</item>
+        <item>料理</item>
+    </string-array>
+    <string name="toets_spatie">空白</string>
+    <string name="toets_wissen">消去</string>
+    <string name="actie_zoeken">検索</string>
+    <string name="actie_klaar">完了</string>
+    <string name="laden_mislukt">読み込みに失敗しました：%s</string>
+
+    <!-- Albums -->
+    <string name="albums">アルバム</string>
+    <plurals name="albums_aantal">
+        <item quantity="other">%d 件のアルバム</item>
+    </plurals>
+    <string name="albums_met">「%s」を含む</string>
+    <string name="volg_recent">最近の更新</string>
+    <string name="volg_nieuwste_fotos">新しい写真</string>
+    <string name="volg_naam">名前順</string>
+    <string name="volg_aantal">枚数順</string>
+    <string name="gedeeld">共有</string>
+    <string name="gedeeld_klein">共有</string>
+    <string name="zoek_album">アルバムを検索</string>
+    <string name="albums_niet_geladen">アルバムを読み込めませんでした</string>
+
+    <!-- Explore -->
+    <string name="verkennen">見つける</string>
+    <string name="niet_geladen">読み込めませんでした</string>
+    <string name="plaatsen">場所</string>
+
+    <!-- World map -->
+    <string name="kaart">マップ</string>
+    <string name="kaart_niet_geladen">読み込めませんでした：%s</string>
+    <plurals name="fotos_met_locatie">
+        <item quantity="other">位置情報付きの写真 %s 枚</item>
+    </plurals>
+    <string name="kaart_geen_achtergrond">地図の背景を表示できません（オフライン）</string>
+    <string name="kaart_hint">"◀▶▲▼ 選択/移動   ·   決定 拡大   ·   決定長押し：すべて表示   ·   ⏯ スライドショー   ·   ⏪︎⏩︎ ズーム   ·   戻る：全世界"</string>
+
+    <!-- Settings -->
+    <string name="instellingen">設定</string>
+    <string name="instellingen_sub">"◀ ▶ または決定：値を変更   ·   戻る長押し：メニュー   ·   INFO：操作一覧"</string>
+    <string name="instellingen_tonen">設定の表示</string>
+    <string name="instellingen_basis">基本</string>
+    <string name="instellingen_alle">すべて</string>
+    <string name="instellingen_basis_uitleg">よく使う設定のみ表示します。「すべて」で詳細を表示できます。</string>
+    <string name="instellingen_alle_uitleg">詳細設定を含むすべての項目</string>
+    <string name="uit">オフ</string>
+    <string name="aan">オン</string>
+    <string name="groep_diashow">スライドショー</string>
+    <string name="tijd_per_foto">表示時間</string>
+    <string name="tijd_per_foto_uitleg">各写真を画面に表示する秒数</string>
+    <string name="seconden">%d 秒</string>
+    <string name="seconden_s">%s 秒</string>
+    <string name="ken_burns">ケン・バーンズ効果</string>
+    <string name="ken_burns_uitleg">スライドショー中にゆっくりズームします</string>
+    <string name="volgorde">順序</string>
+    <string name="dia_volgorde_uitleg">日付順または毎回ランダムに再生</string>
+    <string name="op_datum">日付順</string>
+    <string name="willekeurig">ランダム</string>
+    <string name="videos">動画</string>
+    <string name="dia_videos_uitleg">スライドショーで動画を再生するかスキップします</string>
+    <string name="afspelen">再生</string>
+    <string name="overslaan">スキップ</string>
+    <string name="overgang">切り替え効果</string>
+    <string name="overgang_uitleg">次の写真への切り替え方法</string>
+    <string name="vervagen">フェード</string>
+    <string name="schuiven">スライド</string>
+    <string name="groep_bekijken">写真表示</string>
+    <string name="landkaart">写真上の地図</string>
+    <string name="landkaart_uitleg">撮影国の輪郭を右下に表示します</string>
+    <string name="klein">小</string>
+    <string name="groot">大</string>
+    <string name="toon_datum_plaats">日付と場所を表示</string>
+    <string name="toon_datum_plaats_uitleg">表示中に画面下部へ日付と場所のバーを表示します</string>
+    <string name="datum_plaats">表示の自動非表示</string>
+    <string name="datum_plaats_uitleg">数秒後にバーを隠すか、常に表示したままにします</string>
+    <string name="altijd_tonen">常に表示</string>
+    <string name="teller">カウンター</string>
+    <string name="teller_uitleg">日付の横に「68 / %s」を表示します</string>
+    <string name="groep_tijdlijn">タイムライン</string>
+    <string name="grootte">写真サイズ</string>
+    <string name="grootte_uitleg">一覧での行の高さ</string>
+    <string name="normaal_cluster">標準</string>
+    <string name="normaal">標準</string>
+    <string name="tijdlijn_volgorde_uitleg">起動時の並び順（タイムライン上部のボタンで一時的に反転できます）</string>
+    <string name="partner">パートナーの写真</string>
+    <string name="partner_uitleg">Immich でパートナーと共有されている写真も表示します</string>
+    <string name="herinneringen_boven">上部に思い出を表示</string>
+    <string name="herinneringen_boven_uitleg">タイムライン上部に「過去の同じ日」の行を表示します</string>
+    <string name="startscherm">起動画面</string>
+    <string name="startscherm_uitleg">アプリ起動時に最初に開くセクション</string>
+    <string name="begroeting">あいさつ</string>
+    <string name="begroeting_uitleg">タイムライン上部：「%s」または任意のテキスト</string>
+    <string name="automatisch">自動</string>
+    <string name="eigen_tekst">カスタムテキスト</string>
+    <string name="nog_niets">未入力 — 決定キーで入力</string>
+    <string name="groep_kaart">マップ</string>
+    <string name="startweergave">初期表示</string>
+    <string name="startweergave_uitleg">世界地図を開いたときの表示範囲</string>
+    <string name="hele_wereld">全世界</string>
+    <string name="europa">ヨーロッパ</string>
+    <string name="land_meeste">写真が最も多い国</string>
+    <string name="laatst_bekeken">最後に表示した場所</string>
+    <string name="clusterniveau">クラスター粒度</string>
+    <string name="cluster_uitleg">細かい：小さなグループが増えます／粗い：大きなグループにまとめます</string>
+    <string name="fijn">細かい</string>
+    <string name="grof">粗い</string>
+    <string name="kaartstijl">マップスタイル</string>
+    <string name="kaartstijl_uitleg">ダーク・ライト（Immich）、または衛星写真（EOX Sentinel-2、道路・地名付き）</string>
+    <string name="donker">ダーク</string>
+    <string name="licht">ライト</string>
+    <string name="satelliet">衛星写真</string>
+    <string name="groep_uiterlijk">外観</string>
+    <string name="taal">言語</string>
+    <string name="taal_uitleg">アプリの表示言語（即時反映）</string>
+    <string name="datumnotatie">日付形式</string>
+    <string name="datumnotatie_uitleg">すべての日付における月と日の並び順（スクリーンセーバー含む）</string>
+    <string name="kloknotatie">時刻形式</string>
+    <string name="kloknotatie_uitleg">12時間または24時間表示；自動は言語設定に従います</string>
+    <string name="accentkleur">アクセントカラー</string>
+    <string name="accent_uitleg">フォーカス枠・ボタン・見出しの色</string>
+    <string name="kleur_blauw">ブルー</string>
+    <string name="kleur_groen">グリーン</string>
+    <string name="kleur_oranje">オレンジ</string>
+    <string name="kleur_roze">ピンク</string>
+    <string name="kleur_paars">パープル</string>
+    <string name="kleur_grijs">グレー</string>
+    <string name="naam_icoon">名前とアイコン</string>
+    <string name="naam_icoon_uitleg">%s。ホーム画面のタイルも変更されます（数秒以内に更新）</string>
+    <string name="groep_opslag">ストレージ</string>
+    <string name="cache_legen">画像キャッシュを消去</string>
+    <string name="cache_maat">"ディスク %1$s MB  ·  メモリ %2$s MB"</string>
+    <string name="groep_account">アカウント</string>
+    <string name="immich_server">Immich サーバー</string>
+    <string name="ingelogd_als">ログイン中のユーザー</string>
+    <string name="opnieuw_koppelen">再接続</string>
+    <string name="opnieuw_koppelen_uitleg">別のサーバーやアカウントに切り替え</string>
+    <string name="ontkoppelen">接続解除</string>
+    <string name="ontkoppelen_uitleg">このテレビからキーを削除します（キー自体は Immich の「アカウント設定 → API キー」から削除してください）</string>
+    <string name="zeker_weten">よろしいですか？</string>
+    <string name="zeker_weten_uitleg">もう一度決定キーを押すとこのテレビからキーを削除します</string>
+    <string name="groep_over">アプリ情報</string>
+    <string name="toetsen">リモコン操作</string>
+    <string name="toetsen_uitleg">すべてのショートカット一覧（INFO ボタンでも表示できます）</string>
+    <string name="app_regel">%s アプリ</string>
+    <string name="versie">バージョン %s</string>
+    <string name="kaart_bron">© OpenStreetMap · Protomaps（tiles.immich.cloud）；衛星写真：%s、CC BY-NC-SA 4.0</string>
+
+    <!-- Keys overview -->
+    <string name="toetsen_sluit">いずれかのキーを押して閉じる</string>
+    <string name="tg_overal">共通</string>
+    <string name="t_terug_lang">戻るを長押し</string>
+    <string name="t_terug_lang_wat">セクションメニュー（リモコンの MENU キーでも可）</string>
+    <string name="t_info">INFO</string>
+    <string name="t_info_wat">この操作一覧</string>
+    <string name="t_links_rand">左端で ◀</string>
+    <string name="t_links_rand_wat">メニューを開く</string>
+    <string name="t_terug">戻る</string>
+    <string name="t_terug_wat">1つ戻る；起動画面ではアプリを終了</string>
+    <string name="tg_tijdlijn">タイムライン・アルバム・検索</string>
+    <string name="t_pijlen">▲ ▼ ◀ ▶</string>
+    <string name="t_pijlen_wat">写真を選択</string>
+    <string name="t_ok">決定</string>
+    <string name="t_ok_open">写真を開く</string>
+    <string name="t_play">再生/一時停止</string>
+    <string name="t_play_wat">選択した写真からスライドショーを開始</string>
+    <string name="t_spoel">⏪︎ ⏩︎</string>
+    <string name="t_spoel_maand">1か月前 / 次へ</string>
+    <string name="t_terug_boven">先頭へ戻る；もう一度押すとアプリを終了</string>
+    <string name="tg_instellingen">設定</string>
+    <string name="t_links_rechts">◀ ▶</string>
+    <string name="t_waarde">前 / 次の値</string>
+    <string name="t_ok_waarde">次の値にする、または実行</string>
+    <string name="tg_viewer">写真表示中</string>
+    <string name="t_vorige_volgende">前 / 次の写真</string>
+    <string name="t_ok_play">"決定 または 再生/一時停止"</string>
+    <string name="t_diashow_wat">スライドショー オン/オフ（動画再生中：一時停止）</string>
+    <string name="t_info_toets">"▲ ▼ または INFO"</string>
+    <string name="t_info_paneel">詳細情報（カメラ・場所・地図）</string>
+    <string name="t_ok_info">詳細表示中に決定</string>
+    <string name="t_ok_info_wat">世界地図で位置を表示（位置情報付きの写真）</string>
+    <string name="t_spoel_viewer">写真 10枚前/次へ；動画では 10秒戻し/送り</string>
+    <string name="t_sluiten">閉じる</string>
+    <string name="tg_kaart">世界地図</string>
+    <string name="t_kaart_pijlen">グループ選択または地図をスクロール</string>
+    <string name="t_kaart_ok">グループを拡大；これ以上分割されない場合は開く</string>
+    <string name="t_kaart_zoom">縮小 / 拡大</string>
+    <string name="t_kaart_terug">全世界へ戻る；もう一度押すと起動画面へ</string>
+    <string name="t_kaart_links">全世界表示で ◀</string>
+
+    <!-- Connect screen (TV) -->
+    <string name="koppel_titel">Immich に接続</string>
+    <string name="koppel_test">テストモード：接続が成功するまで現在の設定を保持します</string>
+    <string name="koppel_eenmalig">初回のみの設定です。完了後は自動で使えます</string>
+    <string name="stap1">スマートフォンで QR コードを読み取る</string>
+    <string name="stap1_sub">スマートフォンはテレビと同じ Wi-Fi に接続してください。</string>
+    <string name="stap2">Immich サーバーのアドレス、メールアドレス、パスワードを入力</string>
+    <string name="stap2_sub">テレビが読み取り専用キーを自動作成します。パスワードは保存されません。</string>
+    <string name="stap3">完了</string>
+    <string name="stap3_sub">スマートフォンを置くと、写真が自動的に表示されます。</string>
+    <string name="wacht_telefoon">スマートフォンの操作を待機中…</string>
+    <string name="klaar_titel">完了しました！スマートフォンを閉じて構いません。</string>
+    <string name="gekoppeld_als">%2$s に %1$s として接続しました</string>
+    <string name="koppel_mislukt">接続に失敗しました</string>
+    <string name="probeer_opnieuw">スマートフォンでもう一度お試しください。</string>
+    <string name="geen_netwerk">ネットワークなし</string>
+    <string name="typ_adres">またはブラウザでこのアドレスを開く：</string>
+
+    <!-- Connecting: progress and errors (shown on the TV and sent to the phone) -->
+    <string name="fout_geen_netwerk">ネットワークに接続されていません。Wi-Fi または LAN ケーブルで接続してください。</string>
+    <string name="fout_geen_poort">ポートを開けませんでした。</string>
+    <string name="geen_toegang">アクセス不可</string>
+    <string name="geen_toegang_html">アクセスできません。&lt;br&gt;テレビ画面の QR コードを読み取ってください。</string>
+    <string name="mislukt">失敗</string>
+    <string name="fout_app_inactief">アプリがアクティブではありません。</string>
+    <string name="fout_vul_adres">Immich サーバーのアドレスを入力してください。</string>
+    <string name="fout_vul_email">メールアドレスとパスワードを入力してください。</string>
+    <string name="bezig_sleutel_rechten">キーと権限を確認中…</string>
+    <string name="gekoppeld_melding">%2$s に %1$s として接続しました。</string>
+    <string name="er_ging_iets_mis">エラーが発生しました：%s</string>
+    <string name="fout_ssl">%s への安全な接続に失敗しました（証明書エラー）。http:// を試すか証明書を確認してください。</string>
+    <string name="fout_host">アドレス %s が見つかりません。入力内容を確認してください。</string>
+    <string name="fout_verbinding">%1$s:%2$d に接続できません。サーバーが起動中かつ同一ネットワークにあるか確認してください。</string>
+    <string name="bezig_server">サーバー %s を検索中…</string>
+    <string name="fout_geen_pong">%s から Immich サーバーの応答がありません（/api/server/ping で pong なし）。</string>
+    <string name="fout_geen_immich">%1$s から Immich サーバーの応答がありません（/api/server/ping で HTTP %2$d）。</string>
+    <string name="fout_te_oud">この Immich サーバーのバージョン（%s）は古いため非対応です。Immich 3（最低でも 2）に更新してください。</string>
+    <string name="waarschuwing_versie">注意：Immich サーバーのバージョンは %s です。このアプリは Immich 3 向けに作られていますが、多くの機能は動作する見込みです。</string>
+    <string name="bezig_inloggen">%s としてログイン中…</string>
+    <string name="fout_login">メールアドレスまたはパスワードが正しくありません。</string>
+    <string name="fout_login_adres">このメールアドレスは Immich で受け付けられません（無効な形式です）。</string>
+    <string name="fout_login_http">ログインに失敗しました（HTTP %d）。</string>
+    <string name="fout_geen_token">ログイン時にアクセストークンが返されませんでした。</string>
+    <string name="bezig_sleutel_aanmaken">API キーを作成中…</string>
+    <string name="fout_geen_sleutels">このアカウントには API キーを作成する権限がありません。管理者に連絡するか既存のキーをご利用ください。</string>
+    <string name="fout_sleutel_http">API キーの作成に失敗しました（HTTP %1$d）：%2$s</string>
+    <string name="fout_geen_sleutel_terug">Immich からキーが返されませんでした。</string>
+    <string name="bezig_sleutel_controleren">キーを確認中…</string>
+    <string name="fout_sleutel_werkt_niet">新しいキーが機能しません（HTTP %d）。</string>
+    <string name="fout_sleutel_geweigerd">この API キーは %s に拒否されました。すべてコピーしたか確認してください。</string>
+    <string name="fout_onverwacht">サーバーから予期しない応答がありました（%2$s で HTTP %1$d）。</string>
+    <string name="fout_rechten">このキーには次の権限が不足しています：%1$s。Immich で次の権限のみを持つ新しいキーを作成してください：%2$s。</string>
+    <string name="onbekende_gebruiker">不明なユーザー</string>
+    <string name="sleutel_naam">%s のフォト</string>
+
+    <!-- Phone page (served by the TV) -->
+    <string name="html_titel">フォトを接続</string>
+    <string name="html_kop">テレビのフォト</string>
+    <string name="html_sub">Immich サーバーに接続</string>
+    <string name="html_adres">Immich サーバーのアドレス</string>
+    <string name="html_adres_voorbeeld">例：192.168.1.10:2283 または photos.mydomain.com</string>
+    <string name="html_adres_voorbeeld_kort">例：192.168.1.10:2283</string>
+    <string name="html_adres_hint">ブラウザや Immich アプリと同じアドレスを入力してください。</string>
+    <string name="html_email">メールアドレス</string>
+    <string name="html_wachtwoord">パスワード</string>
+    <string name="html_wachtwoord_hint">パスワードは Immich でテレビ用の読み取り専用キーを作成するためにのみ使用され、保存されません。</string>
+    <string name="html_koppelen">接続</string>
+    <string name="html_sleutel_kop">または既存の API キーを貼り付け</string>
+    <string name="html_sleutel">API キー</string>
+    <string name="html_sleutel_hint_voor">Immich の以下の画面で作成してください：</string>
+    <string name="html_sleutel_pad">アカウント設定 → API キー → 新しい API キー</string>
+    <string name="html_sleutel_hint_na">次の権限のみにチェックを入れてください：</string>
+    <string name="html_koppelen_sleutel">キーで接続</string>
+    <string name="html_voet">このページは自宅ネットワーク内でのみ動作し、接続完了後に閉じます。</string>
+    <string name="html_bezig_titel">接続中…</string>
+    <string name="html_bezig">テレビがサーバーを確認しキーを作成しています。数秒かかります。</string>
+    <string name="html_geen_verbinding_titel">テレビに接続できません</string>
+    <string name="html_geen_verbinding">テレビに接続画面が開いたままで、スマートフォンが同じ Wi-Fi に接続されていますか？</string>
+
+    <!-- Unofficial (2.1) -->
+    <string name="onofficieel_kort">Immich 用非公式クライアント</string>
+    <string name="onofficieel_lang">非公式アプリであり、Immich プロジェクトとは関係・提携していません。Immich はそれぞれの所有者の商標です。</string>
+    <string name="terug_sluit">戻るキーで閉じる</string>
+    <string name="minuten">%d 分</string>
+
+    <!-- Screensaver (2.1) -->
+    <string name="dream_naam">フォト（スクリーンセーバー）</string>
+    <string name="groep_screensaver">スクリーンセーバー</string>
+    <string name="screensaver">スクリーンセーバー</string>
+    <string name="dream_aan_uitleg">このアプリを本機のスクリーンセーバーとして使用する</string>
+    <string name="dream_status_aan">有効：このアプリが本機のスクリーンセーバーです</string>
+    <string name="dream_status_uit">まだ本機のスクリーンセーバーに設定されていません</string>
+    <string name="dream_status_uit_ok">未設定 — 決定キーで設定手順を開く</string>
+    <string name="dream_instellen">このデバイスで設定</string>
+    <string name="dream_instellen_sub">Android TV には通常サードパーティ製スクリーンセーバーの選択画面がありませんが、以下の方法で設定できます。</string>
+    <string name="dream_instellen_uitleg">状態、ヘルプ、初回セットアップ（adb）</string>
+    <string name="dream_voorbeeld">プレビュー</string>
+    <string name="dream_voorbeeld_uitleg">今すぐスクリーンセーバーを表示；任意のキーで終了</string>
+    <string name="dream_bron">写真</string>
+    <string name="dream_bron_uitleg">スクリーンセーバーに表示する写真の範囲</string>
+    <string name="dream_alle_fotos">すべての写真</string>
+    <string name="dream_album">アルバム</string>
+    <string name="dream_personen">人物</string>
+    <string name="dream_combi">アルバム + 人物</string>
+    <string name="dream_vanaf">開始年</string>
+    <string name="dream_vanaf_uitleg">この年以降に撮影された写真のみ</string>
+    <string name="alle_jaren">すべての年</string>
+    <string name="dream_volgorde_uitleg">ランダム、または日付順（前回の続きから）</string>
+    <string name="dream_albums">アルバム</string>
+    <string name="dream_albums_hint">"%1$d 件選択済み  ·  決定 = オン/オフ"</string>
+    <string name="dream_ander_album">他のアルバム名を表示</string>
+    <string name="dream_ander_album_uitleg">写真が別のアルバムにもある場合、そちらのアルバム名を表示します（例：「スクリーンセーバー」ではなく「誕生日」）</string>
+    <string name="dream_herinneringen">今日の思い出</string>
+    <string name="dream_persoon">人物</string>
+    <string name="dream_kies">未選択 — 決定キーで選択</string>
+    <string name="dream_tijd_uitleg">1枚あたりの表示時間（リモコン ◀ ▶：前 / 次）</string>
+    <string name="dream_klok">時計</string>
+    <string name="dream_klok_uitleg">左上に時刻と日付を表示</string>
+    <string name="dream_kaart_uitleg">右下に撮影国の輪郭を表示</string>
+    <string name="dream_ken_burns_uitleg">各写真をゆっくりズーム</string>
+    <string name="dream_info">日付と場所</string>
+    <string name="dream_info_uitleg">左下に日付、場所、アルバム名を表示</string>
+    <string name="dream_geen_fotos">このスクリーンセーバーのソースに写真が見つかりません</string>
+    <string name="dream_geen_verbinding">Immich サーバーに接続できません。再試行中…</string>
+    <string name="dream_niet_gekoppeld">未接続：先にアプリを開いてください</string>
+    <string name="dream_recht_ja">このアプリはスクリーンセーバー設定を自動で変更できます</string>
+    <string name="dream_recht_nee">スクリーンセーバー設定の変更権限がありません（adb で1回権限を付与する必要があります。下記参照）</string>
+    <string name="dream_ontw_ja">開発者向けオプションが有効です</string>
+    <string name="dream_ontw_nee">開発者向けオプションが無効です</string>
+    <string name="dream_zet_aan">今すぐ有効にする</string>
+    <string name="dream_zet_uit">今すぐ無効にする</string>
+    <string name="dream_zet_uitleg">無効にすると以前のスクリーンセーバーが復元されます</string>
+    <string name="dream_open_systeem">スクリーンセーバー設定を開く</string>
+    <string name="dream_open_systeem_uitleg">システム設定で「フォト」を選択してください</string>
+    <string name="dream_auto_kop">自動設定（ネットワークデバッグ）</string>
+    <string name="dream_auto_uitleg">デバイス自身のデバッグポートに接続して自動設定します。「開発者向けオプション → ネットワークデバッグ（または ADB over network）」が必要です。初回は許可確認が出るため「常に許可」を選んでください。</string>
+    <string name="dream_auto_knop">自動設定を実行</string>
+    <string name="dream_auto_knop_uitleg">権限を付与しスクリーンセーバーに設定します（数秒かかります）</string>
+    <string name="adb_bezig">接続中…テレビに許可確認が表示されたら「常に許可」を選択してください</string>
+    <string name="adb_klaar">完了：このアプリがスクリーンセーバーに設定されました</string>
+    <string name="adb_mislukt">設定できませんでした；下記の手動手順をご利用ください</string>
+    <string name="adb_geen_verbinding">接続できません：先に開発者向けオプションでネットワークデバッグを有効にしてください</string>
+    <string name="adb_geen_toestemming">テレビ側で許可されませんでした；再度お試しください</string>
+    <string name="dream_hand_kop">PC から手動で設定</string>
+    <string name="dream_stap1">開発者向けオプションを有効化：設定 → デバイス設定 → デバイス情報 → 「ビルド」を決定キーで 7回押します。</string>
+    <string name="dream_stap2">設定 → デバイス設定 → 開発者向けオプション → ネットワークデバッグ（または USB デバッグ）をオンにします。</string>
+    <string name="dream_stap3">adb（Android platform tools）のある PC で次を実行：</string>
+    <string name="dream_stap4">初回のみテレビに許可確認が出ます。2つ目のコマンド実行後、アプリ自身でオン/オフできるようになります。最後の2つで即座に設定されます。</string>
+    <string name="dream_open_over">「デバイス情報」を開く</string>
+    <string name="dream_open_over_uitleg">開発者向けオプションを有効にするため</string>
+    <string name="dream_open_ontw">開発者向けオプションを開く</string>
+    <string name="dream_open_ontw_uitleg">ネットワークデバッグを有効にするため</string>
+    <string name="dream_sleutel_fout">Immich サーバーがこのデバイスのキーを受け付けなくなりました：アプリを開き「再接続」を選択してください</string>
+    <string name="dream_usb_ja">USB デバッグはオンです</string>
+    <string name="dream_usb_nee">USB デバッグはオフです</string>
+    <string name="dream_net_ja">ネットワークデバッグはオンです（ポート 5555）</string>
+    <string name="dream_net_nee">ネットワークデバッグはオフです（自動設定に必要）</string>
+    <string name="dream_nu">現在のスクリーンセーバー：%1$s</string>
+    <string name="dream_start_na">無操作 %1$s 後に起動</string>
+
+    <!-- Diagnostics (2.1) -->
+    <string name="diagnose">診断情報</string>
+    <string name="diagnose_uitleg">前回アプリが終了した理由（端末内のみに保存）</string>
+    <string name="diagnose_sub">最近予期せず終了した記録と原因。外部への送信はありません。</string>
+    <string name="diagnose_leeg">記録なし：予期しない終了は発生していません。</string>
+    <string name="diagnose_voet">ヒント：クラッシュはその場で記録され、Android のシステム報告（メモリ、ANR）は次回起動時に表示されます。</string>
+    <string name="diag_crash">クラッシュ（アプリ内エラー）</string>
+    <string name="diag_crash_native">クラッシュ（ネイティブコード）</string>
+    <string name="diag_anr">応答なし（ANR）</string>
+    <string name="diag_geheugen">Android により終了：メモリ不足</string>
+    <string name="diag_signaal">シグナル終了（例：アップデート中）</string>
+    <string name="diag_gebruiker">ユーザーまたはシステムにより停止</string>
+    <string name="diag_systeem">システムにより終了</string>
+    <string name="diag_gevangen">捕捉されたエラー（アプリは継続）</string>
+    <string name="diag_anders">その他</string>
+    <string name="diag_voorgrond">フォアグラウンド実行中</string>
+
+    <!-- 2.5: world map, scroll bar, people -->
+    <string name="deel_europa">ヨーロッパ</string>
+    <string name="deel_azie">アジア</string>
+    <string name="deel_afrika">アフリカ</string>
+    <string name="deel_noord_amerika">北アメリカ</string>
+    <string name="deel_zuid_amerika">南アメリカ</string>
+    <string name="deel_oceanie">オセアニア</string>
+    <string name="deel_antarctica">南極</string>
+    <string name="deel_overig">その他の地域</string>
+    <string name="regio_noord_europa">北欧</string>
+    <string name="regio_west_europa">西欧</string>
+    <string name="regio_zuid_europa">南欧</string>
+    <string name="regio_oost_europa">東欧</string>
+    <string name="regio_noord_afrika">北アフリカ</string>
+    <string name="regio_west_afrika">西アフリカ</string>
+    <string name="regio_centraal_afrika">中部アフリカ</string>
+    <string name="regio_oost_afrika">東アフリカ</string>
+    <string name="regio_zuidelijk_afrika">南部アフリカ</string>
+    <string name="regio_noordelijk_amerika">アメリカ &amp; カナダ</string>
+    <string name="regio_midden_amerika">中央アメリカ</string>
+    <string name="regio_caribisch">カリブ海地域</string>
+    <string name="regio_centraal_azie">中央アジア</string>
+    <string name="regio_oost_azie">東アジア</string>
+    <string name="regio_zuidoost_azie">東南アジア</string>
+    <string name="regio_zuid_azie">南アジア</string>
+    <string name="regio_west_azie">中東</string>
+    <string name="regio_australie">オーストラリア &amp; ニュージーランド</string>
+    <string name="regio_melanesie">メラネシア</string>
+    <string name="regio_micronesie">ミクロネシア</string>
+    <string name="regio_polynesie">ポリネシア</string>
+    <string name="balk_hint">"▲▼ 月単位 · 長押し：年単位 · 決定 移動"</string>
+    <string name="zoek_persoon">人物を検索</string>
+    <string name="volg_vaakst">写真数順</string>
+    <string name="alle_personen">すべての人物（%1$d）</string>
+    <string name="t_ok_lang">決定長押し</string>
+    <string name="t_kaart_ok_lang">グループの全写真をグリッド表示（日付順）</string>
+    <string name="t_kaart_play">グループのスライドショー</string>
+    <string name="t_balk">右端で ▶</string>
+    <string name="t_balk_wat">スクロールバー：▲▼ で月ごと（長押しで年ごと）、決定または ◀ で移動</string>
+    <string name="balk_hint_algemeen">"▲▼ 移動 · 長押し：高速 · 決定 移動"</string>
+    <string name="sectie_mappen">フォルダ</string>
+    <string name="mappen_geen_recht">フォルダへのアクセス権限がありません</string>
+    <string name="mappen_geen_recht_uitleg">API キーに folder.read 権限がありません。</string>
+    <string name="mappen_niet_geladen">フォルダを読み込めませんでした</string>
+    <string name="map_leeg">このフォルダは空です</string>
+    <string name="dia_beeld">スライドショー中の表示</string>
+    <string name="dia_beeld_uitleg">スライドショー再生中に写真の上へ表示する内容；一時停止で情報が戻ります</string>
+    <string name="dia_beeld_alles">すべて</string>
+    <string name="dia_beeld_zonder_ring">進行リングなし</string>
+    <string name="dia_beeld_alleen_foto">写真のみ</string>
+    <string name="groep_muziek">音楽</string>
+    <string name="muziek_modus">BGM</string>
+    <string name="muziek_modus_uitleg">アプリ内でアンビエントラジオを再生（動画再生時はミュート、バックグラウンドで一時停止）</string>
+    <string name="muziek_diashow">スライドショーのみ</string>
+    <string name="muziek_altijd">常に再生</string>
+    <string name="dia_muziek_zender">ラジオ局</string>
+    <string name="dia_muziek_zender_uitleg">広告なしのアンビエントネットラジオ（SomaFM）</string>
+    <string name="dream_ring">進行リング</string>
+    <string name="dream_ring_uitleg">左下に次の写真までのカウントダウンリングを表示します</string>
+    <string name="album_naam">アルバム名</string>
+    <string name="album_naam_uitleg">写真が含まれるアルバム名を表示します（人物画面など）</string>
+    <string name="wazig">ぼかし背景</string>
+    <string name="wazig_uitleg">写真・動画の余白をぼかし画像で埋めます；オフ = 黒（スクリーンセーバー含む）</string>
+    <plurals name="mappen_aantal">
+        <item quantity="other">%d 件のフォルダ</item>
+    </plurals>
+    <string name="rechten_titel">キーの権限</string>
+    <string name="rechten_bezig">確認中…</string>
+    <string name="rechten_ok">すべての権限が揃っています</string>
+    <string name="rechten_deels_onbekend">不足権限は見つかりませんでした（このサーバーは一覧を取得できません）</string>
+    <string name="rechten_kern_mist">必須権限が不足しているためアプリが動作できません</string>
+    <string name="rechten_mist">一部の権限が不足しています；該当機能は動作しません</string>
+    <string name="rechten_mist_kort">不足：%s</string>
+    <string name="rechten_oplossen">再接続して全権限付きの新キーを作成するか（旧キーは後で Immich で削除可）、Immich の「アカウント設定 → API キー」で不足権限を追加してください。</string>
+    <string name="rechten_koppel_sub">スマートフォンで新しいキーを作成</string>
+    <string name="rechten_opnieuw">再確認</string>
+    <string name="rechten_sluiten">閉じる</string>
+    <string name="rechten_bekijk">不足している権限を確認して修正</string>
+    <string name="recht_asset_read">タイムライン・検索・写真の詳細</string>
+    <string name="recht_asset_view">サムネイルと写真表示</string>
+    <string name="recht_user_read">あいさつや設定でのユーザー名</string>
+    <string name="recht_album_read">アルバムとアルバム名</string>
+    <string name="recht_memory_read">思い出（「過去の同じ日」）</string>
+    <string name="recht_person_read">人物</string>
+    <string name="recht_map_read">世界地図</string>
+    <string name="recht_folder_read">フォルダ</string>
+    <string name="update_titel">バージョン %1$s が利用可能です</string>
+    <string name="update_sub">現在のバージョン：%1$s</string>
+    <string name="update_downloaden">ダウンロード中… %1$d%%</string>
+    <string name="update_installeren">インストール中…</string>
+    <string name="update_toestemming">先にこのアプリからの更新インストール（不明なアプリ）を許可してから、再度「更新」を選択してください。</string>
+    <string name="update_toestemming_knop">設定を開く</string>
+    <string name="update_fout">更新に失敗しました：%1$s</string>
+    <string name="update_nu">今すぐ更新</string>
+    <string name="update_later">後で</string>
+    <string name="nieuw_titel">%1$s の新機能</string>
+    <string name="updates">アップデート</string>
+    <string name="update_beschikbaar">バージョン %1$s が利用可能です。決定キーで更新</string>
+    <string name="update_bezig">確認中…</string>
+    <string name="update_actueel">最新バージョンです。決定キーで再確認</string>
+    <string name="update_controleer">決定キーで新しいバージョンを確認</string>
+    <string name="update_auto">アップデートを確認</string>
+    <string name="update_auto_uitleg">起動時に GitHub で新しいバージョンを確認します</string>
+    <string name="nieuw_regel">新機能</string>
+    <string name="nieuw_regel_uitleg">このバージョンの変更点</string>
+    <string-array name="wat_nieuw">
+        <item>Amlogic および Android 10+ での動画再生改善とリモコンシーク HUD を追加</item>
+        <item>十字キー長押しによる高速スクロールを滑らかにし、ANR・クラッシュを解消</item>
+        <item>縦長写真の並べて表示と、下部日付・場所バーの表示切替トグルを追加</item>
+        <item>「シャッフル」セクション追加、フォルダを写真直下へ移動、SomaFM BGM 対応</item>
+        <item>多言語対応（日本語・ロシア語・中国語など）を追加</item>
+    </string-array>
+</resources>
