@@ -40,8 +40,8 @@ import kotlinx.coroutines.withContext
 private const val PORTIE = 120
 
 /**
- * Случайный поток всех фото и видео: порции из /search/random без дат и группировок,
- * с дозагрузкой при скролле или просмотре и кнопкой полного перемешивания.
+ * Random feed of all photos and videos: batches from /search/random without dates or grouping,
+ * with incremental loading on scroll or viewing and a full-reshuffle action.
  */
 class WillekeurigStaat(private val scope: CoroutineScope) : BeeldBron {
     var assets by mutableStateOf<List<Asset>>(emptyList())

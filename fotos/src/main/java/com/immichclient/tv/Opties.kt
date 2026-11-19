@@ -137,7 +137,7 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
                 listOf(stringResource(R.string.instellingen_basis), stringResource(R.string.instellingen_alle)), if (alles) 1 else 0, Modifier.focusRequester(eerste)) { Instellingen.alleInstellingen = it == 1 }
         }
 
-        // ---- Просмотр фото и слайд-шоу наверху: системная заставка ниже ----
+        // ---- Viewing photos & Slideshow at the top; system Screensaver placed further down ----
         groep(R.string.groep_bekijken)
         item { Keuzes(stringResource(R.string.landkaart), stringResource(R.string.landkaart_uitleg), KaartMaat.entries.map { stringResource(it.label) }, Instellingen.viewerKaart.ordinal) { Instellingen.viewerKaart = KaartMaat.entries[it] } }
         schakel(R.string.toon_datum_plaats, R.string.toon_datum_plaats_uitleg, uitAan, Instellingen.toonBalk) { Instellingen.toonBalk = it }

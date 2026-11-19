@@ -101,8 +101,8 @@ class App : Application(), SingletonImageLoader.Factory {
         .diskCache { DiskCache.Builder().directory(cacheDir.resolve("beelden").toOkioPath()).maxSizeBytes(400L * 1024 * 1024).build() }
         .build()
 
-    // Никогда не чистим весь кэш на лету при скролле (TRIM_MEMORY_RUNNING_LOW): на TV это вызывало
-    // массовый перезапрос миниатюр и 2-секундный фриз/GC. Полная очистка — только в фоне.
+    // Never clear the entire cache mid-scroll (TRIM_MEMORY_RUNNING_LOW): on TV this caused
+    // mass thumbnail reloads and 2-second freezes/GC pauses. Full clear happens only in background.
     @Suppress("DEPRECATION")
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
@@ -308,7 +308,7 @@ private fun FotosApp(finish: () -> Unit, herstart: () -> Unit, testIndex: Int = 
     var toetsen by remember { mutableStateOf(false) }
     val ctx = androidx.compose.ui.platform.LocalContext.current
     val naamApp = stringResource(Instellingen.uiterlijk.label)
-    // Единый фоновый плеер радио: исключает наложение и ставится на паузу при сворачивании приложения
+    // Single app-level radio player: prevents stream overlap and pauses when the app goes to background
     val levensloop = LocalLifecycleOwner.current.lifecycle
     var appOpVoorgrond by remember { mutableStateOf(levensloop.currentState.isAtLeast(Lifecycle.State.STARTED)) }
     DisposableEffect(levensloop) {

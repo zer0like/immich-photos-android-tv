@@ -25,9 +25,9 @@ import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import kotlinx.coroutines.delay
 
 /**
- * Единый фоновый плеер потокового радио на уровне всего приложения:
- * исключает наложение потоков между ручным просмотром и слайд-шоу,
- * плавно затухает и возвращается за 2.5 с при воспроизведении видео.
+ * Single app-level background radio player:
+ * prevents stream overlap between manual viewing and slideshows,
+ * and smoothly fades out and back in over 2.5 s during video playback.
  */
 @OptIn(UnstableApi::class)
 @Composable
@@ -56,7 +56,7 @@ fun MuziekSpeler(url: String, gedempt: Boolean) {
         animationSpec = tween(durationMillis = 2500, easing = LinearEasing),
         label = "muziekFade",
     )
-    // Квадратичная кривая (audio taper) даёт субъективно ровное затухание и нарастание громкости
+    // Quadratic audio taper produces perceptually smooth volume fade-out and fade-in
     LaunchedEffect(fade, speler) { speler.volume = fade * fade }
     LaunchedEffect(foutTeller, url) {
         if (foutTeller in 1..5) {
