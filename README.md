@@ -206,6 +206,15 @@ The screensaver starts after the device's normal idle time; the setup screen in 
 - With adb: `adb shell settings delete secure screensaver_components`. The system falls back to its default screensaver. Uninstalling the app does the same.
 - Optional: `adb shell pm revoke com.zer0like.immich.tv android.permission.WRITE_SECURE_SETTINGS`
 
+## Privacy
+
+- **Zero telemetry or crash-reporting SDKs:** the app includes no Crashlytics, Firebase, Sentry, Google Play Services, analytics, or tracking libraries.
+- **Local-only crash diagnostics:** uncaught exceptions, coroutine errors, and system exit reasons (`ApplicationExitInfo`) are stored strictly on the device (`diagnose.json`, viewable under Settings → About → Diagnostics) and are never uploaded.
+- **External connections** besides your own Immich server are limited to:
+  - An anonymous `GET` request to GitHub Releases (`api.github.com/repos/zer0like/immich-photos-android-tv/releases/latest`) for update checks (no keys or device data sent).
+  - Vector and satellite map tiles (`tiles.immich.cloud` and `tiles.maps.eox.at`) when opening the World map.
+  - [SomaFM](https://somafm.com) audio streams (`ice2.somafm.com`) only when ambient background music is turned on in Settings.
+
 ## Building
 
 Requirements: JDK 17 and the Android SDK (platform 35).
