@@ -588,10 +588,10 @@
     <string name="whats_new_row">新機能</string>
     <string name="whats_new_row_desc">このバージョンの変更点</string>
     <string-array name="whats_new_items">
+        <item>スライドショー再生中のスリープとシステムスクリーンセーバーを防止</item>
         <item>サーバー変換なしでの 4K / 10-bit HDR 直接再生とリモコンシーク HUD</item>
         <item>滑らかな高速スクロール、縦長写真の並べて表示、写真と同じフォルダ一覧レイアウト</item>
         <item>シャッフル画面、SomaFM BGM 対応、日付・場所バーの完全非表示設定を追加</item>
-        <item>設定画面の並び順を整理し、4K 向けベクターアイコンと全言語バナーを刷新</item>
-        <item>中国語・ヒンディー語・ロシア語・日本語・韓国語に対応</item>
+        <item>設定順の見直し、4K ベクターアイコンと全言語バナー、5つの新言語に対応</item>
     </string-array>
 </resources>

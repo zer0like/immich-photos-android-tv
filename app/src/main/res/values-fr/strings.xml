@@ -585,10 +585,10 @@
     <string name="whats_new_row">Nouveautés</string>
     <string name="whats_new_row_desc">Changements de cette version</string>
     <string-array name="whats_new_items">
+        <item>Empêcher la mise en veille et l\'écran de veille pendant le diaporama</item>
         <item>Lecture vidéo 4K / HDR 10 bits directe sans transcodage + barre de recherche</item>
         <item>Défilement fluide, portraits côte à côte et grille Dossiers identique à Photos</item>
         <item>Section Aléatoire, radio SomaFM et masquage complet de la barre de date</item>
-        <item>Paramètres réorganisés et icônes/bannières 4K nettes pour toutes les langues</item>
-        <item>Nouvelles langues : chinois, hindi, russe, japonais et coréen</item>
+        <item>Paramètres réorganisés, icônes/bannières 4K nettes et 5 nouvelles langues</item>
     </string-array>
 </resources>

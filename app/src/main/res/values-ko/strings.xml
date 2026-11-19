@@ -588,10 +588,10 @@
     <string name="whats_new_row">새로운 기능</string>
     <string name="whats_new_row_desc">이 버전의 변경 사항</string>
     <string-array name="whats_new_items">
+        <item>슬라이드쇼 재생 중 절전 및 시스템 화면 보호기 실행 방지 설정 추가</item>
         <item>서버 변환 없이 4K / 10-bit HDR 직접 재생 및 리모컨 탐색 HUD 지원</item>
         <item>부드러운 고속 스크롤, 세로 사진 나란히 보기, 사진과 동일한 폴더 그리드 적용</item>
         <item>무작위 피드, SomaFM 배경 라디오 및 날짜·장소 바 완전 숨김 설정 추가</item>
-        <item>설정 메뉴 순서 개선 및 선명한 4K 벡터 아이콘·전 언어 배너 적용</item>
-        <item>중국어·힌디어·러시아어·일본어·한국어 인터페이스 추가</item>
+        <item>설정 순서 개선, 4K 벡터 아이콘·전 언어 배너 및 5개 신규 언어 지원</item>
     </string-array>
 </resources>

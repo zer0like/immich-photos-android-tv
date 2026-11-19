@@ -578,10 +578,10 @@
     <string name="whats_new_row">Was ist neu</string>
     <string name="whats_new_row_desc">Änderungen in dieser Version</string>
     <string-array name="whats_new_items">
+        <item>Ruhemodus und Bildschirmschoner bei Diashows verhindern (Schalter unter Diashow)</item>
         <item>Direkte 4K-/10-Bit-HDR-Videowiedergabe ohne Transcodierung + Spulleiste</item>
         <item>Flüssiges Scrollen, Hochformat-Paare und Ordner-Raster wie unter Fotos</item>
         <item>Bereich Zufällig, SomaFM-Radio und Datumsleiste komplett abschaltbar</item>
-        <item>Neu geordnete Einstellungen (Fotoansicht oben) und scharfe 4K-Icons &amp; Banner</item>
-        <item>Neue Sprachen: Chinesisch, Hindi, Russisch, Japanisch und Koreanisch</item>
+        <item>Neu geordnete Einstellungen, scharfe 4K-Icons &amp; Banner und 5 neue Sprachen</item>
     </string-array>
 </resources>

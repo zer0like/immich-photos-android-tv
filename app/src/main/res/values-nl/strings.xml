@@ -578,10 +578,10 @@
     <string name="whats_new_row">Wat is er nieuw</string>
     <string name="whats_new_row_desc">Wijzigingen in deze versie</string>
     <string-array name="whats_new_items">
+        <item>Scherm wakker houden tijdens diashows (voorkomt slaapstand en screensaver)</item>
         <item>Direct 4K / 10-bit HDR-video afspelen zonder servertranscodering + spoelbalk</item>
         <item>Soepele scroll, staande foto\'s naast elkaar en Mappen in hetzelfde raster als Foto\'s</item>
         <item>Sectie Willekeurig, SomaFM-radio en datum-/plaatsbalk volledig uitschakelbaar</item>
-        <item>Overzichtelijkere instellingen en haarscherpe 4K-vectoriconen en banners</item>
-        <item>Talen uitgebreid met Chinees, Hindi, Russisch, Japans en Koreaans</item>
+        <item>Overzichtelijkere instellingen, 4K-vectoriconen en 5 nieuwe talen</item>
     </string-array>
 </resources>

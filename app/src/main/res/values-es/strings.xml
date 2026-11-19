@@ -585,10 +585,10 @@
     <string name="whats_new_row">Novedades</string>
     <string name="whats_new_row_desc">Cambios en esta versión</string>
     <string-array name="whats_new_items">
+        <item>Evitar reposo y salvapantallas durante presentaciones (opción activa por defecto)</item>
         <item>Reproducción directa 4K / 10-bit HDR sin transcodificar + barra de avance</item>
         <item>Desplazamiento fluido, verticales lado a lado y Carpetas igual que Fotos</item>
         <item>Sección Aleatorio, radio SomaFM y ocultación total de la barra de fecha y lugar</item>
-        <item>Ajustes reordenados e iconos y banners vectoriales nítidos en 4K</item>
-        <item>Idiomas añadidos: chino, hindi, ruso, japonés y coreano</item>
+        <item>Ajustes reordenados, iconos y banners vectoriales 4K y 5 idiomas nuevos</item>
     </string-array>
 </resources>
