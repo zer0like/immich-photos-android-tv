@@ -21,7 +21,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 - **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
 - **Background music (`Music` settings):** ad-free [SomaFM](https://somafm.com) ambient radio (`Off` / `Slideshow only` / `Always`), single-player architecture to prevent overlap, auto-pause when minimized, and smooth 2.5 s audio ducking during video playback.
 - **New localizations & 5×2 language picker:** added Chinese (Simplified), Hindi, Russian (with a Cyrillic/Latin `ABC`/`АБВ` toggle on the TV keyboard), Japanese, and Korean; both the first-run `5×2` language grid and the Settings language selector are ordered by total worldwide speakers.
-- **Refreshed 4K launcher icons & banners:** vector `<adaptive-icon>` (`mipmap-anydpi-v26`) for crisp 4K icons, and `6×`-supersampled straight `0°` card banners across all Android TV density buckets (`mdpi` through `xxxhdpi` `640×360`), with localized Russian launcher banners.
+- **Refreshed 4K launcher icons & banners:** vector `<adaptive-icon>` (`mipmap-anydpi-v26`) for crisp 4K icons, and `6×`-supersampled straight `0°` card banners across all Android TV density buckets (`mdpi` through `xxxhdpi` `640×360`) for all 10 supported languages.
 - **Date & place bar toggle:** added a **Show date and place** toggle above the bottom bar duration setting.
 
 ![Timeline](docs/screenshots/timeline.png)

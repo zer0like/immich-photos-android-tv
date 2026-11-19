@@ -10,6 +10,9 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 RES = sys.argv[1] if len(sys.argv) > 1 else "src/main/res"
 FONT = os.path.join(RES, "font/overpass.ttf")
 
+FONT_CJK = "/usr/share/fonts/google-noto-sans-cjk-vf-fonts/NotoSansCJK-VF.ttc"
+FONT_HI = "/usr/share/fonts/google-noto-vf/NotoSansDevanagari[wght].ttf"
+
 TITELS = {
     "": {"fotos": "Photos", "album": "Photo album", "herinneringen": "Memories", "familie": "Family photos"},
     "nl": {"fotos": "Foto’s", "album": "Fotoalbum", "herinneringen": "Herinneringen", "familie": "Familiefoto’s"},
@@ -17,6 +20,18 @@ TITELS = {
     "fr": {"fotos": "Photos", "album": "Album photo", "herinneringen": "Souvenirs", "familie": "Photos de famille"},
     "es": {"fotos": "Fotos", "album": "Álbum de fotos", "herinneringen": "Recuerdos", "familie": "Fotos familiares"},
     "ru": {"fotos": "Фото", "album": "Фотоальбом", "herinneringen": "Воспоминания", "familie": "Семейные фото"},
+    "zh": {"fotos": "照片", "album": "相册", "herinneringen": "回忆", "familie": "家庭照片"},
+    "ja": {"fotos": "フォト", "album": "フォトアルバム", "herinneringen": "思い出", "familie": "家族の写真"},
+    "ko": {"fotos": "사진", "album": "사진 앨범", "herinneringen": "추억", "familie": "가족 사진"},
+    "hi": {"fotos": "फ़ोटो", "album": "फ़ोटो एल्बम", "herinneringen": "यादें", "familie": "पारिवारिक फ़ोटो"},
+}
+
+# Language -> (font_path, ttc_index, base_size_on_3840, center_by_ink_bbox)
+TAAL_STIJL = {
+    "zh": (FONT_CJK, 2, 432, True),
+    "ja": (FONT_CJK, 0, 432, True),
+    "ko": (FONT_CJK, 1, 432, True),
+    "hi": (FONT_HI, 0, 428, True),
 }
 
 MIPMAPS = (("mipmap-xhdpi", 192), ("mipmap-xxhdpi", 288), ("mipmap-xxxhdpi", 384))
@@ -31,9 +46,10 @@ BANNER_SIZES = (
 )
 
 
-def font(px):
+def font(px, taal=""):
+    pad, idx, _, _ = TAAL_STIJL.get(taal, (FONT, 0, 504, False))
     try:
-        f = ImageFont.truetype(FONT, px)
+        f = ImageFont.truetype(pad, px, index=idx)
         f.set_variation_by_axes([700])
         return f
     except Exception:
@@ -166,17 +182,21 @@ def m_familie(base, cx, cy, s):
     return base
 
 
-def titel_laag(w, h, titel, x):
+def titel_laag(w, h, titel, x, taal=""):
     laag = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(laag)
-    maat = 504
+    _, _, maat, ink_mid = TAAL_STIJL.get(taal, (FONT, 0, 504, False))
     while True:
-        f = font(int(maat))
+        f = font(int(maat), taal)
         if d.textlength(titel, font=f) <= w - 150 - x or maat < 180:
             break
         maat *= 0.94
-    cap_h = -d.textbbox((0, 0), "H", font=f, anchor="ls")[1]
-    d.text((x, h / 2 + cap_h / 2), titel, font=f, fill=(255, 255, 255, 255), anchor="ls")
+    if ink_mid:
+        b = d.textbbox((0, 0), titel, font=f, anchor="ls")
+        mid_offset = -(b[1] + b[3]) / 2.0
+    else:
+        mid_offset = -d.textbbox((0, 0), "H", font=f, anchor="ls")[1] / 2.0
+    d.text((x, h / 2 + mid_offset), titel, font=f, fill=(255, 255, 255, 255), anchor="ls")
     return laag
 
 
@@ -187,7 +207,7 @@ def maak_variant(naam, sleutel, banner_naam, links, rechts, motief, titel_x=1720
     basis = motief(basis, 940, 1080, 4.35)
     for taal, titels in TITELS.items():
         im = basis.copy()
-        im.alpha_composite(titel_laag(bw, bh, titels[sleutel], titel_x))
+        im.alpha_composite(titel_laag(bw, bh, titels[sleutel], titel_x, taal))
         rgb = im.convert("RGB")
         for dpi, size in BANNER_SIZES:
             map_ = os.path.join(RES, "drawable-%s%s" % (taal + "-" if taal else "", dpi))
