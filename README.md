@@ -14,7 +14,8 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 
 ## Fork highlights
 
-- **Amlogic & Android 10+ video playback:** uses `SurfaceView` on API 29+ for hardware HWC rotation and 10-bit/4K playback, increases ExoPlayer buffering, clamps `>60 fps` metadata quirks on Amlogic decoders, disables mid-stream AFR stalls, and adds a D-Pad video seek HUD (`◀` / `▶` / `⏪` / `⏩`).
+- **Amlogic & Android 10+ video playback:** uses `SurfaceView` on API 29+ for hardware HWC rotation and 10-bit/4K playback, increases ExoPlayer buffering, clamps `>60 fps` metadata quirks on Amlogic decoders, and disables mid-stream AFR stalls.
+- **Interactive D-Pad video seek HUD:** press `▼` during video playback to open a transport progress bar where `◀` / `▶` scrubs smoothly with debounced timeline preview, duration-aware steps (`5 s` / `10 s` / `15 s`, doubling on hold), `OK` pauses/resumes, and `⏩` / `⏪` jumps `±10 s` anytime.
 - **Smooth D-Pad fast scrolling:** throttles D-Pad key-repeat events to avoid ANR, removes per-tile animation coroutines, prefetches upcoming grid rows, and skips destructive cache clears on `TRIM_MEMORY_RUNNING_LOW`.
 - **Side-by-side portrait photos:** automatically pairs two consecutive portrait photos on widescreen TVs when both fit cleanly side by side.
 - **Shuffle section & reordered menu:** promotes **Folders** right below **Photos**, followed by a new **Shuffle** infinite random photo & video feed with **Shuffle** and **Slideshow** header controls.
@@ -29,7 +30,7 @@ A fast, remote-friendly client for [Immich](https://immich.app) for Android TV b
 
 - **Timeline**: your entire library grouped by month and day, in a justified grid like Immich itself. Thumbnails start as blurred [ThumbHash](https://evanw.github.io/thumbhash/) previews and load month by month while you scroll, so even libraries with 100,000+ items stay smooth.
 - **Memories**: "On this day" cards at the top of the timeline and a dedicated Memories screen for the past week, played as a slideshow.
-- **Viewer**: full-screen photos and videos, a blurred backdrop instead of black bars, an info panel (date, people, albums, place, camera and lens), and an animated country map with the location of the photo. The album(s) a photo belongs to are shown with it, also when you browse a person or the timeline.
+- **Viewer**: full-screen photos and videos with a D-Pad video seek/transport HUD (`▼` for timeline scrubbing, `OK` pause/resume), a blurred backdrop instead of black bars, an info panel (date, people, albums, place, camera and lens), and an animated country map with the location of the photo. The album(s) a photo belongs to are shown with it, also when you browse a person or the timeline.
 - **Slideshow**: adjustable interval, optional Ken Burns zoom, chronological or shuffled, fade or slide transitions. Can run with nothing but the photo on screen (no text, no progress ring).
 - **Search**: Immich smart search ("beach", "birthday cake", "dog in the snow"), text in photos (OCR) and file names, with a built-in on-screen keyboard and voice search.
 - **Explore**: people (faces) and places.
@@ -104,10 +105,11 @@ The receiver requires the `DUMP` permission, so only the adb shell can send it, 
 | Timeline | **⏩ / ⏪** | Next / previous month |
 | Timeline | **▶** at the right edge | Focus the scroll bar: **▲ ▼** per month (hold for years), **OK** jumps there |
 | Timeline, albums, search | **Play/Pause** | Start a slideshow from the selected photo |
-| Viewer | **◀ ▶** | Previous / next photo |
-| Viewer | **OK** | Start / stop the slideshow (videos: pause) |
-| Viewer | **▲ ▼** | Info panel |
-| Viewer | **⏩ / ⏪** | 10 photos forward / back (videos: seek 10 s) |
+| Viewer | **◀ ▶** | Previous / next photo (videos with seek bar open: scrub `5` / `10` / `15 s`, `2×` on hold) |
+| Viewer | **OK** | Start / stop the slideshow (videos: pause / resume) |
+| Viewer | **▼** | Info panel (videos: toggle seek bar HUD) |
+| Viewer | **▲** | Info panel (videos with seek bar open: hide seek bar) |
+| Viewer | **⏩ / ⏪** | 10 photos forward / back (videos: seek `±10 s`) |
 | World map | **◀ ▶ ▲ ▼** | Select the next cluster in that direction, or pan |
 | World map | **OK** | Zoom in on the cluster; open the photos at the deepest level |
 | World map | **OK (long press)** | Show all photos of the cluster |
@@ -121,6 +123,11 @@ The first line, **Show settings**, switches between **Basic** (the settings most
 
 | Group | Setting | Options |
 |---|---|---|
+| Viewer | Country map on the photo | off / small / large |
+| | Show date and place | on / off |
+| | Date and place bar | hide after 2 – 10 s / always show |
+| | Counter | on / off |
+| | Album name | on / off |
 | Slideshow | Time per photo | 3 – 20 s (default 6 s) |
 | | Ken Burns effect | on / off |
 | | Order | by date / shuffled |
@@ -129,11 +136,6 @@ The first line, **Show settings**, switches between **Basic** (the settings most
 | | During the slideshow | everything / no progress ring / photo only |
 | Music | Background music | off / slideshow only / always |
 | | Radio station | Deep Space One / Drone Zone / Space Station Soma / Groove Salad |
-| Viewer | Country map on the photo | off / small / large |
-| | Show date and place | on / off |
-| | Date and place bar | hide after 2 – 10 s / always show |
-| | Counter | on / off |
-| | Album name | on / off |
 | Timeline | Photo size | small / normal / large |
 | | Default order | newest / oldest first |
 | | Partner's photos | on / off |
