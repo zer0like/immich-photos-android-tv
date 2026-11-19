@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and launcher variants (Settings → Name and icon) -->
+    <string name="app_name">照片</string>
+    <string name="alias_photos">照片</string>
+    <string name="alias_album">相册</string>
+    <string name="alias_memories">回忆</string>
+    <string name="alias_family">家庭照片</string>
+    <string name="appearance_photos">蓝色，堆叠照片（默认）</string>
+    <string name="appearance_album">暖橙色，翻开的相册</string>
+    <string name="appearance_memories">紫色，带星标的照片</string>
+    <string name="appearance_family">绿色，带爱心的照片</string>
+
+    <!-- Date/time patterns (java.time) for this language -->
+    <string name="pattern_month_year">yyyy年M月</string>
+    <string name="pattern_month_short">yyyy年M月</string>
+    <string name="pattern_day_short">M月d日 EEE</string>
+    <string name="pattern_day_year">yyyy年M月d日 EEE</string>
+    <string name="pattern_day_long">yyyy年M月d日 EEEE</string>
+    <string name="pattern_time">HH:mm</string>
+
+    <!-- Language screen -->
+    <string name="language_title">选择语言</string>
+    <string name="language_sub">稍后可在“设置 → 语言”中更改。</string>
+
+    <!-- Sections (menu) -->
+    <string name="section_photos">照片</string>
+    <string name="section_memories">回忆</string>
+    <string name="section_search">搜索</string>
+    <string name="section_explore">探索</string>
+    <string name="section_map">地图</string>
+    <string name="section_albums">相册</string>
+    <string name="section_favorites">收藏</string>
+    <string name="section_shuffle">随机浏览</string>
+    <string name="shuffle">重新随机</string>
+    <string name="shuffle_empty">暂无照片或视频</string>
+    <string name="section_settings">设置</string>
+
+    <!-- General -->
+    <string name="loading">加载中…</string>
+    <string name="today">今天</string>
+    <string name="yesterday">昨天</string>
+    <string name="no_date">无日期</string>
+    <string name="person">人物</string>
+    <plurals name="items">
+        <item quantity="other">%d 项</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="other">%s 张照片</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="other">%d 年前</item>
+    </plurals>
+
+    <!-- Timeline -->
+    <string name="newest_first">最新优先</string>
+    <string name="oldest_first">最早优先</string>
+    <string name="go_to_date">跳转到日期</string>
+    <string name="go_to_year">跳转到年份</string>
+    <string name="immich_unreachable">无法连接 Immich</string>
+    <string name="no_favorites_yet">暂无收藏</string>
+    <string name="no_photos_yet">暂无照片</string>
+    <string name="favorites_tip">在 Immich 中为照片点亮爱心，即可在这里显示。</string>
+    <string name="greeting_morning">早上好</string>
+    <string name="greeting_afternoon">下午好</string>
+    <string name="greeting_evening">晚上好</string>
+    <string name="greeting_night">晚安</string>
+    <string name="greeting_with_name">%1$s，%2$s</string>
+
+    <!-- Memories -->
+    <string name="memories_sub">往年今日</string>
+    <string name="no_memories">本周暂无回忆</string>
+
+    <!-- Viewer -->
+    <string name="slideshow">幻灯片</string>
+    <string name="slideshow_paused">幻灯片已暂停</string>
+    <string name="video_error">无法播放此视频</string>
+    <string name="info">详情</string>
+    <string name="hint_info_map">"确定键 在地图显示   ·   ◀ ▶ 切换   ·   ⏩ 跳过 10 项"</string>
+    <string name="hint_info">"◀ ▶ 切换   ·   确定键 幻灯片   ·   ⏩ 跳过 10 项"</string>
+
+    <!-- Search -->
+    <string name="search">搜索</string>
+    <string name="search_title">搜索：%s</string>
+    <string name="search_hint">搜索照片内容：海滩、生日、雪地里的狗…</string>
+    <string name="voice_search">语音搜索</string>
+    <string name="voice_prompt">您想查找什么？</string>
+    <string name="mode_smart">智能搜索</string>
+    <string name="mode_text">图中文字</string>
+    <string name="mode_filename">文件名</string>
+    <string name="type_all">全部</string>
+    <string name="type_photos">照片</string>
+    <string name="type_videos">视频</string>
+    <string name="sort_relevance">最佳匹配</string>
+    <string name="sort_newest">最新</string>
+    <string name="sort_oldest">最早</string>
+    <string name="searching">搜索中…</string>
+    <string name="search_failed">搜索失败：%s</string>
+    <string name="nothing_found">未找到任何结果</string>
+    <plurals name="results">
+        <item quantity="other">%s 个结果</item>
+    </plurals>
+    <string name="recent_searches">最近搜索</string>
+    <string name="try_suggestions">试试搜</string>
+    <string name="people">人物</string>
+    <string-array name="suggestions">
+        <item>海滩</item>
+        <item>雪景</item>
+        <item>生日</item>
+        <item>日落</item>
+        <item>圣诞树</item>
+        <item>山脉</item>
+        <item>小狗</item>
+        <item>蛋糕</item>
+        <item>游泳池</item>
+        <item>美食</item>
+    </string-array>
+    <string name="key_space">空格</string>
+    <string name="key_clear">清空</string>
+    <string name="action_search">搜索</string>
+    <string name="action_done">完成</string>
+    <string name="loading_failed">加载失败：%s</string>
+
+    <!-- Albums -->
+    <string name="albums">相册</string>
+    <plurals name="albums_count">
+        <item quantity="other">%d 个相册</item>
+    </plurals>
+    <string name="albums_matching">包含“%s”</string>
+    <string name="sort_recent">最近更新</string>
+    <string name="sort_newest_photos">最新照片</string>
+    <string name="sort_name">按名称</string>
+    <string name="sort_count">按数量</string>
+    <string name="shared">已共享</string>
+    <string name="shared_lower">已共享</string>
+    <string name="find_album">查找相册</string>
+    <string name="albums_load_failed">无法加载相册</string>
+
+    <!-- Explore -->
+    <string name="explore">探索</string>
+    <string name="load_failed">无法加载</string>
+    <string name="places">地点</string>
+
+    <!-- World map -->
+    <string name="map">地图</string>
+    <string name="map_load_failed">无法加载：%s</string>
+    <plurals name="photos_with_location">
+        <item quantity="other">%s 张带位置照片</item>
+    </plurals>
+    <string name="map_no_background">地图背景不可用（无网络）</string>
+    <string name="map_hint">"◀▶▲▼ 选择/移动   ·   确定 放大   ·   长按确定：全部照片   ·   ⏯ 幻灯片   ·   ⏪︎⏩︎ 缩放   ·   返回：全球"</string>
+
+    <!-- Settings -->
+    <string name="settings">设置</string>
+    <string name="settings_sub">"◀ ▶ 或确定键：选择   ·   长按返回：菜单   ·   INFO：按键说明"</string>
+    <string name="settings_show">显示设置</string>
+    <string name="settings_basic">基础</string>
+    <string name="settings_all">全部</string>
+    <string name="settings_basic_desc">仅显示常用设置。选择“全部”可查看其余选项。</string>
+    <string name="settings_all_desc">显示全部选项，包含高级设置</string>
+    <string name="off">关</string>
+    <string name="on">开</string>
+    <string name="group_slideshow">幻灯片</string>
+    <string name="time_per_photo">每张停留时间</string>
+    <string name="time_per_photo_desc">每张照片在屏幕上的显示时长</string>
+    <string name="seconds">%d 秒</string>
+    <string name="seconds_decimal">%s 秒</string>
+    <string name="ken_burns">Ken Burns 缩放效果</string>
+    <string name="ken_burns_desc">幻灯片播放时缓慢缩放画面</string>
+    <string name="order">播放顺序</string>
+    <string name="slideshow_order_desc">按日期顺序播放，或每次随机抽取照片</string>
+    <string name="by_date">按日期</string>
+    <string name="random">随机</string>
+    <string name="videos">视频</string>
+    <string name="slideshow_videos_desc">在幻灯片中播放或跳过视频</string>
+    <string name="play">播放</string>
+    <string name="skip">跳过</string>
+    <string name="transition">切换效果</string>
+    <string name="transition_desc">下一张照片出现的过渡方式</string>
+    <string name="fade">淡入淡出</string>
+    <string name="slide">滑动</string>
+    <string name="group_viewing">照片查看</string>
+    <string name="country_map">照片小地图</string>
+    <string name="country_map_desc">在右下角显示照片拍摄国家轮廓</string>
+    <string name="small">小</string>
+    <string name="large">大</string>
+    <string name="show_date_place">显示日期与地点</string>
+    <string name="show_date_place_desc">查看照片时在底部显示日期和地点栏</string>
+    <string name="date_place_bar">日期栏停留时间</string>
+    <string name="date_place_bar_desc">几秒后自动隐藏底部栏，或保持常显</string>
+    <string name="always_show">始终显示</string>
+    <string name="counter">计数器</string>
+    <string name="counter_desc">在日期旁显示“68 / %s”</string>
+    <string name="group_timeline">时间线</string>
+    <string name="photo_size">缩略图大小</string>
+    <string name="photo_size_desc">网格视图中的行高</string>
+    <string name="normal_cluster">正常</string>
+    <string name="normal">正常</string>
+    <string name="timeline_order_desc">打开时的默认排序（时间线顶部按钮可临时切换）</string>
+    <string name="partner_photos">共享伴侣照片</string>
+    <string name="partner_photos_desc">同时显示伴侣在 Immich 中与您共享的照片</string>
+    <string name="memories_at_top">顶部显示回忆</string>
+    <string name="memories_at_top_desc">在时间线上方显示“往年今日”一行</string>
+    <string name="start_screen">启动页面</string>
+    <string name="start_screen_desc">打开应用时默认进入的板块</string>
+    <string name="greeting">问候语</string>
+    <string name="greeting_desc">时间线顶部显示：“%s”或自定义文本</string>
+    <string name="automatic">自动</string>
+    <string name="custom_text">自定义文本</string>
+    <string name="nothing_entered">尚未输入 — 按确定键编辑</string>
+    <string name="group_map">地图</string>
+    <string name="map_start_view">初始视角</string>
+    <string name="map_start_view_desc">打开世界地图时的默认区域</string>
+    <string name="whole_world">全球</string>
+    <string name="europe">欧洲</string>
+    <string name="top_country">照片最多的国家</string>
+    <string name="last_viewed">上次查看的位置</string>
+    <string name="cluster_level">聚合粒度</string>
+    <string name="cluster_level_desc">精细：更多更小的分组；粗略：更少更大的分组</string>
+    <string name="fine">精细</string>
+    <string name="coarse">粗略</string>
+    <string name="map_style">地图样式</string>
+    <string name="map_style_desc">深色、浅色（Immich），或卫星图（EOX Sentinel-2，含道路与地名）</string>
+    <string name="dark">深色</string>
+    <string name="light">浅色</string>
+    <string name="satellite">卫星</string>
+    <string name="group_appearance">外观</string>
+    <string name="language">语言</string>
+    <string name="language_desc">应用界面语言，立即生效</string>
+    <string name="date_format">日期格式</string>
+    <string name="date_format_desc">所有日期中月与日的排列顺序（含屏保）</string>
+    <string name="time_format">时间格式</string>
+    <string name="time_format_desc">12 小时或 24 小时制；自动随语言设定</string>
+    <string name="accent_color">主题强调色</string>
+    <string name="accent_color_desc">焦点框、按钮和标题的颜色</string>
+    <string name="color_blue">蓝色</string>
+    <string name="color_green">绿色</string>
+    <string name="color_orange">橙色</string>
+    <string name="color_pink">粉色</string>
+    <string name="color_purple">紫色</string>
+    <string name="color_gray">灰色</string>
+    <string name="name_and_icon">名称与图标</string>
+    <string name="name_and_icon_desc">%s。同时更改桌面图标与名称（数秒内更新）</string>
+    <string name="group_storage">存储</string>
+    <string name="clear_cache">清除图片缓存</string>
+    <string name="cache_size">"磁盘 %1$s MB  ·  内存 %2$s MB"</string>
+    <string name="group_account">账号</string>
+    <string name="immich_server">Immich 服务器</string>
+    <string name="signed_in_as">当前登录</string>
+    <string name="reconnect">重新连接</string>
+    <string name="reconnect_desc">更换服务器或账号</string>
+    <string name="disconnect">断开连接</string>
+    <string name="disconnect_desc">从此电视移除密钥；请在 Immich“账号设置 → API 密钥”中删除对应密钥</string>
+    <string name="are_you_sure">确定要断开吗？</string>
+    <string name="are_you_sure_desc">再次按确定键从此电视移除密钥</string>
+    <string name="group_about">关于</string>
+    <string name="keys">快捷键</string>
+    <string name="keys_desc">查看所有遥控器快捷键（也可按 INFO 键打开）</string>
+    <string name="app_line">%s 应用</string>
+    <string name="version">版本 %s</string>
+    <string name="map_attribution">© OpenStreetMap · Protomaps（tiles.immich.cloud）；卫星图：%s，CC BY-NC-SA 4.0</string>
+
+    <!-- Keys overview -->
+    <string name="keys_close_hint">按任意键关闭</string>
+    <string name="key_group_everywhere">全局</string>
+    <string name="key_back_hold">长按返回键</string>
+    <string name="key_back_hold_desc">打开板块菜单（如遥控器有 MENU 键也可使用）</string>
+    <string name="key_info">INFO 键</string>
+    <string name="key_info_desc">本快捷键说明</string>
+    <string name="key_left_edge">在最左侧按 ◀</string>
+    <string name="key_left_edge_desc">打开菜单</string>
+    <string name="key_back">返回键</string>
+    <string name="key_back_desc">返回上一级；在首页则退出应用</string>
+    <string name="key_group_timeline">时间线、相册、搜索</string>
+    <string name="key_arrows">▲ ▼ ◀ ▶</string>
+    <string name="key_arrows_desc">选择照片</string>
+    <string name="key_ok">确定键</string>
+    <string name="key_ok_open">打开照片</string>
+    <string name="key_play">播放/暂停</string>
+    <string name="key_play_desc">从当前选中照片开始幻灯片</string>
+    <string name="key_seek">⏪︎ ⏩︎</string>
+    <string name="key_seek_month">向前 / 向后跳一个月</string>
+    <string name="key_back_top">回到顶部；再按一次退出应用</string>
+    <string name="key_group_settings">设置</string>
+    <string name="key_left_right">◀ ▶</string>
+    <string name="key_value">上一个 / 下一个选项</string>
+    <string name="key_ok_value">下一个选项或执行操作</string>
+    <string name="key_group_viewer">查看照片</string>
+    <string name="key_prev_next">上一张 / 下一张</string>
+    <string name="key_ok_play">"确定键 或 播放/暂停"</string>
+    <string name="key_slideshow_desc">开/关幻灯片（播放视频时：暂停）</string>
+    <string name="key_info_btn">"▲ ▼ 或 INFO 键"</string>
+    <string name="key_info_panel">照片信息（相机、地点、地图）</string>
+    <string name="key_ok_info">打开信息面板时按确定键</string>
+    <string name="key_ok_info_desc">在世界地图上显示（含位置信息的照片）</string>
+    <string name="key_seek_viewer">前/后跳 10 张照片；视频中快退/快进 10 秒</string>
+    <string name="key_close">关闭</string>
+    <string name="key_group_map">世界地图</string>
+    <string name="key_map_arrows">选择聚合点或平移地图</string>
+    <string name="key_map_ok">放大分组；不可继续拆分时打开照片</string>
+    <string name="key_map_zoom">缩小 / 放大</string>
+    <string name="key_map_back">返回全球视图；再按返回首页</string>
+    <string name="key_map_left">在全球视图按 ◀</string>
+
+    <!-- Connect screen (TV) -->
+    <string name="pair_title">连接到您的 Immich</string>
+    <string name="pair_test">测试模式：在连接成功前保留当前连接</string>
+    <string name="pair_once">仅需一次性配置，之后即可自动使用</string>
+    <string name="step1">用手机扫描二维码</string>
+    <string name="step1_sub">手机需与电视处于同一 Wi-Fi 网络。</string>
+    <string name="step2">输入 Immich 服务器地址、邮箱和密码</string>
+    <string name="step2_sub">电视将自动生成只读密钥；不会保存您的密码。</string>
+    <string name="step3">完成</string>
+    <string name="step3_sub">可以放下手机：照片将自动加载显示。</string>
+    <string name="waiting_for_phone">正在等待手机操作…</string>
+    <string name="done_title">完成！现在可以收起手机了。</string>
+    <string name="paired_as">已连接为 %1$s（%2$s）</string>
+    <string name="pair_failed">连接失败</string>
+    <string name="try_again">请在手机上重试。</string>
+    <string name="no_network">无网络</string>
+    <string name="type_address">或在浏览器中输入此地址：</string>
+
+    <!-- Connecting: progress and errors (shown on the TV and sent to the phone) -->
+    <string name="err_no_network">无网络连接。请将电视盒连接到 Wi-Fi 或网线。</string>
+    <string name="err_no_port">无法打开端口。</string>
+    <string name="no_access">无权限</string>
+    <string name="no_access_html">无权访问。&lt;br&gt;请扫描电视屏幕上的二维码。</string>
+    <string name="failed">失败</string>
+    <string name="err_app_inactive">应用已不再处于活动状态。</string>
+    <string name="err_enter_address">请输入您的 Immich 服务器地址。</string>
+    <string name="err_enter_email">请输入邮箱地址和密码。</string>
+    <string name="status_checking_key_perms">正在检查密钥及其权限…</string>
+    <string name="paired_message">已连接为 %1$s（%2$s）。</string>
+    <string name="err_something_wrong">出现错误：%s</string>
+    <string name="err_ssl">与 %s 的安全连接失败（证书问题）。请尝试使用 http:// 或检查证书。</string>
+    <string name="err_host">找不到地址 %s。请检查拼写。</string>
+    <string name="err_connection">无法连接到 %1$s:%2$d。服务器是否已运行且电视在同一局域网内？</string>
+    <string name="status_finding_server">正在查找服务器 %s…</string>
+    <string name="err_no_pong">%s 未响应 Immich 服务（/api/server/ping 未返回 pong）。</string>
+    <string name="err_no_immich">%1$s 未响应 Immich 服务（/api/server/ping 返回 HTTP %2$d）。</string>
+    <string name="err_too_old">此 Immich 服务器版本为 %s，版本过旧。请升级到 Immich 3（或至少 2）。</string>
+    <string name="warn_version">提示：您的 Immich 服务器版本为 %s，本应用面向 Immich 3 开发，大部分功能应可正常使用。</string>
+    <string name="status_signing_in">正在以 %s 登录…</string>
+    <string name="err_login">邮箱或密码错误。</string>
+    <string name="err_login_email">Immich 不接受此邮箱地址（格式无效）。</string>
+    <string name="err_login_http">登录失败（HTTP %d）。</string>
+    <string name="err_no_token">登录未返回访问令牌。</string>
+    <string name="status_creating_key">正在创建 API 密钥…</string>
+    <string name="err_no_keys_allowed">此账号无权创建 API 密钥。请联系管理员或使用已有密钥。</string>
+    <string name="err_key_http">创建 API 密钥失败（HTTP %1$d）：%2$s</string>
+    <string name="err_no_key_returned">Immich 未返回密钥。</string>
+    <string name="status_checking_key">正在验证密钥…</string>
+    <string name="err_key_not_working">新密钥不可用（HTTP %d）。</string>
+    <string name="err_key_rejected">此 API 密钥被 %s 拒绝。请检查是否完整复制。</string>
+    <string name="err_unexpected">服务器返回异常响应（%2$s 返回 HTTP %1$d）。</string>
+    <string name="err_permissions">密钥缺少以下权限：%1$s。请在 Immich 中创建包含以下精确权限的新密钥：%2$s。</string>
+    <string name="unknown_user">未知用户</string>
+    <string name="key_name_template">%s 上的照片</string>
+
+    <!-- Phone page (served by the TV) -->
+    <string name="html_title">连接照片应用</string>
+    <string name="html_heading">电视上的照片</string>
+    <string name="html_sub">连接到您的 Immich 服务器</string>
+    <string name="html_address">Immich 服务器地址</string>
+    <string name="html_address_example">例如 192.168.1.10:2283 或 photos.mydomain.com</string>
+    <string name="html_address_example_short">例如 192.168.1.10:2283</string>
+    <string name="html_address_hint">与浏览器或 Immich 手机应用中的地址相同。</string>
+    <string name="html_email">邮箱地址</string>
+    <string name="html_password">密码</string>
+    <string name="html_password_hint">您的密码仅用于在 Immich 中为电视创建只读密钥，不会被保存。</string>
+    <string name="html_connect">连接</string>
+    <string name="html_key_heading">或粘贴现有 API 密钥</string>
+    <string name="html_key">API 密钥</string>
+    <string name="html_key_hint_before">请在 Immich 中创建：</string>
+    <string name="html_key_path">账号设置 → API 密钥 → 新建 API 密钥</string>
+    <string name="html_key_hint_after">并仅勾选以下权限：</string>
+    <string name="html_connect_key">使用密钥连接</string>
+    <string name="html_footer">此页面仅在您的局域网内有效，连接成功后自动关闭。</string>
+    <string name="html_busy_title">正在连接…</string>
+    <string name="html_busy">电视正在检查服务器并创建密钥，请稍候几秒。</string>
+    <string name="html_no_conn_title">无法连接电视</string>
+    <string name="html_no_conn">电视是否仍停留在连接界面，且手机与电视在同一 Wi-Fi 网络？</string>
+
+    <!-- Unofficial (2.1) -->
+    <string name="unofficial_short">Immich 非官方客户端</string>
+    <string name="unofficial_long">非官方应用，与 Immich 项目无隶属或背书关系。Immich 为其各自所有者的商标。</string>
+    <string name="back_to_close">按返回键关闭</string>
+    <string name="minutes">%d 分钟</string>
+
+    <!-- Screensaver (2.1) -->
+    <string name="dream_name">照片（屏保）</string>
+    <string name="group_screensaver">屏保</string>
+    <string name="screensaver">屏保</string>
+    <string name="dream_on_desc">将此应用设为本设备的屏幕保护程序</string>
+    <string name="dream_status_on">已启用：此应用为当前设备屏保</string>
+    <string name="dream_status_off">尚未设为设备屏保</string>
+    <string name="dream_status_off_ok">尚未启用 — 按确定键进行设置</string>
+    <string name="dream_setup">在此设备上设置</string>
+    <string name="dream_setup_sub">Android TV 通常没有选择第三方屏保的界面；以下是启用方法。</string>
+    <string name="dream_setup_desc">状态、帮助及一次性设置（adb）</string>
+    <string name="dream_preview">预览</string>
+    <string name="dream_preview_desc">立即预览屏保；按任意键退出</string>
+    <string name="dream_source">照片来源</string>
+    <string name="dream_source_desc">屏保要显示哪些照片</string>
+    <string name="dream_all_photos">所有照片</string>
+    <string name="dream_album">相册</string>
+    <string name="dream_people">人物</string>
+    <string name="dream_combined">相册 + 人物</string>
+    <string name="dream_from_year">起始年份</string>
+    <string name="dream_from_year_desc">仅显示此年份及之后拍摄的照片</string>
+    <string name="all_years">所有年份</string>
+    <string name="dream_order_desc">随机或按日期（从上次位置继续）</string>
+    <string name="dream_albums">相册</string>
+    <string name="dream_albums_hint">"已选 %1$d 个  ·  确定键 = 开关"</string>
+    <string name="dream_other_album">显示其他相册名</string>
+    <string name="dream_other_album_desc">若照片也在其他相册中，优先显示该相册名（如显示“生日”而非“屏保”）</string>
+    <string name="dream_memories">今日回忆</string>
+    <string name="dream_person">人物</string>
+    <string name="dream_not_chosen">尚未选择 — 按确定键</string>
+    <string name="dream_time_desc">每张照片停留时间（遥控器 ◀ ▶：上一张 / 下一张）</string>
+    <string name="dream_clock">时钟</string>
+    <string name="dream_clock_desc">左上角显示时间和日期</string>
+    <string name="dream_map">屏保照片小地图</string>
+    <string name="dream_map_desc">右下角显示拍摄国家轮廓</string>
+    <string name="dream_ken_burns_desc">每张照片缓慢缩放</string>
+    <string name="dream_info">屏保日期与地点</string>
+    <string name="dream_info_desc">左下角显示日期、地点与相册名称</string>
+    <string name="dream_no_photos">所选屏保来源中未找到照片</string>
+    <string name="dream_no_connection">无法连接 Immich 服务器，正在重试…</string>
+    <string name="dream_not_paired">尚未连接：请先打开应用</string>
+    <string name="dream_perm_yes">应用可以直接修改屏保设置</string>
+    <string name="dream_perm_no">应用尚无权修改屏保设置（需通过 adb 授予一次性权限，见下方）</string>
+    <string name="dream_dev_yes">开发者选项已开启</string>
+    <string name="dream_dev_no">开发者选项已关闭</string>
+    <string name="dream_turn_on">立即开启</string>
+    <string name="dream_turn_off">立即关闭</string>
+    <string name="dream_toggle_desc">关闭时会记住并恢复之前的系统屏保</string>
+    <string name="dream_open_system">打开屏保设置</string>
+    <string name="dream_open_system_desc">在系统设置中选择“照片”</string>
+    <string name="dream_auto_heading">自动设置（网络调试）</string>
+    <string name="dream_auto_desc">设备会连接自身调试端口完成配置。需开启“开发者选项 → 网络调试（或 ADB over network）”。首次连接时电视会询问是否允许调试，请选择“始终允许”。</string>
+    <string name="dream_auto_btn">自动配置</string>
+    <string name="dream_auto_btn_desc">授予权限并将本应用设为屏保，耗时数秒</string>
+    <string name="adb_connecting">正在连接…若电视弹出调试授权提示，请选择“始终允许”</string>
+    <string name="adb_done">完成：已将此应用设为屏保</string>
+    <string name="adb_failed">自动配置失败；请使用下方的手动步骤</string>
+    <string name="adb_no_connection">无连接：请先在开发者选项中开启网络调试</string>
+    <string name="adb_no_permission">电视端未授权调试，请重试</string>
+    <string name="dream_manual_heading">通过电脑手动设置</string>
+    <string name="dream_step1">开启开发者选项：设置 → 设备偏好设置 → 关于 → 在“版本号”上连按 7 次确定键。</string>
+    <string name="dream_step2">设置 → 设备偏好设置 → 开发者选项 → 开启网络调试（或通过数据线开启 USB 调试）。</string>
+    <string name="dream_step3">在安装有 adb（Android platform tools）的电脑上运行：</string>
+    <string name="dream_step4">首次连接时电视会询问是否允许该电脑。执行完第二条命令后应用即可自行开关屏保；后两条命令会立即将其设为屏保。</string>
+    <string name="dream_open_about">打开“关于”</string>
+    <string name="dream_open_about_desc">用于开启开发者选项</string>
+    <string name="dream_open_dev">打开开发者选项</string>
+    <string name="dream_open_dev_desc">用于开启网络调试</string>
+    <string name="dream_key_error">Immich 服务器不再接受此设备的密钥：请打开应用并选择“重新连接”</string>
+    <string name="dream_usb_yes">USB 调试已开启</string>
+    <string name="dream_usb_no">USB 调试已关闭</string>
+    <string name="dream_net_yes">网络调试已开启（端口 5555）</string>
+    <string name="dream_net_no">网络调试已关闭（自动配置需要此项）</string>
+    <string name="dream_current">当前屏保：%1$s</string>
+    <string name="dream_starts_after">无操作 %1$s 后启动</string>
+
+    <!-- Diagnostics (2.1) -->
+    <string name="diagnostics">诊断</string>
+    <string name="diagnostics_desc">上次应用退出的原因（仅保存在本地设备）</string>
+    <string name="diagnostics_sub">最近异常退出记录与原因。不会向外部发送任何数据。</string>
+    <string name="diagnostics_empty">暂无记录：应用未发生过异常退出。</string>
+    <string name="diagnostics_footer">提示：应用崩溃会实时写入此处；系统报告的原因（内存、ANR）会在下次启动时显示。</string>
+    <string name="diag_crash">崩溃（应用错误）</string>
+    <string name="diag_crash_native">崩溃（原生代码）</string>
+    <string name="diag_anr">无响应（ANR）</string>
+    <string name="diag_memory">被 Android 关闭：内存不足</string>
+    <string name="diag_signal">被信号终止（例如更新期间）</string>
+    <string name="diag_user">被用户或系统停止</string>
+    <string name="diag_system">被系统关闭</string>
+    <string name="diag_caught">已捕获错误（应用保持运行）</string>
+    <string name="diag_other">其他</string>
+    <string name="diag_foreground">处于前台时</string>
+
+    <!-- 2.5: world map, scroll bar, people -->
+    <string name="continent_europe">欧洲</string>
+    <string name="continent_asia">亚洲</string>
+    <string name="continent_africa">非洲</string>
+    <string name="continent_north_america">北美洲</string>
+    <string name="continent_south_america">南美洲</string>
+    <string name="continent_oceania">大洋洲</string>
+    <string name="continent_antarctica">南极洲</string>
+    <string name="continent_other">其他地区</string>
+    <string name="region_northern_europe">北欧</string>
+    <string name="region_western_europe">西欧</string>
+    <string name="region_southern_europe">南欧</string>
+    <string name="region_eastern_europe">东欧</string>
+    <string name="region_north_africa">北非</string>
+    <string name="region_west_africa">西非</string>
+    <string name="region_central_africa">中非</string>
+    <string name="region_east_africa">东非</string>
+    <string name="region_southern_africa">南部非洲</string>
+    <string name="region_northern_america">美国和加拿大</string>
+    <string name="region_central_america">中美洲</string>
+    <string name="region_caribbean">加勒比地区</string>
+    <string name="region_central_asia">中亚</string>
+    <string name="region_east_asia">东亚</string>
+    <string name="region_southeast_asia">东南亚</string>
+    <string name="region_south_asia">南亚</string>
+    <string name="region_west_asia">中东</string>
+    <string name="region_australia">澳大利亚和新西兰</string>
+    <string name="region_melanesia">美拉尼西亚</string>
+    <string name="region_micronesia">密克罗尼西亚</string>
+    <string name="region_polynesia">波利尼西亚</string>
+    <string name="scrollbar_hint_month">"▲▼ 按月 · 长按：按年 · 确定 跳转"</string>
+    <string name="find_person">查找人物</string>
+    <string name="sort_most_photos">照片最多</string>
+    <string name="all_people">全部人物（%1$d）</string>
+    <string name="key_ok_hold">长按确定键</string>
+    <string name="key_map_ok_hold_desc">以网格查看该分组全部照片（按日期排序）</string>
+    <string name="key_map_play_desc">播放该分组幻灯片</string>
+    <string name="key_scrollbar">在最右侧按 ▶</string>
+    <string name="key_scrollbar_desc">滚动条：▲▼ 按月（长按按年），按确定或 ◀ 跳转</string>
+    <string name="scrollbar_hint_general">"▲▼ 移动 · 长按：加速 · 确定 跳转"</string>
+    <string name="section_folders">文件夹</string>
+    <string name="folders_no_permission">无文件夹访问权限</string>
+    <string name="folders_no_permission_desc">API 密钥缺少 folder.read 权限。</string>
+    <string name="folders_load_failed">无法加载文件夹</string>
+    <string name="folder_empty">此文件夹为空</string>
+    <string name="slideshow_overlay">幻灯片显示内容</string>
+    <string name="slideshow_overlay_desc">幻灯片播放时照片上方显示的元素；暂停时会恢复全部信息</string>
+    <string name="slideshow_overlay_all">全部显示</string>
+    <string name="slideshow_overlay_no_ring">无进度圆环</string>
+    <string name="slideshow_overlay_photo_only">仅照片</string>
+    <string name="group_music">音乐</string>
+    <string name="music_mode">背景音乐</string>
+    <string name="music_mode_desc">在应用内播放环境电台（播放视频时静音，退到后台暂停）</string>
+    <string name="music_slideshow">仅幻灯片时</string>
+    <string name="music_always">始终播放</string>
+    <string name="music_station">电台频道</string>
+    <string name="music_station_desc">无广告环境网络电台（SomaFM）</string>
+    <string name="dream_ring">进度圆环</string>
+    <string name="dream_ring_desc">左下角的小圆环，随下一张照片倒计时填充</string>
+    <string name="album_name">相册名称</string>
+    <string name="album_name_desc">显示照片所属相册（例如查看人物时）</string>
+    <string name="blurred_background">模糊背景</string>
+    <string name="blurred_background_desc">用模糊版本填充照片和视频四周边缘；关闭 = 黑色（同时适用于屏保）</string>
+    <plurals name="folders_count">
+        <item quantity="other">%d 个文件夹</item>
+    </plurals>
+    <string name="perms_title">密钥权限</string>
+    <string name="perms_checking">检查中…</string>
+    <string name="perms_ok">所有权限均正常</string>
+    <string name="perms_partially_unknown">未发现缺少的权限（此服务器无法列出全部权限）</string>
+    <string name="perms_core_missing">缺少核心权限；没有这些权限应用无法工作</string>
+    <string name="perms_missing">缺少部分权限；对应板块将无法使用</string>
+    <string name="perms_missing_short">缺少：%s</string>
+    <string name="perms_how_to_fix">请重新连接以生成包含全部权限的新密钥（之后可在 Immich 删除旧密钥），或在 Immich“账号设置 → API 密钥”中添加缺少的权限。</string>
+    <string name="perms_reconnect_sub">通过手机生成新密钥</string>
+    <string name="perms_recheck">重新检查</string>
+    <string name="perms_close">关闭</string>
+    <string name="perms_inspect">查看缺少的权限并修复</string>
+    <string name="perm_asset_read">时间线、搜索及照片详情</string>
+    <string name="perm_asset_view">缩略图与原图浏览</string>
+    <string name="perm_user_read">在问候语与设置中显示您的名字</string>
+    <string name="perm_album_read">相册与相册名称</string>
+    <string name="perm_memory_read">回忆（“往年今日”）</string>
+    <string name="perm_person_read">人物</string>
+    <string name="perm_map_read">世界地图</string>
+    <string name="perm_folder_read">文件夹</string>
+    <string name="update_title">发现新版本 %1$s</string>
+    <string name="update_sub">当前版本为 %1$s</string>
+    <string name="update_downloading">正在下载… %1$d%%</string>
+    <string name="update_installing">正在安装…</string>
+    <string name="update_permission">请先允许此应用安装更新（未知来源），然后再次选择“立即更新”。</string>
+    <string name="update_permission_btn">打开设置</string>
+    <string name="update_error">更新失败：%1$s</string>
+    <string name="update_now">立即更新</string>
+    <string name="update_later">稍后</string>
+    <string name="whats_new_title">%1$s 更新内容</string>
+    <string name="updates">软件更新</string>
+    <string name="update_available">有可用版本 %1$s，按确定键更新</string>
+    <string name="update_checking">正在检查…</string>
+    <string name="update_up_to_date">已是最新版本，按确定键再次检查</string>
+    <string name="update_check_prompt">按确定键检查新版本</string>
+    <string name="update_auto">检查更新</string>
+    <string name="update_auto_desc">启动时在 GitHub 上检查新版本</string>
+    <string name="whats_new_row">更新日志</string>
+    <string name="whats_new_row_desc">此版本的变更内容</string>
+    <string-array name="whats_new_items">
+        <item>修复 Amlogic 与 Android 10+ 视频播放，新增遥控器快进/快退进度提示</item>
+        <item>优化长按方向键快速滚动流畅度，消除卡顿与 ANR 崩溃</item>
+        <item>支持竖屏照片并排双图浏览及底部日期/地点栏显示开关</item>
+        <item>新增“随机浏览”板块、“文件夹”移至照片下方，并支持 SomaFM 背景电台</item>
+        <item>新增俄语等多语言界面与多语言支持</item>
+    </string-array>
+</resources>

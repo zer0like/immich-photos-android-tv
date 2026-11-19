@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and launcher variants (Settings → Name and icon) -->
+    <string name="app_name">フォト</string>
+    <string name="alias_photos">フォト</string>
+    <string name="alias_album">フォトアルバム</string>
+    <string name="alias_memories">思い出</string>
+    <string name="alias_family">家族の写真</string>
+    <string name="appearance_photos">ブルー、重ねた写真（デフォルト）</string>
+    <string name="appearance_album">ウォームオレンジ、開いたアルバム</string>
+    <string name="appearance_memories">パープル、星付きの写真</string>
+    <string name="appearance_family">グリーン、ハート付きの写真</string>
+
+    <!-- Date/time patterns (java.time) for this language -->
+    <string name="pattern_month_year">yyyy年M月</string>
+    <string name="pattern_month_short">yyyy年M月</string>
+    <string name="pattern_day_short">M月d日(EEE)</string>
+    <string name="pattern_day_year">yyyy年M月d日(EEE)</string>
+    <string name="pattern_day_long">yyyy年M月d日 EEEE</string>
+    <string name="pattern_time">H:mm</string>
+
+    <!-- Language screen -->
+    <string name="language_title">言語を選択</string>
+    <string name="language_sub">後で「設定 → 言語」から変更できます。</string>
+
+    <!-- Sections (menu) -->
+    <string name="section_photos">フォト</string>
+    <string name="section_memories">思い出</string>
+    <string name="section_search">検索</string>
+    <string name="section_explore">見つける</string>
+    <string name="section_map">マップ</string>
+    <string name="section_albums">アルバム</string>
+    <string name="section_favorites">お気に入り</string>
+    <string name="section_shuffle">シャッフル</string>
+    <string name="shuffle">シャッフル</string>
+    <string name="shuffle_empty">写真や動画はまだありません</string>
+    <string name="section_settings">設定</string>
+
+    <!-- General -->
+    <string name="loading">読み込み中…</string>
+    <string name="today">今日</string>
+    <string name="yesterday">昨日</string>
+    <string name="no_date">日付なし</string>
+    <string name="person">人物</string>
+    <plurals name="items">
+        <item quantity="other">%d 件</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="other">%s 枚の写真</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="other">%d 年前</item>
+    </plurals>
+
+    <!-- Timeline -->
+    <string name="newest_first">新しい順</string>
+    <string name="oldest_first">古い順</string>
+    <string name="go_to_date">日付へ移動</string>
+    <string name="go_to_year">年へ移動</string>
+    <string name="immich_unreachable">Immich に接続できません</string>
+    <string name="no_favorites_yet">お気に入りはまだありません</string>
+    <string name="no_photos_yet">写真はまだありません</string>
+    <string name="favorites_tip">Immich で写真にハートを付けると、ここに表示されます。</string>
+    <string name="greeting_morning">おはようございます</string>
+    <string name="greeting_afternoon">こんにちは</string>
+    <string name="greeting_evening">こんばんは</string>
+    <string name="greeting_night">おやすみなさい</string>
+    <string name="greeting_with_name">%1$s、%2$s</string>
+
+    <!-- Memories -->
+    <string name="memories_sub">過去の同じ日</string>
+    <string name="no_memories">今週の思い出はありません</string>
+
+    <!-- Viewer -->
+    <string name="slideshow">スライドショー</string>
+    <string name="slideshow_paused">スライドショーを一時停止</string>
+    <string name="video_error">この動画は再生できません</string>
+    <string name="info">情報</string>
+    <string name="hint_info_map">"決定 マップで表示   ·   ◀ ▶ 移動   ·   ⏩ 10件スキップ"</string>
+    <string name="hint_info">"◀ ▶ 移動   ·   決定 スライドショー   ·   ⏩ 10件スキップ"</string>
+
+    <!-- Search -->
+    <string name="search">検索</string>
+    <string name="search_title">検索：%s</string>
+    <string name="search_hint">写真の内容で検索：ビーチ、誕生日、雪の中の犬…</string>
+    <string name="voice_search">音声検索</string>
+    <string name="voice_prompt">何をお探しですか？</string>
+    <string name="mode_smart">スマート検索</string>
+    <string name="mode_text">写真内の文字</string>
+    <string name="mode_filename">ファイル名</string>
+    <string name="type_all">すべて</string>
+    <string name="type_photos">写真</string>
+    <string name="type_videos">動画</string>
+    <string name="sort_relevance">関連度順</string>
+    <string name="sort_newest">新しい順</string>
+    <string name="sort_oldest">古い順</string>
+    <string name="searching">検索中…</string>
+    <string name="search_failed">検索に失敗しました：%s</string>
+    <string name="nothing_found">見つかりませんでした</string>
+    <plurals name="results">
+        <item quantity="other">%s 件の結果</item>
+    </plurals>
+    <string name="recent_searches">最近の検索</string>
+    <string name="try_suggestions">キーワード例</string>
+    <string name="people">人物</string>
+    <string-array name="suggestions">
+        <item>ビーチ</item>
+        <item>雪</item>
+        <item>誕生日</item>
+        <item>夕日</item>
+        <item>クリスマスツリー</item>
+        <item>山</item>
+        <item>犬</item>
+        <item>ケーキ</item>
+        <item>プール</item>
+        <item>料理</item>
+    </string-array>
+    <string name="key_space">空白</string>
+    <string name="key_clear">消去</string>
+    <string name="action_search">検索</string>
+    <string name="action_done">完了</string>
+    <string name="loading_failed">読み込みに失敗しました：%s</string>
+
+    <!-- Albums -->
+    <string name="albums">アルバム</string>
+    <plurals name="albums_count">
+        <item quantity="other">%d 件のアルバム</item>
+    </plurals>
+    <string name="albums_matching">「%s」を含む</string>
+    <string name="sort_recent">最近の更新</string>
+    <string name="sort_newest_photos">新しい写真</string>
+    <string name="sort_name">名前順</string>
+    <string name="sort_count">枚数順</string>
+    <string name="shared">共有</string>
+    <string name="shared_lower">共有</string>
+    <string name="find_album">アルバムを検索</string>
+    <string name="albums_load_failed">アルバムを読み込めませんでした</string>
+
+    <!-- Explore -->
+    <string name="explore">見つける</string>
+    <string name="load_failed">読み込めませんでした</string>
+    <string name="places">場所</string>
+
+    <!-- World map -->
+    <string name="map">マップ</string>
+    <string name="map_load_failed">読み込めませんでした：%s</string>
+    <plurals name="photos_with_location">
+        <item quantity="other">位置情報付きの写真 %s 枚</item>
+    </plurals>
+    <string name="map_no_background">地図の背景を表示できません（オフライン）</string>
+    <string name="map_hint">"◀▶▲▼ 選択/移動   ·   決定 拡大   ·   決定長押し：すべて表示   ·   ⏯ スライドショー   ·   ⏪︎⏩︎ ズーム   ·   戻る：全世界"</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="settings_sub">"◀ ▶ または決定：値を変更   ·   戻る長押し：メニュー   ·   INFO：操作一覧"</string>
+    <string name="settings_show">設定の表示</string>
+    <string name="settings_basic">基本</string>
+    <string name="settings_all">すべて</string>
+    <string name="settings_basic_desc">よく使う設定のみ表示します。「すべて」で詳細を表示できます。</string>
+    <string name="settings_all_desc">詳細設定を含むすべての項目</string>
+    <string name="off">オフ</string>
+    <string name="on">オン</string>
+    <string name="group_slideshow">スライドショー</string>
+    <string name="time_per_photo">表示時間</string>
+    <string name="time_per_photo_desc">各写真を画面に表示する秒数</string>
+    <string name="seconds">%d 秒</string>
+    <string name="seconds_decimal">%s 秒</string>
+    <string name="ken_burns">ケン・バーンズ効果</string>
+    <string name="ken_burns_desc">スライドショー中にゆっくりズームします</string>
+    <string name="order">順序</string>
+    <string name="slideshow_order_desc">日付順または毎回ランダムに再生</string>
+    <string name="by_date">日付順</string>
+    <string name="random">ランダム</string>
+    <string name="videos">動画</string>
+    <string name="slideshow_videos_desc">スライドショーで動画を再生するかスキップします</string>
+    <string name="play">再生</string>
+    <string name="skip">スキップ</string>
+    <string name="transition">切り替え効果</string>
+    <string name="transition_desc">次の写真への切り替え方法</string>
+    <string name="fade">フェード</string>
+    <string name="slide">スライド</string>
+    <string name="group_viewing">写真表示</string>
+    <string name="country_map">写真上の地図</string>
+    <string name="country_map_desc">撮影国の輪郭を右下に表示します</string>
+    <string name="small">小</string>
+    <string name="large">大</string>
+    <string name="show_date_place">日付と場所を表示</string>
+    <string name="show_date_place_desc">表示中に画面下部へ日付と場所のバーを表示します</string>
+    <string name="date_place_bar">表示の自動非表示</string>
+    <string name="date_place_bar_desc">数秒後にバーを隠すか、常に表示したままにします</string>
+    <string name="always_show">常に表示</string>
+    <string name="counter">カウンター</string>
+    <string name="counter_desc">日付の横に「68 / %s」を表示します</string>
+    <string name="group_timeline">タイムライン</string>
+    <string name="photo_size">写真サイズ</string>
+    <string name="photo_size_desc">一覧での行の高さ</string>
+    <string name="normal_cluster">標準</string>
+    <string name="normal">標準</string>
+    <string name="timeline_order_desc">起動時の並び順（タイムライン上部のボタンで一時的に反転できます）</string>
+    <string name="partner_photos">パートナーの写真</string>
+    <string name="partner_photos_desc">Immich でパートナーと共有されている写真も表示します</string>
+    <string name="memories_at_top">上部に思い出を表示</string>
+    <string name="memories_at_top_desc">タイムライン上部に「過去の同じ日」の行を表示します</string>
+    <string name="start_screen">起動画面</string>
+    <string name="start_screen_desc">アプリ起動時に最初に開くセクション</string>
+    <string name="greeting">あいさつ</string>
+    <string name="greeting_desc">タイムライン上部：「%s」または任意のテキスト</string>
+    <string name="automatic">自動</string>
+    <string name="custom_text">カスタムテキスト</string>
+    <string name="nothing_entered">未入力 — 決定キーで入力</string>
+    <string name="group_map">マップ</string>
+    <string name="map_start_view">初期表示</string>
+    <string name="map_start_view_desc">世界地図を開いたときの表示範囲</string>
+    <string name="whole_world">全世界</string>
+    <string name="europe">ヨーロッパ</string>
+    <string name="top_country">写真が最も多い国</string>
+    <string name="last_viewed">最後に表示した場所</string>
+    <string name="cluster_level">クラスター粒度</string>
+    <string name="cluster_level_desc">細かい：小さなグループが増えます／粗い：大きなグループにまとめます</string>
+    <string name="fine">細かい</string>
+    <string name="coarse">粗い</string>
+    <string name="map_style">マップスタイル</string>
+    <string name="map_style_desc">ダーク・ライト（Immich）、または衛星写真（EOX Sentinel-2、道路・地名付き）</string>
+    <string name="dark">ダーク</string>
+    <string name="light">ライト</string>
+    <string name="satellite">衛星写真</string>
+    <string name="group_appearance">外観</string>
+    <string name="language">言語</string>
+    <string name="language_desc">アプリの表示言語（即時反映）</string>
+    <string name="date_format">日付形式</string>
+    <string name="date_format_desc">すべての日付における月と日の並び順（スクリーンセーバー含む）</string>
+    <string name="time_format">時刻形式</string>
+    <string name="time_format_desc">12時間または24時間表示；自動は言語設定に従います</string>
+    <string name="accent_color">アクセントカラー</string>
+    <string name="accent_color_desc">フォーカス枠・ボタン・見出しの色</string>
+    <string name="color_blue">ブルー</string>
+    <string name="color_green">グリーン</string>
+    <string name="color_orange">オレンジ</string>
+    <string name="color_pink">ピンク</string>
+    <string name="color_purple">パープル</string>
+    <string name="color_gray">グレー</string>
+    <string name="name_and_icon">名前とアイコン</string>
+    <string name="name_and_icon_desc">%s。ホーム画面のタイルも変更されます（数秒以内に更新）</string>
+    <string name="group_storage">ストレージ</string>
+    <string name="clear_cache">画像キャッシュを消去</string>
+    <string name="cache_size">"ディスク %1$s MB  ·  メモリ %2$s MB"</string>
+    <string name="group_account">アカウント</string>
+    <string name="immich_server">Immich サーバー</string>
+    <string name="signed_in_as">ログイン中のユーザー</string>
+    <string name="reconnect">再接続</string>
+    <string name="reconnect_desc">別のサーバーやアカウントに切り替え</string>
+    <string name="disconnect">接続解除</string>
+    <string name="disconnect_desc">このテレビからキーを削除します（キー自体は Immich の「アカウント設定 → API キー」から削除してください）</string>
+    <string name="are_you_sure">よろしいですか？</string>
+    <string name="are_you_sure_desc">もう一度決定キーを押すとこのテレビからキーを削除します</string>
+    <string name="group_about">アプリ情報</string>
+    <string name="keys">リモコン操作</string>
+    <string name="keys_desc">すべてのショートカット一覧（INFO ボタンでも表示できます）</string>
+    <string name="app_line">%s アプリ</string>
+    <string name="version">バージョン %s</string>
+    <string name="map_attribution">© OpenStreetMap · Protomaps（tiles.immich.cloud）；衛星写真：%s、CC BY-NC-SA 4.0</string>
+
+    <!-- Keys overview -->
+    <string name="keys_close_hint">いずれかのキーを押して閉じる</string>
+    <string name="key_group_everywhere">共通</string>
+    <string name="key_back_hold">戻るを長押し</string>
+    <string name="key_back_hold_desc">セクションメニュー（リモコンの MENU キーでも可）</string>
+    <string name="key_info">INFO</string>
+    <string name="key_info_desc">この操作一覧</string>
+    <string name="key_left_edge">左端で ◀</string>
+    <string name="key_left_edge_desc">メニューを開く</string>
+    <string name="key_back">戻る</string>
+    <string name="key_back_desc">1つ戻る；起動画面ではアプリを終了</string>
+    <string name="key_group_timeline">タイムライン・アルバム・検索</string>
+    <string name="key_arrows">▲ ▼ ◀ ▶</string>
+    <string name="key_arrows_desc">写真を選択</string>
+    <string name="key_ok">決定</string>
+    <string name="key_ok_open">写真を開く</string>
+    <string name="key_play">再生/一時停止</string>
+    <string name="key_play_desc">選択した写真からスライドショーを開始</string>
+    <string name="key_seek">⏪︎ ⏩︎</string>
+    <string name="key_seek_month">1か月前 / 次へ</string>
+    <string name="key_back_top">先頭へ戻る；もう一度押すとアプリを終了</string>
+    <string name="key_group_settings">設定</string>
+    <string name="key_left_right">◀ ▶</string>
+    <string name="key_value">前 / 次の値</string>
+    <string name="key_ok_value">次の値にする、または実行</string>
+    <string name="key_group_viewer">写真表示中</string>
+    <string name="key_prev_next">前 / 次の写真</string>
+    <string name="key_ok_play">"決定 または 再生/一時停止"</string>
+    <string name="key_slideshow_desc">スライドショー オン/オフ（動画再生中：一時停止）</string>
+    <string name="key_info_btn">"▲ ▼ または INFO"</string>
+    <string name="key_info_panel">詳細情報（カメラ・場所・地図）</string>
+    <string name="key_ok_info">詳細表示中に決定</string>
+    <string name="key_ok_info_desc">世界地図で位置を表示（位置情報付きの写真）</string>
+    <string name="key_seek_viewer">写真 10枚前/次へ；動画では 10秒戻し/送り</string>
+    <string name="key_close">閉じる</string>
+    <string name="key_group_map">世界地図</string>
+    <string name="key_map_arrows">グループ選択または地図をスクロール</string>
+    <string name="key_map_ok">グループを拡大；これ以上分割されない場合は開く</string>
+    <string name="key_map_zoom">縮小 / 拡大</string>
+    <string name="key_map_back">全世界へ戻る；もう一度押すと起動画面へ</string>
+    <string name="key_map_left">全世界表示で ◀</string>
+
+    <!-- Connect screen (TV) -->
+    <string name="pair_title">Immich に接続</string>
+    <string name="pair_test">テストモード：接続が成功するまで現在の設定を保持します</string>
+    <string name="pair_once">初回のみの設定です。完了後は自動で使えます</string>
+    <string name="step1">スマートフォンで QR コードを読み取る</string>
+    <string name="step1_sub">スマートフォンはテレビと同じ Wi-Fi に接続してください。</string>
+    <string name="step2">Immich サーバーのアドレス、メールアドレス、パスワードを入力</string>
+    <string name="step2_sub">テレビが読み取り専用キーを自動作成します。パスワードは保存されません。</string>
+    <string name="step3">完了</string>
+    <string name="step3_sub">スマートフォンを置くと、写真が自動的に表示されます。</string>
+    <string name="waiting_for_phone">スマートフォンの操作を待機中…</string>
+    <string name="done_title">完了しました！スマートフォンを閉じて構いません。</string>
+    <string name="paired_as">%2$s に %1$s として接続しました</string>
+    <string name="pair_failed">接続に失敗しました</string>
+    <string name="try_again">スマートフォンでもう一度お試しください。</string>
+    <string name="no_network">ネットワークなし</string>
+    <string name="type_address">またはブラウザでこのアドレスを開く：</string>
+
+    <!-- Connecting: progress and errors (shown on the TV and sent to the phone) -->
+    <string name="err_no_network">ネットワークに接続されていません。Wi-Fi または LAN ケーブルで接続してください。</string>
+    <string name="err_no_port">ポートを開けませんでした。</string>
+    <string name="no_access">アクセス不可</string>
+    <string name="no_access_html">アクセスできません。&lt;br&gt;テレビ画面の QR コードを読み取ってください。</string>
+    <string name="failed">失敗</string>
+    <string name="err_app_inactive">アプリがアクティブではありません。</string>
+    <string name="err_enter_address">Immich サーバーのアドレスを入力してください。</string>
+    <string name="err_enter_email">メールアドレスとパスワードを入力してください。</string>
+    <string name="status_checking_key_perms">キーと権限を確認中…</string>
+    <string name="paired_message">%2$s に %1$s として接続しました。</string>
+    <string name="err_something_wrong">エラーが発生しました：%s</string>
+    <string name="err_ssl">%s への安全な接続に失敗しました（証明書エラー）。http:// を試すか証明書を確認してください。</string>
+    <string name="err_host">アドレス %s が見つかりません。入力内容を確認してください。</string>
+    <string name="err_connection">%1$s:%2$d に接続できません。サーバーが起動中かつ同一ネットワークにあるか確認してください。</string>
+    <string name="status_finding_server">サーバー %s を検索中…</string>
+    <string name="err_no_pong">%s から Immich サーバーの応答がありません（/api/server/ping で pong なし）。</string>
+    <string name="err_no_immich">%1$s から Immich サーバーの応答がありません（/api/server/ping で HTTP %2$d）。</string>
+    <string name="err_too_old">この Immich サーバーのバージョン（%s）は古いため非対応です。Immich 3（最低でも 2）に更新してください。</string>
+    <string name="warn_version">注意：Immich サーバーのバージョンは %s です。このアプリは Immich 3 向けに作られていますが、多くの機能は動作する見込みです。</string>
+    <string name="status_signing_in">%s としてログイン中…</string>
+    <string name="err_login">メールアドレスまたはパスワードが正しくありません。</string>
+    <string name="err_login_email">このメールアドレスは Immich で受け付けられません（無効な形式です）。</string>
+    <string name="err_login_http">ログインに失敗しました（HTTP %d）。</string>
+    <string name="err_no_token">ログイン時にアクセストークンが返されませんでした。</string>
+    <string name="status_creating_key">API キーを作成中…</string>
+    <string name="err_no_keys_allowed">このアカウントには API キーを作成する権限がありません。管理者に連絡するか既存のキーをご利用ください。</string>
+    <string name="err_key_http">API キーの作成に失敗しました（HTTP %1$d）：%2$s</string>
+    <string name="err_no_key_returned">Immich からキーが返されませんでした。</string>
+    <string name="status_checking_key">キーを確認中…</string>
+    <string name="err_key_not_working">新しいキーが機能しません（HTTP %d）。</string>
+    <string name="err_key_rejected">この API キーは %s に拒否されました。すべてコピーしたか確認してください。</string>
+    <string name="err_unexpected">サーバーから予期しない応答がありました（%2$s で HTTP %1$d）。</string>
+    <string name="err_permissions">このキーには次の権限が不足しています：%1$s。Immich で次の権限のみを持つ新しいキーを作成してください：%2$s。</string>
+    <string name="unknown_user">不明なユーザー</string>
+    <string name="key_name_template">%s のフォト</string>
+
+    <!-- Phone page (served by the TV) -->
+    <string name="html_title">フォトを接続</string>
+    <string name="html_heading">テレビのフォト</string>
+    <string name="html_sub">Immich サーバーに接続</string>
+    <string name="html_address">Immich サーバーのアドレス</string>
+    <string name="html_address_example">例：192.168.1.10:2283 または photos.mydomain.com</string>
+    <string name="html_address_example_short">例：192.168.1.10:2283</string>
+    <string name="html_address_hint">ブラウザや Immich アプリと同じアドレスを入力してください。</string>
+    <string name="html_email">メールアドレス</string>
+    <string name="html_password">パスワード</string>
+    <string name="html_password_hint">パスワードは Immich でテレビ用の読み取り専用キーを作成するためにのみ使用され、保存されません。</string>
+    <string name="html_connect">接続</string>
+    <string name="html_key_heading">または既存の API キーを貼り付け</string>
+    <string name="html_key">API キー</string>
+    <string name="html_key_hint_before">Immich の以下の画面で作成してください：</string>
+    <string name="html_key_path">アカウント設定 → API キー → 新しい API キー</string>
+    <string name="html_key_hint_after">次の権限のみにチェックを入れてください：</string>
+    <string name="html_connect_key">キーで接続</string>
+    <string name="html_footer">このページは自宅ネットワーク内でのみ動作し、接続完了後に閉じます。</string>
+    <string name="html_busy_title">接続中…</string>
+    <string name="html_busy">テレビがサーバーを確認しキーを作成しています。数秒かかります。</string>
+    <string name="html_no_conn_title">テレビに接続できません</string>
+    <string name="html_no_conn">テレビに接続画面が開いたままで、スマートフォンが同じ Wi-Fi に接続されていますか？</string>
+
+    <!-- Unofficial (2.1) -->
+    <string name="unofficial_short">Immich 用非公式クライアント</string>
+    <string name="unofficial_long">非公式アプリであり、Immich プロジェクトとは関係・提携していません。Immich はそれぞれの所有者の商標です。</string>
+    <string name="back_to_close">戻るキーで閉じる</string>
+    <string name="minutes">%d 分</string>
+
+    <!-- Screensaver (2.1) -->
+    <string name="dream_name">フォト（スクリーンセーバー）</string>
+    <string name="group_screensaver">スクリーンセーバー</string>
+    <string name="screensaver">スクリーンセーバー</string>
+    <string name="dream_on_desc">このアプリを本機のスクリーンセーバーとして使用する</string>
+    <string name="dream_status_on">有効：このアプリが本機のスクリーンセーバーです</string>
+    <string name="dream_status_off">まだ本機のスクリーンセーバーに設定されていません</string>
+    <string name="dream_status_off_ok">未設定 — 決定キーで設定手順を開く</string>
+    <string name="dream_setup">このデバイスで設定</string>
+    <string name="dream_setup_sub">Android TV には通常サードパーティ製スクリーンセーバーの選択画面がありませんが、以下の方法で設定できます。</string>
+    <string name="dream_setup_desc">状態、ヘルプ、初回セットアップ（adb）</string>
+    <string name="dream_preview">プレビュー</string>
+    <string name="dream_preview_desc">今すぐスクリーンセーバーを表示；任意のキーで終了</string>
+    <string name="dream_source">写真</string>
+    <string name="dream_source_desc">スクリーンセーバーに表示する写真の範囲</string>
+    <string name="dream_all_photos">すべての写真</string>
+    <string name="dream_album">アルバム</string>
+    <string name="dream_people">人物</string>
+    <string name="dream_combined">アルバム + 人物</string>
+    <string name="dream_from_year">開始年</string>
+    <string name="dream_from_year_desc">この年以降に撮影された写真のみ</string>
+    <string name="all_years">すべての年</string>
+    <string name="dream_order_desc">ランダム、または日付順（前回の続きから）</string>
+    <string name="dream_albums">アルバム</string>
+    <string name="dream_albums_hint">"%1$d 件選択済み  ·  決定 = オン/オフ"</string>
+    <string name="dream_other_album">他のアルバム名を表示</string>
+    <string name="dream_other_album_desc">写真が別のアルバムにもある場合、そちらのアルバム名を表示します（例：「スクリーンセーバー」ではなく「誕生日」）</string>
+    <string name="dream_memories">今日の思い出</string>
+    <string name="dream_person">人物</string>
+    <string name="dream_not_chosen">未選択 — 決定キーで選択</string>
+    <string name="dream_time_desc">1枚あたりの表示時間（リモコン ◀ ▶：前 / 次）</string>
+    <string name="dream_clock">時計</string>
+    <string name="dream_clock_desc">左上に時刻と日付を表示</string>
+    <string name="dream_map">スクリーンセーバー上の地図</string>
+    <string name="dream_map_desc">右下に撮影国の輪郭を表示</string>
+    <string name="dream_ken_burns_desc">各写真をゆっくりズーム</string>
+    <string name="dream_info">スクリーンセーバーの日付と場所</string>
+    <string name="dream_info_desc">左下に日付、場所、アルバム名を表示</string>
+    <string name="dream_no_photos">このスクリーンセーバーのソースに写真が見つかりません</string>
+    <string name="dream_no_connection">Immich サーバーに接続できません。再試行中…</string>
+    <string name="dream_not_paired">未接続：先にアプリを開いてください</string>
+    <string name="dream_perm_yes">このアプリはスクリーンセーバー設定を自動で変更できます</string>
+    <string name="dream_perm_no">スクリーンセーバー設定の変更権限がありません（adb で1回権限を付与する必要があります。下記参照）</string>
+    <string name="dream_dev_yes">開発者向けオプションが有効です</string>
+    <string name="dream_dev_no">開発者向けオプションが無効です</string>
+    <string name="dream_turn_on">今すぐ有効にする</string>
+    <string name="dream_turn_off">今すぐ無効にする</string>
+    <string name="dream_toggle_desc">無効にすると以前のスクリーンセーバーが復元されます</string>
+    <string name="dream_open_system">スクリーンセーバー設定を開く</string>
+    <string name="dream_open_system_desc">システム設定で「フォト」を選択してください</string>
+    <string name="dream_auto_heading">自動設定（ネットワークデバッグ）</string>
+    <string name="dream_auto_desc">デバイス自身のデバッグポートに接続して自動設定します。「開発者向けオプション → ネットワークデバッグ（または ADB over network）」が必要です。初回は許可確認が出るため「常に許可」を選んでください。</string>
+    <string name="dream_auto_btn">自動設定を実行</string>
+    <string name="dream_auto_btn_desc">権限を付与しスクリーンセーバーに設定します（数秒かかります）</string>
+    <string name="adb_connecting">接続中…テレビに許可確認が表示されたら「常に許可」を選択してください</string>
+    <string name="adb_done">完了：このアプリがスクリーンセーバーに設定されました</string>
+    <string name="adb_failed">設定できませんでした；下記の手動手順をご利用ください</string>
+    <string name="adb_no_connection">接続できません：先に開発者向けオプションでネットワークデバッグを有効にしてください</string>
+    <string name="adb_no_permission">テレビ側で許可されませんでした；再度お試しください</string>
+    <string name="dream_manual_heading">PC から手動で設定</string>
+    <string name="dream_step1">開発者向けオプションを有効化：設定 → デバイス設定 → デバイス情報 → 「ビルド」を決定キーで 7回押します。</string>
+    <string name="dream_step2">設定 → デバイス設定 → 開発者向けオプション → ネットワークデバッグ（または USB デバッグ）をオンにします。</string>
+    <string name="dream_step3">adb（Android platform tools）のある PC で次を実行：</string>
+    <string name="dream_step4">初回のみテレビに許可確認が出ます。2つ目のコマンド実行後、アプリ自身でオン/オフできるようになります。最後の2つで即座に設定されます。</string>
+    <string name="dream_open_about">「デバイス情報」を開く</string>
+    <string name="dream_open_about_desc">開発者向けオプションを有効にするため</string>
+    <string name="dream_open_dev">開発者向けオプションを開く</string>
+    <string name="dream_open_dev_desc">ネットワークデバッグを有効にするため</string>
+    <string name="dream_key_error">Immich サーバーがこのデバイスのキーを受け付けなくなりました：アプリを開き「再接続」を選択してください</string>
+    <string name="dream_usb_yes">USB デバッグはオンです</string>
+    <string name="dream_usb_no">USB デバッグはオフです</string>
+    <string name="dream_net_yes">ネットワークデバッグはオンです（ポート 5555）</string>
+    <string name="dream_net_no">ネットワークデバッグはオフです（自動設定に必要）</string>
+    <string name="dream_current">現在のスクリーンセーバー：%1$s</string>
+    <string name="dream_starts_after">無操作 %1$s 後に起動</string>
+
+    <!-- Diagnostics (2.1) -->
+    <string name="diagnostics">診断情報</string>
+    <string name="diagnostics_desc">前回アプリが終了した理由（端末内のみに保存）</string>
+    <string name="diagnostics_sub">最近予期せず終了した記録と原因。外部への送信はありません。</string>
+    <string name="diagnostics_empty">記録なし：予期しない終了は発生していません。</string>
+    <string name="diagnostics_footer">ヒント：クラッシュはその場で記録され、Android のシステム報告（メモリ、ANR）は次回起動時に表示されます。</string>
+    <string name="diag_crash">クラッシュ（アプリ内エラー）</string>
+    <string name="diag_crash_native">クラッシュ（ネイティブコード）</string>
+    <string name="diag_anr">応答なし（ANR）</string>
+    <string name="diag_memory">Android により終了：メモリ不足</string>
+    <string name="diag_signal">シグナル終了（例：アップデート中）</string>
+    <string name="diag_user">ユーザーまたはシステムにより停止</string>
+    <string name="diag_system">システムにより終了</string>
+    <string name="diag_caught">捕捉されたエラー（アプリは継続）</string>
+    <string name="diag_other">その他</string>
+    <string name="diag_foreground">フォアグラウンド実行中</string>
+
+    <!-- 2.5: world map, scroll bar, people -->
+    <string name="continent_europe">ヨーロッパ</string>
+    <string name="continent_asia">アジア</string>
+    <string name="continent_africa">アフリカ</string>
+    <string name="continent_north_america">北アメリカ</string>
+    <string name="continent_south_america">南アメリカ</string>
+    <string name="continent_oceania">オセアニア</string>
+    <string name="continent_antarctica">南極</string>
+    <string name="continent_other">その他の地域</string>
+    <string name="region_northern_europe">北欧</string>
+    <string name="region_western_europe">西欧</string>
+    <string name="region_southern_europe">南欧</string>
+    <string name="region_eastern_europe">東欧</string>
+    <string name="region_north_africa">北アフリカ</string>
+    <string name="region_west_africa">西アフリカ</string>
+    <string name="region_central_africa">中部アフリカ</string>
+    <string name="region_east_africa">東アフリカ</string>
+    <string name="region_southern_africa">南部アフリカ</string>
+    <string name="region_northern_america">アメリカ &amp; カナダ</string>
+    <string name="region_central_america">中央アメリカ</string>
+    <string name="region_caribbean">カリブ海地域</string>
+    <string name="region_central_asia">中央アジア</string>
+    <string name="region_east_asia">東アジア</string>
+    <string name="region_southeast_asia">東南アジア</string>
+    <string name="region_south_asia">南アジア</string>
+    <string name="region_west_asia">中東</string>
+    <string name="region_australia">オーストラリア &amp; ニュージーランド</string>
+    <string name="region_melanesia">メラネシア</string>
+    <string name="region_micronesia">ミクロネシア</string>
+    <string name="region_polynesia">ポリネシア</string>
+    <string name="scrollbar_hint_month">"▲▼ 月単位 · 長押し：年単位 · 決定 移動"</string>
+    <string name="find_person">人物を検索</string>
+    <string name="sort_most_photos">写真数順</string>
+    <string name="all_people">すべての人物（%1$d）</string>
+    <string name="key_ok_hold">決定長押し</string>
+    <string name="key_map_ok_hold_desc">グループの全写真をグリッド表示（日付順）</string>
+    <string name="key_map_play_desc">グループのスライドショー</string>
+    <string name="key_scrollbar">右端で ▶</string>
+    <string name="key_scrollbar_desc">スクロールバー：▲▼ で月ごと（長押しで年ごと）、決定または ◀ で移動</string>
+    <string name="scrollbar_hint_general">"▲▼ 移動 · 長押し：高速 · 決定 移動"</string>
+    <string name="section_folders">フォルダ</string>
+    <string name="folders_no_permission">フォルダへのアクセス権限がありません</string>
+    <string name="folders_no_permission_desc">API キーに folder.read 権限がありません。</string>
+    <string name="folders_load_failed">フォルダを読み込めませんでした</string>
+    <string name="folder_empty">このフォルダは空です</string>
+    <string name="slideshow_overlay">スライドショー中の表示</string>
+    <string name="slideshow_overlay_desc">スライドショー再生中に写真の上へ表示する内容；一時停止で情報が戻ります</string>
+    <string name="slideshow_overlay_all">すべて</string>
+    <string name="slideshow_overlay_no_ring">進行リングなし</string>
+    <string name="slideshow_overlay_photo_only">写真のみ</string>
+    <string name="group_music">音楽</string>
+    <string name="music_mode">BGM</string>
+    <string name="music_mode_desc">アプリ内でアンビエントラジオを再生（動画再生時はミュート、バックグラウンドで一時停止）</string>
+    <string name="music_slideshow">スライドショーのみ</string>
+    <string name="music_always">常に再生</string>
+    <string name="music_station">ラジオ局</string>
+    <string name="music_station_desc">広告なしのアンビエントネットラジオ（SomaFM）</string>
+    <string name="dream_ring">進行リング</string>
+    <string name="dream_ring_desc">左下に次の写真までのカウントダウンリングを表示します</string>
+    <string name="album_name">アルバム名</string>
+    <string name="album_name_desc">写真が含まれるアルバム名を表示します（人物画面など）</string>
+    <string name="blurred_background">ぼかし背景</string>
+    <string name="blurred_background_desc">写真・動画の余白をぼかし画像で埋めます；オフ = 黒（スクリーンセーバー含む）</string>
+    <plurals name="folders_count">
+        <item quantity="other">%d 件のフォルダ</item>
+    </plurals>
+    <string name="perms_title">キーの権限</string>
+    <string name="perms_checking">確認中…</string>
+    <string name="perms_ok">すべての権限が揃っています</string>
+    <string name="perms_partially_unknown">不足権限は見つかりませんでした（このサーバーは一覧を取得できません）</string>
+    <string name="perms_core_missing">必須権限が不足しているためアプリが動作できません</string>
+    <string name="perms_missing">一部の権限が不足しています；該当機能は動作しません</string>
+    <string name="perms_missing_short">不足：%s</string>
+    <string name="perms_how_to_fix">再接続して全権限付きの新キーを作成するか（旧キーは後で Immich で削除可）、Immich の「アカウント設定 → API キー」で不足権限を追加してください。</string>
+    <string name="perms_reconnect_sub">スマートフォンで新しいキーを作成</string>
+    <string name="perms_recheck">再確認</string>
+    <string name="perms_close">閉じる</string>
+    <string name="perms_inspect">不足している権限を確認して修正</string>
+    <string name="perm_asset_read">タイムライン・検索・写真の詳細</string>
+    <string name="perm_asset_view">サムネイルと写真表示</string>
+    <string name="perm_user_read">あいさつや設定でのユーザー名</string>
+    <string name="perm_album_read">アルバムとアルバム名</string>
+    <string name="perm_memory_read">思い出（「過去の同じ日」）</string>
+    <string name="perm_person_read">人物</string>
+    <string name="perm_map_read">世界地図</string>
+    <string name="perm_folder_read">フォルダ</string>
+    <string name="update_title">バージョン %1$s が利用可能です</string>
+    <string name="update_sub">現在のバージョン：%1$s</string>
+    <string name="update_downloading">ダウンロード中… %1$d%%</string>
+    <string name="update_installing">インストール中…</string>
+    <string name="update_permission">先にこのアプリからの更新インストール（不明なアプリ）を許可してから、再度「更新」を選択してください。</string>
+    <string name="update_permission_btn">設定を開く</string>
+    <string name="update_error">更新に失敗しました：%1$s</string>
+    <string name="update_now">今すぐ更新</string>
+    <string name="update_later">後で</string>
+    <string name="whats_new_title">%1$s の新機能</string>
+    <string name="updates">アップデート</string>
+    <string name="update_available">バージョン %1$s が利用可能です。決定キーで更新</string>
+    <string name="update_checking">確認中…</string>
+    <string name="update_up_to_date">最新バージョンです。決定キーで再確認</string>
+    <string name="update_check_prompt">決定キーで新しいバージョンを確認</string>
+    <string name="update_auto">アップデートを確認</string>
+    <string name="update_auto_desc">起動時に GitHub で新しいバージョンを確認します</string>
+    <string name="whats_new_row">新機能</string>
+    <string name="whats_new_row_desc">このバージョンの変更点</string>
+    <string-array name="whats_new_items">
+        <item>Amlogic および Android 10+ での動画再生改善とリモコンシーク HUD を追加</item>
+        <item>十字キー長押しによる高速スクロールを滑らかにし、ANR・クラッシュを解消</item>
+        <item>縦長写真の並べて表示と、下部日付・場所バーの表示切替トグルを追加</item>
+        <item>「シャッフル」セクション追加、フォルダを写真直下へ移動、SomaFM BGM 対応</item>
+        <item>多言語対応（日本語・ロシア語・中国語など）を追加</item>
+    </string-array>
+</resources>

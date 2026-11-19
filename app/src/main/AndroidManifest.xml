@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- In-app updates (Update.kt): the user confirms each install manually -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- Set the system screensaver to this app (Settings.Secure.screensaver_components). Regular apps are not
+         granted this permission automatically: grant it once via adb `pm grant` (see ScreensaverSetup.kt); without it
+         the app still works normally and displays setup instructions. -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" tools:ignore="ProtectedPermissions" />
+    <!-- MapLibre checks network connectivity (ConnectivityReceiver) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <application
+        android:name=".App"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_photos"
+        android:banner="@drawable/banner"
+        android:theme="@style/Theme.Photos"
+        android:usesCleartextTraffic="true">
+
+        <!-- The activity itself is not in the launcher: the aliases below handle that (name + icon + banner per
+             launcher appearance, see Settings.kt / AppAppearance). Exactly one alias is enabled; default "Photos".
+             Labels and banners are localized (values-xx, drawable-xx-*) and follow the launcher's system language. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|uiMode" />
+        <activity-alias android:name=".Photos" android:targetActivity=".MainActivity" android:exported="true" android:enabled="true"
+            android:label="@string/alias_photos" android:icon="@mipmap/ic_photos" android:banner="@drawable/banner">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:name=".PhotoAlbum" android:targetActivity=".MainActivity" android:exported="true" android:enabled="false"
+            android:label="@string/alias_album" android:icon="@mipmap/ic_album" android:banner="@drawable/banner_album">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:name=".Memories" android:targetActivity=".MainActivity" android:exported="true" android:enabled="false"
+            android:label="@string/alias_memories" android:icon="@mipmap/ic_memories" android:banner="@drawable/banner_memories">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:name=".Family" android:targetActivity=".MainActivity" android:exported="true" android:enabled="false"
+            android:label="@string/alias_family" android:icon="@mipmap/ic_family" android:banner="@drawable/banner_family">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Screensaver (DreamService, see Dream.kt). The label is shown in system settings where a picker exists;
+             dream.xml links the gear icon to the app's screensaver settings. -->
+        <!-- DO NOT use a separate process (android:process): on Android 11 the system starts
+             android.service.dreams.DreamActivity in the app's default process and casts the service binder; in another
+             process that crashes (ClassCastException BinderProxy → DreamServiceWrapper) leaving a black screen. -->
+        <service
+            android:name=".PhotoDream"
+            android:exported="true"
+            android:label="@string/dream_name"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.service.dream" android:resource="@xml/dream" />
+        </service>
+        <!-- Screensaver preview (Settings → Screensaver → Preview). Exported with DUMP permission: only the app itself
+             and adb shell (`am start -n com.zer0like.immich.tv/com.immichclient.tv.PreviewActivity`) can launch it. -->
+        <activity
+            android:name=".PreviewActivity"
+            android:exported="true"
+            android:permission="android.permission.DUMP"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|uiMode" />
+        <!-- Screensaver settings shortcut (settingsActivity in dream.xml): opens the app at Settings → Screensaver -->
+        <activity-alias
+            android:name=".ScreensaverSettings"
+            android:targetActivity=".MainActivity"
+            android:exported="true"
+            android:label="@string/dream_name" />
+
+        <!-- Update install result (PackageInstaller) -->
+        <receiver android:name=".UpdateReceiver" android:exported="false" />
+
+        <!-- Set API key + server via adb without opening the app (see KeyReceiver). Only shell/system holds DUMP,
+             never regular third-party apps. -->
+        <receiver
+            android:name=".KeyReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="${applicationId}.SET_KEY" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

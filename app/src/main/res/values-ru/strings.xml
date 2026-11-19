@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and launcher variants (Settings → Name and icon) -->
+    <string name="app_name">Фото</string>
+    <string name="alias_photos">Фото</string>
+    <string name="alias_album">Фотоальбом</string>
+    <string name="alias_memories">Воспоминания</string>
+    <string name="alias_family">Семейные фото</string>
+    <string name="appearance_photos">Синяя, стопка фотографий (по умолчанию)</string>
+    <string name="appearance_album">Тёплый оранжевый, открытый альбом</string>
+    <string name="appearance_memories">Фиолетовая, фото со звездой</string>
+    <string name="appearance_family">Зелёная, фото с сердцем</string>
+
+    <!-- Date/time patterns (java.time) for this language -->
+    <string name="pattern_month_year">LLLL yyyy</string>
+    <string name="pattern_month_short">LLL yyyy</string>
+    <string name="pattern_day_short">EEE, d MMM</string>
+    <string name="pattern_day_year">EEE, d MMM yyyy</string>
+    <string name="pattern_day_long">EEEE, d MMMM yyyy</string>
+    <string name="pattern_time">HH:mm</string>
+
+    <!-- Language screen -->
+    <string name="language_title">Выберите язык</string>
+    <string name="language_sub">Выбор можно изменить позже в разделе Настройки → Язык.</string>
+
+    <!-- Sections (menu) -->
+    <string name="section_photos">Фото</string>
+    <string name="section_memories">Воспоминания</string>
+    <string name="section_search">Поиск</string>
+    <string name="section_explore">Обзор</string>
+    <string name="section_map">Карта</string>
+    <string name="section_albums">Альбомы</string>
+    <string name="section_favorites">Избранное</string>
+    <string name="section_shuffle">Вперемешку</string>
+    <string name="shuffle">Перемешать</string>
+    <string name="shuffle_empty">Фотографий и видео пока нет</string>
+    <string name="section_settings">Настройки</string>
+
+    <!-- General -->
+    <string name="loading">Загрузка…</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="no_date">Без даты</string>
+    <string name="person">Человек</string>
+    <plurals name="items">
+        <item quantity="one">%d элемент</item>
+        <item quantity="few">%d элемента</item>
+        <item quantity="many">%d элементов</item>
+        <item quantity="other">%d элемента</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="one">%s фото</item>
+        <item quantity="few">%s фото</item>
+        <item quantity="many">%s фото</item>
+        <item quantity="other">%s фото</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">%d год назад</item>
+        <item quantity="few">%d года назад</item>
+        <item quantity="many">%d лет назад</item>
+        <item quantity="other">%d года назад</item>
+    </plurals>
+
+    <!-- Timeline -->
+    <string name="newest_first">Сначала новые</string>
+    <string name="oldest_first">Сначала старые</string>
+    <string name="go_to_date">Перейти к дате</string>
+    <string name="go_to_year">Перейти к году</string>
+    <string name="immich_unreachable">Нет связи с Immich</string>
+    <string name="no_favorites_yet">Избранного пока нет</string>
+    <string name="no_photos_yet">Фотографий пока нет</string>
+    <string name="favorites_tip">Отметьте фотографии сердечком в Immich, и они появятся здесь.</string>
+    <string name="greeting_morning">Доброе утро</string>
+    <string name="greeting_afternoon">Добрый день</string>
+    <string name="greeting_evening">Добрый вечер</string>
+    <string name="greeting_night">Доброй ночи</string>
+    <string name="greeting_with_name">%1$s, %2$s</string>
+
+    <!-- Memories -->
+    <string name="memories_sub">В этот день в прошлые годы</string>
+    <string name="no_memories">На этой неделе воспоминаний нет</string>
+
+    <!-- Viewer -->
+    <string name="slideshow">Слайд-шоу</string>
+    <string name="slideshow_paused">Слайд-шоу на паузе</string>
+    <string name="video_error">Не удалось воспроизвести это видео</string>
+    <string name="info">Инфо</string>
+    <string name="hint_info_map">"OK показать на карте   ·   ◀ ▶ листать   ·   ⏩ пропуск 10"</string>
+    <string name="hint_info">"◀ ▶ листать   ·   OK слайд-шоу   ·   ⏩ пропуск 10"</string>
+
+    <!-- Search -->
+    <string name="search">Поиск</string>
+    <string name="search_title">Поиск: %s</string>
+    <string name="search_hint">Ищите по содержимому фото: пляж, день рождения, собака на снегу…</string>
+    <string name="voice_search">Голосовой поиск</string>
+    <string name="voice_prompt">Что вы ищете?</string>
+    <string name="mode_smart">Умный поиск</string>
+    <string name="mode_text">Текст на фото</string>
+    <string name="mode_filename">Имя файла</string>
+    <string name="type_all">Все</string>
+    <string name="type_photos">Фото</string>
+    <string name="type_videos">Видео</string>
+    <string name="sort_relevance">Лучшие совпадения</string>
+    <string name="sort_newest">Сначала новые</string>
+    <string name="sort_oldest">Сначала старые</string>
+    <string name="searching">Поиск…</string>
+    <string name="search_failed">Ошибка поиска: %s</string>
+    <string name="nothing_found">Ничего не найдено</string>
+    <plurals name="results">
+        <item quantity="one">%s результат</item>
+        <item quantity="few">%s результата</item>
+        <item quantity="many">%s результатов</item>
+        <item quantity="other">%s результата</item>
+    </plurals>
+    <string name="recent_searches">Недавние запросы</string>
+    <string name="try_suggestions">Попробуйте</string>
+    <string name="people">Люди</string>
+    <string-array name="suggestions">
+        <item>пляж</item>
+        <item>снег</item>
+        <item>день рождения</item>
+        <item>закат</item>
+        <item>ёлка</item>
+        <item>горы</item>
+        <item>собака</item>
+        <item>торт</item>
+        <item>бассейн</item>
+        <item>еда</item>
+    </string-array>
+    <string name="key_space">пробел</string>
+    <string name="key_clear">очистить</string>
+    <string name="action_search">Найти</string>
+    <string name="action_done">Готово</string>
+    <string name="loading_failed">Не удалось загрузить: %s</string>
+
+    <!-- Albums -->
+    <string name="albums">Альбомы</string>
+    <plurals name="albums_count">
+        <item quantity="one">%d альбом</item>
+        <item quantity="few">%d альбома</item>
+        <item quantity="many">%d альбомов</item>
+        <item quantity="other">%d альбома</item>
+    </plurals>
+    <string name="albums_matching">с «%s»</string>
+    <string name="sort_recent">Недавно обновлённые</string>
+    <string name="sort_newest_photos">Свежие фото</string>
+    <string name="sort_name">По названию</string>
+    <string name="sort_count">По количеству</string>
+    <string name="shared">Общий</string>
+    <string name="shared_lower">общий</string>
+    <string name="find_album">Найти альбом</string>
+    <string name="albums_load_failed">Не удалось загрузить альбомы</string>
+
+    <!-- Explore -->
+    <string name="explore">Обзор</string>
+    <string name="load_failed">Не удалось загрузить</string>
+    <string name="places">Места</string>
+
+    <!-- World map -->
+    <string name="map">Карта</string>
+    <string name="map_load_failed">Не удалось загрузить: %s</string>
+    <plurals name="photos_with_location">
+        <item quantity="one">%s фото с геолокацией</item>
+        <item quantity="few">%s фото с геолокацией</item>
+        <item quantity="many">%s фото с геолокацией</item>
+        <item quantity="other">%s фото с геолокацией</item>
+    </plurals>
+    <string name="map_no_background">Фон карты недоступен (нет интернета)</string>
+    <string name="map_hint">"◀▶▲▼ выбор / сдвиг   ·   OK приблизить   ·   долгое OK: все фото   ·   ⏯ слайд-шоу   ·   ⏪︎⏩︎ масштаб   ·   Назад: весь мир"</string>
+
+    <!-- Settings -->
+    <string name="settings">Настройки</string>
+    <string name="settings_sub">"◀ ▶ или OK: выбрать значение   ·   Долгое Назад: меню   ·   INFO: кнопки"</string>
+    <string name="settings_show">Отображение настроек</string>
+    <string name="settings_basic">Основные</string>
+    <string name="settings_all">Все</string>
+    <string name="settings_basic_desc">Только самые нужные настройки. Выберите «Все» для полного списка.</string>
+    <string name="settings_all_desc">Все параметры, включая расширенные</string>
+    <string name="off">Выкл.</string>
+    <string name="on">Вкл.</string>
+    <string name="group_slideshow">Слайд-шоу</string>
+    <string name="time_per_photo">Время на фото</string>
+    <string name="time_per_photo_desc">Как долго каждое фото остаётся на экране</string>
+    <string name="seconds">%d с</string>
+    <string name="seconds_decimal">%s с</string>
+    <string name="ken_burns">Эффект Кена Бёрнса</string>
+    <string name="ken_burns_desc">Плавное приближение во время слайд-шоу</string>
+    <string name="order">Порядок</string>
+    <string name="slideshow_order_desc">По дате или случайное фото каждый раз</string>
+    <string name="by_date">По дате</string>
+    <string name="random">Случайно</string>
+    <string name="videos">Видео</string>
+    <string name="slideshow_videos_desc">Воспроизводить видео в слайд-шоу или пропускать их</string>
+    <string name="play">Воспроизводить</string>
+    <string name="skip">Пропускать</string>
+    <string name="transition">Переход</string>
+    <string name="transition_desc">Как появляется следующее фото</string>
+    <string name="fade">Плавное затухание</string>
+    <string name="slide">Сдвиг</string>
+    <string name="group_viewing">Просмотр фото</string>
+    <string name="country_map">Карта на фото</string>
+    <string name="country_map_desc">Контур страны со съёмкой фото в правом нижнем углу</string>
+    <string name="small">Маленький</string>
+    <string name="large">Большой</string>
+    <string name="show_date_place">Показывать дату и место</string>
+    <string name="show_date_place_desc">Показывать панель с датой и местом внизу экрана при просмотре</string>
+    <string name="date_place_bar">Время показа панели</string>
+    <string name="date_place_bar_desc">Скрывать нижнюю панель через несколько секунд или показывать всегда</string>
+    <string name="always_show">Всегда показывать</string>
+    <string name="counter">Счётчик</string>
+    <string name="counter_desc">«68 / %s» рядом с датой</string>
+    <string name="group_timeline">Лента</string>
+    <string name="photo_size">Размер фото</string>
+    <string name="photo_size_desc">Высота строк в сетке</string>
+    <string name="normal_cluster">Обычный</string>
+    <string name="normal">Обычный</string>
+    <string name="timeline_order_desc">Порядок по умолчанию при открытии (кнопка вверху ленты временно меняет его)</string>
+    <string name="partner_photos">Фото партнёра</string>
+    <string name="partner_photos_desc">Также показывать фото, которыми партнёр делится с вами в Immich</string>
+    <string name="memories_at_top">Воспоминания наверху</string>
+    <string name="memories_at_top_desc">Ряд «В этот день» над лентой</string>
+    <string name="start_screen">Стартовый экран</string>
+    <string name="start_screen_desc">Какой раздел открывается при запуске приложения</string>
+    <string name="greeting">Приветствие</string>
+    <string name="greeting_desc">Вверху ленты: «%s» или свой текст</string>
+    <string name="automatic">Автоматически</string>
+    <string name="custom_text">Свой текст</string>
+    <string name="nothing_entered">Пока ничего не введено — нажмите OK</string>
+    <string name="group_map">Карта</string>
+    <string name="map_start_view">Начальный вид</string>
+    <string name="map_start_view_desc">Где открывается карта мира</string>
+    <string name="whole_world">Весь мир</string>
+    <string name="europe">Европа</string>
+    <string name="top_country">Страна с наибольшим числом фото</string>
+    <string name="last_viewed">Последнее просмотренное место</string>
+    <string name="cluster_level">Детализация групп</string>
+    <string name="cluster_level_desc">Мелко: больше небольших групп и глубже масштаб; крупно: меньше крупных групп</string>
+    <string name="fine">Мелко</string>
+    <string name="coarse">Крупно</string>
+    <string name="map_style">Стиль карты</string>
+    <string name="map_style_desc">Тёмная или светлая (Immich), либо спутник (Sentinel-2 от EOX, с дорогами и названиями)</string>
+    <string name="dark">Тёмная</string>
+    <string name="light">Светлая</string>
+    <string name="satellite">Спутник</string>
+    <string name="group_appearance">Внешний вид</string>
+    <string name="language">Язык</string>
+    <string name="language_desc">Язык приложения; применяется сразу</string>
+    <string name="date_format">Формат даты</string>
+    <string name="date_format_desc">Порядок дня и месяца во всех датах (и на заставке)</string>
+    <string name="time_format">Формат времени</string>
+    <string name="time_format_desc">12 или 24 часа; автоматически следует за языком</string>
+    <string name="accent_color">Цвет акцента</string>
+    <string name="accent_color_desc">Цвет рамки фокуса, кнопок и заголовков</string>
+    <string name="color_blue">Синий</string>
+    <string name="color_green">Зелёный</string>
+    <string name="color_orange">Оранжевый</string>
+    <string name="color_pink">Розовый</string>
+    <string name="color_purple">Фиолетовый</string>
+    <string name="color_gray">Серый</string>
+    <string name="name_and_icon">Название и значок</string>
+    <string name="name_and_icon_desc">%s. Также меняет плитку в лаунчере (обновляется за несколько секунд)</string>
+    <string name="group_storage">Хранилище</string>
+    <string name="clear_cache">Очистить кэш изображений</string>
+    <string name="cache_size">"%1$s МБ на диске  ·  %2$s МБ в памяти"</string>
+    <string name="group_account">Аккаунт</string>
+    <string name="immich_server">Сервер Immich</string>
+    <string name="signed_in_as">Вход выполнен как</string>
+    <string name="reconnect">Подключить заново</string>
+    <string name="reconnect_desc">Другой сервер или аккаунт</string>
+    <string name="disconnect">Отключить</string>
+    <string name="disconnect_desc">Удалить ключ с этого ТВ; сам ключ удалите в Immich в разделе Настройки аккаунта → API-ключи</string>
+    <string name="are_you_sure">Вы уверены?</string>
+    <string name="are_you_sure_desc">Нажмите OK ещё раз, чтобы удалить ключ с этого ТВ</string>
+    <string name="group_about">О приложении</string>
+    <string name="keys">Управление</string>
+    <string name="keys_desc">Список всех кнопок и сочетаний (также по кнопке INFO)</string>
+    <string name="app_line">Приложение %s</string>
+    <string name="version">версия %s</string>
+    <string name="map_attribution">© OpenStreetMap · Protomaps через tiles.immich.cloud; спутник: %s, CC BY-NC-SA 4.0</string>
+
+    <!-- Keys overview -->
+    <string name="keys_close_hint">Нажмите любую кнопку, чтобы закрыть</string>
+    <string name="key_group_everywhere">Везде</string>
+    <string name="key_back_hold">Удержать Назад</string>
+    <string name="key_back_hold_desc">меню с разделами (или MENU, если есть на пульте)</string>
+    <string name="key_info">INFO</string>
+    <string name="key_info_desc">эта справка</string>
+    <string name="key_left_edge">◀ у левого края</string>
+    <string name="key_left_edge_desc">меню</string>
+    <string name="key_back">Назад</string>
+    <string name="key_back_desc">на шаг назад; на стартовом экране: закрыть приложение</string>
+    <string name="key_group_timeline">Лента, альбомы, поиск</string>
+    <string name="key_arrows">▲ ▼ ◀ ▶</string>
+    <string name="key_arrows_desc">выбор фото</string>
+    <string name="key_ok">OK</string>
+    <string name="key_ok_open">открыть фото</string>
+    <string name="key_play">Воспр./Пауза</string>
+    <string name="key_play_desc">слайд-шоу с выбранного фото</string>
+    <string name="key_seek">⏪︎ ⏩︎</string>
+    <string name="key_seek_month">на месяц назад / вперёд</string>
+    <string name="key_back_top">вверх к началу; ещё раз: закрыть приложение</string>
+    <string name="key_group_settings">Настройки</string>
+    <string name="key_left_right">◀ ▶</string>
+    <string name="key_value">предыдущее / следующее значение</string>
+    <string name="key_ok_value">следующее значение или выполнить действие</string>
+    <string name="key_group_viewer">Просмотр фото</string>
+    <string name="key_prev_next">предыдущее / следующее</string>
+    <string name="key_ok_play">"OK  или  Воспр./Пауза"</string>
+    <string name="key_slideshow_desc">вкл./выкл. слайд-шоу (на видео: пауза)</string>
+    <string name="key_info_btn">"▲ ▼  или  INFO"</string>
+    <string name="key_info_panel">информация (камера, место, карта)</string>
+    <string name="key_ok_info">OK при открытой инфо-панели</string>
+    <string name="key_ok_info_desc">показать на карте мира (если есть геолокация)</string>
+    <string name="key_seek_viewer">на 10 фото назад / вперёд; в видео на 10 с</string>
+    <string name="key_close">закрыть</string>
+    <string name="key_group_map">Карта мира</string>
+    <string name="key_map_arrows">выбрать группу или сдвинуть карту</string>
+    <string name="key_map_ok">приблизить группу; если больше не делится: открыть</string>
+    <string name="key_map_zoom">уменьшить / увеличить масштаб</string>
+    <string name="key_map_back">весь мир; ещё раз: стартовый экран</string>
+    <string name="key_map_left">◀ на уровне мира</string>
+
+    <!-- Connect screen (TV) -->
+    <string name="pair_title">Подключение к Immich</string>
+    <string name="pair_test">Тестовый режим: текущее подключение сохранится до успешной настройки</string>
+    <string name="pair_once">Однократная настройка; дальше всё работает само</string>
+    <string name="step1">Отсканируйте QR-код телефоном</string>
+    <string name="step1_sub">Телефон должен быть в той же сети Wi-Fi, что и телевизор.</string>
+    <string name="step2">Введите адрес сервера Immich, эл. почту и пароль</string>
+    <string name="step2_sub">ТВ сам создаст ключ только для чтения; ваш пароль не сохраняется.</string>
+    <string name="step3">Готово</string>
+    <string name="step3_sub">Уберите телефон: фотографии появятся автоматически.</string>
+    <string name="waiting_for_phone">Ожидание телефона…</string>
+    <string name="done_title">Готово! Можете убрать телефон.</string>
+    <string name="paired_as">Подключено как %1$s на %2$s</string>
+    <string name="pair_failed">Ошибка подключения</string>
+    <string name="try_again">Попробуйте ещё раз на телефоне.</string>
+    <string name="no_network">Нет сети</string>
+    <string name="type_address">Или откройте этот адрес в браузере:</string>
+
+    <!-- Connecting: progress and errors (shown on the TV and sent to the phone) -->
+    <string name="err_no_network">Нет подключения к сети. Подключите приставку к Wi-Fi или кабелем.</string>
+    <string name="err_no_port">Не удалось открыть порт.</string>
+    <string name="no_access">Нет доступа</string>
+    <string name="no_access_html">Нет доступа.&lt;br&gt;Отсканируйте QR-код на экране ТВ.</string>
+    <string name="failed">Ошибка</string>
+    <string name="err_app_inactive">Приложение больше не активно.</string>
+    <string name="err_enter_address">Введите адрес вашего сервера Immich.</string>
+    <string name="err_enter_email">Введите адрес эл. почты и пароль.</string>
+    <string name="status_checking_key_perms">Проверка ключа и его прав…</string>
+    <string name="paired_message">Подключено как %1$s на %2$s.</string>
+    <string name="err_something_wrong">Что-то пошло не так: %s</string>
+    <string name="err_ssl">Защищённое подключение к %s не удалось (сертификат). Попробуйте адрес с http:// или проверьте сертификат.</string>
+    <string name="err_host">Адрес %s не найден. Проверьте правильность написания.</string>
+    <string name="err_connection">Нет подключения к %1$s:%2$d. Сервер запущен и ТВ в той же сети?</string>
+    <string name="status_finding_server">Поиск сервера по адресу %s…</string>
+    <string name="err_no_pong">По адресу %s не отвечает сервер Immich (нет \'pong\' от /api/server/ping).</string>
+    <string name="err_no_immich">По адресу %1$s не отвечает сервер Immich (HTTP %2$d на /api/server/ping).</string>
+    <string name="err_too_old">Версия сервера Immich (%s) слишком стара для этого приложения. Обновите сервер до Immich 3 (или хотя бы 2).</string>
+    <string name="warn_version">Внимание: версия вашего сервера Immich — %s; приложение создавалось для Immich 3. Скорее всего всё будет работать, но проверено не всё.</string>
+    <string name="status_signing_in">Вход как %s…</string>
+    <string name="err_login">Неверный адрес эл. почты или пароль.</string>
+    <string name="err_login_email">Immich не принимает этот адрес эл. почты (некорректный адрес).</string>
+    <string name="err_login_http">Не удалось войти (HTTP %d).</string>
+    <string name="err_no_token">При входе не получен токен доступа.</string>
+    <string name="status_creating_key">Создание API-ключа…</string>
+    <string name="err_no_keys_allowed">Этому аккаунту запрещено создавать API-ключи. Обратитесь к администратору сервера или используйте готовый ключ.</string>
+    <string name="err_key_http">Не удалось создать API-ключ (HTTP %1$d): %2$s</string>
+    <string name="err_no_key_returned">Immich не вернул ключ.</string>
+    <string name="status_checking_key">Проверка ключа…</string>
+    <string name="err_key_not_working">Новый ключ не работает (HTTP %d).</string>
+    <string name="err_key_rejected">Этот API-ключ не принят сервером %s. Убедитесь, что скопировали его полностью.</string>
+    <string name="err_unexpected">Неожиданный ответ сервера (HTTP %1$d на %2$s).</string>
+    <string name="err_permissions">У этого ключа не хватает прав: %1$s. Создайте новый ключ в Immich с правами: %2$s.</string>
+    <string name="unknown_user">неизвестный пользователь</string>
+    <string name="key_name_template">Фото на %s</string>
+
+    <!-- Phone page (served by the TV) -->
+    <string name="html_title">Подключение Фото</string>
+    <string name="html_heading">Фото на телевизоре</string>
+    <string name="html_sub">Подключение к серверу Immich</string>
+    <string name="html_address">Адрес сервера Immich</string>
+    <string name="html_address_example">напр. 192.168.1.10:2283 или photos.mydomain.com</string>
+    <string name="html_address_example_short">напр. 192.168.1.10:2283</string>
+    <string name="html_address_hint">Тот же адрес, что в браузере или приложении Immich.</string>
+    <string name="html_email">Эл. почта</string>
+    <string name="html_password">Пароль</string>
+    <string name="html_password_hint">Пароль используется только для создания ключа чтения в Immich; он не сохраняется.</string>
+    <string name="html_connect">Подключить</string>
+    <string name="html_key_heading">Или вставьте готовый API-ключ</string>
+    <string name="html_key">API-ключ</string>
+    <string name="html_key_hint_before">Создайте его в Immich в разделе</string>
+    <string name="html_key_path">Настройки аккаунта → API-ключи → Новый API-ключ</string>
+    <string name="html_key_hint_after">отметив ровно эти права:</string>
+    <string name="html_connect_key">Подключить по ключу</string>
+    <string name="html_footer">Эта страница работает только в вашей домашней сети и закрывается после подключения.</string>
+    <string name="html_busy_title">Подключение…</string>
+    <string name="html_busy">ТВ проверяет сервер и создаёт ключ. Это займёт несколько секунд.</string>
+    <string name="html_no_conn_title">Нет связи с ТВ</string>
+    <string name="html_no_conn">Экран подключения всё ещё открыт на ТВ и телефон подключён к той же сети Wi-Fi?</string>
+
+    <!-- Unofficial (2.1) -->
+    <string name="unofficial_short">Неофициальный клиент для Immich</string>
+    <string name="unofficial_long">Неофициальное приложение, не связано с проектом Immich и не одобрено им. Immich является товарным знаком его владельцев.</string>
+    <string name="back_to_close">Нажмите «Назад», чтобы закрыть</string>
+    <string name="minutes">%d мин</string>
+
+    <!-- Screensaver (2.1) -->
+    <string name="dream_name">Фото (заставка)</string>
+    <string name="group_screensaver">Заставка</string>
+    <string name="screensaver">Заставка</string>
+    <string name="dream_on_desc">Использовать это приложение как заставку устройства</string>
+    <string name="dream_status_on">Активна: это приложение выбрано заставкой устройства</string>
+    <string name="dream_status_off">Пока не выбрано заставкой устройства</string>
+    <string name="dream_status_off_ok">Пока не активна — нажмите OK для настройки</string>
+    <string name="dream_setup">Настроить на этом устройстве</string>
+    <string name="dream_setup_sub">В Android TV обычно нет меню выбора сторонней заставки; вот как всё равно её включить.</string>
+    <string name="dream_setup_desc">Состояние, инструкция и однократная настройка (adb)</string>
+    <string name="dream_preview">Предпросмотр</string>
+    <string name="dream_preview_desc">Запустить заставку сейчас; любая кнопка закрывает её</string>
+    <string name="dream_source">Фотографии</string>
+    <string name="dream_source_desc">Какие фото показывать на заставке</string>
+    <string name="dream_all_photos">Все фото</string>
+    <string name="dream_album">Альбом</string>
+    <string name="dream_people">Люди</string>
+    <string name="dream_combined">Альбомы + люди</string>
+    <string name="dream_from_year">Начиная с</string>
+    <string name="dream_from_year_desc">Только фото, снятые в этом году или позже</string>
+    <string name="all_years">Все годы</string>
+    <string name="dream_order_desc">Случайно или по дате (продолжает с места остановки)</string>
+    <string name="dream_albums">Альбомы</string>
+    <string name="dream_albums_hint">"Выбрано: %1$d  ·  OK = вкл./выкл."</string>
+    <string name="dream_other_album">Показывать другой альбом</string>
+    <string name="dream_other_album_desc">Если фото есть и в другом альбоме, показывать его название (напр., «День рождения» вместо «Заставка»)</string>
+    <string name="dream_memories">Воспоминания дня</string>
+    <string name="dream_person">Человек</string>
+    <string name="dream_not_chosen">Не выбрано — нажмите OK</string>
+    <string name="dream_time_desc">Сколько времени показывать каждое фото (◀ ▶ на пульте: назад / вперёд)</string>
+    <string name="dream_clock">Часы</string>
+    <string name="dream_clock_desc">Время и дата в левом верхнем углу</string>
+    <string name="dream_map">Карта в заставке</string>
+    <string name="dream_map_desc">Контур страны со съёмкой фото в правом нижнем углу</string>
+    <string name="dream_ken_burns_desc">Плавное приближение каждого фото</string>
+    <string name="dream_info">Дата и место в заставке</string>
+    <string name="dream_info_desc">Дата, место и название альбома в левом нижнем углу</string>
+    <string name="dream_no_photos">Для выбранного источника заставки фото не найдены</string>
+    <string name="dream_no_connection">Нет связи с сервером Immich; повторная попытка…</string>
+    <string name="dream_not_paired">Пока не подключено: сначала откройте приложение</string>
+    <string name="dream_perm_yes">Приложение может само менять настройку заставки</string>
+    <string name="dream_perm_no">Приложение пока не может менять заставку (нужно однократное разрешение через adb, см. ниже)</string>
+    <string name="dream_dev_yes">Параметры разработчика включены</string>
+    <string name="dream_dev_no">Параметры разработчика выключены</string>
+    <string name="dream_turn_on">Включить сейчас</string>
+    <string name="dream_turn_off">Выключить сейчас</string>
+    <string name="dream_toggle_desc">Предыдущая заставка запоминается и возвращается при выключении</string>
+    <string name="dream_open_system">Открыть настройки заставки</string>
+    <string name="dream_open_system_desc">Выберите «Фото» в системных настройках</string>
+    <string name="dream_auto_heading">Автоматически (отладка по сети)</string>
+    <string name="dream_auto_desc">Устройство подключается к своему порту отладки и настраивает всё само. Требуется: Для разработчиков → Отладка по сети (или «ADB по сети»). В первый раз ТВ спросит разрешение на отладку — выберите «Всегда разрешать».</string>
+    <string name="dream_auto_btn">Настроить автоматически</string>
+    <string name="dream_auto_btn_desc">Выдаёт приложению разрешение и ставит его заставкой; занимает пару секунд</string>
+    <string name="adb_connecting">Подключение… если ТВ попросит разрешить отладку, выберите «Всегда разрешать»</string>
+    <string name="adb_done">Готово: приложение установлено заставкой</string>
+    <string name="adb_failed">Не сработало; воспользуйтесь ручными шагами ниже</string>
+    <string name="adb_no_connection">Нет подключения: сначала включите «Отладку по сети» в параметрах разработчика</string>
+    <string name="adb_no_permission">На ТВ не выдано разрешение; попробуйте снова</string>
+    <string name="dream_manual_heading">Вручную, с компьютера</string>
+    <string name="dream_step1">Включите параметры разработчика: Настройки → Настройки устройства → Об устройстве → нажмите OK 7 раз на пункте «Сборка».</string>
+    <string name="dream_step2">Настройки → Настройки устройства → Для разработчиков → включите «Отладка по сети» (или «Отладка по USB» с кабелем).</string>
+    <string name="dream_step3">На компьютере с установленным adb (Android platform tools) выполните:</string>
+    <string name="dream_step4">В первый раз ТВ запросит разрешение для компьютера. После второй команды приложение сможет само включать и выключать заставку; последние две команды включают её сразу.</string>
+    <string name="dream_open_about">Открыть «Об устройстве»</string>
+    <string name="dream_open_about_desc">Чтобы включить параметры разработчика</string>
+    <string name="dream_open_dev">Открыть «Для разработчиков»</string>
+    <string name="dream_open_dev_desc">Чтобы включить отладку по сети</string>
+    <string name="dream_key_error">Сервер Immich больше не принимает ключ этого устройства: откройте приложение и выберите «Подключить заново»</string>
+    <string name="dream_usb_yes">Отладка по USB включена</string>
+    <string name="dream_usb_no">Отладка по USB выключена</string>
+    <string name="dream_net_yes">Отладка по сети включена (порт 5555)</string>
+    <string name="dream_net_no">Отладка по сети выключена (нужна для автонастройки)</string>
+    <string name="dream_current">Текущая заставка: %1$s</string>
+    <string name="dream_starts_after">запуск через %1$s бездействия</string>
+
+    <!-- Diagnostics (2.1) -->
+    <string name="diagnostics">Диагностика</string>
+    <string name="diagnostics_desc">Почему приложение закрылось в прошлый раз (хранится только локально)</string>
+    <string name="diagnostics_sub">Последние неожиданные завершения приложения и их причины. Ничего никуда не отправляется.</string>
+    <string name="diagnostics_empty">Записей нет: приложение не завершалось аварийно.</string>
+    <string name="diagnostics_footer">Подсказка: сбой записывается сразу в момент падения; данные системы (память, ANR) появляются при следующем запуске.</string>
+    <string name="diag_crash">Сбой (ошибка в приложении)</string>
+    <string name="diag_crash_native">Сбой (нативный код)</string>
+    <string name="diag_anr">Не отвечает (ANR)</string>
+    <string name="diag_memory">Закрыто Android: нехватка памяти</string>
+    <string name="diag_signal">Завершено сигналом (напр. при обновлении)</string>
+    <string name="diag_user">Остановлено пользователем или системой</string>
+    <string name="diag_system">Закрыто системой</string>
+    <string name="diag_caught">Перехваченная ошибка (приложение продолжило работу)</string>
+    <string name="diag_other">Другое</string>
+    <string name="diag_foreground">на переднем плане</string>
+
+    <!-- 2.5: world map (continents/regions), scroll bar, people -->
+    <string name="continent_europe">Европа</string>
+    <string name="continent_asia">Азия</string>
+    <string name="continent_africa">Африка</string>
+    <string name="continent_north_america">Северная Америка</string>
+    <string name="continent_south_america">Южная Америка</string>
+    <string name="continent_oceania">Океания</string>
+    <string name="continent_antarctica">Антарктида</string>
+    <string name="continent_other">Другие места</string>
+    <string name="region_northern_europe">Северная Европа</string>
+    <string name="region_western_europe">Западная Европа</string>
+    <string name="region_southern_europe">Южная Европа</string>
+    <string name="region_eastern_europe">Восточная Европа</string>
+    <string name="region_north_africa">Северная Африка</string>
+    <string name="region_west_africa">Западная Африка</string>
+    <string name="region_central_africa">Центральная Африка</string>
+    <string name="region_east_africa">Восточная Африка</string>
+    <string name="region_southern_africa">Южная Африка</string>
+    <string name="region_northern_america">США и Канада</string>
+    <string name="region_central_america">Центральная Америка</string>
+    <string name="region_caribbean">Карибский регион</string>
+    <string name="region_central_asia">Центральная Азия</string>
+    <string name="region_east_asia">Восточная Азия</string>
+    <string name="region_southeast_asia">Юго-Восточная Азия</string>
+    <string name="region_south_asia">Южная Азия</string>
+    <string name="region_west_asia">Ближний Восток</string>
+    <string name="region_australia">Австралия и Новая Зеландия</string>
+    <string name="region_melanesia">Меланезия</string>
+    <string name="region_micronesia">Микронезия</string>
+    <string name="region_polynesia">Полинезия</string>
+    <string name="scrollbar_hint_month">"▲▼ месяц · удержать: год · OK перейти"</string>
+    <string name="find_person">Найти человека</string>
+    <string name="sort_most_photos">Больше всего фото</string>
+    <string name="all_people">Все люди (%1$d)</string>
+    <string name="key_ok_hold">Удержать OK</string>
+    <string name="key_map_ok_hold_desc">все фото группы сеткой (по дате)</string>
+    <string name="key_map_play_desc">слайд-шоу группы</string>
+    <string name="key_scrollbar">▶ у правого края</string>
+    <string name="key_scrollbar_desc">полоса прокрутки: ▲▼ по месяцам (удержать: по годам), OK или ◀ — переход</string>
+    <string name="scrollbar_hint_general">"▲▼ шаг · удержать: быстрее · OK перейти"</string>
+    <string name="section_folders">Папки</string>
+    <string name="folders_no_permission">Нет доступа к папкам</string>
+    <string name="folders_no_permission_desc">У API-ключа отсутствует право folder.read.</string>
+    <string name="folders_load_failed">Не удалось загрузить папки</string>
+    <string name="folder_empty">Эта папка пуста</string>
+    <string name="slideshow_overlay">Во время слайд-шоу</string>
+    <string name="slideshow_overlay_desc">Что показывать поверх фото в слайд-шоу; пауза возвращает информацию</string>
+    <string name="slideshow_overlay_all">Всё</string>
+    <string name="slideshow_overlay_no_ring">Без кольца прогресса</string>
+    <string name="slideshow_overlay_photo_only">Только фото</string>
+    <string name="group_music">Музыка</string>
+    <string name="music_mode">Фоновая музыка</string>
+    <string name="music_mode_desc">Эмбиент-радио в приложении (приглушается на видео, ставится на паузу при сворачивании)</string>
+    <string name="music_slideshow">В слайд-шоу</string>
+    <string name="music_always">Всегда</string>
+    <string name="music_station">Радиостанция</string>
+    <string name="music_station_desc">Фоновое эмбиент-радио без рекламы (SomaFM)</string>
+    <string name="dream_ring">Кольцо прогресса</string>
+    <string name="dream_ring_desc">Маленькое кольцо в левом нижнем углу, заполняющееся до следующего фото</string>
+    <string name="album_name">Название альбома</string>
+    <string name="album_name_desc">Показывать, в каких альбомах есть фото, напр. при просмотре человека</string>
+    <string name="blurred_background">Размытый фон</string>
+    <string name="blurred_background_desc">Заполнять края вокруг фото и видео размытым фоном; выкл. = чёрный (и на заставке)</string>
+    <plurals name="folders_count">
+        <item quantity="one">%d папка</item>
+        <item quantity="few">%d папки</item>
+        <item quantity="many">%d папок</item>
+        <item quantity="other">%d папки</item>
+    </plurals>
+    <string name="perms_title">Права ключа</string>
+    <string name="perms_checking">Проверка…</string>
+    <string name="perms_ok">Все права в порядке</string>
+    <string name="perms_partially_unknown">Отсутствующих прав не найдено (этот сервер не может вывести полный список)</string>
+    <string name="perms_core_missing">Не хватает обязательных прав; без них приложение не сможет работать</string>
+    <string name="perms_missing">Некоторые права отсутствуют; эти разделы не будут работать</string>
+    <string name="perms_missing_short">Не хватает: %s</string>
+    <string name="perms_how_to_fix">Подключитесь заново, чтобы создать новый ключ со всеми правами (старый можно удалить в Immich), либо добавьте недостающие права ключу в Immich: Настройки аккаунта → API-ключи.</string>
+    <string name="perms_reconnect_sub">Новый ключ через телефон</string>
+    <string name="perms_recheck">Проверить снова</string>
+    <string name="perms_close">Закрыть</string>
+    <string name="perms_inspect">Показать недостающие права и исправить</string>
+    <string name="perm_asset_read">Лента, поиск и сведения о фото</string>
+    <string name="perm_asset_view">Миниатюры и фотографии</string>
+    <string name="perm_user_read">Ваше имя в приветствии и настройках</string>
+    <string name="perm_album_read">Альбомы и названия альбомов</string>
+    <string name="perm_memory_read">Воспоминания («в этот день»)</string>
+    <string name="perm_person_read">Люди</string>
+    <string name="perm_map_read">Карта мира</string>
+    <string name="perm_folder_read">Папки</string>
+    <string name="update_title">Доступна версия %1$s</string>
+    <string name="update_sub">У вас установлена версия %1$s</string>
+    <string name="update_downloading">Загрузка… %1$d%%</string>
+    <string name="update_installing">Установка…</string>
+    <string name="update_permission">Сначала разрешите этому приложению установку обновлений (неизвестные источники), затем снова выберите «Обновить».</string>
+    <string name="update_permission_btn">Открыть настройку</string>
+    <string name="update_error">Не удалось обновить: %1$s</string>
+    <string name="update_now">Обновить сейчас</string>
+    <string name="update_later">Позже</string>
+    <string name="whats_new_title">Что нового в %1$s</string>
+    <string name="updates">Обновления</string>
+    <string name="update_available">Доступна версия %1$s. Нажмите OK для обновления</string>
+    <string name="update_checking">Проверка…</string>
+    <string name="update_up_to_date">У вас последняя версия. Нажмите OK для повторной проверки</string>
+    <string name="update_check_prompt">Нажмите OK для проверки новой версии</string>
+    <string name="update_auto">Проверять обновления</string>
+    <string name="update_auto_desc">Искать новую версию на GitHub при запуске</string>
+    <string name="whats_new_row">Что нового</string>
+    <string name="whats_new_row_desc">Изменения в этой версии</string>
+    <string-array name="whats_new_items">
+        <item>Исправлено воспроизведение видео на Amlogic и добавлен HUD перемотки с пульта</item>
+        <item>Устранены вылеты и фризы при быстром скролле с зажатым D-Pad</item>
+        <item>Парный показ вертикальных фото и тумблер панели «Дата и место»</item>
+        <item>Раздел «Вперемешку», Папки под Фото и фоновое эмбиент-радио SomaFM</item>
+        <item>Русский интерфейс и кириллическая экранная клавиатура</item>
+    </string-array>
+</resources>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and launcher variants (Settings → Name and icon) -->
+    <string name="app_name">사진</string>
+    <string name="alias_photos">사진</string>
+    <string name="alias_album">사진 앨범</string>
+    <string name="alias_memories">추억</string>
+    <string name="alias_family">가족 사진</string>
+    <string name="appearance_photos">파란색, 겹쳐진 사진 (기본값)</string>
+    <string name="appearance_album">따뜻한 주황색, 펼쳐진 앨범</string>
+    <string name="appearance_memories">보라색, 별이 있는 사진</string>
+    <string name="appearance_family">초록색, 하트가 있는 사진</string>
+
+    <!-- Date/time patterns (java.time) for this language -->
+    <string name="pattern_month_year">yyyy년 M월</string>
+    <string name="pattern_month_short">yyyy년 M월</string>
+    <string name="pattern_day_short">M월 d일 (EEE)</string>
+    <string name="pattern_day_year">yyyy년 M월 d일 (EEE)</string>
+    <string name="pattern_day_long">yyyy년 M월 d일 EEEE</string>
+    <string name="pattern_time">HH:mm</string>
+
+    <!-- Language screen -->
+    <string name="language_title">언어 선택</string>
+    <string name="language_sub">나중에 “설정 → 언어”에서 변경할 수 있습니다.</string>
+
+    <!-- Sections (menu) -->
+    <string name="section_photos">사진</string>
+    <string name="section_memories">추억</string>
+    <string name="section_search">검색</string>
+    <string name="section_explore">둘러보기</string>
+    <string name="section_map">지도</string>
+    <string name="section_albums">앨범</string>
+    <string name="section_favorites">즐겨찾기</string>
+    <string name="section_shuffle">무작위</string>
+    <string name="shuffle">다시 섞기</string>
+    <string name="shuffle_empty">사진이나 동영상이 아직 없습니다</string>
+    <string name="section_settings">설정</string>
+
+    <!-- General -->
+    <string name="loading">불러오는 중…</string>
+    <string name="today">오늘</string>
+    <string name="yesterday">어제</string>
+    <string name="no_date">날짜 없음</string>
+    <string name="person">인물</string>
+    <plurals name="items">
+        <item quantity="other">%d개</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="other">사진 %s장</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="other">%d년 전</item>
+    </plurals>
+
+    <!-- Timeline -->
+    <string name="newest_first">최신순</string>
+    <string name="oldest_first">오래된순</string>
+    <string name="go_to_date">날짜로 이동</string>
+    <string name="go_to_year">연도로 이동</string>
+    <string name="immich_unreachable">Immich에 연결할 수 없습니다</string>
+    <string name="no_favorites_yet">즐겨찾기가 아직 없습니다</string>
+    <string name="no_photos_yet">사진이 아직 없습니다</string>
+    <string name="favorites_tip">Immich에서 사진에 하트를 누르면 여기에 표시됩니다.</string>
+    <string name="greeting_morning">좋은 아침입니다</string>
+    <string name="greeting_afternoon">좋은 오후입니다</string>
+    <string name="greeting_evening">좋은 저녁입니다</string>
+    <string name="greeting_night">안녕히 주무세요</string>
+    <string name="greeting_with_name">%1$s, %2$s</string>
+
+    <!-- Memories -->
+    <string name="memories_sub">과거 오늘의 기록</string>
+    <string name="no_memories">이번 주 추억이 없습니다</string>
+
+    <!-- Viewer -->
+    <string name="slideshow">슬라이드쇼</string>
+    <string name="slideshow_paused">슬라이드쇼 일시정지됨</string>
+    <string name="video_error">이 동영상을 재생할 수 없습니다</string>
+    <string name="info">정보</string>
+    <string name="hint_info_map">"확인 지도에서 보기   ·   ◀ ▶ 이동   ·   ⏩ 10개 건너뛰기"</string>
+    <string name="hint_info">"◀ ▶ 이동   ·   확인 슬라이드쇼   ·   ⏩ 10개 건너뛰기"</string>
+
+    <!-- Search -->
+    <string name="search">검색</string>
+    <string name="search_title">검색: %s</string>
+    <string name="search_hint">사진 내용 검색: 해변, 생일, 눈 속의 강아지…</string>
+    <string name="voice_search">음성 검색</string>
+    <string name="voice_prompt">무엇을 찾고 계신가요?</string>
+    <string name="mode_smart">스마트 검색</string>
+    <string name="mode_text">사진 속 텍스트</string>
+    <string name="mode_filename">파일 이름</string>
+    <string name="type_all">전체</string>
+    <string name="type_photos">사진</string>
+    <string name="type_videos">동영상</string>
+    <string name="sort_relevance">관련도순</string>
+    <string name="sort_newest">최신순</string>
+    <string name="sort_oldest">오래된순</string>
+    <string name="searching">검색 중…</string>
+    <string name="search_failed">검색 실패: %s</string>
+    <string name="nothing_found">검색 결과가 없습니다</string>
+    <plurals name="results">
+        <item quantity="other">결과 %s개</item>
+    </plurals>
+    <string name="recent_searches">최근 검색어</string>
+    <string name="try_suggestions">추천 검색어</string>
+    <string name="people">인물</string>
+    <string-array name="suggestions">
+        <item>해변</item>
+        <item>눈</item>
+        <item>생일</item>
+        <item>일몰</item>
+        <item>크리스마스 트리</item>
+        <item>산</item>
+        <item>강아지</item>
+        <item>케이크</item>
+        <item>수영장</item>
+        <item>음식</item>
+    </string-array>
+    <string name="key_space">공백</string>
+    <string name="key_clear">지우기</string>
+    <string name="action_search">검색</string>
+    <string name="action_done">완료</string>
+    <string name="loading_failed">불러오기 실패: %s</string>
+
+    <!-- Albums -->
+    <string name="albums">앨범</string>
+    <plurals name="albums_count">
+        <item quantity="other">앨범 %d개</item>
+    </plurals>
+    <string name="albums_matching">\"%s\" 포함</string>
+    <string name="sort_recent">최근 업데이트순</string>
+    <string name="sort_newest_photos">최신 사진순</string>
+    <string name="sort_name">이름순</string>
+    <string name="sort_count">항목 수순</string>
+    <string name="shared">공유됨</string>
+    <string name="shared_lower">공유됨</string>
+    <string name="find_album">앨범 찾기</string>
+    <string name="albums_load_failed">앨범을 불러올 수 없습니다</string>
+
+    <!-- Explore -->
+    <string name="explore">둘러보기</string>
+    <string name="load_failed">불러올 수 없습니다</string>
+    <string name="places">장소</string>
+
+    <!-- World map -->
+    <string name="map">지도</string>
+    <string name="map_load_failed">불러올 수 없음: %s</string>
+    <plurals name="photos_with_location">
+        <item quantity="other">위치 정보가 있는 사진 %s장</item>
+    </plurals>
+    <string name="map_no_background">지도 배경을 사용할 수 없습니다 (오프라인)</string>
+    <string name="map_hint">"◀▶▲▼ 선택/이동   ·   확인 확대   ·   확인 길게 누르기: 전체 사진   ·   ⏯ 슬라이드쇼   ·   ⏪︎⏩︎ 확대/축소   ·   뒤로: 전 세계"</string>
+
+    <!-- Settings -->
+    <string name="settings">설정</string>
+    <string name="settings_sub">"◀ ▶ 또는 확인: 값 선택   ·   뒤로 길게 누르기: 메뉴   ·   INFO: 단축키"</string>
+    <string name="settings_show">설정 표시</string>
+    <string name="settings_basic">기본</string>
+    <string name="settings_all">전체</string>
+    <string name="settings_basic_desc">자주 사용하는 설정만 표시합니다. 전체를 선택하면 모든 옵션이 표시됩니다.</string>
+    <string name="settings_all_desc">고급 설정을 포함한 모든 항목</string>
+    <string name="off">끔</string>
+    <string name="on">켬</string>
+    <string name="group_slideshow">슬라이드쇼</string>
+    <string name="time_per_photo">사진당 표시 시간</string>
+    <string name="time_per_photo_desc">각 사진이 화면에 머무는 시간</string>
+    <string name="seconds">%d초</string>
+    <string name="seconds_decimal">%s초</string>
+    <string name="ken_burns">Ken Burns 효과</string>
+    <string name="ken_burns_desc">슬라이드쇼 동안 화면을 천천히 확대합니다</string>
+    <string name="order">순서</string>
+    <string name="slideshow_order_desc">날짜순으로 이어서 재생하거나 매번 무작위 선택</string>
+    <string name="by_date">날짜순</string>
+    <string name="random">무작위</string>
+    <string name="videos">동영상</string>
+    <string name="slideshow_videos_desc">슬라이드쇼에서 동영상을 재생하거나 건너뜁니다</string>
+    <string name="play">재생</string>
+    <string name="skip">건너뛰기</string>
+    <string name="transition">전환 효과</string>
+    <string name="transition_desc">다음 사진이 화면에 나타나는 방식</string>
+    <string name="fade">페이드</string>
+    <string name="slide">슬라이드</string>
+    <string name="group_viewing">사진 보기</string>
+    <string name="country_map">사진 위 지도</string>
+    <string name="country_map_desc">오른쪽 하단에 사진이 찍힌 국가 윤곽 표시</string>
+    <string name="small">작게</string>
+    <string name="large">크게</string>
+    <string name="show_date_place">날짜 및 장소 표시</string>
+    <string name="show_date_place_desc">사진 감상 시 하단에 날짜 및 장소 바를 표시합니다</string>
+    <string name="date_place_bar">하단 바 유지 시간</string>
+    <string name="date_place_bar_desc">몇 초 뒤 하단 바를 숨기거나 계속 표시합니다</string>
+    <string name="always_show">항상 표시</string>
+    <string name="counter">카운터</string>
+    <string name="counter_desc">날짜 옆에 “68 / %s” 표시</string>
+    <string name="group_timeline">타임라인</string>
+    <string name="photo_size">사진 크기</string>
+    <string name="photo_size_desc">목록 보기에서의 행 높이</string>
+    <string name="normal_cluster">보통</string>
+    <string name="normal">보통</string>
+    <string name="timeline_order_desc">열 때 기본 정렬 (타임라인 상단 버튼으로 일시 변경 가능)</string>
+    <string name="partner_photos">파트너 사진</string>
+    <string name="partner_photos_desc">Immich에서 파트너가 공유한 사진도 함께 표시합니다</string>
+    <string name="memories_at_top">상단에 추억 표시</string>
+    <string name="memories_at_top_desc">타임라인 위에 “과거 오늘” 행을 표시합니다</string>
+    <string name="start_screen">시작 화면</string>
+    <string name="start_screen_desc">앱을 실행할 때 열리는 섹션</string>
+    <string name="greeting">인사말</string>
+    <string name="greeting_desc">타임라인 상단: “%s” 또는 사용자 지정 문구</string>
+    <string name="automatic">자동</string>
+    <string name="custom_text">사용자 지정 문구</string>
+    <string name="nothing_entered">아직 입력됨 없음 — 확인을 눌러 입력</string>
+    <string name="group_map">지도</string>
+    <string name="map_start_view">시작 보기</string>
+    <string name="map_start_view_desc">세계 지도를 열 때의 초기 영역</string>
+    <string name="whole_world">전 세계</string>
+    <string name="europe">유럽</string>
+    <string name="top_country">사진이 가장 많은 국가</string>
+    <string name="last_viewed">마지막으로 본 위치</string>
+    <string name="cluster_level">클러스터 수준</string>
+    <string name="cluster_level_desc">세밀하게: 더 작고 많은 그룹 / 크게: 더 크고 적은 그룹</string>
+    <string name="fine">세밀하게</string>
+    <string name="coarse">크게</string>
+    <string name="map_style">지도 스타일</string>
+    <string name="map_style_desc">어두움 또는 밝음 (Immich), 또는 위성 (EOX Sentinel-2, 도로 및 지명 포함)</string>
+    <string name="dark">어두움</string>
+    <string name="light">밝음</string>
+    <string name="satellite">위성</string>
+    <string name="group_appearance">모양</string>
+    <string name="language">언어</string>
+    <string name="language_desc">앱 언어 (즉시 적용)</string>
+    <string name="date_format">날짜 형식</string>
+    <string name="date_format_desc">모든 날짜의 월/일 순서 (화면 보호기 포함)</string>
+    <string name="time_format">시간 형식</string>
+    <string name="time_format_desc">12시간제 또는 24시간제; 자동은 언어 설정을 따릅니다</string>
+    <string name="accent_color">강조 색상</string>
+    <string name="accent_color_desc">포커스 테두리, 버튼 및 제목 색상</string>
+    <string name="color_blue">파란색</string>
+    <string name="color_green">초록색</string>
+    <string name="color_orange">주황색</string>
+    <string name="color_pink">분홍색</string>
+    <string name="color_purple">보라색</string>
+    <string name="color_gray">회색</string>
+    <string name="name_and_icon">이름 및 아이콘</string>
+    <string name="name_and_icon_desc">%s. 런처 타일도 함께 변경됩니다 (몇 초 내 업데이트)</string>
+    <string name="group_storage">저장소</string>
+    <string name="clear_cache">이미지 캐시 지우기</string>
+    <string name="cache_size">"디스크 %1$s MB  ·  메모리 %2$s MB"</string>
+    <string name="group_account">계정</string>
+    <string name="immich_server">Immich 서버</string>
+    <string name="signed_in_as">로그인된 계정</string>
+    <string name="reconnect">다시 연결</string>
+    <string name="reconnect_desc">다른 서버 또는 계정 연결</string>
+    <string name="disconnect">연결 해제</string>
+    <string name="disconnect_desc">이 TV에서 키를 제거합니다 (Immich의 계정 설정 → API 키에서 직접 삭제하세요)</string>
+    <string name="are_you_sure">정말 연결을 해제할까요?</string>
+    <string name="are_you_sure_desc">다시 확인을 누르면 이 TV에서 키가 제거됩니다</string>
+    <string name="group_about">정보</string>
+    <string name="keys">단축키</string>
+    <string name="keys_desc">모든 단축키 보기 (INFO 버튼으로도 열기 가능)</string>
+    <string name="app_line">%s 앱</string>
+    <string name="version">버전 %s</string>
+    <string name="map_attribution">© OpenStreetMap · Protomaps (tiles.immich.cloud); 위성: %s, CC BY-NC-SA 4.0</string>
+
+    <!-- Keys overview -->
+    <string name="keys_close_hint">닫으려면 아무 키나 누르세요</string>
+    <string name="key_group_everywhere">어디서나</string>
+    <string name="key_back_hold">뒤로 길게 누르기</string>
+    <string name="key_back_hold_desc">섹션 메뉴 (리모컨에 MENU 키가 있으면 사용 가능)</string>
+    <string name="key_info">INFO</string>
+    <string name="key_info_desc">이 단축키 안내</string>
+    <string name="key_left_edge">왼쪽 끝에서 ◀</string>
+    <string name="key_left_edge_desc">메뉴</string>
+    <string name="key_back">뒤로</string>
+    <string name="key_back_desc">한 단계 뒤로; 시작 화면에서는 앱 종료</string>
+    <string name="key_group_timeline">타임라인, 앨범, 검색</string>
+    <string name="key_arrows">▲ ▼ ◀ ▶</string>
+    <string name="key_arrows_desc">사진 선택</string>
+    <string name="key_ok">확인</string>
+    <string name="key_ok_open">사진 열기</string>
+    <string name="key_play">재생/일시정지</string>
+    <string name="key_play_desc">선택한 사진부터 슬라이드쇼</string>
+    <string name="key_seek">⏪︎ ⏩︎</string>
+    <string name="key_seek_month">한 달 뒤 / 앞</string>
+    <string name="key_back_top">맨 위로 이동; 한 번 더 누르면 앱 종료</string>
+    <string name="key_group_settings">설정</string>
+    <string name="key_left_right">◀ ▶</string>
+    <string name="key_value">이전 / 다음 값</string>
+    <string name="key_ok_value">다음 값 선택 또는 작업 실행</string>
+    <string name="key_group_viewer">사진 감상</string>
+    <string name="key_prev_next">이전 / 다음</string>
+    <string name="key_ok_play">"확인 또는 재생/일시정지"</string>
+    <string name="key_slideshow_desc">슬라이드쇼 켜기/끄기 (동영상에서는 일시정지)</string>
+    <string name="key_info_btn">"▲ ▼ 또는 INFO"</string>
+    <string name="key_info_panel">정보 (카메라, 장소, 지도)</string>
+    <string name="key_ok_info">정보가 열린 상태에서 확인</string>
+    <string name="key_ok_info_desc">세계 지도에 표시 (위치 정보가 있는 사진)</string>
+    <string name="key_seek_viewer">사진 10장 뒤 / 앞; 동영상에서는 10초 이동</string>
+    <string name="key_close">닫기</string>
+    <string name="key_group_map">세계 지도</string>
+    <string name="key_map_arrows">그룹 선택 또는 지도 이동</string>
+    <string name="key_map_ok">그룹 확대; 더 이상 나뉘지 않으면 열기</string>
+    <string name="key_map_zoom">축소 / 확대</string>
+    <string name="key_map_back">전 세계 보기; 한 번 더 누르면 시작 화면</string>
+    <string name="key_map_left">전 세계 보기에서 ◀</string>
+
+    <!-- Connect screen (TV) -->
+    <string name="pair_title">Immich에 연결</string>
+    <string name="pair_test">테스트 모드: 연결이 성공할 때까지 현재 연결을 유지합니다</string>
+    <string name="pair_once">최초 1회 설정 후 자동으로 작동합니다</string>
+    <string name="step1">휴대폰으로 QR 코드를 스캔하세요</string>
+    <string name="step1_sub">휴대폰과 TV가 같은 Wi-Fi 네트워크에 연결되어 있어야 합니다.</string>
+    <string name="step2">Immich 서버 주소, 이메일, 비밀번호를 입력하세요</string>
+    <string name="step2_sub">TV가 읽기 전용 키를 자체 생성하며 비밀번호는 저장되지 않습니다.</string>
+    <string name="step3">완료</string>
+    <string name="step3_sub">휴대폰을 내려놓으세요. 사진이 자동으로 나타납니다.</string>
+    <string name="waiting_for_phone">휴대폰 입력 대기 중…</string>
+    <string name="done_title">완료! 이제 휴대폰을 내려놓으셔도 됩니다.</string>
+    <string name="paired_as">%2$s의 %1$s 계정으로 연결됨</string>
+    <string name="pair_failed">연결 실패</string>
+    <string name="try_again">휴대폰에서 다시 시도해 주세요.</string>
+    <string name="no_network">네트워크 없음</string>
+    <string name="type_address">또는 브라우저에 이 주소를 입력하세요:</string>
+
+    <!-- Connecting: progress and errors (shown on the TV and sent to the phone) -->
+    <string name="err_no_network">네트워크 연결이 없습니다. Wi-Fi 또는 랜 케이블을 연결해 주세요.</string>
+    <string name="err_no_port">포트를 열 수 없습니다.</string>
+    <string name="no_access">접근 거부</string>
+    <string name="no_access_html">접근할 수 없습니다.&lt;br&gt;TV 화면의 QR 코드를 스캔하세요.</string>
+    <string name="failed">실패</string>
+    <string name="err_app_inactive">앱이 더 이상 활성화되어 있지 않습니다.</string>
+    <string name="err_enter_address">Immich 서버 주소를 입력하세요.</string>
+    <string name="err_enter_email">이메일 주소와 비밀번호를 입력하세요.</string>
+    <string name="status_checking_key_perms">키와 권한 확인 중…</string>
+    <string name="paired_message">%2$s의 %1$s 계정으로 연결되었습니다.</string>
+    <string name="err_something_wrong">문제가 발생했습니다: %s</string>
+    <string name="err_ssl">%s 보안 연결 실패 (인증서 오류). http:// 로 시도하거나 인증서를 확인하세요.</string>
+    <string name="err_host">주소 %s을(를) 찾을 수 없습니다. 철자를 확인하세요.</string>
+    <string name="err_connection">%1$s:%2$d에 연결할 수 없습니다. 서버가 실행 중이며 TV와 같은 네트워크인지 확인하세요.</string>
+    <string name="status_finding_server">%s에서 서버 찾는 중…</string>
+    <string name="err_no_pong">%s에서 Immich 서버가 응답하지 않습니다 (/api/server/ping에서 pong 없음).</string>
+    <string name="err_no_immich">%1$s에서 Immich 서버가 응답하지 않습니다 (/api/server/ping에서 HTTP %2$d).</string>
+    <string name="err_too_old">이 Immich 서버 버전(%s)은 너무 오래되어 호환되지 않습니다. Immich 3(최소 2)으로 업데이트하세요.</string>
+    <string name="warn_version">참고: Immich 서버 버전은 %s입니다. 이 앱은 Immich 3용으로 제작되었지만 대부분 정상 작동할 것입니다.</string>
+    <string name="status_signing_in">%s(으)로 로그인 중…</string>
+    <string name="err_login">이메일 주소 또는 비밀번호가 잘못되었습니다.</string>
+    <string name="err_login_email">Immich가 이 이메일 주소를 허용하지 않습니다 (유효한 주소가 아님).</string>
+    <string name="err_login_http">로그인 실패 (HTTP %d).</string>
+    <string name="err_no_token">로그인에서 액세스 토큰을 받지 못했습니다.</string>
+    <string name="status_creating_key">API 키 생성 중…</string>
+    <string name="err_no_keys_allowed">이 계정은 API 키를 생성할 권한이 없습니다. 서버 관리자에게 문의하거나 기존 키를 사용하세요.</string>
+    <string name="err_key_http">API 키 생성 실패 (HTTP %1$d): %2$s</string>
+    <string name="err_no_key_returned">Immich가 키를 반환하지 않았습니다.</string>
+    <string name="status_checking_key">키 확인 중…</string>
+    <string name="err_key_not_working">새 키가 작동하지 않습니다 (HTTP %d).</string>
+    <string name="err_key_rejected">이 API 키는 %s에서 거부되었습니다. 전체 키를 복사했는지 확인하세요.</string>
+    <string name="err_unexpected">서버에서 예기치 않은 응답이 왔습니다 (%2$s에서 HTTP %1$d).</string>
+    <string name="err_permissions">이 키에 권한이 누락되었습니다: %1$s. Immich에서 다음 권한만 정확히 선택해 새 키를 만드세요: %2$s.</string>
+    <string name="unknown_user">알 수 없는 사용자</string>
+    <string name="key_name_template">%s의 사진</string>
+
+    <!-- Phone page (served by the TV) -->
+    <string name="html_title">사진 연결</string>
+    <string name="html_heading">TV의 사진</string>
+    <string name="html_sub">Immich 서버에 연결</string>
+    <string name="html_address">Immich 서버 주소</string>
+    <string name="html_address_example">예: 192.168.1.10:2283 또는 photos.mydomain.com</string>
+    <string name="html_address_example_short">예: 192.168.1.10:2283</string>
+    <string name="html_address_hint">브라우저 또는 Immich 앱과 동일한 주소입니다.</string>
+    <string name="html_email">이메일 주소</string>
+    <string name="html_password">비밀번호</string>
+    <string name="html_password_hint">비밀번호는 Immich에서 TV용 읽기 전용 키를 생성하는 데만 사용되며 저장되지 않습니다.</string>
+    <string name="html_connect">연결</string>
+    <string name="html_key_heading">또는 기존 API 키 붙여넣기</string>
+    <string name="html_key">API 키</string>
+    <string name="html_key_hint_before">Immich의 다음 경로에서 생성하세요:</string>
+    <string name="html_key_path">계정 설정 → API 키 → 새 API 키</string>
+    <string name="html_key_hint_after">아래 권한만 정확히 체크하세요:</string>
+    <string name="html_connect_key">키로 연결</string>
+    <string name="html_footer">이 페이지는 홈 네트워크에서만 작동하며 연결이 완료되면 닫힙니다.</string>
+    <string name="html_busy_title">연결 중…</string>
+    <string name="html_busy">TV가 서버를 확인하고 키를 생성하고 있습니다. 몇 초 정도 걸립니다.</string>
+    <string name="html_no_conn_title">TV에 연결할 수 없음</string>
+    <string name="html_no_conn">TV에 연결 화면이 아직 열려 있고 휴대폰이 같은 Wi-Fi에 연결되어 있나요?</string>
+
+    <!-- Unofficial (2.1) -->
+    <string name="unofficial_short">Immich 비공식 클라이언트</string>
+    <string name="unofficial_long">Immich 프로젝트와 제휴하거나 보증받지 않은 비공식 앱입니다. Immich는 해당 소유자의 상표입니다.</string>
+    <string name="back_to_close">닫으려면 뒤로를 누르세요</string>
+    <string name="minutes">%d분</string>
+
+    <!-- Screensaver (2.1) -->
+    <string name="dream_name">사진 (화면 보호기)</string>
+    <string name="group_screensaver">화면 보호기</string>
+    <string name="screensaver">화면 보호기</string>
+    <string name="dream_on_desc">이 앱을 기기의 화면 보호기로 사용합니다</string>
+    <string name="dream_status_on">활성: 이 앱이 기기의 화면 보호기로 설정되었습니다</string>
+    <string name="dream_status_off">아직 기기의 화면 보호기가 아닙니다</string>
+    <string name="dream_status_off_ok">비활성 — 확인을 눌러 설정하세요</string>
+    <string name="dream_setup">이 기기에서 설정</string>
+    <string name="dream_setup_sub">Android TV에는 보통 타사 화면 보호기 선택 화면이 없지만 아래 방법으로 설정할 수 있습니다.</string>
+    <string name="dream_setup_desc">상태, 도움말 및 일회성 설정 (adb)</string>
+    <string name="dream_preview">미리보기</string>
+    <string name="dream_preview_desc">지금 화면 보호기 보기; 아무 키나 누르면 닫힙니다</string>
+    <string name="dream_source">사진</string>
+    <string name="dream_source_desc">화면 보호기에 표시할 사진 범위</string>
+    <string name="dream_all_photos">모든 사진</string>
+    <string name="dream_album">앨범</string>
+    <string name="dream_people">인물</string>
+    <string name="dream_combined">앨범 + 인물</string>
+    <string name="dream_from_year">시작 연도</string>
+    <string name="dream_from_year_desc">이 연도 이후에 촬영된 사진만 표시</string>
+    <string name="all_years">모든 연도</string>
+    <string name="dream_order_desc">무작위 또는 날짜순 (이전에 멈춘 위치부터 이어서 재생)</string>
+    <string name="dream_albums">앨범</string>
+    <string name="dream_albums_hint">"%1$d개 선택됨  ·  확인 = 켜기/끄기"</string>
+    <string name="dream_other_album">다른 앨범 이름 표시</string>
+    <string name="dream_other_album_desc">사진이 다른 앨범에도 속한 경우 해당 앨범 이름을 대신 표시합니다 (예: “화면 보호기” 대신 “생일”)</string>
+    <string name="dream_memories">오늘의 추억</string>
+    <string name="dream_person">인물</string>
+    <string name="dream_not_chosen">선택되지 않음 — 확인을 누르세요</string>
+    <string name="dream_time_desc">각 사진이 화면에 표시되는 시간 (리모컨 ◀ ▶: 이전 / 다음)</string>
+    <string name="dream_clock">시계</string>
+    <string name="dream_clock_desc">왼쪽 상단에 시간과 날짜 표시</string>
+    <string name="dream_map">화면 보호기 지도</string>
+    <string name="dream_map_desc">오른쪽 하단에 촬영 국가 윤곽 표시</string>
+    <string name="dream_ken_burns_desc">각 사진을 천천히 확대</string>
+    <string name="dream_info">화면 보호기 날짜 및 장소</string>
+    <string name="dream_info_desc">왼쪽 하단에 날짜, 장소 및 앨범 이름 표시</string>
+    <string name="dream_no_photos">이 화면 보호기 소스에서 사진을 찾지 못했습니다</string>
+    <string name="dream_no_connection">Immich 서버에 연결할 수 없습니다; 다시 시도 중…</string>
+    <string name="dream_not_paired">연결되지 않음: 먼저 앱을 실행하세요</string>
+    <string name="dream_perm_yes">앱이 화면 보호기 설정을 직접 변경할 수 있습니다</string>
+    <string name="dream_perm_no">아직 화면 보호기 설정을 변경할 수 없습니다 (adb로 1회 권한 필요, 아래 참조)</string>
+    <string name="dream_dev_yes">개발자 옵션이 켜져 있습니다</string>
+    <string name="dream_dev_no">개발자 옵션이 꺼져 있습니다</string>
+    <string name="dream_turn_on">지금 켜기</string>
+    <string name="dream_turn_off">지금 끄기</string>
+    <string name="dream_toggle_desc">이 기능을 끄면 이전 화면 보호기가 복원됩니다</string>
+    <string name="dream_open_system">화면 보호기 설정 열기</string>
+    <string name="dream_open_system_desc">시스템 설정에서 “사진”을 선택하세요</string>
+    <string name="dream_auto_heading">자동 설정 (네트워크 디버깅)</string>
+    <string name="dream_auto_desc">기기가 자체 디버그 포트에 연결해 모든 설정을 완료합니다. 개발자 옵션 → 네트워크 디버깅(또는 ADB over network)이 필요합니다. 처음 실행 시 TV가 디버깅 허용을 물으면 “항상 허용”을 선택하세요.</string>
+    <string name="dream_auto_btn">자동으로 설정</string>
+    <string name="dream_auto_btn_desc">권한을 부여하고 화면 보호기로 설정합니다 (몇 초 걸림)</string>
+    <string name="adb_connecting">연결 중… TV에서 디버깅 허용을 물으면 “항상 허용”을 선택하세요</string>
+    <string name="adb_done">완료: 이제 이 앱이 화면 보호기입니다</string>
+    <string name="adb_failed">작동하지 않았습니다; 아래 수동 단계를 사용하세요</string>
+    <string name="adb_no_connection">연결 없음: 먼저 개발자 옵션에서 네트워크 디버깅을 켜세요</string>
+    <string name="adb_no_permission">TV에서 허용하지 않았습니다; 다시 시도하세요</string>
+    <string name="dream_manual_heading">컴퓨터에서 수동 설정</string>
+    <string name="dream_step1">개발자 옵션 활성화: 설정 → 기기 환경설정 → 정보 → “빌드”에서 확인을 7번 누르세요.</string>
+    <string name="dream_step2">설정 → 기기 환경설정 → 개발자 옵션 → 네트워크 디버깅(또는 케이블 연결 시 USB 디버깅)을 켜세요.</string>
+    <string name="dream_step3">adb(Android platform tools)가 설치된 컴퓨터에서 실행:</string>
+    <string name="dream_step4">처음에는 TV가 컴퓨터 허용 여부를 묻습니다. 두 번째 명령 후 앱이 화면 보호기를 스스로 켜고 끌 수 있으며, 마지막 두 명령으로 즉시 설정됩니다.</string>
+    <string name="dream_open_about">“정보” 열기</string>
+    <string name="dream_open_about_desc">개발자 옵션을 켜기 위해</string>
+    <string name="dream_open_dev">개발자 옵션 열기</string>
+    <string name="dream_open_dev_desc">네트워크 디버깅을 켜기 위해</string>
+    <string name="dream_key_error">Immich 서버가 이 기기의 키를 더 이상 허용하지 않습니다: 앱을 열고 “다시 연결”을 선택하세요</string>
+    <string name="dream_usb_yes">USB 디버깅이 켜져 있습니다</string>
+    <string name="dream_usb_no">USB 디버깅이 꺼져 있습니다</string>
+    <string name="dream_net_yes">네트워크 디버깅이 켜져 있습니다 (포트 5555)</string>
+    <string name="dream_net_no">네트워크 디버깅이 꺼져 있습니다 (자동 설정에 필요)</string>
+    <string name="dream_current">현재 화면 보호기: %1$s</string>
+    <string name="dream_starts_after">활동 없음 %1$s 후 시작</string>
+
+    <!-- Diagnostics (2.1) -->
+    <string name="diagnostics">진단</string>
+    <string name="diagnostics_desc">지난번 앱이 종료된 이유 (이 기기에만 저장)</string>
+    <string name="diagnostics_sub">최근 앱이 예기치 않게 종료된 원인과 기록입니다. 외부로 전송되지 않습니다.</string>
+    <string name="diagnostics_empty">기록 없음: 앱이 예기치 않게 종료된 적이 없습니다.</string>
+    <string name="diagnostics_footer">팁: 충돌은 발생하는 즉시 기록되며, Android 시스템 보고(메모리, ANR)는 다음 실행 시 표시됩니다.</string>
+    <string name="diag_crash">충돌 (앱 오류)</string>
+    <string name="diag_crash_native">충돌 (네이티브 코드)</string>
+    <string name="diag_anr">응답 없음 (ANR)</string>
+    <string name="diag_memory">Android에 의해 종료됨: 메모리 부족</string>
+    <string name="diag_signal">시그널로 종료됨 (예: 업데이트 중)</string>
+    <string name="diag_user">사용자 또는 시스템에 의해 중지됨</string>
+    <string name="diag_system">시스템에 의해 종료됨</string>
+    <string name="diag_caught">오류 포착됨 (앱 계속 실행)</string>
+    <string name="diag_other">기타</string>
+    <string name="diag_foreground">포그라운드 실행 중</string>
+
+    <!-- 2.5: world map, scroll bar, people -->
+    <string name="continent_europe">유럽</string>
+    <string name="continent_asia">아시아</string>
+    <string name="continent_africa">아프리카</string>
+    <string name="continent_north_america">북아메리카</string>
+    <string name="continent_south_america">남아메리카</string>
+    <string name="continent_oceania">오세아니아</string>
+    <string name="continent_antarctica">남극</string>
+    <string name="continent_other">기타 지역</string>
+    <string name="region_northern_europe">북유럽</string>
+    <string name="region_western_europe">서유럽</string>
+    <string name="region_southern_europe">남유럽</string>
+    <string name="region_eastern_europe">동유럽</string>
+    <string name="region_north_africa">북아프리카</string>
+    <string name="region_west_africa">서아프리카</string>
+    <string name="region_central_africa">중앙아프리카</string>
+    <string name="region_east_africa">동아프리카</string>
+    <string name="region_southern_africa">남부 아프리카</string>
+    <string name="region_northern_america">미국 및 캐나다</string>
+    <string name="region_central_america">중앙아메리카</string>
+    <string name="region_caribbean">카리브해</string>
+    <string name="region_central_asia">중앙아시아</string>
+    <string name="region_east_asia">동아시아</string>
+    <string name="region_southeast_asia">동남아시아</string>
+    <string name="region_south_asia">남아시아</string>
+    <string name="region_west_asia">중동</string>
+    <string name="region_australia">호주 및 뉴질랜드</string>
+    <string name="region_melanesia">멜라네시아</string>
+    <string name="region_micronesia">미크로네시아</string>
+    <string name="region_polynesia">폴리네시아</string>
+    <string name="scrollbar_hint_month">"▲▼ 월 · 길게 누르기: 연 · 확인 이동"</string>
+    <string name="find_person">인물 찾기</string>
+    <string name="sort_most_photos">사진 많은 순</string>
+    <string name="all_people">모든 인물 (%1$d)</string>
+    <string name="key_ok_hold">확인 길게 누르기</string>
+    <string name="key_map_ok_hold_desc">그룹의 모든 사진을 그리드로 보기 (날짜순)</string>
+    <string name="key_map_play_desc">그룹 슬라이드쇼</string>
+    <string name="key_scrollbar">오른쪽 끝에서 ▶</string>
+    <string name="key_scrollbar_desc">스크롤 막대: ▲▼ 월별 이동 (길게 누르면 연도별), 확인 또는 ◀ 으로 이동</string>
+    <string name="scrollbar_hint_general">"▲▼ 이동 · 길게 누르기: 빠르게 · 확인 이동"</string>
+    <string name="section_folders">폴더</string>
+    <string name="folders_no_permission">폴더에 접근 권한이 없습니다</string>
+    <string name="folders_no_permission_desc">API 키에 folder.read 권한이 없습니다.</string>
+    <string name="folders_load_failed">폴더를 불러올 수 없습니다</string>
+    <string name="folder_empty">이 폴더는 비어 있습니다</string>
+    <string name="slideshow_overlay">슬라이드쇼 중 표시</string>
+    <string name="slideshow_overlay_desc">슬라이드쇼 실행 중 사진 위에 표시할 항목; 일시정지하면 정보가 다시 나타납니다</string>
+    <string name="slideshow_overlay_all">모두</string>
+    <string name="slideshow_overlay_no_ring">진행 링 없음</string>
+    <string name="slideshow_overlay_photo_only">사진만</string>
+    <string name="group_music">음악</string>
+    <string name="music_mode">배경 음악</string>
+    <string name="music_mode_desc">앱에서 앰비언트 라디오 재생 (동영상 재생 시 음소거, 최소화 시 일시정지)</string>
+    <string name="music_slideshow">슬라이드쇼만</string>
+    <string name="music_always">항상</string>
+    <string name="music_station">라디오 방송국</string>
+    <string name="music_station_desc">광고 없는 앰비언트 인터넷 라디오 (SomaFM)</string>
+    <string name="dream_ring">진행 링</string>
+    <string name="dream_ring_desc">왼쪽 하단에 다음 사진까지 채워지는 작은 원형 표시</string>
+    <string name="album_name">앨범 이름</string>
+    <string name="album_name_desc">사진이 속한 앨범을 표시합니다 (예: 인물 보기 시)</string>
+    <string name="blurred_background">흐림 배경</string>
+    <string name="blurred_background_desc">사진과 동영상 주변 여백을 흐린 이미지로 채웁니다; 끔 = 검정 (화면 보호기 포함)</string>
+    <plurals name="folders_count">
+        <item quantity="other">폴더 %d개</item>
+    </plurals>
+    <string name="perms_title">키 권한</string>
+    <string name="perms_checking">확인 중…</string>
+    <string name="perms_ok">모든 권한이 정상입니다</string>
+    <string name="perms_partially_unknown">누락된 권한이 발견되지 않았습니다 (이 서버에서는 전체 목록 확인 불가)</string>
+    <string name="perms_core_missing">필수 권한이 누락되어 앱을 사용할 수 없습니다</string>
+    <string name="perms_missing">일부 권한이 누락되어 해당 섹션이 작동하지 않습니다</string>
+    <string name="perms_missing_short">누락됨: %s</string>
+    <string name="perms_how_to_fix">다시 연결해 모든 권한이 있는 새 키를 만들거나(기존 키는 나중에 Immich에서 삭제 가능), Immich의 “계정 설정 → API 키”에서 누락된 권한을 추가하세요.</string>
+    <string name="perms_reconnect_sub">휴대폰으로 새 키 생성</string>
+    <string name="perms_recheck">다시 확인</string>
+    <string name="perms_close">닫기</string>
+    <string name="perms_inspect">누락된 항목 보기 및 해결</string>
+    <string name="perm_asset_read">타임라인, 검색 및 사진 세부 정보</string>
+    <string name="perm_asset_view">썸네일 및 사진 보기</string>
+    <string name="perm_user_read">인사말 및 설정의 사용자 이름</string>
+    <string name="perm_album_read">앨범 및 앨범 이름</string>
+    <string name="perm_memory_read">추억 (“과거 오늘”)</string>
+    <string name="perm_person_read">인물</string>
+    <string name="perm_map_read">세계 지도</string>
+    <string name="perm_folder_read">폴더</string>
+    <string name="update_title">버전 %1$s 사용 가능</string>
+    <string name="update_sub">현재 버전은 %1$s입니다</string>
+    <string name="update_downloading">다운로드 중… %1$d%%</string>
+    <string name="update_installing">설치 중…</string>
+    <string name="update_permission">먼저 이 앱에서 업데이트 설치(출처를 알 수 없는 앱)를 허용한 다음, 다시 업데이트를 선택하세요.</string>
+    <string name="update_permission_btn">설정 열기</string>
+    <string name="update_error">업데이트 실패: %1$s</string>
+    <string name="update_now">지금 업데이트</string>
+    <string name="update_later">나중에</string>
+    <string name="whats_new_title">%1$s의 새로운 기능</string>
+    <string name="updates">업데이트</string>
+    <string name="update_available">버전 %1$s 사용 가능. 확인을 눌러 업데이트</string>
+    <string name="update_checking">확인 중…</string>
+    <string name="update_up_to_date">최신 버전입니다. 확인을 눌러 다시 확인</string>
+    <string name="update_check_prompt">확인을 눌러 새 버전 확인</string>
+    <string name="update_auto">업데이트 확인</string>
+    <string name="update_auto_desc">시작 시 GitHub에서 새 버전 확인</string>
+    <string name="whats_new_row">새로운 기능</string>
+    <string name="whats_new_row_desc">이 버전의 변경 사항</string>
+    <string-array name="whats_new_items">
+        <item>Amlogic 및 Android 10+ 동영상 재생 개선 및 리모컨 탐색 HUD 추가</item>
+        <item>방향키 길게 누르기 스크롤 속도 조절 및 프리페치로 ANR/프리징 해결</item>
+        <item>세로 사진 나란히 보기 및 날짜/장소 바 표시 토글 추가</item>
+        <item>무작위 섹션 추가, 폴더를 사진 바로 아래로 이동, SomaFM 배경 음악 추가</item>
+        <item>한국어, 일본어, 중국어, 러시아어 등 다국어 지원 추가</item>
+    </string-array>
+</resources>

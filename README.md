@@ -89,8 +89,8 @@ The pairing page is only served while the pairing screen is open, only on the lo
 <summary>Setting the key with adb (for developers)</summary>
 
 ```sh
-adb shell am broadcast -a com.zer0like.immich.tv.SET_KEY -n com.zer0like.immich.tv/com.immichclient.tv.SleutelOntvanger \
-  --es sleutel <API key> --es server http://192.168.1.10:2283 [--es taal en]
+adb shell am broadcast -a com.zer0like.immich.tv.SET_KEY -n com.zer0like.immich.tv/com.immichclient.tv.KeyReceiver \
+  --es key <API key> --es server http://192.168.1.10:2283 [--es lang en]
 ```
 
 The receiver requires the `DUMP` permission, so only the adb shell can send it, not other apps.
@@ -197,7 +197,7 @@ Android TV and Google TV have no menu for picking a third-party screensaver. The
      ```
      From then on the app can turn the screensaver on and off by itself (Settings → Screensaver). To set it directly instead:
      ```
-     adb shell settings put secure screensaver_components com.zer0like.immich.tv/com.immichclient.tv.FotoDream
+     adb shell settings put secure screensaver_components com.zer0like.immich.tv/com.immichclient.tv.PhotoDream
      adb shell settings put secure screensaver_enabled 1
      ```
 
@@ -212,7 +212,7 @@ The screensaver starts after the device's normal idle time; the setup screen in 
 ## Privacy
 
 - **Zero telemetry or crash-reporting SDKs:** the app includes no Crashlytics, Firebase, Sentry, Google Play Services, analytics, or tracking libraries.
-- **Local-only crash diagnostics:** uncaught exceptions, coroutine errors, and system exit reasons (`ApplicationExitInfo`) are stored strictly on the device (`diagnose.json`, viewable under Settings → About → Diagnostics) and are never uploaded.
+- **Local-only crash diagnostics:** uncaught exceptions, coroutine errors, and system exit reasons (`ApplicationExitInfo`) are stored strictly on the device (`diagnostics.json`, viewable under Settings → About → Diagnostics) and are never uploaded.
 - **External connections** besides your own Immich server are limited to:
   - An anonymous `GET` request to GitHub Releases (`api.github.com/repos/zer0like/immich-photos-android-tv/releases/latest`) for update checks (no keys or device data sent).
   - Vector and satellite map tiles (`tiles.immich.cloud` and `tiles.maps.eox.at`) when opening the World map.
@@ -223,14 +223,14 @@ The screensaver starts after the device's normal idle time; the setup screen in 
 Requirements: JDK 17 and the Android SDK (platform 35).
 
 ```sh
-./gradlew :fotos:assembleRelease
-# → fotos/build/outputs/apk/release/fotos-release.apk
+./gradlew :app:assembleRelease
+# → app/build/outputs/apk/release/app-release.apk
 ```
 
 Always use the release build on a TV: Jetpack Compose is noticeably slower in debug builds. For the smoothest first start, precompile the app once:
 
 ```sh
-adb install -r fotos/build/outputs/apk/release/fotos-release.apk
+adb install -r app/build/outputs/apk/release/app-release.apk
 adb shell cmd package compile -m speed -f com.zer0like.immich.tv
 ```
 
@@ -248,13 +248,9 @@ or set the environment variables `IMMICHCLIENT_KEYSTORE`, `IMMICHCLIENT_KEYSTORE
 ### Notes for developers
 
 - Kotlin, Jetpack Compose for TV (`androidx.tv:tv-material`), [Coil 3](https://coil-kt.github.io/coil/), [Media3/ExoPlayer](https://developer.android.com/media/media3) and [MapLibre Native](https://maplibre.org/).
-- Source code identifiers and comments are in Dutch. User-facing strings live in `res/values*/strings.xml`. To add a language, add a `values-xx/strings.xml`, add the code to `resourceConfigurations` in `fotos/build.gradle.kts` and to the list in `Taal.kt`, and generate localized banners with `fotos/banners.py`.
+- User-facing strings live in `res/values*/strings.xml`. To add a language, add a `values-xx/strings.xml`, add the code to `resourceConfigurations` in `app/build.gradle.kts` and to the list in `Language.kt`, and generate localized banners with `app/banners.py`.
 - The app is tuned for 2 GB TV boxes: a fixed, small image cache, previews decoded at screen size, small video buffers and a lazily loaded timeline. Keep memory usage in mind when adding features.
-- `fotos/landen_bin.py` builds `assets/landen.bin` (country outlines for the map in the viewer) from Natural Earth data.
-
-## TODO
-
-- [ ] Refactor codebase identifiers and comments from Dutch (`Kijker`, `Tijdlijn`, `Instellingen`, `Schudder`, `Willekeurig`, etc.) to standard English so contributors don't need a Dutch dictionary to read the code.
+- `app/countries_bin.py` builds `assets/countries.bin` (country outlines for the map in the viewer) from Natural Earth data.
 
 ## Credits and licences
 
@@ -264,6 +260,6 @@ or set the environment variables `IMMICHCLIENT_KEYSTORE`, `IMMICHCLIENT_KEYSTORE
 - Satellite imagery: [Sentinel-2 cloudless](https://s2maps.eu) by [EOX IT Services GmbH](https://eox.at) (contains modified Copernicus Sentinel data), licensed CC BY-NC-SA 4.0, **non-commercial use only**.
 - Country outlines: [Natural Earth](https://www.naturalearthdata.com) (public domain).
 - [ThumbHash](https://github.com/evanw/thumbhash) by Evan Wallace (MIT), ported to Kotlin.
-- [Overpass](https://github.com/RedHatOfficial/Overpass) font (SIL Open Font License 1.1, see `fotos/OFL-Overpass.txt`).
+- [Overpass](https://github.com/RedHatOfficial/Overpass) font (SIL Open Font License 1.1, see `app/OFL-Overpass.txt`).
 - This project: MIT licence (see `LICENSE`).
 - [MapLibre Native](https://github.com/maplibre/maplibre-native) (BSD 2-Clause), [Coil](https://github.com/coil-kt/coil) (Apache 2.0), [ZXing](https://github.com/zxing/zxing) (Apache 2.0), AndroidX (Apache 2.0), OkHttp (Apache 2.0).
