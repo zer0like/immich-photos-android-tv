@@ -103,12 +103,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.AudioAttributes
 import androidx.media3.common.Format
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.okhttp.OkHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.DefaultRenderersFactory
@@ -211,6 +213,9 @@ fun Kijker(staat: KijkerStaat, opKaart: ((Asset) -> Unit)? = null, sluit: (Asset
     DisposableEffect(staat.diashow) {
         view.keepScreenOn = staat.diashow
         onDispose { view.keepScreenOn = false }
+    }
+    if (staat.diashow && Instellingen.diaMuziek) {
+        DiashowMuziek(url = Instellingen.diaMuziekZender.url, gedempt = staat.speeltVideo)
     }
 
     fun ga(d: Int) {
@@ -824,3 +829,58 @@ fun albumNamen(id: String): List<String> =
 
 /** "Vakantie 2023", of "Vakantie 2023 + 2" bij meer albums. */
 fun albumRegel(namen: List<String>) = if (namen.size <= 1) namen.firstOrNull().orEmpty() else namen[0] + "  + " + (namen.size - 1)
+
+/**
+ * Фоновое потоковое радио во время слайд-шоу (отдельный HttpDataSource без ключа Immich).
+ * При воспроизведении видео громкость плавно снижается до нуля и затем возвращается.
+ */
+@OptIn(UnstableApi::class)
+@Composable
+private fun DiashowMuziek(url: String, gedempt: Boolean) {
+    val ctx = LocalContext.current
+    val speler = remember(url) {
+        val http = DefaultHttpDataSource.Factory()
+            .setUserAgent("FotosTV/1.0")
+            .setAllowCrossProtocolRedirects(true)
+            .setConnectTimeoutMs(8000)
+            .setReadTimeoutMs(15000)
+        ExoPlayer.Builder(ctx)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(http))
+            .setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(C.USAGE_MEDIA)
+                    .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
+                    .build(),
+                false,
+            )
+            .build()
+    }
+    var foutTeller by remember(url) { mutableIntStateOf(0) }
+    val volume by animateFloatAsState(if (gedempt) 0f else 1f, tween(450), label = "muziekVolume")
+    LaunchedEffect(volume, speler) { speler.volume = volume }
+    LaunchedEffect(foutTeller, url) {
+        if (foutTeller in 1..5) {
+            delay(5000)
+            speler.setMediaItem(MediaItem.fromUri(url))
+            speler.prepare()
+            speler.playWhenReady = true
+        }
+    }
+    DisposableEffect(speler, url) {
+        val luister = object : Player.Listener {
+            override fun onPlayerError(error: PlaybackException) {
+                Log.w("Fotos", "muziek $url: ${error.errorCodeName}", error)
+                foutTeller++
+            }
+        }
+        speler.addListener(luister)
+        speler.setMediaItem(MediaItem.fromUri(url))
+        speler.prepare()
+        speler.playWhenReady = true
+        onDispose {
+            speler.removeListener(luister)
+            speler.stop()
+            speler.release()
+        }
+    }
+}

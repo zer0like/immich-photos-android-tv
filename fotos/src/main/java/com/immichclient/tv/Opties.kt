@@ -148,6 +148,12 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
         item { Keuzes(stringResource(R.string.videos), stringResource(R.string.dia_videos_uitleg), listOf(stringResource(R.string.afspelen), stringResource(R.string.overslaan)), if (Instellingen.diaVideos) 0 else 1) { Instellingen.diaVideos = it == 0 } }
         if (alles) item { Keuzes(stringResource(R.string.overgang), stringResource(R.string.overgang_uitleg), listOf(stringResource(R.string.vervagen), stringResource(R.string.schuiven)), if (Instellingen.diaSchuiven) 1 else 0) { Instellingen.diaSchuiven = it == 1 } }
         if (alles) item { Keuzes(stringResource(R.string.dia_beeld), stringResource(R.string.dia_beeld_uitleg), DiaBeeld.entries.map { stringResource(it.label) }, Instellingen.diaBeeld.ordinal) { Instellingen.diaBeeld = DiaBeeld.entries[it] } }
+        schakel(R.string.dia_muziek, R.string.dia_muziek_uitleg, uitAan, Instellingen.diaMuziek) { Instellingen.diaMuziek = it }
+        if (Instellingen.diaMuziek) item {
+            Keuzes(stringResource(R.string.dia_muziek_zender), stringResource(R.string.dia_muziek_zender_uitleg), MuziekZender.entries.map { it.titel }, Instellingen.diaMuziekZender.ordinal) {
+                Instellingen.diaMuziekZender = MuziekZender.entries[it]
+            }
+        }
 
         // ---- Screensaver (item-index dreamItem() = de groepskop; de volgorde hierboven niet veranderen zonder die aan te passen) ----
         if (SCREENSAVER_AAN) {
@@ -319,8 +325,8 @@ fun InstellingenScherm(opnieuwKoppelen: () -> Unit, ontkoppeld: () -> Unit, toet
     }
 }
 
-/** Item-index van de groepskop "Screensaver" in de lijst: kop + regel Basis/Alle + groep Diashow (1 + 3 of 6 regels). */
-private fun dreamItem(alles: Boolean) = 3 + if (alles) 6 else 3
+/** Item-index van de groepskop "Screensaver" in de lijst: kop + regel Basis/Alle + groep Diashow (1 + 3/6 regels + muziek). */
+private fun dreamItem(alles: Boolean) = 3 + (if (alles) 6 else 3) + 1 + (if (Instellingen.diaMuziek) 1 else 0)
 /** Screensaver-groep in de instellingen tonen (sinds 2.2; false verbergt de groep weer, de DreamService blijft bestaan). */
 const val SCREENSAVER_AAN = true
 

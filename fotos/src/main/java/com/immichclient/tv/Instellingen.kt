@@ -59,6 +59,9 @@ object Instellingen {
     var diaSchuiven by bool("dia_schuiven", false)
     /** wat er tijdens een lopende diashow over de foto heen staat (ringetje, badge, datum/plaats, landkaart) */
     var diaBeeld by keuze("dia_beeld", DiaBeeld.ALLES)
+    /** Achtergrondmuziek (ambient radio) afspelen tijdens een diashow. */
+    var diaMuziek by bool("dia_muziek", false)
+    var diaMuziekZender by keuze("dia_muziek_zender", MuziekZender.DEEP_SPACE_ONE)
 
     // ---- Viewer ----
     var viewerKaart by keuze("viewer_kaart", KaartMaat.GROOT)
@@ -177,6 +180,13 @@ enum class ClusterNiveau(@StringRes val label: Int, val straal: Float, val maxZo
 enum class KaartStijl(@StringRes val label: Int) { DONKER(R.string.donker), LICHT(R.string.licht), SATELLIET(R.string.satelliet) }
 /** Wat er tijdens een lopende diashow in beeld staat; gepauzeerd (of na een toets) komt de info gewoon terug. */
 enum class DiaBeeld(@StringRes val label: Int) { ALLES(R.string.dia_beeld_alles), ZONDER_RING(R.string.dia_beeld_zonder_ring), ALLEEN_FOTO(R.string.dia_beeld_alleen_foto) }
+/** Reclamevrije ambient/space-radiostreams (SomaFM) voor tijdens de diashow. */
+enum class MuziekZender(val titel: String, val url: String) {
+    DEEP_SPACE_ONE("Deep Space One", "https://ice2.somafm.com/deepspaceone-128-aac"),
+    DRONE_ZONE("Drone Zone", "https://ice2.somafm.com/dronezone-128-aac"),
+    SPACE_STATION("Space Station Soma", "https://ice2.somafm.com/spacestation-128-aac"),
+    GROOVE_SALAD("Groove Salad", "https://ice2.somafm.com/groovesalad-128-aac"),
+}
 /** Waar de screensaver zijn foto's vandaan haalt. */
 enum class DreamBron(@StringRes val label: Int) {
     ALLES(R.string.dream_alle_fotos), ALBUM(R.string.dream_albums), FAVORIETEN(R.string.sectie_favorieten),
