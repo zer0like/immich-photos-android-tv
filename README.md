@@ -214,7 +214,7 @@ Always use the release build on a TV: Jetpack Compose is noticeably slower in de
 
 ```sh
 adb install -r fotos/build/outputs/apk/release/fotos-release.apk
-adb shell cmd package compile -m speed -f com.immichclient.tv
+adb shell cmd package compile -m speed -f com.zer0like.immich.tv
 ```
 
 **Signing.** Without configuration the release build is signed with the debug key. To use your own key (needed if you want to install updates over an existing installation), create `~/.android/immichclient-release.properties`:
@@ -234,6 +234,10 @@ or set the environment variables `IMMICHCLIENT_KEYSTORE`, `IMMICHCLIENT_KEYSTORE
 - Source code identifiers and comments are in Dutch. User-facing strings live in `res/values*/strings.xml`. To add a language, add a `values-xx/strings.xml`, add the code to `resourceConfigurations` in `fotos/build.gradle.kts` and to the list in `Taal.kt`, and generate localized banners with `fotos/banners.py`.
 - The app is tuned for 2 GB TV boxes: a fixed, small image cache, previews decoded at screen size, small video buffers and a lazily loaded timeline. Keep memory usage in mind when adding features.
 - `fotos/landen_bin.py` builds `assets/landen.bin` (country outlines for the map in the viewer) from Natural Earth data.
+
+## TODO
+
+- [ ] Refactor codebase identifiers and comments from Dutch (`Kijker`, `Tijdlijn`, `Instellingen`, `Schudder`, `Willekeurig`, etc.) to standard English so contributors don't need a Dutch dictionary to read the code.
 
 ## Credits and licences
 
